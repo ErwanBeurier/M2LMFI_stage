@@ -1,0 +1,102 @@
+\documentclass{article}
+
+\include{packages}
+\include{macros}
+
+% Pour les itemize : 			\setlength{\itemsep}{-1mm}
+
+% Variables pour le document
+
+\author{BEURIER Erwan}
+\title{M2 LFMI \\ BROUILLON }
+\date{Année 2015-2016}
+
+% Commandes de ce document
+
+\newcommand{\sRAMif}[2]{\text{IF} (A=B) \{I( #1 )\} \text{ ELSE } \{I( #2 )\}}
+\newcommand{\sRAMifc}[2]{\text{IF} (A_1=A_2) \{I( #1 )\} \text{ ELSE } \{I( #2 )\}}
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\TRec}[1]{\text{TRec}\left(\mathbb{#1}\right)}
+\newcommand{\TRecd}[1]{\text{TRec}_{2}\left(\mathbb{#1}\right)}
+\newcommand{\dtimeram}{\text{DTIME}_{\text{RAM}}\left( \grozo{ n^k }\right)}
+
+\begin{document}
+	
+	
+	\paragraph{README}
+	Ce fichier n'est qu'un brouillon de réécriture de l'article de Grandjean et Schwentick \emph{Machine-independent characterizations and complete problems for deterministic linear time} pour voir si ces notions peuvent s'étendre au temps $\grozo{n^k}$.
+	
+	
+	\paragraph{Notations}
+	
+	Par abus de notation découlant de la théorie des ensembles, j'écrirai $n$ pour $\intint{0}{n-1}$ voire pour $\intint{1}{n}$ quand il n'y aura pas d'ambiguïté (en général, ce sera pour $\intint{1}{n}$).
+	
+	\pagebreak
+	
+	\paragraph{Preliminaries} (p.198)
+	
+		\subparagraph{RAM data structures} (p.198)
+	
+
+		\begin{definition}[RAM data structures]
+			Soit $t$ un type, c'est-à-dire une signature fonctionnelle ne contenant que des symboles de constantes ou de fonctions unaires.
+			
+			Une RAM-structure $s$ de type $t$ est un uplet constitué de :
+			\begin{itemize}
+				\setlength{\itemsep}{-1mm}
+				\item 	$n \in \naturels$ est la taille de la structure ;
+				\item 	$C \in \naturels$ pour chaque symbole $C \in t$ ;
+				\item 	$f : n \to \naturels$ pour chaque symbole $f \in t$.
+			\end{itemize}
+			
+			On notera $s.n, s.C, s.f$ les composantes $n, C, f$ de $s$ (cette notation est à rapprocher de l'accès à un attribut ou à une fonction membre en programmation objet).
+			
+			On dira que $s$ est $c$-bornée pour $c\in\naturels$ lorsque $s.C, s.f(i) < c s.n$ pour tous $C, f \in t$ et $i \in n$.
+		\end{definition}
+	
+	
+		\begin{definition}[Fonction de RAM]
+			Soient $t_1, t_2$ des types. 
+			
+			Une $(t_1, t_2)$-fonction de RAM $\Gamma$ est une fonction telle qu'il existe $c_1, c_2 \in \naturels$, tels que $\Gamma$ envoie les structures $c_1$-bornées de type $t_1$ sur des structures $c_2$-bornées de type $t_2$.
+			
+			% On rappelle que "c-borné" ne concerne que la structure par rapport à sa propre taille ; ici on ne compare pas la taille de l'entrée et de la sortie
+			
+			On dit que $\Gamma$ est polynomiale lorsque $\Gamma(s).n = \grozo{(s.n)^k}$.
+			
+			% Là, si.
+		\end{definition}
+	
+	
+	
+		\subparagraph{Machine RAM} (p.200)
+	
+		
+		La machine RAM reste la même (heureusement). On va utiliser la $\{+\}$-RAM ou des versions un brin plus puissantes comme la $\{+ , -, \times, \div k \}$-RAM pour un $k\in \naturels$ fixé.
+		
+		\begin{definition}[Temps polynomial]
+			On définit $\dtimeram$ comme étant l'ensemble des fonctions calculables sur $\{+\}$-RAM en temps $\grozo{n^k}$, telles que le nombre de registres utilisés, la longueur des nombres manipulés (y compris les adresses de registres) soient bornés par $\grozo{n^k}$.
+		\end{definition}
+		
+		
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
