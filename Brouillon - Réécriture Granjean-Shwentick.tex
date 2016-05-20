@@ -29,7 +29,7 @@
 	
 	\paragraph{Notations}
 	
-	Par abus de notation découlant de la théorie des ensembles, j'écrirai $n$ pour $\intint{0}{n-1}$ voire pour $\intint{1}{n}$ quand il n'y aura pas d'ambiguïté (en général, ce sera pour $\intint{1}{n}$).
+	Par abus de notation découlant de la théorie des ensembles, j'écrirai $n$ pour $\intint{0}{n-1}$ voire pour $\intint{1}{n}$ quand il n'y aura pas d'ambiguïté. De manière générale, si un terme ressemble à un entier naturel mais qu'il est mis à la place d'un ensemble, il faut le lire comme l'ensemble $\intint{0}{n-1}$.
 	
 	\pagebreak
 	
@@ -79,8 +79,50 @@
 		\end{definition}
 		
 		
+		
+		\subparagraph{Réductions affines} (p.202)
 
 
+		On laisse inchangées les notions de \emph{transformations affines} (définition 2.3), de \emph{réductions affines} (définition 2.5),de projections affines (définition 2.7). Les théorèmes et lemmes suivants ou intermédiaires sont aussi inchangés. Ils permettront de définir des réductions qui \emph{restent} dans $\dtimeram$ pour un $k$ fixé.
+		
+		
+	\paragraph{Le framework algébrique} (p.208)
+
+	Le LSRS en tant que tel n'a pas l'air collé à la définition du temps linéaire. On garde la définition pour le moment. 
+	
+	On doit refaire la définition 3.3.
+	
+	Pour $t$ un type, on note $F_t$ l'ensemble de symboles de fonctions suivants : $\{1(-), n(-), id(-)\} \cup  \{ f_C | C \in t\} \cup \{ f | f \in t\}$.
+	
+	\begin{remark}
+		Soient $t$ un type et $S$ un LSRS pour $f_1, \dots, f_k$ sur $F_{t}$. 
+		L'entrée d'un LSRS peut être vue comme étant une RAM-structure $s$ de type $t$, qu'il \emph{lit} en interprétant les symboles de $F_t$ de la façon suivante : 
+		
+		\begin{itemize}
+			\item 	$\forall f \in t_1$ :   $f(i) = 
+			\left\lbrace \begin{array}{ll}
+			s.f(i) & \text{si } i< s.n \\
+			0 & \text{sinon}
+			\end{array}\right.$
+			
+			\item 	$\forall C \in t_1$ :   $f_C(i) = s.C$
+			\item 	$1(i) = 1, n(i) = s.n, id(i) = i$
+		\end{itemize}
+		
+		La sortie du LSRS peut aussi être vue comme une nouvelle structure $s'$ de type $\{f_1, \dots, f_k\}$.
+	\end{remark}
+	
+	
+	\begin{definition}[RAM $n^k$-représentée]
+		Soient $t_1, t_2$ des types. Soit $\Gamma$ une $(t_1, t_2)$-fonction de RAM. 
+		
+		Soit $S$ un LSRS pour $f_1, \dots, f_k$ sur $F_{t_1}$. On dit que $\Gamma$ est $n^k$-représentée par $S$ lorsqu'il existe un entier $c$ et une projection affine $P$ tels que, pour chaque structure $s$ $c$-bornée, $S$ définit des fonctions $f_1, \dots, f_k : c (s.n)^k \to c (s.n)^k$ à partir des interprétations des fonctions de $F_{t_1}$ suivantes :
+		
+		
+		Ce LSRS définit une structure $s'$ de type $\{f_1, \dots, f_k\}$. 
+	\end{definition}
+		
+		
 
 \end{document}
 
