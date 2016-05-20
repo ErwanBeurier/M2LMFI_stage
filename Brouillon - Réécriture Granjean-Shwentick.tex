@@ -86,44 +86,99 @@
 		On laisse inchangées les notions de \emph{transformations affines} (définition 2.3), de \emph{réductions affines} (définition 2.5),de projections affines (définition 2.7). Les théorèmes et lemmes suivants ou intermédiaires sont aussi inchangés. Ils permettront de définir des réductions qui \emph{restent} dans $\dtimeram$ pour un $k$ fixé.
 		
 		
+		
 	\paragraph{Le framework algébrique} (p.208)
 
-	Le LSRS en tant que tel n'a pas l'air collé à la définition du temps linéaire. On garde la définition pour le moment. 
-	
-	On doit refaire la définition 3.3.
-	
-	Pour $t$ un type, on note $F_t$ l'ensemble de symboles de fonctions suivants : $\{1(-), n(-), id(-)\} \cup  \{ f_C | C \in t\} \cup \{ f | f \in t\}$.
-	
-	\begin{remark}
-		Soient $t$ un type et $S$ un LSRS pour $f_1, \dots, f_k$ sur $F_{t}$. 
-		L'entrée d'un LSRS peut être vue comme étant une RAM-structure $s$ de type $t$, qu'il \emph{lit} en interprétant les symboles de $F_t$ de la façon suivante : 
-		
-		\begin{itemize}
-			\item 	$\forall f \in t_1$ :   $f(i) = 
-			\left\lbrace \begin{array}{ll}
-			s.f(i) & \text{si } i< s.n \\
-			0 & \text{sinon}
-			\end{array}\right.$
-			
-			\item 	$\forall C \in t_1$ :   $f_C(i) = s.C$
-			\item 	$1(i) = 1, n(i) = s.n, id(i) = i$
-		\end{itemize}
-		
-		La sortie du LSRS peut aussi être vue comme une nouvelle structure $s'$ de type $\{f_1, \dots, f_k\}$.
-	\end{remark}
-	
-	
-	\begin{definition}[RAM $n^k$-représentée]
-		Soient $t_1, t_2$ des types. Soit $\Gamma$ une $(t_1, t_2)$-fonction de RAM. 
-		
-		Soit $S$ un LSRS pour $f_1, \dots, f_k$ sur $F_{t_1}$. On dit que $\Gamma$ est $n^k$-représentée par $S$ lorsqu'il existe un entier $c$ et une projection affine $P$ tels que, pour chaque structure $s$ $c$-bornée, $S$ définit des fonctions $f_1, \dots, f_k : c (s.n)^k \to c (s.n)^k$ à partir des interprétations des fonctions de $F_{t_1}$ suivantes :
-		
-		
-		Ce LSRS définit une structure $s'$ de type $\{f_1, \dots, f_k\}$. 
-	\end{definition}
-		
-		
 
+		\subparagraph{LSRS} (p.208)
+		
+		
+		Le LSRS en tant que tel n'a pas l'air collé à la définition du temps linéaire. On garde la définition pour le moment. 
+		
+		On doit refaire la définition 3.3.
+		
+		Pour $t$ un type, on note $F_t$ l'ensemble de symboles de fonctions suivants : $\{1(-), n(-), id(-)\} \cup  \{ f_C | C \in t\} \cup \{ f | f \in t\}$.
+		
+		\begin{remark}
+			Soient $t$ un type et $S$ un LSRS pour $f_1, \dots, f_h$ sur $F_{t}$. 
+			L'entrée d'un LSRS peut être vue comme étant une RAM-structure $s$ de type $t$, qu'il \emph{lit} en interprétant les symboles de $F_t$ de la façon suivante : 
+			
+			\begin{itemize}
+				\item 	$\forall f \in t_1$ :   $f(i) = 
+				\left\lbrace \begin{array}{ll}
+				s.f(i) & \text{si } i< s.n \\
+				0 & \text{sinon}
+				\end{array}\right.$
+				
+				\item 	$\forall C \in t_1$ :   $f_C(i) = s.C$
+				\item 	$1(i) = 1, n(i) = s.n, id(i) = i$
+			\end{itemize}
+			
+			La sortie du LSRS peut aussi être vue comme une nouvelle structure $s' = S(s)$ de type $\{f_1, \dots, f_h\}$.
+		\end{remark}
+		
+		
+		Ici, on a plusieurs possibilités pour adapter le concept de \emph{linéairement représenté} (définition 3.3) à $n^k$.
+		
+		\begin{definition}[RAM $n^k$-représentée par LSRS - Proposition 1]
+			Soient $t_1, t_2$ des types. Soit $\Gamma$ une $(t_1, t_2)$-fonction de RAM. 
+			
+			Soit $S$ un LSRS pour $f_1, \dots, f_h$ sur $F_{t_1}$. 
+			
+			On dit que $\Gamma$ est $n^k$-représentée par $S$ lorsqu'il existe un entier $c$ et une projection affine $P$ tels que, pour chaque structure $s$ $c$-bornée, $S$ définit des fonctions $f_1, \dots, f_h : c (s.n)^k \to c (s.n)^k$ telles que $\Gamma(s) = P((s.n)^k, S(s))$ ($S(s)$ est la structure définie par le LSRS).
+			
+			\emph{La modification réside dans le domaine de définition des fonctions et la taille de la sortie dans la projection.}
+		\end{definition}
+			
+		
+		\begin{probs} \textcolor{white}{T} % Obligé pour sauter une ligne.
+			\begin{itemize}
+				\setlength{\itemsep}{-1mm}
+				\item 	Est-ce qu'on capture tout $\dtimeram$ ? 
+				\item 	Est-ce que $P((s.n)^k, S(s))$ capture toutes les structures de taille $\grozo{n^k}$ ?
+			\end{itemize}
+		\end{probs}
+			
+	
+		Si $\Gamma$ est $n^k$-représentée par un LSRS alors on dit que $\Gamma$ est définissable par LSRS. 
+		
+		
+		% Eventuellement d'autres possibilités
+		
+		La définition 3.4 (définition par cas) et les lemmes 3.5 (la définition par cas ne change pas la puissance des LSRS) et 3.6 (composition de fonctions définissables par LSRS reste définissable par LSRS) restent les mêmes.
+		
+		
+		\subparagraph{LRS} (p.211)
+		
+		La définition d'un terme récursif (non numérotée) et d'un LRS (définition 3.7) restent les mêmes. Le lemme 3.8 d'existence d'une solution unique au LRS aussi. 
+		
+		On doit adapter la définition de $n^k$-représentée par LRS : 
+		
+		\begin{definition}[RAM $n^k$-représentée par LRS - Proposition 1]
+			Soit $\Gamma$ une fonction de RAM. 
+			
+			Soit $E$ un LSRS $g(x) = \sigma(x)$. 
+			
+			On dit que $\Gamma$ est $n^k$-représentée par $E$ lorsqu'il existe un entier $c$ et une projection affine $P$ tels que, pour chaque structure $s$ $c$-bornée, $E$ définit une fonction $g : c (s.n)^k \to c (s.n)^k$ telle que $\Gamma(s) = P((s.n)^k, E(s)$ ($E(s)$ est la structure définie par le LRS, elle est de type $\{g\}$).
+			
+			\emph{La modification réside dans le domaine de définition de $g$.}
+		\end{definition}
+		
+		Et là, c'est la foire.
+		
+		On doit vérifier si le théorème principal de l'article tient encore au temps polynomial.
+		
+		
+		
+		\begin{conj}[Adaptation du lemme 3.10 (p.212)]
+			Toute fonction de RAM $n^k$-représentée par LSRS est aussi $n^k$-représentable par LRS.
+		\end{conj}
+		
+		\begin{proof}
+			Ici commence la relecture de la preuve.
+			
+			
+		\end{proof}
 \end{document}
 
 
