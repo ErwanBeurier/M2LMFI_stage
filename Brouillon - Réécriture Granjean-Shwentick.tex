@@ -29,6 +29,7 @@
 	
 	\paragraph{README}
 	
+	
 	Ce fichier n'est qu'un brouillon de réécriture de l'article de Grandjean et Schwentick \emph{Machine-independent characterizations and complete problems for deterministic linear time} pour voir si ces notions peuvent s'étendre au temps $\grozo{n^k}$.
 	
 	C'est plus ou moins une traduction littérale en français et en remplaçant $\grozo{n}$ par $\grozo{n^k}$, pour voir si ça coince à un endroit.
@@ -36,11 +37,13 @@
 	
 	\paragraph{Notations}
 	
+	
 	Par abus de notation découlant de la théorie des ensembles, j'écrirai $n$ pour $\intint{0}{n-1}$ voire pour $\intint{1}{n}$ quand il n'y aura pas d'ambiguïté. De manière générale, si un terme ressemble à un entier naturel mais qu'il est mis à la place d'un ensemble (typiquement, dans une fonction), il faut le lire comme l'ensemble $\intint{0}{n-1}$.
 	
 	\pagebreak
 	
 	\paragraph{Preliminaries} (p.198)
+	
 	
 		\subparagraph{RAM data structures} (p.198)
 	
@@ -157,6 +160,7 @@
 		
 		\subparagraph{LRS} (p.211)
 		
+		
 		La définition d'un terme récursif (non numérotée) et d'un LRS (définition 3.7) restent les mêmes. Le lemme 3.8 d'existence d'une solution unique au LRS aussi. 
 		
 		On doit adapter la définition de $n^k$-représentée par LRS : 
@@ -201,142 +205,150 @@
 			En d'autres termes, pour $b \geqslant kcn^H$ et $b \mod{k} = j$, on a $g(b) = kcn^H + k f_j\left( (b-kcn^H) \div k \right) + j$.
 			On va définir la valeur de $g(b)$ pour $b \in 2kcn^H$ par distinction de cas sur $b \mod{k}$, comme décrit dans (1) à (3) ci-dessous.
 			
-			\begin{itemize}
-				\setlength{\itemsep}{-1mm}
+			\begin{enumerate}[itemsep=-1mm,leftmargin=2cm]
+				%\setlength{\itemsep}{-1mm}
+				\item  
+					Renumérotons les symboles de $F_{t_1} = \{f | f \in t_1\} \cup \{f_C | C \in t_1\} \cup \{1(-), n(-), id(-)\}$ ainsi $\{ f^0, \dots, f^{l-1} \}$. On va limiter les occurrences de ces symboles. Premièrement, les symboles $f_0, \dots, f_{k-1}$ sont remplacés par $f^{l}, \dots, f^{l+k-1}$ respectivement. Ensuite, On va introduire $l$ nouvelles fonctions $f_0, \dots, f_{l-1}$ et $l$ équations pour les définir :
+					
+						\begin{itemize}[itemsep=-1mm,leftmargin=1cm]
+							\item	Si $f^i$ vient de $t_1$, alors l'équation associée est $f_i(x) = f^i(x)$ ;
+							\item 	Si $f^i = id$, alors l'équation associée est $f_i(x) = x$ ;
+							\item 	Si $f^i = f_C$, ou $1$ ou $n$, alors l'équation associée est (respectivement) $f_i(x) = C, 1, n$. 
+						\end{itemize}
 				
-				\item 	
-						Renumérotons les symboles de $F_{t_1} = \{f | f \in t_1\} \cup \{f_C | C \in t_1\} \cup \{1(-), n(-), id(-)\}$ ainsi $\{ f^0, \dots, f^{l-1} \}$. On va limiter les occurrences de ces symboles. Premièrement, les symboles $f_0, \dots, f_{k-1}$ sont remplacés par $f^{l}, \dots, f^{l+k-1}$ respectivement. Ensuite, On va introduire $l$ nouvelles fonctions $f_0, \dots, f_{l-1}$ et $l$ équations pour les définir :
-							
-							\subitem	Si $f^i$ vient de $t_1$, alors l'équation associée est $f_i(x) = f^i(x)$ ;
-							\subitem 	Si $f^i = id$, alors l'équation associée est $f_i(x) = x$ ;
-							\subitem 	Si $f^i = f_C$, ou $1$ ou $n$, alors l'équation associée est (respectivement) $f_i(x) = C, 1, n$. 
+					% Subitem ne marche pas ?
 					
-						% Subitem ne marche pas ?
-						
-						On appellera ces équations des \emph{équations d'entrée} ; elles servent justement à remplacer les entrées du LSRS.
-						
-						Enfin, on remplace dans le LSRS $S$ tous les anciens symboles de fonctions (ceux de $F_{t_1}$) par les nouveaux (les $(f_i)_{i \in l+k}$). Après ces remplacements, $S$ ne contient plus aucune référence à $F_{t_1}$, sauf pour les équations d'entrée. 
+					On appellera ces équations des \emph{équations d'entrée} ; elles servent justement à remplacer les entrées du LSRS.
+					
+					Enfin, on remplace dans le LSRS $S$ tous les anciens symboles de fonctions (ceux de $F_{t_1}$) par les nouveaux (les $(f_i)_{i \in l+k}$). Après ces remplacements, $S$ ne contient plus aucune référence à $F_{t_1}$, sauf pour les équations d'entrée. 
 					
 				\item 	
-						Les équations de $S$ sont combinées en une seule équation $g(y) = \sigma(y)$ comme suit. Le terme $\sigma(y)$ est principalement une distinction de cas dépendant de $y$ et $y \mod{k}$. 
+					Les équations de $S$ sont combinées en une seule équation $g(y) = \sigma(y)$ comme suit. Le terme $\sigma(y)$ est principalement une distinction de cas dépendant de $y$ et $y \mod{k}$. 
+				
+					\[
+						g(y) = 
+							\left\lbrace \begin{array}{ll}
+								0 				& \text{si $y \leqslant k-1$} \\
+								g(y-k) + 1 		& \text{si $k \leqslant y < kcn^H$} \\
+								\sigma_i(y)		& \text{si $y \geqslant kcn^H$ et $y \mod{k} = i$}
+							\end{array}\right.
+					\]
 					
-						\[
-							g(y) = 
-								\left\lbrace \begin{array}{ll}
-									0 				& \text{si $y \leqslant k-1$} \\
-									g(y-k) + 1 		& \text{si $k \leqslant y < kcn^H$} \\
-									\sigma_i(y)		& \text{si $y \geqslant kcn^H$ et $y \mod{k} = i$}
-								\end{array}\right.
-						\]
-						
-						où $\sigma_i(y)$ est un terme récursif qu'on explicitera tout de suite après. 
-						
-						Notons que les deux premiers cas donnent $g(y) = y \div k$ pour chaque $y < kcn^H$, comme voulu. Cela nous permet d'exprimer $y \mod{k}$ pour $kcn^H \leqslant y < 2kcn^H$, puisque $(y-kcn^H) - kg(y-kcn^H) = (y-kcn^H) - \sum_{j=1}^{k} g(y-kcn^H)$. \redtext{(Et alors ???)}
-						
-						Ensuite, on a vu que la distinction de cas ne rendait pas le LSRS plus puissant. 
-						
-						Enfin, on décrit la construction des termes de récurrence $\sigma_i(y)$ (on distingue la variable $y$ du terme de récurrence, de la variable $x$ des équations) :
+					où $\sigma_i(y)$ est un terme récursif qu'on explicitera tout de suite après. 
 					
-						\subitem $\bullet$	
-								Si $E_i$ est une équation d'entrée, alors $\sigma_i(y)$ est construit comme suit :
-						
-						
-								\subsubitem -		
-									Si le terme de droite de l'équation est une constante $C$ (éventuellement $1$ ou $n$), alors $\sigma_i(y) = kcn^H + kC + i$ ;
-
-								\subsubitem	-	
-									Si le terme de droite de l'équation est $x$, alors $\sigma_i(y) = kcn^H + kg\left( y - kcn^H \right) + i$ ;
+					Notons que les deux premiers cas donnent $g(y) = y \div k$ pour chaque $y < kcn^H$, comme voulu. Cela nous permet d'exprimer $y \mod{k}$ pour $kcn^H \leqslant y < 2kcn^H$, puisque $(y-kcn^H) - kg(y-kcn^H) = (y-kcn^H) - \sum_{j=1}^{k} g(y-kcn^H)$. \redtext{(Et alors ???)}
+					
+					Ensuite, on a vu que la distinction de cas ne rendait pas le LSRS plus puissant. 
+					
+					Enfin, on décrit la construction des termes de récurrence $\sigma_i(y)$ (on distingue la variable $y$ du terme de récurrence, de la variable $x$ des équations) :
+					
+					\begin{itemize}[itemsep=-1mm, leftmargin=1cm]
+						\item
+							Si $E_i$ est une équation d'entrée, alors $\sigma_i(y)$ est construit comme suit :
+					
+							\begin{itemize}[itemsep=-1mm,leftmargin=1cm]
+								\item %\subsubitem -		
+								Si le terme de droite de l'équation est une constante $C$ (éventuellement $1$ ou $n$), alors $\sigma_i(y) = kcn^H + kC + i$ ;
 								
-								\subsubitem	-	
-									Si le terme de droite de l'équation est $f^i(x)$, alors $\sigma_i(y) = kcn^H + k f^i\left( g\left( y - kcn^H \right) \right) + i$.
-									
+								\item %\subsubitem	-	
+								Si le terme de droite de l'équation est $x$, alors $\sigma_i(y) = kcn^H + kg\left( y - kcn^H \right) + i$ ;
+								
+								\item %\subsubitem	-	
+								Si le terme de droite de l'équation est $f^i(x)$, alors $\sigma_i(y) = kcn^H + k f^i\left( g\left( y - kcn^H \right) \right) + i$.
+								
 								Justifions pourquoi cette définition de $\sigma_i(y)$ est correcte. On le fait pour le troisième cas ; les deux autres sont plus simples. Soit $b = kcn^H + ka + i$ avec $a < cn^H$. Alors $g(b-kcn) = g(ka + i) = (ka + i) \div k = a$, et $\sigma_i(b) = kcn^H + kf^i(a) + i$, comme voulu. 
-				
-						\subitem $\bullet$	
-								Si $E_i$ est de la forme $f_i(x) = f_j(x) - f_{j'}(x)$, alors $\sigma_i(y)$ est défini par :
-								
-								\[
-									\sigma_i(y) = \left( g(y - \delta) - k cn^H - j \right) - \left( g(y - \delta') - k cn^H - j' \right) + kcn^H + i
-								\]
-								
-								où $\delta = i -j$ et $\delta' = i - j'$ et, par définition d'un LSRS, $i > j, j'$. Pour vérifier que cette expression est correcte, soient $a \in cn^H$, $b = kcn + ka + i$, où $i<k$. Si $g(b - \delta) = g(kcn^H + ka + j) = kcn^H + kf_j(a) + j$ et $g(b - \delta') = g(kcn^H + ka + j') = kcn^H + kf_{j'}(a) + j'$ alors :
-								
-								\[
-									\left( g\left( b - \delta \right) - kcn^H - j \right) - \left( g\left( b - \delta' \right) - kcn^H - j' \right)
-									=  k \left( f_{j}(a) - f_{j'}(a) \right) + kcn^H + i
-								\]
+							\end{itemize}
+							
+			
+						\item
+							Si $E_i$ est de la forme $f_i(x) = f_j(x) - f_{j'}(x)$, alors $\sigma_i(y)$ est défini par :
+							
+							\[
+								\sigma_i(y) = \left( g(y - \delta) - k cn^H - j \right) - \left( g(y - \delta') - k cn^H - j' \right) + kcn^H + i
+							\]
+							
+							où $\delta = i -j$ et $\delta' = i - j'$ et, par définition d'un LSRS, $i > j, j'$. Pour vérifier que cette expression est correcte, soient $a \in cn^H$, $b = kcn + ka + i$, où $i<k$. Si $g(b - \delta) = g(kcn^H + ka + j) = kcn^H + kf_j(a) + j$ et $g(b - \delta') = g(kcn^H + ka + j') = kcn^H + kf_{j'}(a) + j'$ alors :
+							
+							\[
+								\left( g\left( b - \delta \right) - kcn^H - j \right) - \left( g\left( b - \delta' \right) - kcn^H - j' \right)
+								=  k \left( f_{j}(a) - f_{j'}(a) \right) + kcn^H + i
+							\]
 
-								
-								Ce qui est ce qu'on voulait.
-								
-						\subitem $\bullet$
-								Si $E_i$ est de la forme $f_i(x) = f_j(x) + f_{j'}(x)$, alors son traitement est similaire au cas précédent, à ceci près qu'il faut que l'addition $x + y$ renvoie $0$ si $x + y > cn^H$. On redéfinit alors $\sigma_i(y)$ : 
-								
-								\[
-									\sigma_i(y) = \casedist{
-										\tau(y) + kcn^H + i & \text{si $\tau(y) < kcn^H$} \\
-										kcn^H + i & \text{sinon}
-										}
-								\]
-								
-								où $\tau(y) = \left( g\left( b - \delta \right) - kcn^H - j \right) - \left( g\left( b - \delta' \right) - kcn^H - j' \right)$ avec $\delta = i - j$ et $\delta' = i - j'$. 
-								
-								La vérification se passe de la même manière que précédemment.
-								
-						\subitem $\bullet$
-								Si $E_i$ est de la forme $f_i(x) = \eqpred{f_{j'}}{f_j}{x}$, où $j < i$ et on suppose sans perte de généralité que $i \leqslant j'$ 
-									\footnote{Si $i > j'$ alors on doit rajouter une nouvelle fonction $f_l$ à $S$, telle que $l > i$, et définie par la nouvelle équation $f_l(x) = f_{j'}$ et remplacer $E_i$ par $f_i(x) = \eqpred{f_{l}}{f_j}{x}$}
-								, alors $\sigma_i(y)$ est définie par :
-								
-								\[
-									\sigma_i(y) = \eqpredfi{g}{g}{y-\delta}{ + \delta'}{y} - j' + i
-								\]
-								
-								où $\delta = i - j$ et $\delta' = j' - j$.
-								
-								Pour justifier ce remplacement, on doit s'assurer que le codage de plusieurs fonctions en une seule ne cause par d'effets de bord quand on utilise \emph{Equal-Predecesor}. Ce qui est crucial ici, c'est que, pour chaque $i<k$, les valeurs de $g$ qui codent $f_i$ soient congruentes à $i$ modulo $k$. Pour être plus précis, soit $b = kcn^H + ka + i$, avec $a< cn^H$. Alors $b-\delta = kcn^H + ka + i - (i - j) \underset{i>j}{=} kcn^H + ka + j$. On a deux sous-cas à étudier :
-								
-								\subsubitem -
-										$f_j^{\leftarrow}(a) = a$.   Dans ce cas, pour aucun $a' < a$, on n'a $f_j(a') = f_j(a)$, donc il n'y a pas de $a' < a$ pour lequel $g\left( kcn^H + ka' + j \right) = g\left( kcn^H + ka + j \right)$. La définition de $g$ assure que, pour chaque $e \geqslant kcn^H$, on a $\left(g(e) \mod{k} = j \Leftrightarrow e \mod{k} = j\right)$ et $\forall e, e' \in 2kcn^H$, si $g(e) = g(e')$, alors soit $e, e' < kcn^H$, soit $e, e' \geqslant kcn^H$. Donc $g^{\leftarrow} \left( kcn^H + ka + j \right) = kcn^H + ka + j$ et $g^{\leftarrow}\left( b - \delta \right) + \delta' = kcn^H + ka + j' \geqslant kcn^H + ka + i = b$. Ainsi :
-										
-										\setcounter{equation}{0}
-										\begin{eqnarray}
-											\sigma_i(b) 	& = &	\eqpredfi{g}{g}{b-\delta}{+\delta'}{b} - j' + i \\
-															& = & 	\left( kcn^H + ka + j' \right) - j' + i \\
-															& = & 	kcn^H + ka + i \\
-															& = & 	kcn^H + k \eqpred{f_{j'}}{f_j}{a} + i \\
-															& = & 	kcn^H + k f_i(a) + i \\
-															& = & 	g(b),
-										\end{eqnarray}
-										
-										comme voulu.
-										
-								\subsubitem - 
-										$f_j^{\leftarrow}(a) = a'$ pour un certain $a' < a$. Dans ce cas, $g\left( kcn^H + ka + j \right) = kcn^H + ka' + j$. En conséquence : 
-										
-										\[
-											g^{\leftarrow}\left( b - \delta \right) + \delta' = kcn^H + ka' + j' < kcn^H + ka + i = b
-										\]
-										
-										Donc :
-										
-										\setcounter{equation}{0}
-										\begin{eqnarray}
-											\sigma_i(b) 	& = &	\eqpredfi{g}{g}{b-\delta}{+\delta'}{b} - j' + i \\
-															& = & 	g\left( kcn^H + ka' + j' \right) - j' + i \\
-															& = & 	\left( kcn^H + k f_{j'}(a') + j' \right) - j' + i \\
-															& = & 	kcn^H + k f_{j'}(a') + j' + i \\
-															& = & 	kcn^H + k \eqpred{f_{j'}}{f_j}{a} + i \\
-															& = & 	kcn^H + k f_i(a) + i \\
-															& = & 	g(b),
-										\end{eqnarray}
-										
-										comme souhaité.
-										
+							
+							Ce qui est ce qu'on voulait.
+							
+						\item
+							Si $E_i$ est de la forme $f_i(x) = f_j(x) + f_{j'}(x)$, alors son traitement est similaire au cas précédent, à ceci près qu'il faut que l'addition $x + y$ renvoie $0$ si $x + y > cn^H$. On redéfinit alors $\sigma_i(y)$ : 
+							
+							\[
+								\sigma_i(y) = \casedist{
+									\tau(y) + kcn^H + i & \text{si $\tau(y) < kcn^H$} \\
+									kcn^H + i & \text{sinon}
+									}
+							\]
+							
+							où $\tau(y) = \left( g\left( b - \delta \right) - kcn^H - j \right) - \left( g\left( b - \delta' \right) - kcn^H - j' \right)$ avec $\delta = i - j$ et $\delta' = i - j'$. 
+							
+							La vérification se passe de la même manière que précédemment.
+							
+						\item
+							Si $E_i$ est de la forme $f_i(x) = \eqpred{f_{j'}}{f_j}{x}$, où $j < i$ et on suppose sans perte de généralité que $i \leqslant j'$ 
+								\footnote{Si $i > j'$ alors on doit rajouter une nouvelle fonction $f_l$ à $S$, telle que $l > i$, et définie par la nouvelle équation $f_l(x) = f_{j'}$ et remplacer $E_i$ par $f_i(x) = \eqpred{f_{l}}{f_j}{x}$}
+							, alors $\sigma_i(y)$ est définie par :
+							
+							\[
+								\sigma_i(y) = \eqpredfi{g}{g}{y-\delta}{ + \delta'}{y} - j' + i
+							\]
+							
+							où $\delta = i - j$ et $\delta' = j' - j$.
+							
+							Pour justifier ce remplacement, on doit s'assurer que le codage de plusieurs fonctions en une seule ne cause par d'effets de bord quand on utilise \emph{Equal-Predecesor}. Ce qui est crucial ici, c'est que, pour chaque $i<k$, les valeurs de $g$ qui codent $f_i$ soient congruentes à $i$ modulo $k$. Pour être plus précis, soit $b = kcn^H + ka + i$, avec $a< cn^H$. Alors $b-\delta = kcn^H + ka + i - (i - j) \underset{i>j}{=} kcn^H + ka + j$. On a deux sous-cas à étudier :
+							
+							\begin{itemize}[itemsep=-1mm,leftmargin=1cm]
+								\item
+									$f_j^{\leftarrow}(a) = a$.   Dans ce cas, pour aucun $a' < a$, on n'a $f_j(a') = f_j(a)$, donc il n'y a pas de $a' < a$ pour lequel $g\left( kcn^H + ka' + j \right) = g\left( kcn^H + ka + j \right)$. La définition de $g$ assure que, pour chaque $e \geqslant kcn^H$, on a $\left(g(e) \mod{k} = j \Leftrightarrow e \mod{k} = j\right)$ et $\forall e, e' \in 2kcn^H$, si $g(e) = g(e')$, alors soit $e, e' < kcn^H$, soit $e, e' \geqslant kcn^H$. Donc $g^{\leftarrow} \left( kcn^H + ka + j \right) = kcn^H + ka + j$ et $g^{\leftarrow}\left( b - \delta \right) + \delta' = kcn^H + ka + j' \geqslant kcn^H + ka + i = b$. Ainsi :
+									
+									\setcounter{equation}{0}
+									\begin{eqnarray}
+										\sigma_i(b) 	& = &	\eqpredfi{g}{g}{b-\delta}{+\delta'}{b} - j' + i \\
+														& = & 	\left( kcn^H + ka + j' \right) - j' + i \\
+														& = & 	kcn^H + ka + i \\
+														& = & 	kcn^H + k \eqpred{f_{j'}}{f_j}{a} + i \\
+														& = & 	kcn^H + k f_i(a) + i \\
+														& = & 	g(b),
+									\end{eqnarray}
+									
+									comme voulu.
+									
+								\item
+									$f_j^{\leftarrow}(a) = a'$ pour un certain $a' < a$. Dans ce cas, $g\left( kcn^H + ka + j \right) = kcn^H + ka' + j$. En conséquence : 
+									
+									\[
+										g^{\leftarrow}\left( b - \delta \right) + \delta' = kcn^H + ka' + j' < kcn^H + ka + i = b
+									\]
+									
+									Donc :
+									
+									\setcounter{equation}{0}
+									\begin{eqnarray}
+										\sigma_i(b) 	& = &	\eqpredfi{g}{g}{b-\delta}{+\delta'}{b} - j' + i \\
+														& = & 	g\left( kcn^H + ka' + j' \right) - j' + i \\
+														& = & 	\left( kcn^H + k f_{j'}(a') + j' \right) - j' + i \\
+														& = & 	kcn^H + k f_{j'}(a') + j' + i \\
+														& = & 	kcn^H + k \eqpred{f_{j'}}{f_j}{a} + i \\
+														& = & 	kcn^H + k f_i(a) + i \\
+														& = & 	g(b),
+									\end{eqnarray}
+									
+									comme souhaité.
+							\end{itemize}
+					\end{itemize}
+					
+					
 				\item	
-					Maintenant, on complète le LRS pour $g$. Pour une question de simplicité, on va supposer que $t_2$ ne contient que le symbole de constante $n$ et un seul symbole de fonction $h$. Soient $j <k$ et $\alpha$ une fonction affine tels que, pour toute structure $s$, on ait $\Gamma(s).n = P\left((s.n)^H, s'\right).n = s'.f_j\left(\alpha\left( (s.n)^H \right)\right)$, et soient $i <k$ et $A$ une fonction affine tels que, pour toute structure $s$ et tout $a < \Gamma(s).n$, on ait $\Gamma(s).h(a) = P\left((s.n)^H, s'\right).h(a) = s'.f_i\left(A\left( (s.n)^H, a \right)\right)$
-						\footnote{Ça veut juste dire : on donne des noms aux éléments qui permettent de définir la structure $\Gamma(s)$ ; ces fonctions affines $\alpha, A$ et ces entiers $i,j$ existent par définition d'une fonction $n^H$-représentable par un LSRS. Reste à voir si cette définition a bien du sens, mais si ça a du sens, alors il n'y a pas de problème ici.}
-					.
+					Maintenant, on complète le LRS pour $g$. Pour une question de simplicité, on va supposer que $t_2$ ne contient que le symbole de constante $n$ et un seul symbole de fonction $h$. Soient $j <k$ et $\alpha$ une fonction affine tels que, pour toute structure $s$, on ait $\Gamma(s).n = P\left((s.n)^H, s'\right).n = s'.f_j\left(\alpha\left( (s.n)^H \right)\right)$, et soient $i <k$ et $A$ une fonction affine tels que, pour toute structure $s$ et tout $a < \Gamma(s).n$, on ait $\Gamma(s).h(a) = P\left((s.n)^H, s'\right).h(a) = s'.f_i\left(A\left( (s.n)^H, a \right)\right)$\footnotemark.
+					
+						\footnotetext{Ça veut juste dire : on donne des noms aux éléments qui permettent de définir la structure $\Gamma(s)$ ; ces fonctions affines $\alpha, A$ et ces entiers $i,j$ existent par définition d'une fonction $n^H$-représentable par un LSRS. Reste à voir si cette définition a bien du sens, mais si ça a du sens, alors il n'y a pas de problème ici.}
 					
 					On a construit $g$ de telle manière que toutes les valeurs de fonctions $f_i(a)$ sont, en quelque sorte, disponibles dans $g$, mais on a encore deux problèmes à résoudre. Premièrement, les $f_i(a)$ apparaissent uniquement sous une forme codée ; deuxièmement, elles ne forment pas un intervalle contigu mais sont éparpillées modulo $k$. Il faut donc, avant d'extraire les valeurs à l'aide d'une projection affine bien choisie, on doit décoder les valeurs des fonctions et les ramener dans un même intervalle. Pour ça, on élargit le domaine de $g$ à $(2k+2)cn^H$ et on complète la définition de $g$ :
 					
@@ -348,8 +360,9 @@
 							}
 					\]
 					
-					Il découle de l'équation \redtext{$(\star)$} (la définition de $g$ sur $kcn^H$) et de cette définition que, pour tout $a < cn^H$, on a
-					\footnote{Analysons :
+					Il découle de l'équation \redtext{$(\star)$} (la définition de $g$ sur $kcn^H$) et de cette définition que, pour tout $a < cn^H$, on a\footnotemark :
+					
+					\footnotetext{Analysons :
 						\begin{itemize}
 							\setlength{\itemsep}{-1mm}
 							\item	$(1) \rightarrow (2)$ : parce que soustraction propre.
@@ -358,7 +371,8 @@
 							\item 	$(4) \rightarrow (5)$ : \emph{because} soustraction propre.
 							\item 	$(5) \rightarrow (6)$ : parce que $f_i(a) < cn^H$ et on a le bon décalage avec $i$.
 						\end{itemize}	
-					} :
+					}
+					
 					\setcounter{equation}{0}
 					\begin{eqnarray}
 						g\left( 2kcn^H + a\right)	& = & 		g\left[ g\left[ k\left( \left(2kcn^H + a\right) - 2kcn^H \right) + kcn^H  + i\right]_{2kcn^H + a} - kcn^H  \right]_{2kcn^H + a} \\
@@ -397,16 +411,27 @@
 					
 					\footnotetext{C'est bien ce qu'il nous faut parce que $A' : a,b \mapsto 2kcb + A\left( b, a \right)$ est bien une fonction affine telle que $P'\left(n^H, s'\right).h(a) = s'''.g(A'(n^H, a))$.}
 					
-					
-			\end{itemize}
+			\end{enumerate}
 			
 		\end{proof}
 		
+		
 		\subparagraph{Bilan}
+		
 		
 		La démonstration a l'air de marcher !!
 		
 		
+		
+	\paragraph{LRS et temps linéaire} (p.216)
+	
+	\begin{conj}
+		Soit $\Gamma$ une fonction de RAM. Les propositions suivantes sont équivalentes :
+		
+		\begin{enumerate}[itemsep=-1mm]
+
+		\end{enumerate}
+	\end{conj}
 		
 \end{document}
 
