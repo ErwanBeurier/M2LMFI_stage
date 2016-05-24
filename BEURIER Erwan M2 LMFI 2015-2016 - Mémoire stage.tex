@@ -28,17 +28,21 @@
 	
 	\pagebreak
 	
+	
 	\section{Des caractérisations de $P$}
+	
 	
 		\subsection{Notions générales}
 		
-		\begin{itemize}
+		
+		\begin{itemize}[itemsep=-1mm]
 			\item 	Algèbre
 			\item 	Fonctions récursives sur une algèbre
 		\end{itemize}
 		
 		
 		\subsection{Approche de Bellantoni et Cook}
+		
 		
 		\nepasoublier{SOURCES}
 		
@@ -49,8 +53,7 @@
 		\begin{definition}[Fonctions récursives à arguments normaux]
 			On note $\text{BC}$ le plus petit ensemble de fonctions contenant :
 			
-			\begin{itemize}
-				\setlength{\itemsep}{-1mm}
+			\begin{itemize}[itemsep=-1mm]
 				\item 	les constructeurs \emph{safe} : $C_i\left(; x\right)$
 				\item 	les projections : $p_i^{k,h} \left( x_1, \dots, x_{k}; x_{k+1}, \dots, x_{k+h}\right) = x_i$
 				\item 	le destructeur \emph{safe} : $\text{dest} \left( ; C_i\left(; x\right) \right) = 
@@ -74,7 +77,7 @@
 			\begin{itemize}
 				\item 	$f\left(c(x), \bar{y} ; \bar{z}\right) = g_c\left( x, \bar{y} ; \bar{z}, f(x, \bar{y}; \bar{z}) \right)$
 			\end{itemize}
-			
+
 			%}}}
 			
 			et composition \emph{safe}.
@@ -84,9 +87,9 @@
 			\emph{$f$ est définie par composition \emph{safe} à partir de $h, g_0, g_1 \in \text{BC}$ lorsque :}
 			
 			\begin{itemize}
-				\setlength{\itemsep}{-1mm}
 				\item 	$f\left( \bar{x} ; \bar{y}\right) = h\left( \bar{x}, g_0( \bar{x}; ) ; \bar{y}, g_1( \bar{x}; \bar{y} ) \right)$
 			\end{itemize}
+			
 			%}}}
 			
 		\end{definition}
@@ -110,8 +113,7 @@
 			
 			\emph{Une fonction $f \in \text{Cob}$ est définie par récurrence bornée sur les notations à partir de $(g_c)_{c \in \sigma}, h \in \text{Cob}$ lorsque :}
 			
-			\begin{itemize}
-				\setlength{\itemsep}{-1mm}
+			\begin{itemize}[itemsep=-1mm]
 				\item 	$\forall c \in \sigma, \:\:\: f\left( c(x), \bar{y} \right) = g_c\left( x, \bar{y} \right)$
 				\item 	$\forall x, \bar{y}, \:\:\: \left| f \left( x, \bar{y} \right) \right| \leq \left| h \left( x, \bar{y} \right) \right|$
 			\end{itemize}
@@ -243,8 +245,7 @@
 			
 			Si $f(\underset{1}{\bar{x}}, \underset{0}{\bar{y}}) = g( \underset{1}{\bar{x}}, \underset{1}{h_1}(\bar{x}), \underset{0}{\bar{y}}, \underset{0}{h_0}(\bar{x}, \bar{y}))$ alors :
 			
-			\begin{itemize}
-				\setlength{\itemsep}{-1mm}
+			\begin{itemize}[itemsep=-1mm]
 				\item 	Soit $\text{tier}(f) = \text{tier}(g) = 1$, dans ce cas $f(\underset{1}{\bar{x}}) = g( \underset{1}{\bar{x}}, \underset{1}{h_1}(\bar{x}))$ (car on n'a pas d'argument redondant). Par hypothèse d'induction $\underset{1}{h_1}(\bar{x}) = h_1(;\bar{x})$ et $g(\underset{1}{\bar{x}}, \underset{1}{h_1}(\bar{x})) = g(; \bar{x}, h_1(;\bar{x})) = f(; \bar{x})$.
 				
 				\item 	Soit $\text{tier}(f) = \text{tier}(g) = 0$, dans ce cas par hypothèse d'induction, on a bien : $g( \bar{x}, h_1(\bar{x};) ; \bar{y}, h_0(\bar{x}; \bar{y})) = f(\bar{x} ; \bar{y})$.
@@ -279,8 +280,7 @@
 		\begin{definition}[$\sigma$-RAM] \nepasoublier{SOURCES}
 			Une $\sigma$-RAM est un modèle de calcul composé de :
 
-			\begin{itemize}
-				\setlength{\itemsep}{-1mm}
+			\begin{itemize}[itemsep=-1mm]
 				\item	Deux accumulateurs $A$, $B$ ;
 				\item 	Un registre spécial $N$ ;
 				\item 	Une infinité dénombrable de registres $\left( R_i\right)_{i \in \omega}$.
@@ -290,8 +290,7 @@
 			
 			Un programme de $\sigma$-RAM est un ensemble fini d'instructions $\left( I(i) \right)_{i \in N}$ dont chacune est de l'une des formes suivantes :
 			
-			\begin{itemize}
-				\setlength{\itemsep}{-1mm}
+			\begin{itemize}[itemsep=-1mm]
 				\item 	$A := c$ pour n'importe quelle constante $c \in \naturels$
 				\item 	$A := op(A)$ ou $op(A,B)$, où $op \in \sigma$
 				\item 	$A := N$ 
@@ -315,8 +314,7 @@
 		\paragraph{Entrées et sorties.}
 		Dans leur article \nepasoublier{SOURCE}, Grandjean et Schwentick indiquent que leur $\sigma$-RAM prend en entrée une structure $\left( \intint{1}{n}, \underset{\text{fonctions unaires}}{\underbrace{f_1, \dots, f_k}},  \underset{\text{constantes}}{\underbrace{C_1, \dots, C_l}}\right)$ et s'initialise de la façon suivante : 
 		
-		\begin{itemize}
-			\setlength{\itemsep}{-1mm}
+		\begin{itemize}[itemsep=-1mm]
 			\item 	$N := n$
 			\item 	$R_{(i-1) \times n + j} := f_i(j)$ où $i \in \intint{1}{k}$ et $j \in \intint{1}{n}$
 			\item 	$R_{k \times n + j} := C_i$ où $i \in \intint{1}{l}$
@@ -341,8 +339,7 @@
 			
 			Soit un terme $\tau \in \bbA$. On appelle \emph{constructeur extérieur} le dernier constructeur de $\tau$. On peut le définir par induction comme suit :
 			
-			\begin{itemize}
-				\setlength{\itemsep}{-1mm}
+			\begin{itemize}[itemsep=-1mm]
 				\item 	Si $\tau = C_i$ où $r_i = 0$ alors $C_i$ est le constructeur extérieur de $\tau$.
 				\item 	Si $\tau = C_i(\tau_1, \dots, \tau_{r_i})$ alors $C_{i}$ est le constructeur extérieur de $\tau$.
 			\end{itemize}
@@ -350,8 +347,7 @@
 		
 		
 		\paragraph{Exemples.}
-		\begin{itemize}
-			\setlength{\itemsep}{-1mm}
+		\begin{itemize}[itemsep=-1mm]
 			\item 	la $\left\lbrace 0, s \right\rbrace$-algèbre des entiers unaires $\naturels$ ;
 			\item 	la $\left\lbrace \varepsilon, 0(-), 1(-)\right\rbrace$-algèbre des mots binaires $\mathbb{W}$.
 		\end{itemize}
@@ -363,8 +359,7 @@
 		\begin{definition}[$\mathbb{A}$-RAM]
 			Une $\bbA$-RAM est un modèle de calcul comprenant :
 			
-			\begin{itemize}
-				\setlength{\itemsep}{-1mm}
+			\begin{itemize}[itemsep=-1mm]
 				\item 	Un ensemble fini d'états $S = \left\lbrace s_1, \dots, s_l \right\rbrace$, où $s_1$ est l'état initial et $s_l$ est l'état final ;
 				\item 	Un ensemble fini de registres $\Pi = \left\lbrace \pi_1, \dots, \pi_m \right\rbrace$.
 			\end{itemize}
@@ -373,8 +368,7 @@
 			
 			Un programme de $\bbA$-RAM est un ensemble fini d'instructions dont chacune est de l'une des formes suivantes :
 			
-			\begin{itemize}
-				\setlength{\itemsep}{-1mm}
+			\begin{itemize}[itemsep=-1mm]
 				\item 	(const)			$s_a \pi_{j_1} \dots \pi_{j_{r_i}} C_i \pi_j s_b$
 				\item	($p$-dest)		$s_a \pi_i \pi_j s_b$
 				\item	(switch)		$s_a \pi_j s_{b_1} \dots s_{b_k}$
@@ -435,8 +429,7 @@
 			\begin{definition}[$\sigma$-RAM constructrice]
 				Une $\sigma$-RAM constructrice est un modèle de calcul composé de :
 				
-				\begin{itemize}
-					\setlength{\itemsep}{-1mm}
+				\begin{itemize}[itemsep=-1mm]
 					\item	$r$ accumulateurs $\left(A_i\right)_{i\in \intint{1}{r}}$ (si $r$ = 1, on suppose qu'on a au moins deux accumulateurs) ;
 					\item 	Un registre spécial $N$ ;
 					\item 	Une infinité dénombrable de registres $\left( R_i\right)_{i \in \omega}$.
@@ -445,8 +438,7 @@
 				
 				Les instructions sont similaires à celles de la $\sigma$-RAM classique :
 				
-				\begin{itemize}
-					\setlength{\itemsep}{-1mm}
+				\begin{itemize}[itemsep=-1mm]
 					\item 	$A_1 := c$ pour n'importe quelle constante $c \in \bbA$
 					\item 	$A_1 := C_i(A_1, \dots, A_{r_i})$ où $C_i \in \sigma$
 					\item 	$A_1 := N$
@@ -838,8 +830,7 @@
 			
 			Enfin, on peut penser à donner un test d'égalité gratuit à la $\bbA$-RAM. Il accélère la simulation des trois opérations de base de la $\sigma$-RAM, mais il reste un coup : 
 			
-			\begin{itemize}
-				\setlength{\itemsep}{-1mm}
+			\begin{itemize}[itemsep=-1mm]
 				\item 	$A_1 := R_{A_1}$ se simule à présent en temps $\grozo{\left| \mu \right|}$ ;
 				\item 	$R_{A_1} := A_i$ se simule à présent en temps $\grozo{\left| \mu \right|}$ ;
 				\item 	$\sRAMifc{i}{j}$ se simule à présent en temps $\grozo{1}$ ;
