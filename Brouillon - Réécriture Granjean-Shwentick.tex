@@ -561,13 +561,162 @@
 			
 			Le nombre d'étapes pour évaluer un terme de récurrence est linéaire en la longueur du terme. Comme le terme de récurrence de $E$ est fixé, il s'agit d'un nombre constant d'étapes. Ainsi, $G[i]$ n'a besoin que d'un nombre constant d'étapes, de sorte que le programme tourne en temps $\grozo{p} = \grozo{n^H}$.
 			
-			
-			
 }
 			
+		\end{proof}
+		
+		\pagebreak
+		
+	\subparagraph{Calculable en temps polynomial $\Rightarrow$ LSRS}
+		
+		
+		\begin{conj}
+			Si une fonction de RAM $\Gamma$ est calculable en temps $\grozo{n^H }$ sur une $\{+, -\} \footnotemark$-RAM $M$, alors $\Gamma$ est $n^H$-représentable par un LSRS.
+		
+				\footnotetext{On aura probablement besoin de l'opération $\times$ si on a besoin d'avoir la fonction $i \mapsto n^H$.}
+		\end{conj}
+		
+		\begin{proof}
+			Soit $\Gamma$ une fonction de RAM. Pour des raisons de simplicité, on va supposer que les types d'entrée et de sortie de la fonction n'ont qu'un seul symbole de fonction $f$. Soit $M$ une RAM calculant $\Gamma$ comme stipulé dans les hypothèses. Soit $c$ tel que le temps de calcul est borné par $c n^H$ sur des entrées $c(\Gamma)$-bornées\footnotemark de taille $n$.
 			
+				\footnotetext{Je ne comprends pas si ce $c(\Gamma)$ est le même que celui qu'on vient d'instancier.}
+				
+			On va construire un LSRS qui utilise des fonctions $I, A, B, R_A, N$, qui décrivent l'état courant de la RAM \emph{avant} chaque étape $x$, de la façon suivante :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item	$I(x)$ contient le numéro courant d'instruction du programme de la RAM ;
+				\item 	$A(x), B(x), N(x)$ contiennent les valeurs des registres $A, B, N$ de $M$ ;
+				\item 	$R_A(x)$ contient la valeur du registre dont l'adresse est actuellement dans le registre $A$.
+			\end{itemize}
+			
+			Par commodité, on va aussi utiliser des fonctions $I', A', B', R_A', N'$, qui décrivent l'état de la RAM \emph{après} l'étape $x$. 
+			
+			En définissant $I(x)$ par distinction de cas, une bonne partie de la simulation de la RAM est immédiate. Par exemple, si $M$ exécute $A:= A + B$ alors les équations doivent forcer $A'(x) = A(x) + B(x)$. Le principal problème réside dans l'instruction $A:= R_A$, qui récupère le contenu d'un registre. Notons que les fonctions définies dans $S$ n'encodent pas explicitement les valeurs de tous les registres de $M$ à chaque étape $t$ mais seulement le contenu du registre dont l'indice est contenu dans $A$. Pour obtenir la valeur de $R_A(t)$, on doit trouver le dernier instant avant $t$ auquel le registre $A$ avait la valeur $A(t)$. Si un tel instant n'existe pas, on doit se référer à l'entrée. Rappelons que $s.f(i)$ est stocké dans $R_i$ au début du calcul. C'est pour cela que l'opération de récursion entre en jeu\footnotemark.
+			
+				\footnotetext{C'est l'opération $g, g' \mapsto \eqpred{g'}{g}{x}$}
+			
+			Pour faciliter les instructions $A:=R_A$, on va diviser le domaine en trois : $\intint{0}{cn^H-1}$, $\intint{cn^H}{2cn^H-1}$, $\intint{2cn^H}{3cn^H-1}$.
+			On va utiliser le premier intervalle pour stocker $s.f$, le deuxième pour simuler le calcul de $M$, et le troisième pour extraire la fonction de sortie ; pour ce faire, on va utiliser $R_A$ de manière à encoder la sortie (c'est un usage différent de celui introduit).
+			
+			On va s'autoriser la définition par cas (on a vu dans un lemme précédent que ça ne rendait pas le LSRS plus puissant) et quelques opérations simples qui ne sont pas directement disponible dans la définition d'un LSRS. Le système qu'on va proposer n'est pas un LSRS à proprement parler, mais sa traduction en véritable LSRS est immédiate, quoiqu'elle nécessite quelques fonctions en plus.
+			
+			Pour simplifier la présentation, on va présenter les définitions des fonctions sur les trois intervalles ; elles peuvent être combinées via un LSRS. 
+			
+			Dans un LSRS, l'ordre est important. Ici, les fonctions doivent être présentées dans cet ordre : $I, A, B, N, R_A, I', A', B', N', R_A'$.
+			
+			Pour $x < cn^H$, $A$ et $R_A$ sont définies par :
+			
+			\setcounter{equation}{0}
+			\begin{eqnarray}
+				A(x) & = & x \\
+				R_A'(x) & = & f(x)
+			\end{eqnarray}
+			
+			Les autres fonctions valent $0$ sur cet intervalle. Cette initialisation va permettre de récupérer les valeurs de $R_A$ dans la deuxième partie du domaine. 
+			
+			Sur le domaine $\intint{cn^H}{2cn^H-1}$
+			
+			\fbox{
+				\begin{minipage}{0.9\textwidth}
+					
+				\setcounter{equation}{0}
+				\begin{eqnarray}
+					I(x) & = & \casedist{
+							1			& 	\text{si $x = c n^H$} \\
+							I'(x-1)		& 	\text{sinon}
+							} \\
+					I'(x) & = & \casedist{
+							i			& 	\text{si $I(x)$ est de la forme $\sRAMif{i}{j}$ et $A(x) = B(x)$} \\
+							j			& 	\text{si $I(x)$ est de la forme $\sRAMif{i}{j}$ et $A(x) \neq B(x)$} \\
+							I(x)		&  	\text{si $I(x)$ est de la forme $\text{HALT}$} \\
+							I(x) + 1 	& 	\text{sinon} 
+							} \\
+					A(x) & = & \casedist{
+							0			& 	\text{si $x = cn^H$} \\
+							A'(x-1)		& 	\text{sinon}
+							} \\
+					A'(x) & = & \casedist{
+							c			& 	\text{si $I(x)$ est de la forme $A := c$} \\
+							A(x) * B(x)	& 	\text{si $I(x)$ est de la forme $A := A + B$} \\
+							R_A(x) 		& 	\text{si $I(x)$ est de la forme $A := R_A$} \\
+							N(x)		& 	\text{si $I(x)$ est de la forme $A := N$} \\
+							A(x)		& 	\text{sinon}
+							} \\
+					B(x) & = & \casedist{
+							0			& 	\text{si $x = cn^H$} \\
+							B'(x-1)		& 	\text{sinon}
+							} \\
+					B'(x) & = & \casedist{
+							A(x)		& 	\text{si $I(x)$ est de la forme $B := A$} \\
+							B(x)		& 	\text{sinon}
+							} \\
+					N(x) & = & \casedist{
+							n			& 	\text{si $x = cn^H$} \\
+							N'(x-1)		& 	\text{sinon}
+							} \\
+					N'(x) & = & \casedist{
+							A(x)		& 	\text{si $I(x)$ est de la forme $N := A$} \\
+							N(x)		& 	\text{sinon}
+							} \\
+					R_A(x) & = & \eqpred{R_A'}{A}{x} \\
+					R_A'(x) & = & \casedist{
+							B(x)		& 	\text{si $I(x)$ est de la forme $R_A := B$} \\
+							R_A(x)		& 	\text{sinon}
+							}
+				\end{eqnarray}
+			
+				\end{minipage}
+				}
+			
+			Notons que $cn^H$ code le premier instant du calcul. 
+			
+			Les fonctions $I(x)$ et $I'(x)$ ne prennent qu'un nombre fini de valeurs. Ainsi, en écrivant \emph{si $I(x)$ est de la forme $R_A := B$}, on écrit en fait \emph{si $I(x) = i_1$ ou $I(x) = i_2$ \dots ou $I(x) = i_m$} où $i_1, \dots, i_m$ sont les numéros des instructions $R_A := B$ dans le programme de la RAM.
+			
+			De plus, les opérations $I'(x-1)$ sont en réalité écrites $\eqpred{I}{1}{x}$ dans un vrai LSRS. Comme on l'a précédemment dit, on utilise $R_A$ pour extraire les valeurs de sortie du calcul de $M$, donné par la valeur $n'$ de $N$ et le contenu $R(0), \dots, R(n'-1)$, à la fin du calcul. Pour $2cn^H \leqslant x < 3cn^H$, le LSRS consiste en les équations suivantes :
+			
+			\setcounter{equation}{0}
+			\begin{eqnarray}
+				A(x) & = & x - 2cn^H \\
+				R_A(x) & = & \eqpred{R_A'}{A}{x}
+			\end{eqnarray}
+			
+			Les autres fonctions du LSRS sont définies par $h(x) = h(x-1)$ (les fonctions stationnent).
+			
+			Il ne reste plus qu'à voir que les équations de $S$ définissent les fonctions attendues pour décrire le calcul de $M$ et que $S$ produit la bonne sortie.
+			
+			Soit $s$ la RAM-structure, $1(-), n(-), id(-)$\footnote{Il faudra probablement rajouter $i \mapsto n^H$} comme précédemment, et soient $I, A, B, N, R_A, I', A', B', N', R_A'$ des fonctions \emph{that fulfill the equations of $S$}\footnotemark.
+			
+				\footnotetext{??????}
+				
+			Premièrement, il est clair que pour $a < c(s.n)^H$, on a :
+			
+			\setcounter{equation}{0}
+			\begin{eqnarray}
+				A(a) & = & a \\
+				R_A'(a) & = & s.f(a) \\
+				I(a) & = & B(a) = N(a) = R_A(a) = I'(a) = A'(a) = B'(a) = N'(a) = 0
+			\end{eqnarray}
+			
+			Les valeurs des fonctions au point $c(s.n)^H$ décrivent la configuration de la RAM au début du calcul. De plus, la définition de $A$ et $R_A'$ sur la première partie du domaine permet de rendre compte du faire que $M$ contient $s.f(i)$ dans le registre $R_i$.
+			
+			On montre facilement par induction sur $t$ que la valeur des fonctions au temps $c(s.n)^H+t$ sont correctes. La partie la plus difficile réside dans le calcul de $R_A$. Remarquons premièrement que, puisque $A(a) < c(s.n)^H$ pour chaque $a$, l'initialisation sur la première partie du domaine assure que $A^{\leftarrow}(a) < a$ pour tout $a \in \intint{cn^H}{2cn^H-1}$. Deux cas possibles :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	
+					$c(s.n)^H \leqslant A^{\leftarrow}(a) < a$. Dans ce cas, il existe $b \in \intint{c(s.n)^H}{a-1}$ tel que $A(a) = A(b)$ ; donc le registre courant $R$ a déjà été visité pendant le calcul, et $A^{\leftarrow}(a)$ est la dernière étape où cela s'est produit ; ainsi $R_A'\left(A^{\leftarrow}(a)\right)$ donne la bonne valeur de $R_A(a)$.
+					
+				\item 
+					$A^{\leftarrow}(a) < c(s.n)^H$. Dans ce cas, il n'y a pas de $b \in \intint{c(s.n)^H}{a-1}$ tel que $A(a) = A(b)$ ; donc le registre courant $R$ n'a pas été visité pour le moment, et devrait toujours contenir la valeur de $f(A^{\leftarrow}(a))$\footnotemark. Par initialisation, il découle que $A^{\leftarrow}(a) = A(a)$ et $R_A'(A(a)) = f(A(a))$, comme voulu.
+					
+						\footnotetext{Petite erreur de frappe dans l'article original ? Il y est écrit : $f(A(a))$.}
+			\end{itemize}
+			
+			Enfin, on doit encore montrer que $S$ définit correctement $\Gamma(s)$. Par définition de $R_A$ et $N$ sur la troisième partie du domaine du LSRS, pour chaque $a$, $R_A\left( 2 c(s.n)^H + a \right)$ contient les valeurs de du registre $R_a$ à la fin du calcul. De plus, $N(3c(s.n)^H-1)$ contient la valeur de $N$ à la fin du calcul. Ainsi, avec une projection bien choisie, $\Gamma(s)$ peut être extraite des fonctions définies par $S$. 
+			
+			Ainsi, on a montré que $S$ calcule correctement $\Gamma(s)$. Donc $\Gamma$ est $n^H$-représentée par $S$
 			
 		\end{proof}
+
 	
 \end{document}
 
