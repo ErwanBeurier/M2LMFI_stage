@@ -1,5 +1,6 @@
 % Ce fichier contient les macros/notations que j'ai définies depuis que j'utilise LaTeX.
 
+
 % Commandes personnalisées
 
 	% Notations standards
@@ -7,8 +8,8 @@
 \newcommand{\naturels}{\mathbb{N}}
 \newcommand{\reels}{\mathbb{R}}
 \newcommand{\complexes}{\mathbb{C}}
-\newcommand{\crod}{\right]\!\right]}
-\newcommand{\crog}{\left[\!\left[}
+\newcommand{\crod}{\right]\!\!\>\!\right]}
+\newcommand{\crog}{\left[\!\!\>\!\left[}
 \newcommand{\diff}{\mathrm{d}}
 \newcommand{\re}[1]{\text{Ré}\left( #1 \right)}
 \newcommand{\im}[1]{\text{Im}\left( #1 \right)}
@@ -55,18 +56,11 @@
 
 \newcommand{\espace}{\vspace{3mm}}
 \newcommand{\bfunder}[1]{\textbf{\underline{#1}}}
+\newcommand{\textquoted}[1]{\textquotedblleft#1\textquotedblright}
+
+	% Couleurs
+	
+\newcommand{\temp}[1]{\textcolor[RGB]{170,170,170}{ #1 }}
 \newcommand{\nepasoublier}[1]{\colorbox{red}{#1}}
 \newcommand{\redtext}[1]{\textcolor{red}{#1}}
-\newcommand{\textquoted}[1]{\textquotedblleft#1\textquotedblright}
-\newcommand{\issu}{\espace
 
-\textcolor{blue}{[\textit{Ce qui suit est extrait de mon T.I.P.E. de Spé sur la propriété d'universalité de $\zeta$.}]}
-
-\espace}
-\newcommand{\fin}{\espace
-
-$\hfill\multimap$
-
-\hrule
-
-\espace}
