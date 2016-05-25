@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 \documentclass{article}
 
 \include{packages}
@@ -736,3 +737,743 @@
 
 
 
+=======
+\documentclass{article}
+
+\include{packages}
+\include{macros}
+
+% Pour les itemize : 			\setlength{\itemsep}{-1mm}
+
+% Variables pour le document
+
+\author{BEURIER Erwan}
+\title{M2 LFMI \\ BROUILLON }
+\date{Année 2015-2016}
+
+% Commandes de ce document
+
+\newcommand{\sRAMif}[2]{\text{IF} (A=B) \{I( #1 )\} \text{ ELSE } \{I( #2 )\}}
+\newcommand{\sRAMifc}[2]{\text{IF} (A_1=A_2) \{I( #1 )\} \text{ ELSE } \{I( #2 )\}}
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\TRec}[1]{\text{TRec}\left(\mathbb{#1}\right)}
+\newcommand{\TRecd}[1]{\text{TRec}_{2}\left(\mathbb{#1}\right)}
+\newcommand{\dtimeram}{\text{DTIME}_{\text{RAM}}\left( \grozo{ n^k }\right)}
+\newcommand{\dtimeramarg}[1]{\text{DTIME}_{\text{RAM}}\left( \grozo{ n^{#1} }\right)}
+\newcommand{\eqpred}[3]{#1\left[ #2^{\leftarrow}(#3) \right]_{#3}}
+\newcommand{\eqpredf}[4]{#1\left[ #2^{\leftarrow}(#3) \right]_{#4}} % four arguments
+\newcommand{\eqpredfi}[5]{#1\left[ #2^{\leftarrow}(#3) #4 \right]_{#5}} % five arguments
+
+
+\begin{document}
+	
+	
+	\paragraph{README}
+	
+	
+	Ce fichier n'est qu'un brouillon de réécriture de l'article de Grandjean et Schwentick \emph{Machine-independent characterizations and complete problems for deterministic linear time} pour voir si ces notions peuvent s'étendre au temps $\grozo{n^k}$.
+	
+	C'est plus ou moins une traduction littérale en français et en remplaçant $\grozo{n}$ par $\grozo{n^k}$, pour voir si ça coince à un endroit.
+	
+	
+	\paragraph{Notations}
+	
+	
+	Par abus de notation découlant de la théorie des ensembles, j'écrirai $n$ pour $\intint{0}{n-1}$ voire pour $\intint{1}{n}$ quand il n'y aura pas d'ambiguïté. De manière générale, si un terme ressemble à un entier naturel mais qu'il est mis à la place d'un ensemble (typiquement, dans une fonction), il faut le lire comme l'ensemble $\intint{0}{n-1}$.
+	
+	\pagebreak
+	
+	\paragraph{Preliminaries} (p.198)
+	
+	
+		\subparagraph{RAM data structures} (p.198)
+	
+
+		\begin{definition}[RAM data structures]
+			Soit $t$ un type, c'est-à-dire une signature fonctionnelle ne contenant que des symboles de constantes ou de fonctions unaires.
+			
+			Une RAM-structure $s$ de type $t$ est un uplet constitué de :
+			\begin{itemize}[itemsep=-1mm]
+				\item 	$n \in \naturels$ est la taille de la structure ;
+				\item 	$C \in \naturels$ pour chaque symbole $C \in t$ ;
+				\item 	$f : n \to \naturels$ pour chaque symbole $f \in t$.
+			\end{itemize}
+			
+			On notera $s.n, s.C, s.f$ les composantes $n, C, f$ de $s$ (cette notation est à rapprocher de l'accès à un attribut ou à une fonction membre en programmation objet).
+			
+			On dira que $s$ est $c$-bornée pour $c\in\naturels$ lorsque $s.C, s.f(i) < c s.n$ pour tous $C, f \in t$ et $i \in n$.
+		\end{definition}
+	
+	
+		\begin{definition}[Fonction de RAM]
+			Soient $t_1, t_2$ des types. 
+			
+			Une $(t_1, t_2)$-fonction de RAM $\Gamma$ est une fonction telle qu'il existe $c_1, c_2 \in \naturels$, tels que $\Gamma$ envoie les structures $c_1$-bornées de type $t_1$ sur des structures $c_2$-bornées de type $t_2$.
+			
+			% On rappelle que "c-borné" ne concerne que la structure par rapport à sa propre taille ; ici on ne compare pas la taille de l'entrée et de la sortie
+			
+			On dit que $\Gamma$ est polynomiale lorsque $\Gamma(s).n = \grozo{(s.n)^k}$.
+			
+			% Là, si.
+		\end{definition}
+	
+	
+	
+		\subparagraph{Machine RAM} (p.200)
+	
+		
+		La machine RAM reste la même (heureusement). On va utiliser la $\{+\}$-RAM ou des versions un brin plus puissantes comme la $\{+ , -, \times, \div k \}$-RAM pour un $k\in \naturels$ fixé.
+		
+		\begin{definition}[Temps polynomial]
+			On définit $\dtimeram$ comme étant l'ensemble des fonctions calculables sur $\{+\}$-RAM en temps $\grozo{n^k}$, telles que le nombre de registres utilisés, la longueur des nombres manipulés (y compris les adresses de registres) soient bornés par $\grozo{n^k}$.
+		\end{definition}
+		
+		
+		
+		\subparagraph{Réductions affines} (p.202)
+
+
+		On laisse inchangées les notions de \emph{transformations affines} (définition 2.3), de \emph{réductions affines} (définition 2.5),de projections affines (définition 2.7). Les théorèmes et lemmes suivants ou intermédiaires sont aussi inchangés. Ils permettront de définir des réductions qui \emph{restent} dans $\dtimeram$ pour un $k$ fixé.
+		
+		
+		
+	\paragraph{Le framework algébrique} (p.208)
+
+
+		\subparagraph{LSRS} (p.208)
+		
+		
+		Le LSRS en tant que tel n'a pas l'air collé à la définition du temps linéaire. On garde la définition pour le moment. 
+		
+		On doit refaire la définition 3.3.
+		
+		Pour $t$ un type, on note $F_t$ l'ensemble de symboles de fonctions suivants : $\{1(-), n(-), id(-)\} \cup  \{ f_C | C \in t\} \cup \{ f | f \in t\}$.
+		
+		\begin{remark}
+			Soient $t$ un type et $S$ un LSRS pour $f_1, \dots, f_h$ sur $F_{t}$. 
+			L'entrée d'un LSRS peut être vue comme étant une RAM-structure $s$ de type $t$, qu'il \emph{lit} en interprétant les symboles de $F_t$ de la façon suivante : 
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	$\forall f \in t_1$ :   $f(i) = 
+				\left\lbrace \begin{array}{ll}
+				s.f(i) & \text{si } i< s.n \\
+				0 & \text{sinon}
+				\end{array}\right.$
+				
+				\item 	$\forall C \in t_1$ :   $f_C(i) = s.C$
+				\item 	$1(i) = 1, n(i) = s.n, id(i) = i$
+			\end{itemize}
+			
+			La sortie du LSRS peut aussi être vue comme une nouvelle structure $s' = S(s)$ de type $\{f_1, \dots, f_h\}$.
+		\end{remark}
+		
+		
+		Ici, on a plusieurs possibilités pour adapter le concept de \emph{linéairement représenté} (définition 3.3) à $n^k$.
+		
+		\begin{definition}[RAM $n^k$-représentée par LSRS - Proposition 1]
+			Soient $t_1, t_2$ des types. Soit $\Gamma$ une $(t_1, t_2)$-fonction de RAM. 
+			
+			Soit $S$ un LSRS pour $f_1, \dots, f_h$ sur $F_{t_1}$. 
+			
+			On dit que $\Gamma$ est $n^k$-représentée par $S$ lorsqu'il existe un entier $c$ et une projection affine $P$ tels que, pour chaque structure $s$ $c$-bornée, $S$ définit des fonctions $f_1, \dots, f_h : c (s.n)^k \to c (s.n)^k$ telles que $\Gamma(s) = P((s.n)^k, S(s))$ ($S(s)$ est la structure définie par le LSRS).
+			
+			\emph{La modification réside dans le domaine de définition des fonctions et la taille de la sortie dans la projection.}
+		\end{definition}
+			
+		
+		\begin{probs} \textcolor{white}{T} % Obligé pour sauter une ligne.
+			\begin{itemize}
+				\setlength{\itemsep}{-1mm}
+				\item 	Est-ce qu'on capture tout $\dtimeram$ ? 
+				\item 	Est-ce que $P((s.n)^k, S(s))$ capture toutes les structures de taille $\grozo{n^k}$ ?
+			\end{itemize}
+		\end{probs}
+			
+	
+		Si $\Gamma$ est $n^k$-représentée par un LSRS alors on dit que $\Gamma$ est définissable par LSRS. 
+		
+		
+		% Eventuellement d'autres possibilités
+		
+		La définition 3.4 (définition par cas) et les lemmes 3.5 (la définition par cas ne change pas la puissance des LSRS) et 3.6 (composition de fonctions définissables par LSRS reste définissable par LSRS) restent les mêmes.
+		
+		
+		\subparagraph{LRS} (p.211)
+		
+		
+		La définition d'un terme récursif (non numérotée) et d'un LRS (définition 3.7) restent les mêmes. Le lemme 3.8 d'existence d'une solution unique au LRS aussi. 
+		
+		On doit adapter la définition de $n^k$-représentée par LRS : 
+		
+		\begin{definition}[RAM $n^k$-représentée par LRS - Proposition 1]
+			Soit $\Gamma$ une fonction de RAM. 
+			
+			Soit $E$ un LSRS $g(x) = \sigma(x)$. 
+			
+			On dit que $\Gamma$ est $n^k$-représentée par $E$ lorsqu'il existe un entier $c$ et une projection affine $P$ tels que, pour chaque structure $s$ $c$-bornée, $E$ définit une fonction $g : c (s.n)^k \to c (s.n)^k$ telle que $\Gamma(s) = P((s.n)^k, E(s)$ ($E(s)$ est la structure définie par le LRS, elle est de type $\{g\}$).
+			
+			\emph{La modification réside dans le domaine de définition de $g$.}
+		\end{definition}
+		
+		Et là, c'est la foire.
+		
+		On doit vérifier si le théorème principal de l'article tient encore au temps polynomial.
+		
+		
+		
+		\begin{conj}[Adaptation du lemme 3.10 (p.212)]
+			Toute fonction de RAM $n^H$-représentée par LSRS est aussi $n^H$-représentable par LRS.
+		\end{conj}
+		
+		\begin{proof}
+			Ici commence la relecture de la preuve.
+			
+			Soit $\Gamma$ une fonction de RAM $n^H$-représentée par un LSRS $S$ sur $F_{t_1}$ pour $f_0, \dots, f_{k-1}$, comme dans la définition, et soit $P$ la projection affine associée. Soit $s$ une RAM-structure $c$-bornée de type $t_1$. On note $s' = S(s)$ la structure définie par $S$ avec entrée $s$, et on note $s'' = \Gamma(s) = P\left( (s.n)^H, s'\right)$. Pour simplifier les notations, on va simplement écrire $n$ au lieu de $s.n$.
+			
+			L'idée est de coder les fonctions $f_0, \dots, f_{k-1} : cn^H \to cn^H$ par une unique fonction $g$. Pour s'assurer que la fonction \emph{Equal-Predecessor} fonctionne correctement, le codage des $f_i$ doit avoir des domaines disjoints et des images disjointes. Cela peut se faire, pour chaque $i<k$, en n'utilisant que des valeurs congrues à $i$ modulo $k$ pour la fonction $f_i$. Puisqu'on va en avoir besoin pour coder/décoder les opérations, on va aussi coder la fonction $\div k$ dans $g$.\\
+			
+			On va étendre le domaine de $g$ pour encoder $\Gamma(s).f$ pour chaque symbole de fonction $f$ du type de la structure de sortie, \emph{by function values of a contiguous interval} (???).
+			
+			Précisément, $g$ va être définie sur $2kcn^H$ de sorte que :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item	pour tout $b \in kcn^H$, on a $g(b) = b \div k$ ;
+				\item 	pour tous $a \in cn^H$ et $i \in k$, on a $g\left( kcn^H + ka + i \right) = kcn^H + k f_i(a) + i$ $\textcolor{red}{(\star)}$
+			\end{itemize}
+			% Commentaire bidon
+			
+			\espace
+			
+			\fbox{
+				\begin{minipage}{0.9\textwidth}
+					On a donc besoin d'un moyen de calculer $n^H$ dans la fonction de sortie.
+
+					Pour l'instant, pour des raisons de simplicité, puisqu'on sait que la fonction est $n^H$-représentable, on va supposer qu'on a accès à une fonction $i \mapsto n^H$. Pour ce faire, on peut soit la définir par multiplication en rajoutant $H$ équations (ce qui ne me semble pas naturel, parce qu'on modifie le LSRS à chaque fois qu'on veut changer la taille d'arrivée ?) soit on peut rajouter une fonction constante $i \mapsto n^H$ (on ajoute ou remplace une fonction dans les fonctions de base du LSRS ? Ca veut dire qu'on rajoute un symbole de fonction au type de départ, qui sait déjà ce qu'on va en faire ? )
+				
+					Problème : apparemment le LSRS sait qu'il représente des fonctions de taille $n^H$, mais est-ce suffisant pour justifier l'insertion de cette fonction en tant que fonction du domaine ? Apparemment, un même LSRS peut être utilisé pour toutes les tailles de domaines, donc peut-être qu'on peut, au cas par cas, rajouter une fonction en plus selon le domaine d'arrivée ?
+					
+					(La question ici est de savoir si on peut rajouter naturellement cette fonction constante d'accès direct au max, sans avoir l'air de tricher pour se faciliter la vie.)
+					
+					Ou bien on peut voir l'ajout de cette fonction comme un ajout de contrainte. C'est l'ajout de cette fonction qui impose que le domaine d'arrivée sera de taille $\grozo{n^k}$.
+				\end{minipage}
+				}
+				
+				\espace
+			
+			
+			En d'autres termes, pour $b \geqslant kcn^H$ et $b \mod{k} = j$, on a $g(b) = kcn^H + k f_j\left( (b-kcn^H) \div k \right) + j$.
+			On va définir la valeur de $g(b)$ pour $b \in 2kcn^H$ par distinction de cas sur $b \mod{k}$, comme décrit dans (1) à (3) ci-dessous.
+			
+			\begin{enumerate}[itemsep=-1mm,leftmargin=2cm]
+				%\setlength{\itemsep}{-1mm}
+				\item  
+					Renumérotons les symboles de $F_{t_1} = \{f | f \in t_1\} \cup \{f_C | C \in t_1\} \cup \{1(-), n(-), id(-)\}$ ainsi $\{ f^0, \dots, f^{l-1} \}$. On va limiter les occurrences de ces symboles. Premièrement, les symboles $f_0, \dots, f_{k-1}$ sont remplacés par $f^{l}, \dots, f^{l+k-1}$ respectivement. Ensuite, On va introduire $l$ nouvelles fonctions $f_0, \dots, f_{l-1}$ et $l$ équations pour les définir :
+					
+						\begin{itemize}[itemsep=-1mm,leftmargin=1cm]
+							\item	Si $f^i$ vient de $t_1$, alors l'équation associée est $f_i(x) = f^i(x)$ ;
+							\item 	Si $f^i = id$, alors l'équation associée est $f_i(x) = x$ ;
+							\item 	Si $f^i = f_C$, ou $1$ ou $n$, alors l'équation associée est (respectivement) $f_i(x) = C, 1, n$. 
+						\end{itemize}
+				
+					% Subitem ne marche pas ?
+					
+					On appellera ces équations des \emph{équations d'entrée} ; elles servent justement à remplacer les entrées du LSRS.
+					
+					Enfin, on remplace dans le LSRS $S$ tous les anciens symboles de fonctions (ceux de $F_{t_1}$) par les nouveaux (les $(f_i)_{i \in l+k}$). Après ces remplacements, $S$ ne contient plus aucune référence à $F_{t_1}$, sauf pour les équations d'entrée. 
+					
+				\item 	
+					Les équations de $S$ sont combinées en une seule équation $g(y) = \sigma(y)$ comme suit. Le terme $\sigma(y)$ est principalement une distinction de cas dépendant de $y$ et $y \mod{k}$. 
+				
+					\[
+						g(y) = 
+							\left\lbrace \begin{array}{ll}
+								0 				& \text{si $y \leqslant k-1$} \\
+								g(y-k) + 1 		& \text{si $k \leqslant y < kcn^H$} \\
+								\sigma_i(y)		& \text{si $y \geqslant kcn^H$ et $y \mod{k} = i$}
+							\end{array}\right.
+					\]
+					
+					où $\sigma_i(y)$ est un terme récursif qu'on explicitera tout de suite après. 
+					
+					Notons que les deux premiers cas donnent $g(y) = y \div k$ pour chaque $y < kcn^H$, comme voulu. Cela nous permet d'exprimer $y \mod{k}$ pour $kcn^H \leqslant y < 2kcn^H$, puisque $(y-kcn^H) - kg(y-kcn^H) = (y-kcn^H) - \sum_{j=1}^{k} g(y-kcn^H)$. \redtext{(Et alors ???)}
+					
+					Ensuite, on a vu que la distinction de cas ne rendait pas le LSRS plus puissant. 
+					
+					Enfin, on décrit la construction des termes de récurrence $\sigma_i(y)$ (on distingue la variable $y$ du terme de récurrence, de la variable $x$ des équations) :
+					
+					\begin{itemize}[itemsep=-1mm, leftmargin=1cm]
+						\item
+							Si $E_i$ est une équation d'entrée, alors $\sigma_i(y)$ est construit comme suit :
+					
+							\begin{itemize}[itemsep=-1mm,leftmargin=1cm]
+								\item %\subsubitem -		
+								Si le terme de droite de l'équation est une constante $C$ (éventuellement $1$ ou $n$), alors $\sigma_i(y) = kcn^H + kC + i$ ;
+								
+								\item %\subsubitem	-	
+								Si le terme de droite de l'équation est $x$, alors $\sigma_i(y) = kcn^H + kg\left( y - kcn^H \right) + i$ ;
+								
+								\item %\subsubitem	-	
+								Si le terme de droite de l'équation est $f^i(x)$, alors $\sigma_i(y) = kcn^H + k f^i\left( g\left( y - kcn^H \right) \right) + i$.
+								
+								Justifions pourquoi cette définition de $\sigma_i(y)$ est correcte. On le fait pour le troisième cas ; les deux autres sont plus simples. Soit $b = kcn^H + ka + i$ avec $a < cn^H$. Alors $g(b-kcn) = g(ka + i) = (ka + i) \div k = a$, et $\sigma_i(b) = kcn^H + kf^i(a) + i$, comme voulu. 
+							\end{itemize}
+							
+			
+						\item
+							Si $E_i$ est de la forme $f_i(x) = f_j(x) - f_{j'}(x)$, alors $\sigma_i(y)$ est défini par :
+							
+							\[
+								\sigma_i(y) = \left( g(y - \delta) - k cn^H - j \right) - \left( g(y - \delta') - k cn^H - j' \right) + kcn^H + i
+							\]
+							
+							où $\delta = i -j$ et $\delta' = i - j'$ et, par définition d'un LSRS, $i > j, j'$. Pour vérifier que cette expression est correcte, soient $a \in cn^H$, $b = kcn + ka + i$, où $i<k$. Si $g(b - \delta) = g(kcn^H + ka + j) = kcn^H + kf_j(a) + j$ et $g(b - \delta') = g(kcn^H + ka + j') = kcn^H + kf_{j'}(a) + j'$ alors :
+							
+							\[
+								\left( g\left( b - \delta \right) - kcn^H - j \right) - \left( g\left( b - \delta' \right) - kcn^H - j' \right)
+								=  k \left( f_{j}(a) - f_{j'}(a) \right) + kcn^H + i
+							\]
+
+							
+							Ce qui est ce qu'on voulait.
+							
+						\item
+							Si $E_i$ est de la forme $f_i(x) = f_j(x) + f_{j'}(x)$, alors son traitement est similaire au cas précédent, à ceci près qu'il faut que l'addition $x + y$ renvoie $0$ si $x + y > cn^H$. On redéfinit alors $\sigma_i(y)$ : 
+							
+							\[
+								\sigma_i(y) = \casedist{
+									\tau(y) + kcn^H + i & \text{si $\tau(y) < kcn^H$} \\
+									kcn^H + i & \text{sinon}
+									}
+							\]
+							
+							où $\tau(y) = \left( g\left( b - \delta \right) - kcn^H - j \right) - \left( g\left( b - \delta' \right) - kcn^H - j' \right)$ avec $\delta = i - j$ et $\delta' = i - j'$. 
+							
+							La vérification se passe de la même manière que précédemment.
+							
+						\item
+							Si $E_i$ est de la forme $f_i(x) = \eqpred{f_{j'}}{f_j}{x}$, où $j < i$ et on suppose sans perte de généralité que $i \leqslant j'$ 
+								\footnote{Si $i > j'$ alors on doit rajouter une nouvelle fonction $f_l$ à $S$, telle que $l > i$, et définie par la nouvelle équation $f_l(x) = f_{j'}$ et remplacer $E_i$ par $f_i(x) = \eqpred{f_{l}}{f_j}{x}$}
+							, alors $\sigma_i(y)$ est définie par :
+							
+							\[
+								\sigma_i(y) = \eqpredfi{g}{g}{y-\delta}{ + \delta'}{y} - j' + i
+							\]
+							
+							où $\delta = i - j$ et $\delta' = j' - j$.
+							
+							Pour justifier ce remplacement, on doit s'assurer que le codage de plusieurs fonctions en une seule ne cause par d'effets de bord quand on utilise \emph{Equal-Predecesor}. Ce qui est crucial ici, c'est que, pour chaque $i<k$, les valeurs de $g$ qui codent $f_i$ soient congruentes à $i$ modulo $k$. Pour être plus précis, soit $b = kcn^H + ka + i$, avec $a< cn^H$. Alors $b-\delta = kcn^H + ka + i - (i - j) \underset{i>j}{=} kcn^H + ka + j$. On a deux sous-cas à étudier :
+							
+							\begin{itemize}[itemsep=-1mm,leftmargin=1cm]
+								\item
+									$f_j^{\leftarrow}(a) = a$.   Dans ce cas, pour aucun $a' < a$, on n'a $f_j(a') = f_j(a)$, donc il n'y a pas de $a' < a$ pour lequel $g\left( kcn^H + ka' + j \right) = g\left( kcn^H + ka + j \right)$. La définition de $g$ assure que, pour chaque $e \geqslant kcn^H$, on a $\left(g(e) \mod{k} = j \Leftrightarrow e \mod{k} = j\right)$ et $\forall e, e' \in 2kcn^H$, si $g(e) = g(e')$, alors soit $e, e' < kcn^H$, soit $e, e' \geqslant kcn^H$. Donc $g^{\leftarrow} \left( kcn^H + ka + j \right) = kcn^H + ka + j$ et $g^{\leftarrow}\left( b - \delta \right) + \delta' = kcn^H + ka + j' \geqslant kcn^H + ka + i = b$. Ainsi :
+									
+									\setcounter{equation}{0}
+									\begin{eqnarray}
+										\sigma_i(b) 	& = &	\eqpredfi{g}{g}{b-\delta}{+\delta'}{b} - j' + i \\
+														& = & 	\left( kcn^H + ka + j' \right) - j' + i \\
+														& = & 	kcn^H + ka + i \\
+														& = & 	kcn^H + k \eqpred{f_{j'}}{f_j}{a} + i \\
+														& = & 	kcn^H + k f_i(a) + i \\
+														& = & 	g(b),
+									\end{eqnarray}
+									
+									comme voulu.
+									
+								\item
+									$f_j^{\leftarrow}(a) = a'$ pour un certain $a' < a$. Dans ce cas, $g\left( kcn^H + ka + j \right) = kcn^H + ka' + j$. En conséquence : 
+									
+									\[
+										g^{\leftarrow}\left( b - \delta \right) + \delta' = kcn^H + ka' + j' < kcn^H + ka + i = b
+									\]
+									
+									Donc :
+									
+									\setcounter{equation}{0}
+									\begin{eqnarray}
+										\sigma_i(b) 	& = &	\eqpredfi{g}{g}{b-\delta}{+\delta'}{b} - j' + i \\
+														& = & 	g\left( kcn^H + ka' + j' \right) - j' + i \\
+														& = & 	\left( kcn^H + k f_{j'}(a') + j' \right) - j' + i \\
+														& = & 	kcn^H + k f_{j'}(a') + j' + i \\
+														& = & 	kcn^H + k \eqpred{f_{j'}}{f_j}{a} + i \\
+														& = & 	kcn^H + k f_i(a) + i \\
+														& = & 	g(b),
+									\end{eqnarray}
+									
+									comme souhaité.
+							\end{itemize}
+					\end{itemize}
+					
+					
+				\item	
+					Maintenant, on complète le LRS pour $g$. Pour une question de simplicité, on va supposer que $t_2$ ne contient que le symbole de constante $n$ et un seul symbole de fonction $h$. Soient $j <k$ et $\alpha$ une fonction affine tels que, pour toute structure $s$, on ait $\Gamma(s).n = P\left((s.n)^H, s'\right).n = s'.f_j\left(\alpha\left( (s.n)^H \right)\right)$, et soient $i <k$ et $A$ une fonction affine tels que, pour toute structure $s$ et tout $a < \Gamma(s).n$, on ait $\Gamma(s).h(a) = P\left((s.n)^H, s'\right).h(a) = s'.f_i\left(A\left( (s.n)^H, a \right)\right)$\footnotemark.
+					
+						\footnotetext{Ça veut juste dire : on donne des noms aux éléments qui permettent de définir la structure $\Gamma(s)$ ; ces fonctions affines $\alpha, A$ et ces entiers $i,j$ existent par définition d'une fonction $n^H$-représentable par un LSRS. Reste à voir si cette définition a bien du sens, mais si ça a du sens, alors il n'y a pas de problème ici.}
+					
+					On a construit $g$ de telle manière que toutes les valeurs de fonctions $f_i(a)$ sont, en quelque sorte, disponibles dans $g$, mais on a encore deux problèmes à résoudre. Premièrement, les $f_i(a)$ apparaissent uniquement sous une forme codée ; deuxièmement, elles ne forment pas un intervalle contigu mais sont éparpillées modulo $k$. Il faut donc, avant d'extraire les valeurs à l'aide d'une projection affine bien choisie, on doit décoder les valeurs des fonctions et les ramener dans un même intervalle. Pour ça, on élargit le domaine de $g$ à $(2k+2)cn^H$ et on complète la définition de $g$ :
+					
+					\[
+						g(y) = \casedist{
+							\text{comme avant} & \text{si $y < 2kcn^H$} \\
+							g\left[ g\left[ k\left( y - 2kcn^H \right) + kcn^H  + i\right]_y - kcn^H  \right]_y & \text{si $2kcn^H \leqslant y < (2k+1)cn^H$} \\
+							g\left[ g\left[ k\left( y - (2k + 1)cn^H \right) + kcn^H  + j \right]_y - kcn^H  \right]_y & \text{si $(2k+1)cn^H \leqslant y < (2k+2)cn^H$} \\
+							}
+					\]
+					
+					Il découle de l'équation \redtext{$(\star)$} (la définition de $g$ sur $kcn^H$) et de cette définition que, pour tout $a < cn^H$, on a\footnotemark :
+					\footnotetext{Analysons :
+						\begin{itemize}
+							\setlength{\itemsep}{-1mm}
+							\item	$(1) \rightarrow (2)$ : parce que soustraction propre.
+							\item 	$(2) \rightarrow (3)$ : par définition de l'opérateur \emph{application bornée}.
+							\item 	$(3) \rightarrow (4)$ : parce que $k a + kcn^H  + i < 2kcn^H$ donc on reprend la définition de la fonction $g$ sur l'intervalle $2kcn^H$.
+							\item 	$(4) \rightarrow (5)$ : \emph{because} soustraction propre.
+							\item 	$(5) \rightarrow (6)$ : parce que $f_i(a) < cn^H$ et on a le bon décalage avec $i$.
+						\end{itemize}	
+					}
+					\setcounter{equation}{0}
+					\begin{eqnarray}
+						g\left( 2kcn^H + a\right)	& = & 		g\left[ g\left[ k\left( \left(2kcn^H + a\right) - 2kcn^H \right) + kcn^H  + i\right]_{2kcn^H + a} - kcn^H  \right]_{2kcn^H + a} \\
+													& = & 		g\left[ g\left[ k a + kcn^H  + i\right]_{2kcn^H + a} - kcn^H  \right]_{2kcn^H + a} \\
+													& = & 		g\left[ g\left( k a + kcn^H  + i\right) - kcn^H  \right]_{2kcn^H + a} \\
+													& = & 		g\left[ \left(kcn^H  +  k f_i(a) + i\right) - kcn^H  \right]_{2kcn^H + a} \\
+													& = & 		g\left[ k f_i(a) + i \right]_{2kcn^H + a} \\
+													& = & 		f_i(a)
+					\end{eqnarray}
+					
+					De la même manière, on obtient, pour $a < cn^H$, $g\left( (2k+1)cn^H + a\right) = f_j(a)$. 
+					
+					Maintenant, il est aisé de définir une projection affine $P'$ qui extrait $\Gamma(s)$ à partir de $s'''$ de type $\{g\}$, définie par le LRS :
+					\[
+						\Gamma(s).n = s'''.g\left( \alpha\left( cn^H\right) + (2k+1)cn^H\right) \footnotemark
+					\]
+					
+						\footnotetext{C'est bien ce qu'il nous faut, parce que $\alpha': a \mapsto \alpha\left(ca\right) + (2k+1)ca$ est bien une fonction affine telle que $P'\left(n^H, s'\right).n = s'''.g\left(\alpha'\left(n^H\right)\right)$.}
+					
+					et
+						\footnote{On rappelle que $s'$ est la structure résultante du LSRS originel, de type $\{f_0, \dots, f_{k-1}\}$, qu'on a compactée dans une seule structure de type $\{g\}$.}
+						\footnote{Analysons :
+							\begin{itemize}
+								\setlength{\itemsep}{-1mm}
+								\item 	$(1) \rightarrow (2)$ : par définition de $A$ et $i$.
+								\item 	$(2) \rightarrow (3)$ : parce qu'on a $f_i(a) = g\left( 2kcn^H + a \right)$ par construction de $g$.
+							\end{itemize}
+							}
+					 :
+					\setcounter{equation}{0}
+					\begin{eqnarray}
+						\Gamma(s).h(a) 	& = &	P\left( n^H, s' \right).h(a) \\
+										& = &	s'.f_i\left( A\left( n^H, a \right) \right) \\
+										& = & 	s'''.g\left( 2kcn^H + A\left( n^H, a \right) \right) \footnotemark
+					\end{eqnarray}
+					
+					\footnotetext{C'est bien ce qu'il nous faut parce que $A' : a,b \mapsto 2kcb + A\left( b, a \right)$ est bien une fonction affine telle que $P'\left(n^H, s'\right).h(a) = s'''.g(A'(n^H, a))$.}
+					
+			\end{enumerate}
+			
+		
+	\end{proof}
+	
+		
+		\subparagraph{Bilan}
+		La démonstration a l'air de marcher !!
+		
+
+	\pagebreak
+		
+		
+	\paragraph{LRS et temps linéaire} (p.216)
+	
+	\begin{conj}
+		Soit $\Gamma$ une fonction de RAM. Les propositions suivantes sont équivalentes :
+		
+		\begin{enumerate}[itemsep=-1mm]
+			\item 	$\Gamma \in \dtimeramarg{H}$.
+			\item 	$\Gamma$ est $n^H$-représentée par un LSRS.
+			\item 	$\Gamma$ est $n^H$-représentée par un LRS.
+		\end{enumerate}
+	\end{conj}
+	
+	On a montré $(2) \Rightarrow (3)$ juste avant.
+	
+	
+	\subparagraph{$(3) \Rightarrow (1)$}
+	
+		
+		\begin{lemma}
+			Si une fonction de RAM $\Gamma$ est $n^H$-représentée par un LRS $E$ alors $\Gamma \in \dtimeramarg{H}$.
+		\end{lemma}
+		
+		\begin{proof}
+			{
+% Je sais, c'est très sale de les mettre ici. Je trouve juste l'écriture plus agréable avec ces macros, et c'est un usage purement local.
+\newcommand{\Fin}{F_{\text{in}}}
+\newcommand{\Ginv}{G_{\text{inverse}}}
+
+			Soit $\Gamma$ une fonction de RAM $n^H$-représentée par une équation $E$, et soit $P$ la projection affine correspondante. Pour des raisons de simplicité, on va considérer que le type d'entrée de $\Gamma$ ne contient qu'un seul symbole de fonction $f_{\text{in}}$. Rappelons-nous que $E$ est une équation de la forme $g(x) = \sigma(x)$, où $\sigma(x)$ est une terme de récursion, et qu'il existe une constante $c$ (et $H$ ?) telles que la sortie $s' = \Gamma(s)$ peut être extraite de $(s.n)^H$ \footnotemark et $g : cn^H \to cn^H$.
+				
+				\footnotetext{Donc on a clairement besoin d'une fonction $i \mapsto n^H$. Sauf qu'il faut en limiter l'accès pour éviter de s'en servir de manière à obtenir des nombres trop gros ? Ou ce n'est pas notre problème parce que de toute façon, si le calcul dépasse les bornes imposées, on n'est plus dans la même classe de complexité ?}
+			
+			Au lieu de définir formellement la RAM pour $\Gamma$, on va donner un algorithme qui pourra facilement être converti en une RAM à plusieurs mémoires, puis en une RAM à une mémoire\footnotemark. 
+			
+				\footnotetext{\redtext{Est-ce toujours vrai pour une RAM polynomiale ?}}
+
+			
+			
+			Sa structure de données associée sera constituée de variables $p$, $x$ et, en plus de la structure d'entrée $s$ et de la structure de sortie $s'$, de quatre tableaux à une dimension $\Fin, G, \Ginv$ et $EP$. 
+			
+			Dans $p$, on va stocker $c(s.n)^H$\footnotemark qui borne le domaine de $g$, définie par $E$ et $s$.
+				\footnotetext{Du coup on n'a plus besoin de la fonction $i \mapsto n^H$ ? Dans l'article, on a déjà accès à $cs.n$ pour simuler la machine. D'où vient cette connaissance ?}
+			Ensuite, on a décrire le sens de $F_{\text{in}}, G, G_{\text{inverse}}$ et $EP$. Pour des indices plus grands que $s.n$, $F_{\text{in}}$ vaut $0$; pour les indices plus petits que $s.n$, $\Fin$ contient la valeur de $s.f$. Le calcul principal se fait en $p$ étapes, numérotés de $0$ à $p-1 = cn^H-1$.
+			
+			Après le tour n°$i$, on devrait avoir les invariants suivants : 
+			
+			\begin{enumerate}[itemsep=-1mm,leftmargin=1cm,label=(\alph*)]
+				\item	pour tout $j < p$, $G[j]= \casedist{
+													g(j) 	& 	\text{si $j \leqslant i$} \\ 
+													j		&	\text{si $i < j < p$}
+											}$ ;
+				\item 	$EP[j] = g^{\leftarrow}(j)$ pour chaque $j \leqslant i$ ;
+				\item 	pour tout $j < p$, $\Ginv[j] = \casedist{
+													\maxset{l \leqslant i | g(l) = j} 	& 	\text{si un tel $l$ existe} \\
+													p									& 	\text{sinon}
+											}$ .
+			\end{enumerate}
+			
+			Le calcul des valeurs de $G[i]$ est assez immédiat. On associe à chaque terme de récurrence $\sigma(x)$ un terme de programmation $\sigma[x]$ de la façon suivante : 
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	Si $\sigma(x)$ est $1, n, x$ alors $\sigma[x]$ est $1, n, x$, respectivement ;
+				
+				\item 	Si $\sigma(x) = g^{\leftarrow}(x - \delta)$ pour une certain $\delta$, alors $\sigma[x] = EP[x - \delta]$ ;
+				
+				\item 	Si $\sigma(x) = g[\tau(x)]_x$ pour un certain terme de récurrence $\tau(x)$, alors $\sigma[x] = G[\tau[x]]$ ;
+				
+				\item 	Si $\sigma(x) = f_{\text{in}}(\tau(x))$ pour un certain terme de récurrence $\tau(x)$, alors $\sigma[x] = \Fin[\tau[x]]$ ;
+				
+				\item 	Si $\sigma(x) = \tau_1(x) * \tau_2(x) $ pour des termes de récurrence $\tau_1(x)$ et $\tau_2(x)$, alors $\sigma[x] = \tau_1[x] * \tau_2[x]$.
+			\end{itemize}
+			
+			Au tour $i$, on calcule $G[i]$ en évaluant $\sigma[i]$. La seule difficulté est de bien évaluer les termes $g^{\leftarrow}(x-\delta)$, qui devrait prendre plus qu'un nombre constant d'étapes pour être évalué, suivant la méthode directe. Au lieu de faire ça, on va utiliser le tableau $EP$ qui contient, après le tour $i$, la valeur de $g^{\leftarrow}(j)$ pour chaque $j \leqslant i$. $\Ginv$ contient toujours une inverse partielle de $g$ sur $\intint{0}{j}$ et est utilisé pour calculer $EP$. 
+			
+			Voici l'algorithme pour $\Gamma$ :
+			
+			\begin{algorithm}[H]
+				\KwIn{s}
+				
+				\tcp{Initializations}
+				
+				$p := c(s.n)^H$ \;
+				$EP[0] := 0$ \;
+				\For{$j=0 \text{ to } s.n-1$}{
+					$\Fin[j] := s.f(j)$\;
+				}
+				\For{$j=s.n \text{ to } p-1$}{
+					$\Fin[j] := 0$\;
+					}
+				\For{$j = 0 \text{ to } p-1$}{
+					$G[j] := j$\;
+					$\Ginv[j] := p$ \;
+					}
+				
+				\tcp{Main loop}
+				
+				\For{$i=0 \text{ to } p-1$}{
+					$G[i] = \sigma[i]$ \;
+					$EP[i] := \minset{i, \Ginv[G[i]]}$ \;
+					$\Ginv[G[i]] := i$ \;
+					}
+					
+				\KwOut{Compute $s''$ by applying the affine projection $P_{(s.n)^H}$ to the 	structure $s' = (p, G)$}
+			\end{algorithm}
+			
+			On montre par induction que les invariants (a), (b), (c) sont maintenus pendant chaque étape de calcul. Bien évidemment, les invariants sont respectés après l'initialisation, c'est-à-dire, avant le tour $0$. 
+			Pour l'induction, supposons que les invariants (a), (b), (c) sont respectés \emph{avant} le tour $i \in p$. On montre qu'ils sont valides \emph{après} le tour $i$, et donc avant le tour $i+1$. 
+			
+			\begin{itemize}
+				\item 	On a $G[i] = g(i)$ parce que, par induction, $G[j] = g[j]_i$ pour tout $j \in p$, et $EP[j] = g^{\leftarrow}(j)$ pour tout $j \in i$ ; ainsi, l'opérateur d'applicaiton bornée et la fonction \emph{Equal-Predecesor} sont évaluées correctement.
+				
+				\item 	L'assignation $EP[i] := \minset{i, \Ginv[G[i]]}$ implique que $EP[i] = g^{\leftarrow}(i)$ par induction.
+				
+				\item 	Il est immédiat de voir que (c) est maintenu par l'assignation $\Ginv[G[i]] := i$. 
+			\end{itemize}
+			
+			Donc (a), (b) et (c), et en particulier (a), sont maintenus, donc le programme est correct.
+			
+			Le nombre d'étapes pour évaluer un terme de récurrence est linéaire en la longueur du terme. Comme le terme de récurrence de $E$ est fixé, il s'agit d'un nombre constant d'étapes. Ainsi, $G[i]$ n'a besoin que d'un nombre constant d'étapes, de sorte que le programme tourne en temps $\grozo{p} = \grozo{n^H}$.
+			
+}
+			
+		\end{proof}
+		
+		\pagebreak
+		
+	\subparagraph{Calculable en temps polynomial $\Rightarrow$ LSRS}
+		
+		
+		\begin{conj}
+			Si une fonction de RAM $\Gamma$ est calculable en temps $\grozo{n^H }$ sur une $\{+, -\} \footnotemark$-RAM $M$, alors $\Gamma$ est $n^H$-représentable par un LSRS.
+		
+				\footnotetext{On aura probablement besoin de l'opération $\times$ si on a besoin d'avoir la fonction $i \mapsto n^H$.}
+		\end{conj}
+		
+		\begin{proof}
+			Soit $\Gamma$ une fonction de RAM. Pour des raisons de simplicité, on va supposer que les types d'entrée et de sortie de la fonction n'ont qu'un seul symbole de fonction $f$. Soit $M$ une RAM calculant $\Gamma$ comme stipulé dans les hypothèses. Soit $c$ tel que le temps de calcul est borné par $c n^H$ sur des entrées $c(\Gamma)$-bornées\footnotemark de taille $n$.
+			
+				\footnotetext{Je ne comprends pas si ce $c(\Gamma)$ est le même que celui qu'on vient d'instancier.}
+				
+			On va construire un LSRS qui utilise des fonctions $I, A, B, R_A, N$, qui décrivent l'état courant de la RAM \emph{avant} chaque étape $x$, de la façon suivante :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item	$I(x)$ contient le numéro courant d'instruction du programme de la RAM ;
+				\item 	$A(x), B(x), N(x)$ contiennent les valeurs des registres $A, B, N$ de $M$ ;
+				\item 	$R_A(x)$ contient la valeur du registre dont l'adresse est actuellement dans le registre $A$.
+			\end{itemize}
+			
+			Par commodité, on va aussi utiliser des fonctions $I', A', B', R_A', N'$, qui décrivent l'état de la RAM \emph{après} l'étape $x$. 
+			
+			En définissant $I(x)$ par distinction de cas, une bonne partie de la simulation de la RAM est immédiate. Par exemple, si $M$ exécute $A:= A + B$ alors les équations doivent forcer $A'(x) = A(x) + B(x)$. Le principal problème réside dans l'instruction $A:= R_A$, qui récupère le contenu d'un registre. Notons que les fonctions définies dans $S$ n'encodent pas explicitement les valeurs de tous les registres de $M$ à chaque étape $t$ mais seulement le contenu du registre dont l'indice est contenu dans $A$. Pour obtenir la valeur de $R_A(t)$, on doit trouver le dernier instant avant $t$ auquel le registre $A$ avait la valeur $A(t)$. Si un tel instant n'existe pas, on doit se référer à l'entrée. Rappelons que $s.f(i)$ est stocké dans $R_i$ au début du calcul. C'est pour cela que l'opération de récursion entre en jeu\footnotemark.
+			
+				\footnotetext{C'est l'opération $g, g' \mapsto \eqpred{g'}{g}{x}$}
+			
+			Pour faciliter les instructions $A:=R_A$, on va diviser le domaine en trois : $\intint{0}{cn^H-1}$, $\intint{cn^H}{2cn^H-1}$, $\intint{2cn^H}{3cn^H-1}$.
+			On va utiliser le premier intervalle pour stocker $s.f$, le deuxième pour simuler le calcul de $M$, et le troisième pour extraire la fonction de sortie ; pour ce faire, on va utiliser $R_A$ de manière à encoder la sortie (c'est un usage différent de celui introduit).
+			
+			On va s'autoriser la définition par cas (on a vu dans un lemme précédent que ça ne rendait pas le LSRS plus puissant) et quelques opérations simples qui ne sont pas directement disponible dans la définition d'un LSRS. Le système qu'on va proposer n'est pas un LSRS à proprement parler, mais sa traduction en véritable LSRS est immédiate, quoiqu'elle nécessite quelques fonctions en plus.
+			
+			Pour simplifier la présentation, on va présenter les définitions des fonctions sur les trois intervalles ; elles peuvent être combinées via un LSRS. 
+			
+			Dans un LSRS, l'ordre est important. Ici, les fonctions doivent être présentées dans cet ordre : $I, A, B, N, R_A, I', A', B', N', R_A'$.
+			
+			Pour $x < cn^H$, $A$ et $R_A$ sont définies par :
+			
+			\setcounter{equation}{0}
+			\begin{eqnarray}
+				A(x) & = & x \\
+				R_A'(x) & = & f(x)
+			\end{eqnarray}
+			
+			Les autres fonctions valent $0$ sur cet intervalle. Cette initialisation va permettre de récupérer les valeurs de $R_A$ dans la deuxième partie du domaine. 
+			
+			Sur le domaine $\intint{cn^H}{2cn^H-1}$
+			
+			\fbox{
+				\begin{minipage}{0.9\textwidth}
+					
+				\setcounter{equation}{0}
+				\begin{eqnarray}
+					I(x) & = & \casedist{
+							1			& 	\text{si $x = c n^H$} \\
+							I'(x-1)		& 	\text{sinon}
+							} \\
+					I'(x) & = & \casedist{
+							i			& 	\text{si $I(x)$ est de la forme $\sRAMif{i}{j}$ et $A(x) = B(x)$} \\
+							j			& 	\text{si $I(x)$ est de la forme $\sRAMif{i}{j}$ et $A(x) \neq B(x)$} \\
+							I(x)		&  	\text{si $I(x)$ est de la forme $\text{HALT}$} \\
+							I(x) + 1 	& 	\text{sinon} 
+							} \\
+					A(x) & = & \casedist{
+							0			& 	\text{si $x = cn^H$} \\
+							A'(x-1)		& 	\text{sinon}
+							} \\
+					A'(x) & = & \casedist{
+							c			& 	\text{si $I(x)$ est de la forme $A := c$} \\
+							A(x) * B(x)	& 	\text{si $I(x)$ est de la forme $A := A + B$} \\
+							R_A(x) 		& 	\text{si $I(x)$ est de la forme $A := R_A$} \\
+							N(x)		& 	\text{si $I(x)$ est de la forme $A := N$} \\
+							A(x)		& 	\text{sinon}
+							} \\
+					B(x) & = & \casedist{
+							0			& 	\text{si $x = cn^H$} \\
+							B'(x-1)		& 	\text{sinon}
+							} \\
+					B'(x) & = & \casedist{
+							A(x)		& 	\text{si $I(x)$ est de la forme $B := A$} \\
+							B(x)		& 	\text{sinon}
+							} \\
+					N(x) & = & \casedist{
+							n			& 	\text{si $x = cn^H$} \\
+							N'(x-1)		& 	\text{sinon}
+							} \\
+					N'(x) & = & \casedist{
+							A(x)		& 	\text{si $I(x)$ est de la forme $N := A$} \\
+							N(x)		& 	\text{sinon}
+							} \\
+					R_A(x) & = & \eqpred{R_A'}{A}{x} \\
+					R_A'(x) & = & \casedist{
+							B(x)		& 	\text{si $I(x)$ est de la forme $R_A := B$} \\
+							R_A(x)		& 	\text{sinon}
+							}
+				\end{eqnarray}
+			
+				\end{minipage}
+				}
+			
+			Notons que $cn^H$ code le premier instant du calcul. 
+			
+			Les fonctions $I(x)$ et $I'(x)$ ne prennent qu'un nombre fini de valeurs. Ainsi, en écrivant \emph{si $I(x)$ est de la forme $R_A := B$}, on écrit en fait \emph{si $I(x) = i_1$ ou $I(x) = i_2$ \dots ou $I(x) = i_m$} où $i_1, \dots, i_m$ sont les numéros des instructions $R_A := B$ dans le programme de la RAM.
+			
+			De plus, les opérations $I'(x-1)$ sont en réalité écrites $\eqpred{I}{1}{x}$ dans un vrai LSRS. Comme on l'a précédemment dit, on utilise $R_A$ pour extraire les valeurs de sortie du calcul de $M$, donné par la valeur $n'$ de $N$ et le contenu $R(0), \dots, R(n'-1)$, à la fin du calcul. Pour $2cn^H \leqslant x < 3cn^H$, le LSRS consiste en les équations suivantes :
+			
+			\setcounter{equation}{0}
+			\begin{eqnarray}
+				A(x) & = & x - 2cn^H \\
+				R_A(x) & = & \eqpred{R_A'}{A}{x}
+			\end{eqnarray}
+			
+			Les autres fonctions du LSRS sont définies par $h(x) = h(x-1)$ (les fonctions stationnent).
+			
+			Il ne reste plus qu'à voir que les équations de $S$ définissent les fonctions attendues pour décrire le calcul de $M$ et que $S$ produit la bonne sortie.
+			
+			Soit $s$ la RAM-structure, $1(-), n(-), id(-)$\footnote{Il faudra probablement rajouter $i \mapsto n^H$} comme précédemment, et soient $I, A, B, N, R_A, I', A', B', N', R_A'$ des fonctions \emph{that fulfill the equations of $S$}\footnotemark.
+			
+				\footnotetext{??????}
+				
+			Premièrement, il est clair que pour $a < c(s.n)^H$, on a :
+			
+			\setcounter{equation}{0}
+			\begin{eqnarray}
+				A(a) & = & a \\
+				R_A'(a) & = & s.f(a) \\
+				I(a) & = & B(a) = N(a) = R_A(a) = I'(a) = A'(a) = B'(a) = N'(a) = 0
+			\end{eqnarray}
+			
+			Les valeurs des fonctions au point $c(s.n)^H$ décrivent la configuration de la RAM au début du calcul. De plus, la définition de $A$ et $R_A'$ sur la première partie du domaine permet de rendre compte du faire que $M$ contient $s.f(i)$ dans le registre $R_i$.
+			
+			On montre facilement par induction sur $t$ que la valeur des fonctions au temps $c(s.n)^H+t$ sont correctes. La partie la plus difficile réside dans le calcul de $R_A$. Remarquons premièrement que, puisque $A(a) < c(s.n)^H$ pour chaque $a$, l'initialisation sur la première partie du domaine assure que $A^{\leftarrow}(a) < a$ pour tout $a \in \intint{cn^H}{2cn^H-1}$. Deux cas possibles :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	
+					$c(s.n)^H \leqslant A^{\leftarrow}(a) < a$. Dans ce cas, il existe $b \in \intint{c(s.n)^H}{a-1}$ tel que $A(a) = A(b)$ ; donc le registre courant $R$ a déjà été visité pendant le calcul, et $A^{\leftarrow}(a)$ est la dernière étape où cela s'est produit ; ainsi $R_A'\left(A^{\leftarrow}(a)\right)$ donne la bonne valeur de $R_A(a)$.
+					
+				\item 
+					$A^{\leftarrow}(a) < c(s.n)^H$. Dans ce cas, il n'y a pas de $b \in \intint{c(s.n)^H}{a-1}$ tel que $A(a) = A(b)$ ; donc le registre courant $R$ n'a pas été visité pour le moment, et devrait toujours contenir la valeur de $f(A^{\leftarrow}(a))$\footnotemark. Par initialisation, il découle que $A^{\leftarrow}(a) = A(a)$ et $R_A'(A(a)) = f(A(a))$, comme voulu.
+					
+						\footnotetext{Petite erreur de frappe dans l'article original ? Il y est écrit : $f(A(a))$.}
+			\end{itemize}
+			
+			Enfin, on doit encore montrer que $S$ définit correctement $\Gamma(s)$. Par définition de $R_A$ et $N$ sur la troisième partie du domaine du LSRS, pour chaque $a$, $R_A\left( 2 c(s.n)^H + a \right)$ contient les valeurs de du registre $R_a$ à la fin du calcul. De plus, $N(3c(s.n)^H-1)$ contient la valeur de $N$ à la fin du calcul. Ainsi, avec une projection bien choisie, $\Gamma(s)$ peut être extraite des fonctions définies par $S$. 
+			
+			Ainsi, on a montré que $S$ calcule correctement $\Gamma(s)$. Donc $\Gamma$ est $n^H$-représentée par $S$
+			
+		\end{proof}
+
+	
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> refs/remotes/origin/master
