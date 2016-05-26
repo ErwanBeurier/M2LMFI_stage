@@ -4,3 +4,7 @@
 *.log
 *.out
 *.synctex.gz
+*.toc
+# Les fichiers générés par BibTeX :
+*.bbl
+*.blg
