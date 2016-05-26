@@ -26,20 +26,6 @@
 
 \usepackage{amsthm}
 
-\theoremstyle{theorem}
-\newtheorem{theorem}{THEOREME}
-\newtheorem{prop}{PROPOSITION}
-\newtheorem{coro}{CORROLAIRE}
-\newtheorem{lemma}{LEMME}
-\newtheorem{ax}{AXIOME}
-\newtheorem*{theorem*}{THEOREME}
-\newtheorem*{prop*}{PROPOSITION}
-\newtheorem*{coro*}{CORROLAIRE}
-\newtheorem*{lemma*}{LEMME}
-\newtheorem*{ax*}{AXIOME}
-\newtheorem{conj}{CONJECTURE}
-
-\makeatletter
 \newtheoremstyle{smallcapsit}% small caps and italic
 {2ex}% above space 
 {2ex}% below space 
@@ -49,12 +35,25 @@
 {.}% post head punctuation 
 { }% post head punctuation 
 {}% head spec
-\makeatother
 % Met l'intitulé en petites capitales (donc une vraie majuscule pour le titre et des majusucules plus petites pour les autres)
+
+\theoremstyle{smallcapsit}
+\newtheorem{theorem}{Théorème}
+\newtheorem{prop}{Proposition}
+\newtheorem{coro}{Corollaire}
+\newtheorem{lemma}{Lemme}
+\newtheorem{ax}{Axiome} % Why do I have that ?
+\newtheorem*{theorem*}{Théorème}
+\newtheorem*{prop*}{Proposition}
+\newtheorem*{coro*}{Corollaire}
+\newtheorem*{lemma*}{Lemme}
+\newtheorem*{ax*}{Axiome}
+\newtheorem{conj}{Conjecture}
+
 
 
 %\theoremstyle{definition}
-\theoremstyle{smallcapsit}
+\theoremstyle{theorem}
 \newtheorem{definition}{Définition}
 \newtheorem{example}{Exemple}
 \newtheorem{algo}{ALGORITHME}
@@ -62,10 +61,8 @@
 \newtheorem*{example*}{Exemple}
 \newtheorem*{algo*}{ALGORITHME}
 
-\theoremstyle{theorem}
+\theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remarque}
 \newtheorem{prob}{Problème}
-
-\theoremstyle{remark}
 \newtheorem*{demo}{Démonstration}
 
