@@ -44,9 +44,7 @@
 		\subsection{Approche de Bellantoni et Cook}
 		
 		
-		\nepasoublier{SOURCES}
-		
-		L'idée de Bellantoni et Cook est qu'on peut séparer les arguments d'une fonction en deux types. Le premier type, les arguments \emph{normaux}, sont des arguments qu'on suppose bornés de manière implicite. Typiquement, un argument de récurrence est un argument normal : il ne faut pas, dans la définition par récurrence, que cet argument grossisse trop vite, car il risquerait d'entraîner un nombre croissant d'itérations. \nepasoublier{Exemple de l'exponentielle (prendre à Leivant)}.
+		L'idée de Bellantoni et Cook \cite{BellantoniCook1992} est qu'on peut séparer les arguments d'une fonction en deux types. Le premier type, les arguments \emph{normaux}, sont des arguments qu'on suppose bornés de manière implicite. Typiquement, un argument de récurrence est un argument normal : il ne faut pas, dans la définition par récurrence, que cet argument grossisse trop vite, car il risquerait d'entraîner un nombre croissant d'itérations. \nepasoublier{Exemple de l'exponentielle (prendre à Leivant)}.
 		
 		On se place dans une algèbre de mots (tous les constructeurs de l'algèbre sont d'arité au plus $1$).
 		
@@ -95,7 +93,7 @@
 		\end{definition}
 		
 		
-		\begin{theorem}[Bellantoni et Cook]
+		\begin{theorem}[Bellantoni et Cook]\cite{BellantoniCook1992}
 			$\text{BC} = P$
 		\end{theorem}
 		
@@ -132,11 +130,14 @@
 		
 		\subsection{Approche de Leivant}
 	
+	
 		\nepasoublier{Explication du point de départ de Leivant.}
+		
+		\cite{Leivant1995}
 		
 		On note $(\bbA_i)_{i\in \omega}$ l'ensemble des copies de l'algèbre $\bbA$, qui correspondent à des niveaux d'abstraction de $\bbA$. On notera $\mathcal{A}$ n'importe quel produit cartésien fini de copies de $\bbA$. Pour $x\in \bbA$, on note $\text{tier}(x) = i$. De même, pour $f : \mathcal{A} \to \bbA_i$, on note $\text{tier}(f) = i$. Chaque tier a de plus ses propres constructeurs. Le constructeur $C_j$ du niveau $i$ sera noté $C_j^i$. 
 		
-		\begin{definition}
+		\begin{definition} 
 			On note $\TRec{A}$ le plus petit ensemble de fonctions récursives primitives sur $\bbA$ contenant les constructeurs, les projections et étant clos par composition ramifiée et récurrence ramifiée.
 			
 			%Décaler d'une tabulation {{{
@@ -275,9 +276,9 @@
 		\subsection{La $\sigma$-RAM de Grandjean-Schwentick}
 		
 		
-		Soit $\sigma$ une signature fonctionnelle unaire ou binaire, typiquement $\sigma = \left\lbrace +, -, \times, \div 2\right\rbrace$.
+		Soit $\sigma$ une signature fonctionnelle unaire ou binaire, typiquement $\sigma = \left\lbrace +, -, \times, \div 2\right\rbrace$. 
 		
-		\begin{definition}[$\sigma$-RAM] \nepasoublier{SOURCES}
+		\begin{definition}[$\sigma$-RAM] \cite{GrandjeanSchwentick2002}
 			Une $\sigma$-RAM est un modèle de calcul composé de :
 
 			\begin{itemize}[itemsep=-1mm]
@@ -312,7 +313,7 @@
 		
 		
 		\paragraph{Entrées et sorties.}
-		Dans leur article \nepasoublier{SOURCE}, Grandjean et Schwentick indiquent que leur $\sigma$-RAM prend en entrée une structure $\left( \intint{1}{n}, \underset{\text{fonctions unaires}}{\underbrace{f_1, \dots, f_k}},  \underset{\text{constantes}}{\underbrace{C_1, \dots, C_l}}\right)$ et s'initialise de la façon suivante : 
+		Dans leur article \cite{GrandjeanSchwentick2002}, Grandjean et Schwentick indiquent que leur $\sigma$-RAM prend en entrée une structure $\left( \intint{1}{n}, \underset{\text{fonctions unaires}}{\underbrace{f_1, \dots, f_k}},  \underset{\text{constantes}}{\underbrace{C_1, \dots, C_l}}\right)$ et s'initialise de la façon suivante : 
 		
 		\begin{itemize}[itemsep=-1mm]
 			\item 	$N := n$
@@ -328,7 +329,7 @@
 		\subsection{La $\bbA$-RAM de Leivant}
 		
 		
-		\begin{definition}[Algèbre]\nepasoublier{SOURCES}
+		\begin{definition}[Algèbre]\cite{Leivant1995}
 			Soit $\sigma = \left\lbrace C_1, \dots, C_k \right\rbrace$ un ensemble de symboles de fonctions. Dans la suite, $k$ représentera le nombre de constructeurs dans la signature.
 			
 			La $\sigma$-algèbre $\bbA$ est l'ensemble des termes clos constitués uniquement par les symboles de fonctions de $\sigma$. Dans ce cas, ces fonctions sont nommées \emph{constructeurs}. 
@@ -398,13 +399,13 @@
 			\subsubsection{Modèles Turing-complets}
 		
 		
-			\begin{theorem} \nepasoublier{SOURCES}
+			\begin{theorem} 
 				\emph{Une machine de Turing (binaire ?) simule une $\sigma$-RAM (pour quel $\sigma$ ?) en temps ??? et une $\sigma$-RAM simule une machine de Turing en temps polynomial.}
 				
 				Une $\mathbb{W}$-RAM simule une machine de Turing binaire en temps linéaire et une machine de Turing binaire simule une $\mathbb{W}$-RAM en temps polynomial.
 			\end{theorem}
 			
-			Les démonstrations se trouvent dans \nepasoublier{SOURCES}.
+			Les démonstrations se trouvent dans \cite{Leivant1995} \nepasoublier{Il me faut une source pour la $\sigma$-RAM.}.
 
 			
 			\subsubsection{$\bbA$-RAM dans $\sigma$-RAM}
@@ -846,6 +847,16 @@
 			\nepasoublier{Sauf qu'il faudrait un accès rapide à n'importe quel sous-terme de la mémoire.}
 			
 			Une modif pour le test.
+			
+			
+			
+			
+			
+			
+			
+			\bibliographystyle{plain}
+			\bibliography{biblio}
+			
 \end{document}
 
 
