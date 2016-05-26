@@ -552,7 +552,7 @@
 			Pour l'induction, supposons que les invariants (a), (b), (c) sont respectés \emph{avant} le tour $i \in p$. On montre qu'ils sont valides \emph{après} le tour $i$, et donc avant le tour $i+1$. 
 			
 			\begin{itemize}
-				\item 	On a $G[i] = g(i)$ parce que, par induction, $G[j] = g[j]_i$ pour tout $j \in p$, et $EP[j] = g^{\leftarrow}(j)$ pour tout $j \in i$ ; ainsi, l'opérateur d'applicaiton bornée et la fonction \emph{Equal-Predecesor} sont évaluées correctement.
+				\item 	On a $G[i] = g(i)$ parce que, par induction, $G[j] = g[j]_i$ pour tout $j \in p$, et $EP[j] = g^{\leftarrow}(j)$ pour tout $j \in i$ ; ainsi, l'opérateur d'application bornée et la fonction \emph{Equal-Predecesor} sont évaluées correctement.
 				
 				\item 	L'assignation $EP[i] := \minset{i, \Ginv[G[i]]}$ implique que $EP[i] = g^{\leftarrow}(i)$ par induction.
 				
@@ -715,7 +715,7 @@
 			
 			Enfin, on doit encore montrer que $S$ définit correctement $\Gamma(s)$. Par définition de $R_A$ et $N$ sur la troisième partie du domaine du LSRS, pour chaque $a$, $R_A\left( 2 c(s.n)^K + a \right)$ contient les valeurs de du registre $R_a$ à la fin du calcul. De plus, $N(3c(s.n)^K-1)$ contient la valeur de $N$ à la fin du calcul. Ainsi, avec une projection bien choisie, $\Gamma(s)$ peut être extraite des fonctions définies par $S$. 
 			
-			Ainsi, on a montré que $S$ calcule correctement $\Gamma(s)$. Donc $\Gamma$ est $n^K$-représentée par $S$
+			Ainsi, on a montré que $S$ calcule correctement $\Gamma(s)$. Donc $\Gamma$ est $n^K$-représentée par $S$.
 			
 		\end{proof}
 
