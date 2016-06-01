@@ -1,41 +1,45 @@
 \select@language {french}
-\contentsline {section}{\numberline {1}Des caract\IeC {\'e}risations de $P$}{2}{section.1}
-\contentsline {subsection}{\numberline {1.1}Notions g\IeC {\'e}n\IeC {\'e}rales}{2}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Approche de Bellantoni et Cook}{2}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}Approche de Cobham}{2}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}Approche de Leivant}{2}{subsection.1.4}
-\contentsline {subsection}{\numberline {1.5}Correspondance entre Bellantoni et Cook et Leivant}{3}{subsection.1.5}
-\contentsline {section}{\numberline {2}Une histoire de RAMs}{5}{section.2}
-\contentsline {subsection}{\numberline {2.1}La $\sigma $-RAM de Grandjean-Schwentick}{5}{subsection.2.1}
+\contentsline {section}{\numberline {0.1}Des caract\IeC {\'e}risations de $P$}{2}{section.0.1}
+\contentsline {subsection}{\numberline {0.1.1}Notions g\IeC {\'e}n\IeC {\'e}rales}{2}{subsection.0.1.1}
+\contentsline {subsection}{\numberline {0.1.2}Approche de Bellantoni et Cook}{2}{subsection.0.1.2}
+\contentsline {subsection}{\numberline {0.1.3}Approche de Cobham}{2}{subsection.0.1.3}
+\contentsline {subsection}{\numberline {0.1.4}Approche de Leivant}{2}{subsection.0.1.4}
+\contentsline {subsection}{\numberline {0.1.5}Correspondance entre Bellantoni et Cook et Leivant}{3}{subsection.0.1.5}
+\contentsline {section}{\numberline {0.2}Une histoire de RAMs}{5}{section.0.2}
+\contentsline {subsection}{\numberline {0.2.1}La $\sigma $-RAM de Grandjean-Schwentick}{5}{subsection.0.2.1}
 \contentsline {paragraph}{Explications.}{5}{section*.2}
 \contentsline {paragraph}{Entr\IeC {\'e}es et sorties.}{5}{section*.3}
-\contentsline {subsection}{\numberline {2.2}La $\mathbb {A}$-RAM de Leivant}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {0.2.2}La $\mathbb {A}$-RAM de Leivant}{5}{subsection.0.2.2}
 \contentsline {paragraph}{Exemples.}{6}{section*.4}
 \contentsline {paragraph}{Explications.}{6}{section*.5}
 \contentsline {paragraph}{Entr\IeC {\'e}es et sorties.}{6}{section*.6}
-\contentsline {subsection}{\numberline {2.3}Comparaison entre les deux RAM}{6}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}Mod\IeC {\`e}les Turing-complets}{6}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.2}$\mathbb {A}$-RAM dans $\sigma $-RAM}{6}{subsubsection.2.3.2}
-\contentsline {paragraph}{Premi\IeC {\`e}res observations.}{6}{section*.7}
-\contentsline {paragraph}{Simulation.}{7}{section*.8}
-\contentsline {subparagraph}{(const)}{7}{section*.9}
-\contentsline {subparagraph}{($p$-dest)}{8}{section*.10}
-\contentsline {subparagraph}{(switch())}{8}{section*.11}
-\contentsline {paragraph}{Bilan.}{8}{section*.12}
-\contentsline {subsubsection}{\numberline {2.3.3}$\sigma $-RAM dans $\mathbb {A}$-RAM}{8}{subsubsection.2.3.3}
-\contentsline {paragraph}{Conventions d'\IeC {\'e}criture.}{8}{section*.13}
-\contentsline {paragraph}{Egalit\IeC {\'e}.}{9}{section*.14}
-\contentsline {paragraph}{M\IeC {\'e}moire.}{10}{section*.15}
-\contentsline {paragraph}{Simulation.}{11}{section*.16}
-\contentsline {subparagraph}{Entr\IeC {\'e}es/sorties}{11}{section*.17}
-\contentsline {subparagraph}{Assignation de terme.}{11}{section*.18}
-\contentsline {subparagraph}{Instructions de copie.}{11}{section*.19}
-\contentsline {subparagraph}{Construction.}{11}{section*.20}
-\contentsline {subparagraph}{Destruction.}{11}{section*.21}
-\contentsline {subparagraph}{HALT.}{11}{section*.22}
-\contentsline {subparagraph}{Acc\IeC {\`e}s m\IeC {\'e}moire.}{11}{section*.23}
-\contentsline {subparagraph}{Insertion m\IeC {\'e}moire.}{11}{section*.24}
-\contentsline {subparagraph}{Test d'\IeC {\'e}galit\IeC {\'e}.}{11}{section*.25}
-\contentsline {paragraph}{Bilan.}{11}{section*.26}
-\contentsline {subsubsection}{\numberline {2.3.4}Cas particulier : entiers unaires}{12}{subsubsection.2.3.4}
-\contentsline {subsubsection}{\numberline {2.3.5}Une tentative d'am\IeC {\'e}lioration}{12}{subsubsection.2.3.5}
+\contentsline {subsection}{\numberline {0.2.3}Comparaison entre les deux RAM}{6}{subsection.0.2.3}
+\contentsline {subsubsection}{Mod\IeC {\`e}les Turing-complets}{6}{section*.7}
+\contentsline {subsubsection}{$\mathbb {A}$-RAM dans $\sigma $-RAM}{6}{section*.8}
+\contentsline {paragraph}{Premi\IeC {\`e}res observations.}{6}{section*.9}
+\contentsline {paragraph}{Simulation.}{7}{section*.10}
+\contentsline {subparagraph}{(const)}{7}{section*.11}
+\contentsline {subparagraph}{($p$-dest)}{8}{section*.12}
+\contentsline {subparagraph}{(switch)}{8}{section*.13}
+\contentsline {paragraph}{Bilan.}{8}{section*.14}
+\contentsline {subsubsection}{$\sigma $-RAM dans $\mathbb {A}$-RAM}{9}{section*.15}
+\contentsline {paragraph}{Copie}{9}{section*.16}
+\contentsline {paragraph}{Egalit\IeC {\'e}.}{9}{section*.17}
+\contentsline {paragraph}{M\IeC {\'e}moire.}{10}{section*.18}
+\contentsline {paragraph}{Simulation.}{11}{section*.19}
+\contentsline {subparagraph}{Entr\IeC {\'e}es/sorties}{11}{section*.20}
+\contentsline {subparagraph}{Assignation de terme.}{11}{section*.21}
+\contentsline {subparagraph}{Instructions de copie.}{11}{section*.22}
+\contentsline {subparagraph}{Construction.}{11}{section*.23}
+\contentsline {subparagraph}{Destruction.}{11}{section*.24}
+\contentsline {subparagraph}{HALT.}{11}{section*.25}
+\contentsline {subparagraph}{Acc\IeC {\`e}s m\IeC {\'e}moire.}{11}{section*.26}
+\contentsline {subparagraph}{Insertion m\IeC {\'e}moire.}{11}{section*.27}
+\contentsline {subparagraph}{Test d'\IeC {\'e}galit\IeC {\'e}.}{12}{section*.28}
+\contentsline {paragraph}{Bilan.}{12}{section*.29}
+\contentsline {subsubsection}{Cas particulier : entiers unaires}{12}{section*.30}
+\contentsline {subsubsection}{Une tentative d'am\IeC {\'e}lioration}{12}{section*.31}
+\contentsline {chapter}{Appendices}{13}{section*.32}
+\contentsline {section}{\numberline {.1}Simulation de la $\sigma $-RAM par la $\mathbb {A}$-RAM}{14}{section.1..1}
+\contentsline {subsection}{\numberline {.1.1}Conventions d'\IeC {\'e}criture.}{14}{subsection.1..1.1}
+\contentsline {subsection}{\numberline {.1.2}Ecriture des programmes}{15}{subsection.1..1.2}
