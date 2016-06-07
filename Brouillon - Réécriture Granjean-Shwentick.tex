@@ -29,7 +29,7 @@
 	
 	
 	\section*{README}
-	
+		\label{sec:README}
 	
 	Ce fichier n'est qu'un brouillon de réécriture de l'article de Grandjean et Schwentick \emph{Machine-independent characterizations and complete problems for deterministic linear time} pour voir si ces notions peuvent s'étendre au temps $\grozo{n^K}$.
 	
@@ -37,6 +37,7 @@
 	
 	
 	\section*{Notations}
+		\label{sec:Notations}
 	
 	
 	Par abus de notation découlant de la théorie des ensembles, j'écrirai $n$ pour $\intint{0}{n-1}$ voire pour $\intint{1}{n}$ quand il n'y aura pas d'ambiguïté. De manière générale, si un terme ressemble à un entier naturel mais qu'il est mis à la place d'un ensemble (typiquement, dans le domaine de départ ou d'arrivée d'une fonction), il faut le lire comme l'ensemble $\intint{0}{n-1}$.
@@ -44,12 +45,13 @@
 	\pagebreak
 	
 	\section{Preliminaries} (p.198)
-	
+		\label{sec:Preliminaries}
 	
 		\subsection{RAM data structures} (p.198)
-	
+			\label{sec:RAM_data_structures}
 
 		\begin{definition}[RAM data structures]
+			\label{def:RAM_data_structures}
 			Soit $t$ un type, c'est-à-dire une signature fonctionnelle ne contenant que des symboles de constantes ou de fonctions unaires.
 			
 			Une RAM-structure $s$ de type $t$ est un uplet constitué de :
@@ -66,11 +68,12 @@
 	
 	
 		\begin{definition}[Fonction de RAM]
+			\label{def:fonction_de_RAM}
 			Soient $t_1, t_2$ des types. 
 			
-			Une $(t_1, t_2)$-fonction de RAM $\Gamma$ est une fonction telle qu'il existe $c_1, c_2 \in \naturels$, tels que $\Gamma$ envoie les structures $c_1$-bornées de type $t_1$ sur des structures $c_2$-bornées de type $t_2$.
+			Une $(t_1, t_2)$-fonction de RAM $\Gamma$ est une fonction telle qu'il existe $c_1, c_2 \in \naturels$, tels que $\Gamma$ envoie les structures $c_1$-bornées de type $t_1$ sur des structures $c_2$-bornées de type $t_2$\footnotemark.
 			
-			% On rappelle que "c-borné" ne concerne que la structure par rapport à sa propre taille ; ici on ne compare pas la taille de l'entrée et de la sortie
+				\footnotetext{On rappelle que "c-borné" ne concerne que la structure par rapport à sa propre taille ; ici on ne compare pas la taille de l'entrée et de la sortie}
 			
 			On dit que $\Gamma$ est polynomiale lorsque $\Gamma(s).n = \grozo{(s.n)^K}$.
 			
@@ -80,36 +83,57 @@
 	
 	
 		\subsection{Machine RAM} (p.200)
-	
+			\label{subsec:machine_RAM}
 		
-		La machine RAM reste la même (heureusement). On va utiliser la $\{+\}$-RAM ou des versions un brin plus puissantes comme la $\{+ , -, \times, \div k \}$-RAM pour un $k\in \naturels$ fixé.
+		La machine RAM reste la même (heureusement). On va utiliser la $\{+\}$-RAM ou des versions un brin plus puissantes comme la $\{+ , -, \times, \div k \}$-RAM pour un $k\in \naturels$ fixé\footnotemark. 
+		
+			\footnotetext{L'ajout de ces opérations ne rend pas la $\{+\}$-RAM plus puissante \cite{Grandjean1994}, \cite{GrandjeanSchwentick2002}.}
 		
 		\begin{definition}[Temps polynomial]
+			\label{def:temps_poly_RAM}
 			On définit $\dtimeram$ comme étant l'ensemble des fonctions calculables sur $\{+\}$-RAM en temps $\grozo{n^K}$, telles que le nombre de registres utilisés, les valeurs entières manipulées (y compris les adresses de registres) soient bornés par $\grozo{n^K}$.
 		\end{definition}
 		
 		
 		
 		\subsection{Réductions affines} (p.202)
+			\label{subsec:reductions_affines}
 
-
-		On laisse inchangées les notions de \emph{transformations affines} (définition 2.3), de \emph{réductions affines} (définition 2.5), de \emph{projections affines} (définition 2.7). Les théorèmes et lemmes suivants ou intermédiaires sont aussi inchangés. Ils permettront de définir des réductions qui \emph{restent} dans $\dtimeram$ pour un $k$ fixé.
+		On laisse inchangées les notions de \emph{transformations affines} (définition 2.3), de \emph{réductions affines} (définition 2.5), de \emph{projections affines} (définition 2.7). Les théorèmes et lemmes suivants ou intermédiaires sont aussi inchangés. Ils permettront de définir des réductions qui \emph{restent} dans $\dtimeram$ pour un $k$ fixé. 
+		
+		\begin{definition}[Fonction affine non-décroissante]
+			On appellera \emph{fonction affine non-décroissante}, ou plus simplement, \emph{fonction affine}, une fonction $A$ de la forme $A(x_1, \dots, x_k) = a_0 + a_1 x_1 + \dots + a_k x_k$, telle que soit $a_1, \dots, a_k \geqslant 0$ et $a_0 \in \bb{Z}$, soit $a_1, \dots, a_k = 0$ et $a_0 \geqslant 0$.
+		\end{definition}
+		
+		\begin{definition}[Transformation affine]
+			Soit $T$ une fonction de RAM qui envoie des RAM-structures de type $t_1$ sur des RAM structures de type $t_2$. 
+			
+			On dit que $T$ est une transformation affine lorsque : 
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	
+			\end{itemize}
+		\end{definition}
 		
 		
 		
 	\section{Le framework algébrique} (p.208)
-
+		\label{sec:framework_algebrique}
 
 		\subsection{LSRS} (p.208)
+			\label{subsec:LSRS}
+		
+		Le LSRS en tant que tel n'a pas l'air collé à la définition du temps linéaire. On garde la définition pour le moment.
 		
 		
-		Le LSRS en tant que tel n'a pas l'air collé à la définition du temps linéaire. On garde la définition pour le moment. 
+		
 		
 		On doit refaire la définition 3.3 (la définition de \emph{linéairement représentable}).
 		
-		Pour $t$ un type, on note $F_t$ l'ensemble de symboles de fonctions suivants : $\{1(-), n(-), id(-)\} \cup  \{ f_C | C \in t\} \cup \{ f | f \in t\}$.
+		Pour $t$ un type, on note $F_t$ l'ensemble des symboles de fonctions suivants : $\{1(-), n(-), id(-)\} \cup  \{ f_C | C \in t\} \cup \{ f | f \in t\}$.
 		
 		\begin{remark}
+			\label{rk:entree_LSRS}
 			Soient $t$ un type et $S$ un LSRS pour $f_1, \dots, f_k$ sur $F_{t}$. 
 			L'entrée d'un LSRS peut être vue comme étant une RAM-structure $s$ de type $t$, qu'il \emph{lit} en interprétant les symboles de $F_t$ de la façon suivante : 
 			
@@ -130,8 +154,11 @@
 		
 		Ici, on a plusieurs possibilités pour adapter le concept de \emph{linéairement représenté} (définition 3.3) à $n^K$.
 		
-		\begin{definition}[RAM $n^K$-représentée par LSRS - Proposition 1]
-			Soient $t_1, t_2$ des types. Soit $\Gamma$ une $(t_1, t_2)$-fonction de RAM. 
+		\begin{definition}[RAM $n^K$-représentée par LSRS - Proposition 1 \footnotemark]
+			\label{def:representee_par_LSRS}
+			Soient $t_1, t_2$ des types. Soit $\Gamma$ une $(t_1, t_2)$-fonction de RAM.
+			
+			\footnotetext{Il pourra à l'avenir y avoir d'autres possibilités mais cette définition semble bien élargir la définition pour le temps linéaire.} 
 			
 			Soit $S$ un LSRS pour $f_1, \dots, f_k$ sur $F_{t_1}$. 
 			
@@ -159,8 +186,7 @@
 		
 		
 		\subsection{LRS} (p.211)
-		
-		
+			\label{subsec:LRS}
 		
 		
 		La définition d'un terme récursif (non numérotée) et d'un LRS (définition 3.7) restent les mêmes. Le lemme 3.8 d'existence d'une solution unique au LRS aussi. 
@@ -168,6 +194,7 @@
 		On doit adapter la définition de $n^K$-représentée par LRS : 
 		
 		\begin{definition}[RAM $n^K$-représentée par LRS - Proposition 1]
+			\label{def:representee_par_LRS}
 			Soit $\Gamma$ une fonction de RAM. 
 			
 			Soit $E$ un LSRS $g(x) = \sigma(x)$. 
@@ -184,6 +211,7 @@
 		
 		
 		\begin{conj}[Adaptation du lemme 3.10 (p.212)]
+			\label{conj:rep_LSRS_rep_LRS}
 			Toute fonction de RAM $n^K$-représentée par LSRS est aussi $n^K$-représentable par LRS.
 		\end{conj}
 		
@@ -208,17 +236,32 @@
 			
 			\fbox{
 				\begin{minipage}{0.9\textwidth}
-					On a donc besoin d'un moyen de calculer $n^K$ dans la fonction de sortie.
-
-					Pour l'instant, pour des raisons de simplicité, puisqu'on sait que la fonction est $n^K$-représentable, on va supposer qu'on a accès à une fonction $i \mapsto n^K$. Pour ce faire, on peut soit la définir par multiplication en rajoutant $H$ équations \emph{(ce qui ne me semble pas naturel, parce qu'on modifie le LSRS à chaque fois qu'on veut changer la taille d'arrivée ?)} soit on peut rajouter une fonction constante $i \mapsto n^K$ \emph{(on ajoute ou remplace une fonction dans les fonctions de base du LSRS ? Ça veut dire qu'on rajoute un symbole de fonction au type de départ, qui sait déjà ce qu'on va en faire ?)}.
+					
+					{\footnotesize \begin{minipage}{0.95\textwidth}
+						On a donc besoin d'un moyen de calculer $n^K$ dans la fonction de sortie.
+						
+						Pour l'instant, pour des raisons de simplicité, puisqu'on sait que la fonction est $n^K$-représentable, on va supposer qu'on a accès à une fonction $i \mapsto n^K$. Pour ce faire, on peut soit la définir par multiplication en rajoutant $H$ équations \emph{(ce qui ne me semble pas naturel, parce qu'on modifie le LSRS à chaque fois qu'on veut changer la taille d'arrivée ?)} soit on peut rajouter une fonction constante $i \mapsto n^K$ \emph{(on ajoute ou remplace une fonction dans les fonctions de base du LSRS ? Ça veut dire qu'on rajoute un symbole de fonction au type de départ, qui sait déjà ce qu'on va en faire ?)}.
+						
+						Problème : apparemment le LSRS sait qu'il représente des fonctions de taille $n^K$, mais est-ce suffisant pour justifier l'insertion de cette fonction en tant que fonction du domaine ? Apparemment, un même LSRS peut être utilisé pour toutes les tailles de domaines, donc peut-être qu'on peut, au cas par cas, rajouter une fonction en plus selon le domaine d'arrivée ?
+						
+						(La question ici est de savoir si on peut rajouter naturellement cette fonction constante d'accès direct au max, sans avoir l'air de tricher pour se faciliter la vie.)
+						
+						Ou bien on peut voir l'ajout de cette fonction comme un ajout de contrainte. C'est l'ajout de cette fonction qui impose que le domaine d'arrivée sera de taille $\grozo{n^K}$.
+					\end{minipage} }
 				
-					Problème : apparemment le LSRS sait qu'il représente des fonctions de taille $n^K$, mais est-ce suffisant pour justifier l'insertion de cette fonction en tant que fonction du domaine ? Apparemment, un même LSRS peut être utilisé pour toutes les tailles de domaines, donc peut-être qu'on peut, au cas par cas, rajouter une fonction en plus selon le domaine d'arrivée ?
 					
-					(La question ici est de savoir si on peut rajouter naturellement cette fonction constante d'accès direct au max, sans avoir l'air de tricher pour se faciliter la vie.)
+					\redtext{Solution}
+					%En fait, dans la démonstration originale, $kcn$ n'est pas calculée à la volée dans le système. Le LSRS est défini à l'aide d'une fonction constante $n(-)$ qui, malgré la notation, n'a rien à voir avec le $n$ de $kcn = kcs.n$. En fait, $n(-)$ permet d'accéder à la borne du domaine de définition des fonctions du LSRS. Ici, $n(y) = kcs.n$, ce qui permet au LSRS d'avoir accès à cette valeur. Dans le cas polynomial, on a $n(y) = kc(s.n)^K$, ce qui est bien ce qu'on voulait. La démonstration se tient. 
+					Dans la démonstration originale, $kcn$ est calculé à la volée dans le LRS. Il s'agit d'une abréviation : $cn = \underset{c \text{ fois}}{\underbrace{n(y) + \dots + n(y)}}$, et $kcn = \underset{k \text{ fois}}{\underbrace{cn + \dots + cn}}$. 
 					
-					Ou bien on peut voir l'ajout de cette fonction comme un ajout de contrainte. C'est l'ajout de cette fonction qui impose que le domaine d'arrivée sera de taille $\grozo{n^K}$.
+					La constante $c$ est toujours une valeur explicite, donnée par définition de la fonction. On peut donc construire ce terme. Idem pour $k$, qui est le nombre d'équations. 
+					
+					Dans notre cas, on ne peut pas faire un terme similaire pour $n^K$, car on ne peut pas autoriser un terme dont la longueur dépend de l'entrée (un LRS est défini par une équation fixée dès le départ). Il faut donc qu'on ajoute la multiplication comme opération de base de la définition par LRS, et on pourra écrire un terme similaire : $n^K = \underset{K \text{ fois}}{\underbrace{n(y) \times \dots \times n(y)}}$, puis $cn^K = \underset{c \text{ fois}}{\underbrace{n^K + \dots + n^K}}$, et $kcn^K = \underset{k \text{ fois}}{\underbrace{cn^K + \dots + cn^K}}$. 
+					
+					L'ajout de la multiplication ne rend pas le LSRS, le LRS et la RAM plus puissants, d'après la partie 3.1 et la proposition 2.1 de \cite{GrandjeanSchwentick2002}. 
+					
 				\end{minipage}
-				}
+			}
 				
 				\espace
 			
@@ -371,7 +414,7 @@
 					
 						\footnotetext{Ça veut juste dire : on donne des noms aux éléments qui permettent de définir la structure $\Gamma(s)$ ; ces fonctions affines $\alpha, A$ et ces entiers $i,j$ existent par définition d'une fonction $n^K$-représentable par un LSRS. Reste à voir si cette définition a bien du sens, mais si ça a du sens, alors il n'y a pas de problème ici.}
 					
-					On a construit $g$ de telle manière que toutes les valeurs de fonctions $f_i(a)$ sont, en quelque sorte, disponibles dans $g$, mais on a encore deux problèmes à résoudre. Premièrement, les $f_i(a)$ apparaissent uniquement sous une forme codée ; deuxièmement, elles ne forment pas un intervalle contigu mais sont éparpillées modulo $k$. Il faut donc, avant d'extraire les valeurs à l'aide d'une projection affine bien choisie, on doit décoder les valeurs des fonctions et les ramener dans un même intervalle. Pour ça, on élargit le domaine de $g$ à $(2k+2)cn^K$ et on complète la définition de $g$ :
+					On a construit $g$ de telle manière que toutes les valeurs de fonctions $f_i(a)$ sont, en quelque sorte, disponibles dans $g$, mais on a encore deux problèmes à résoudre. Premièrement, les $f_i(a)$ apparaissent uniquement sous une forme codée ; deuxièmement, elles ne forment pas un intervalle contigu mais sont éparpillées modulo $k$. Il faut donc, avant d'extraire les valeurs à l'aide d'une projection affine bien choisie, décoder les valeurs des fonctions et les ramener dans un même intervalle. Pour ça, on élargit le domaine de $g$ à $(2k+2)cn^K$ et on complète la définition de $g$ :
 					
 					\[
 						g(y) = \casedist{
@@ -444,8 +487,10 @@
 		
 		
 	\section{LRS et temps linéaire} (p.216)
+		\label{LRS_et_temps_lineaire}
 	
 	\begin{conj}
+		\label{conj:big_theorem}
 		Soit $\Gamma$ une fonction de RAM. Les propositions suivantes sont équivalentes :
 		
 		\begin{enumerate}[itemsep=-1mm]
@@ -459,7 +504,7 @@
 	
 	
 	\subsection{$(3) \Rightarrow (1)$}
-	
+		\label{subsec:LRS_implique_poly}
 		
 		\begin{lemma}
 			Si une fonction de RAM $\Gamma$ est $n^K$-représentée par un LRS $E$ alors $\Gamma \in \dtimeramarg{K}$.
@@ -570,9 +615,10 @@
 		\pagebreak
 		
 	\subsection{Calculable en temps polynomial $\Rightarrow$ LSRS}
-		
+		\label{subsec:poly_implique_LSRS}
 		
 		\begin{conj}
+			\label{conj:poly_implique_LSRS}
 			Si une fonction de RAM $\Gamma$ est calculable en temps $\grozo{n^K }$ sur une $\{+, -\} \footnotemark$-RAM $M$, alors $\Gamma$ est $n^K$-représentable par un LSRS.
 		
 				\footnotetext{On aura probablement besoin de l'opération $\times$ si on a besoin d'avoir la fonction $i \mapsto n^K$.}
@@ -719,6 +765,10 @@
 			
 		\end{proof}
 
+	
+		
+		\bibliographystyle{plain}
+		\bibliography{biblio}
 	
 \end{document}
 

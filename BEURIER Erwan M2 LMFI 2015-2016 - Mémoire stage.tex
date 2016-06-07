@@ -33,7 +33,6 @@
 	
 	\pagebreak
 	
-	
 	\section{Des caractérisations de $P$}
 		\label{sec:caracterisations_P}
 	
@@ -142,7 +141,35 @@
 	
 		\nepasoublier{Explication du point de départ de Leivant.}
 		
-		\cite{Leivant1995}
+		Résumé de l'article \cite{Leivant1995} de Leivant. 
+		
+		\begin{definition}[Algèbre \cite{Leivant1995}]
+			\label{def:algebre}
+			Soit $\sigma = \left\lbrace C_1, \dots, C_k \right\rbrace$ un ensemble de symboles de fonctions. Dans la suite, $k$ représentera le nombre de constructeurs dans la signature.
+			
+			La $\sigma$-algèbre $\bbA$ est l'ensemble des termes clos constitués uniquement par les symboles de fonctions de $\sigma$. Dans ce cas, ces fonctions sont nommées \emph{constructeurs}. 
+			
+			On note $r_i$ l'arité du constructeur $C_i$. On suppose que $\minlist{i\in\intint{1}{k}}{r_i} = 0$ (sinon $\bbA$ est vide) et $\maxlist{i\in\intint{1}{k}}{r_i} = r > 0$ (sinon $\bbA$ est finie).
+			
+			Si $r = 1$ alors $\mathbb{A}$ est une \emph{algèbre de mots}, sinon c'est une \emph{algèbre arborescente}.
+			
+			Soit un terme $\tau \in \bbA$. On appelle \emph{constructeur extérieur} le dernier constructeur de $\tau$. On peut le définir par induction comme suit :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	Si $\tau = C_i$ où $r_i = 0$ alors $C_i$ est le constructeur extérieur de $\tau$.
+				\item 	Si $\tau = C_i(\tau_1, \dots, \tau_{r_i})$ alors $C_{i}$ est le constructeur extérieur de $\tau$.
+			\end{itemize}
+		\end{definition}
+		
+		
+		\paragraph{Exemples.}
+		\begin{itemize}[itemsep=-1mm]
+			\item 	la $\left\lbrace 0, s \right\rbrace$-algèbre des entiers unaires $\naturels$ ;
+			\item 	la $\left\lbrace \varepsilon, 0(-), 1(-)\right\rbrace$-algèbre des mots binaires $\mathbb{W}$.
+		\end{itemize}
+		
+		\espace
+		
 		
 		On note $(\bbA_i)_{i\in \omega}$ l'ensemble des copies de l'algèbre $\bbA$, qui correspondent à des niveaux d'abstraction de $\bbA$. On notera $\mathcal{A}$ n'importe quel produit cartésien fini de copies de $\bbA$. Pour $x\in \bbA$, on note $\text{tier}(x) = i$. De même, pour $f : \mathcal{A} \to \bbA_i$, on note $\text{tier}(f) = i$. Chaque tier a de plus ses propres constructeurs. Le constructeur $C_j$ du niveau $i$ sera noté $C_j^i$. 
 		
@@ -166,7 +193,57 @@
 			On note $\TRecd{A}$ le sous-ensemble de $\TRec{A}$ dont chaque fonction est constructible en n'utilisant que deux tiers $\bbA_0, \bbA_1$.
 		\end{definition}
 		
-		Si $\bbA$ est une algèbre de mots, alors on a le théorème suivant :
+		Un résultat intéressant est que si une fonction $f \in \TRec{\bbA}$ a des arguments de tiers inférieur à son tier d'arrivée, alors $f$ \emph{ignore} ces arguments.
+		
+		\espace 
+		
+		En plus de ça, on va définir une notion de degré d'imbrication, qui sert en somme de compteur de tours de boucles. 
+		
+		
+		\begin{definition}[Degré d'imbrication de récurrences]
+			\label{def:degre_recurrence}
+			
+			Soit $f \in \TRec{A}$ \footnotemark. 
+			
+				\footnotetext{Pour être rigoureux, le degré de récurrence ne s'applique pas à une fonction, mais à une \emph{définition de fonction}.}
+			
+			Le degré d'imbrication de récurrence de $f$, noté $\delta(f)$, est un entier défini par induction sur la définition de $f$ :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	Si $f$ est un constructeur ou une projection, alors $\delta(f) = 0$.
+				\item 	Si $f$ est définie par composition, sans perte de généralité, $f(\bar{x}) = g\left( \bar{x}, h\left( \bar{x}\right)\right)$, alors :
+				
+						\begin{itemize}[itemsep=-1mm]
+							\item 	Si $\text{tier}(h) < \text{tier}(g)$ alors $\delta(f) = \delta(g)$ ;
+							\item 	Si $\text{tier}(h) = \text{tier}(g)$ alors $\delta(f) = \max\left(\delta(g), \delta(h)\right)$ ;
+							\item 	Si $\text{tier}(h) > \text{tier}(g)$ alors $\delta(f) = \max\left(1, \delta(h)\right) \times \delta(g)$ ;
+						\end{itemize}
+						
+				\item 	Si $f$ est définie par récurrence ramifiée $f(c_i^j(a_1, \dots, a_{r_i}), \bar{x}) = g_{c_i}\left( f(a_1, \bar{x}), \dots, f(a_{r_i}, \bar{x}), \bar{a}, \bar{x} \right)$, telles que $\left( g_{\alpha_j}\right)_{j\in p}$ aient des arguments critiques et $\left( g_{\beta_j}\right)_{j\in q}$ n'en aient pas, alors $\delta(f) = \max\left( 1 + \delta\left( g_{\alpha_1} \right), \dots,  1 + \delta\left( g_{\alpha_p} \right), \delta\left( g_{\beta_1} \right), \dots,  \delta\left( g_{\beta_q} \right)\right)$. 
+			\end{itemize}
+		\end{definition}
+		
+		
+		Il définit aussi une RAM personnalisée pour la construction de termes, voir \ref{def:A_RAM}. Cette RAM, notée $\bbA$-RAM dans ce mémoire, coïncide avec les autres modèles de calcul sur la classe $P$, mais son manque de test d'égalité et sa mémoire limitée la rendent moins puissante qu'une \hyperref[def:sigma_RAM]{RAM au sens de Granjean} \cite{GrandjeanSchwentick2002} sur des classes plus fines (voir \ref{subsubsec:sim_A_RAM_sigma_RAM} pour la comparaison).
+		
+		\espace
+		
+		Les principaux résultats de Leivant ne concernent que les algèbres de mots. Voici les résultats de cet article \cite{Leivant1995} qui nous intéressent dans le cadre de ce mémoire :
+		
+		\begin{theorem}
+			\label{thm:TRecA_equals_P_poly_fixe}
+			Soit $\bbA$ une algèbre de mots. Soit $f : \mathcal{A} \to \bbA $.
+			
+			Les propositions suivantes sont équivalentes :
+
+			\begin{itemize}[itemsep=-1mm]
+				\item 	$f$ est calculable en temps $\grozo{n^k}$ sur une $\bbA$-RAM;
+				\item 	$f$ est définissable par récurrence ramifiée sur deux tiers $\bbA_0, \bbA_1$ et $\delta(f) \leq k$ ;
+				\item 	$f$ est définissable par récurrence ramifiée et $\delta(f) \leq k$.
+			\end{itemize}
+		\end{theorem}
+		
+		
 		
 		\begin{theorem}
 			\label{thm:TRecA_equals_P}
@@ -175,6 +252,9 @@
 		
 		La récurrence ramifiée engendre $P$ et deux niveaux de ramification suffisent.
 	
+		Le théorème \ref{thm:TRecA_equals_P_poly_fixe} a été prouvé pour une $\bbA$-RAM ; l'un des objets de ce stage a aussi été d'obtenir un résultat similaire pour la $\sigma$-RAM. 
+		
+		
 	
 		\subsection{Correspondance entre Bellantoni et Cook et Leivant}
 		\label{subsec:corres_BC_Leivant}
@@ -339,33 +419,6 @@
 		
 		\subsection{La $\bbA$-RAM de Leivant}
 		\label{subsec:A_RAM_de_Leivant}
-		
-		\begin{definition}[Algèbre \cite{Leivant1995}]
-			\label{def:algebre}
-			Soit $\sigma = \left\lbrace C_1, \dots, C_k \right\rbrace$ un ensemble de symboles de fonctions. Dans la suite, $k$ représentera le nombre de constructeurs dans la signature.
-			
-			La $\sigma$-algèbre $\bbA$ est l'ensemble des termes clos constitués uniquement par les symboles de fonctions de $\sigma$. Dans ce cas, ces fonctions sont nommées \emph{constructeurs}. 
-			
-			On note $r_i$ l'arité du constructeur $C_i$. On suppose que $\minlist{i\in\intint{1}{k}}{r_i} = 0$ (sinon $\bbA$ est vide) et $\maxlist{i\in\intint{1}{k}}{r_i} = r > 0$ (sinon $\bbA$ est finie).
-			
-			Si $r = 1$ alors $\mathbb{A}$ est une \emph{algèbre de mots}, sinon c'est une \emph{algèbre arborescente}.
-			
-			Soit un terme $\tau \in \bbA$. On appelle \emph{constructeur extérieur} le dernier constructeur de $\tau$. On peut le définir par induction comme suit :
-			
-			\begin{itemize}[itemsep=-1mm]
-				\item 	Si $\tau = C_i$ où $r_i = 0$ alors $C_i$ est le constructeur extérieur de $\tau$.
-				\item 	Si $\tau = C_i(\tau_1, \dots, \tau_{r_i})$ alors $C_{i}$ est le constructeur extérieur de $\tau$.
-			\end{itemize}
-		\end{definition}
-		
-		
-			\paragraph{Exemples.}
-			\begin{itemize}[itemsep=-1mm]
-				\item 	la $\left\lbrace 0, s \right\rbrace$-algèbre des entiers unaires $\naturels$ ;
-				\item 	la $\left\lbrace \varepsilon, 0(-), 1(-)\right\rbrace$-algèbre des mots binaires $\mathbb{W}$.
-			\end{itemize}
-			
-			\espace
 		
 		Soit $\bbA$ une $\sigma$-algèbre. 
 		
@@ -898,12 +951,24 @@
 				
 				La $\bbA$-RAM garde encore une fois un lourd point faible : la gestion de sa mémoire.
 				
-				Ici, nous avons utilisé une liste, mais dans le cas d'une algèbre de mots, on pourrait utiliser une mémoire avec embranchements (un terme $\text{MEM}\left( -, \dots, -\right)$), où chaque emplacement de la mémoire correspond à un constructeur. L'adresse est alors un mot et se traduit comme un ensemble de destructions successives du terme de mémoire, en prenant garde à récupérer le sous-terme correspondant au constructeur détruit.
+				Ici, nous avons utilisé une liste, mais dans le cas d'une algèbre de mots, on pourrait utiliser une mémoire avec embranchements (un terme $\text{MEM}\left( -, \dots, -\right)$, où chaque emplacement de la mémoire correspond à un constructeur). L'adresse est alors un mot et se traduit comme un ensemble de destructions successives du terme de mémoire, en prenant garde à récupérer le sous-terme correspondant au constructeur détruit.
 				
 				\nepasoublier{Sauf qu'il faudrait un accès rapide à n'importe quel sous-terme de la mémoire.}
 				
-				Une modif pour le test.
-				
+
+
+
+
+	\section{Vers une caractérisation du temps polynomial sur $\sigma$-RAM}
+		\label{sec:carac_poly_sigma_RAM}
+		
+		\subsection{Caractérisation du temps linéaire}
+			\label{subsec:carac_lineaire}
+			\label{subsec:resume_Grandjean_Schwentick}
+			
+		\begin{definition}[LSRS]
+			
+		\end{definition}
 			
 			
 			
@@ -924,7 +989,7 @@
 			% ----------------------------------------------------------------------------
 			% ----------------------------------------------------------------------------
 			% 
-			% ANNEXES
+			% ANNEXES 
 			% 
 			% ----------------------------------------------------------------------------
 			% ----------------------------------------------------------------------------
