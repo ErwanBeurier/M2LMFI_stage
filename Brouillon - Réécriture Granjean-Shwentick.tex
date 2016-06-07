@@ -643,8 +643,10 @@
 			
 				\footnotetext{C'est l'opération $g, g' \mapsto \eqpred{g'}{g}{x}$}
 			
-			Pour faciliter les instructions $A:=R_A$, on va diviser le domaine en trois : $\intint{0}{cn^K-1}$, $\intint{cn^K}{2cn^K-1}$, $\intint{2cn^K}{3cn^K-1}$.
+			Pour faciliter les instructions $A:=R_A$, on va diviser le domaine en trois\footnotemark : $\intint{0}{cn^K-1}$, $\intint{cn^K}{2cn^K-1}$, $\intint{2cn^K}{3cn^K-1}$.
 			On va utiliser le premier intervalle pour stocker $s.f$, le deuxième pour simuler le calcul de $M$, et le troisième pour extraire la fonction de sortie ; pour ce faire, on va utiliser $R_A$ de manière à encoder la sortie (c'est un usage différent de celui introduit).
+			
+				\footnotetext{En fait, le $n^K$ est explicite ; dans cette preuve, il est implicite qu'on peut calculer $cn^K$ en rajoutant quelques équations : $c$ et $K$ étant fixés, si on a la multiplication, il suffit de rajouter $K$ équations $f_1(x) = n(x)$ et $f_{i+1}(x) = f_i(x) \times n(x)$, puis $c-1$ équations $f_{K+j+1}(x) = f_{K+j}(x) + n(x)$ ; on obtient alors $cn^K$ dès le premier tour de calcul. Si on n'a que l'addition, on ne peut pas reproduire ce schéma. Si on n'a que l'addition, on peut envisager d'étudier $g$ non pas sur $\intint{0}{3cn^K-1}$ mais sur $\intint{0}{4cn^K-1}$, et de couper ce domaine en quatre ; le premier domaine servirait alors à calculer $cn^K$ (mais comment délimiter ce premier domaine explicitement, avec un LSRS ?) et le reste serait le même que présenté ici. }
 			
 			On va s'autoriser la définition par cas (on a vu dans un lemme précédent que ça ne rendait pas le LSRS plus puissant) et quelques opérations simples qui ne sont pas directement disponible dans la définition d'un LSRS. Le système qu'on va proposer n'est pas un LSRS à proprement parler, mais sa traduction en véritable LSRS est immédiate, quoiqu'elle nécessite quelques fonctions en plus.
 			
@@ -661,6 +663,8 @@
 			\end{eqnarray}
 			
 			Les autres fonctions valent $0$ sur cet intervalle. Cette initialisation va permettre de récupérer les valeurs de $R_A$ dans la deuxième partie du domaine. 
+			
+
 			
 			Sur le domaine $\intint{cn^K}{2cn^K-1}$
 			
