@@ -35,6 +35,8 @@
 	
 	C'est plus ou moins une traduction littérale en français et en remplaçant $\grozo{n}$ par $\grozo{n^K}$, pour voir si ça coince à un endroit.
 	
+	Je n'aime pas que les liens hypertextes soient trop visibles, mais je n'ai pas encore cherché comment on pouvait les rendre discrets, donc pour l'instant, ils sont simplement invisibles. Ne pas hésiter à passer la souris sur des mots comme \emph{ici}, \emph{plus bas}, etc ; ils seront très probablement munis d'un lien hypertexte. Les références à des sections, définitions, théorèmes, etc. sont aussi cliquables.
+	
 	
 	\section*{Notations}
 		\label{sec:Notations}
@@ -110,6 +112,8 @@
 			
 			On dit que $T$ est une transformation affine lorsque : 
 			
+			\nepasoublier{REMPLIR ICI !!!!!!!!!!!!}
+			
 			\begin{itemize}[itemsep=-1mm]
 				\item 	
 			\end{itemize}
@@ -128,7 +132,7 @@
 		
 		
 		
-		On doit refaire la définition 3.3 (la définition de \emph{linéairement représentable}).
+		On doit refaire la définition 3.3 de l'article (la définition de \emph{linéairement représentable}).
 		
 		Pour $t$ un type, on note $F_t$ l'ensemble des symboles de fonctions suivants : $\{1(-), n(-), id(-)\} \cup  \{ f_C | C \in t\} \cup \{ f | f \in t\}$.
 		
@@ -500,15 +504,18 @@
 		\end{enumerate}
 	\end{conj}
 	
-	On a montré $(2) \Rightarrow (3)$ juste avant.
+	On a montré $(2) \Rightarrow (3)$ \hyperref[conj:rep_LSRS_rep_LRS]{juste avant}. 
+	La preuve de $(3) \Rightarrow (1)$ se trouve \hyperref[conj:rep_LRS_calc_n_K]{ci-dessous}.
+	La preuve de $(1) \Rightarrow (2)$ se trouve \hyperref[conj:poly_implique_LSRS]{plus loin}.
 	
 	
 	\subsection{$(3) \Rightarrow (1)$}
 		\label{subsec:LRS_implique_poly}
 		
-		\begin{lemma}
+		\begin{conj}
+			\label{conj:rep_LRS_calc_n_K}
 			Si une fonction de RAM $\Gamma$ est $n^K$-représentée par un LRS $E$ alors $\Gamma \in \dtimeramarg{K}$.
-		\end{lemma}
+		\end{conj}
 		
 		\begin{proof}
 			{
@@ -643,30 +650,55 @@
 			
 				\footnotetext{C'est l'opération $g, g' \mapsto \eqpred{g'}{g}{x}$}
 			
-			Pour faciliter les instructions $A:=R_A$, on va diviser le domaine en trois\footnotemark : $\intint{0}{cn^K-1}$, $\intint{cn^K}{2cn^K-1}$, $\intint{2cn^K}{3cn^K-1}$.
+			Pour faciliter les instructions $A:=R_A$, on va diviser le domaine en trois sous-domaines : $\intint{0}{cn^K-1}$, $\intint{cn^K}{2cn^K-1}$ et $\intint{2cn^K}{3cn^K-1}$.
 			On va utiliser le premier intervalle pour stocker $s.f$, le deuxième pour simuler le calcul de $M$, et le troisième pour extraire la fonction de sortie ; pour ce faire, on va utiliser $R_A$ de manière à encoder la sortie (c'est un usage différent de celui introduit).
 			
-				\footnotetext{En fait, le $n^K$ est explicite ; dans cette preuve, il est implicite qu'on peut calculer $cn^K$ en rajoutant quelques équations : $c$ et $K$ étant fixés, si on a la multiplication, il suffit de rajouter $K$ équations $f_1(x) = n(x)$ et $f_{i+1}(x) = f_i(x) \times n(x)$, puis $c-1$ équations $f_{K+j+1}(x) = f_{K+j}(x) + n(x)$ ; on obtient alors $cn^K$ dès le premier tour de calcul. Si on n'a que l'addition, on ne peut pas reproduire ce schéma. Si on n'a que l'addition, on peut envisager d'étudier $g$ non pas sur $\intint{0}{3cn^K-1}$ mais sur $\intint{0}{4cn^K-1}$, et de couper ce domaine en quatre ; le premier domaine servirait alors à calculer $cn^K$ (mais comment délimiter ce premier domaine explicitement, avec un LSRS ?) et le reste serait le même que présenté ici. }
+			%			\footnotemark  <= après "on va diviser le domaine en trois"
+				%\footnotetext{\label{astuce_cnK}En fait, le $n^K$ doit être explicité, et on peut le faire, même si cette preuve le passe sous silence pour des raisons de clarté. On peut calculer $cn^K$ en rajoutant quelques équations : $c$ et $K$ étant fixés, si on a la multiplication, il suffit de rajouter $K$ équations $f_1(x) = n(x)$ et $f_{i+1}(x) = f_i(x) \times n(x)$, puis $c-1$ équations $f_{K+j+1}(x) = f_{K+j}(x) + f_{K}(x)(x)$ ; on obtient alors $cn^K$ dès le premier tour de calcul. En revanche, si on n'a que l'addition, on ne peut pas reproduire ce schéma. On peut envisager d'étudier $g$ non pas sur $\intint{0}{3cn^K-1}$ mais sur $\intint{0}{4cn^K-1}$, et de couper ce domaine en quatre ; le premier domaine servirait alors à calculer $cn^K$ (mais comment délimiter ce premier domaine explicitement, avec un LSRS ?) et le reste serait le même que présenté ici. }
 			
-			On va s'autoriser la définition par cas (on a vu dans un lemme précédent que ça ne rendait pas le LSRS plus puissant) et quelques opérations simples qui ne sont pas directement disponible dans la définition d'un LSRS. Le système qu'on va proposer n'est pas un LSRS à proprement parler, mais sa traduction en véritable LSRS est immédiate, quoiqu'elle nécessite quelques fonctions en plus.
+			On va s'autoriser la définition par cas (on a vu dans un lemme précédent que ça ne rendait pas le LSRS plus puissant) et quelques opérations simples qui ne sont pas directement disponibles dans la définition d'un LSRS. Le système qu'on va proposer n'est pas un LSRS à proprement parler, mais sa traduction en véritable LSRS est immédiate, quoiqu'elle nécessite quelques fonctions en plus.
 			
 			Pour simplifier la présentation, on va présenter les définitions des fonctions sur les trois intervalles ; elles peuvent être combinées via un LSRS. 
 			
-			Dans un LSRS, l'ordre est important. Ici, les fonctions doivent être présentées dans cet ordre : $I, A, B, N, R_A, I', A', B', N', R_A'$.
+			Dans un LSRS, l'ordre est important. Ici, les fonctions doivent être présentées dans cet ordre : $I$, $A$, $B$, $N$, $R_A$, $I'$, $A'$, $B'$, $N'$, $R_A'$.
 			
-			Pour $x < cn^K$, $A$ et $R_A$ sont définies par :
+			Dans l'article d'origine \cite{GrandjeanSchwentick2002} de ce brouillon, les auteurs prennent la convention que l'addition est bornée ; si $a+b > cn$ où $cn$ est la taille du domaine, alors $a+b$ est en fait évalué à $0$ dans le LSRS. On peut utiliser cette convention pour simuler une définition par cas sur la taille entière du domaine. Si le LSRS est défini sur $3cn^K$ alors le test $x < cn^K$ peut se simuler avec le test : $x=0$ ou $x + x + x >0$.
 			
+			Ainsi, avant de définir les autres fonctions, intéressons-nous à un moyen d'obtenir $cn^K$ dans le LSRS, ce qui nous sera fort utile pour la suite.
+			
+			\begin{equation}
+				f_0(x) = \casedist{
+					1 & \text{ si $x = 0$} \\
+					x + 1 & \text{ si $3x >0$} \\
+					f_0(x-1) & \text{ sinon}
+				}
+			\end{equation}
+			
+			
+			La définition de $f_0$ est telle que $f_0(cn^K-1) = cn^K$ et pour $x>cn^K$, $f_0(x) = cn^K$. 
+			
+			On peut utiliser cette astuce pour définir, en même temps que la phase d'initialisation, une fonction qui permet d'obtenir $cn^K$. Si $x<cn^K$, c'est-à-dire, $x=0$ ou $x + x + x >0$, on définit $A$ et $R_A'$ par :
+			
+			
+			%Pour $x<cn^K$, $A$ et $R_A$ sont définies par\footnotemark :
+				
+			%	\footnotetext{On pourrait profiter de cette initialisation pour définir une fonction qui va calculer }
+				
 			\setcounter{equation}{0}
 			\begin{eqnarray}
 				A(x) & = & x \\
 				R_A'(x) & = & f(x)
 			\end{eqnarray}
 			
-			Les autres fonctions valent $0$ sur cet intervalle. Cette initialisation va permettre de récupérer les valeurs de $R_A$ dans la deuxième partie du domaine. 
+			Les autres fonctions valent $0$ sur cet intervalle, sauf $f_0(x) = x+1$. Pour l'instant, on n'utilise pas $f_0(x)$, qui de toute façon n'est pas prête à l'emploi.
 			
-
+			 Cette initialisation va permettre de récupérer les valeurs de $R_A$ dans la deuxième partie du domaine. 
 			
-			Sur le domaine $\intint{cn^K}{2cn^K-1}$
+			\espace
+			
+			Sur le domaine $\intint{cn^K}{2cn^K-1}$ : 
+			
+			\espace 
 			
 			\fbox{
 				\begin{minipage}{0.9\textwidth}
@@ -720,6 +752,8 @@
 				\end{minipage}
 				}
 			
+			\espace 
+			
 			Notons que $cn^K$ code le premier instant du calcul. 
 			
 			Les fonctions $I(x)$ et $I'(x)$ ne prennent qu'un nombre fini de valeurs. Ainsi, en écrivant \emph{si $I(x)$ est de la forme $R_A := B$}, on écrit en fait \emph{si $I(x) = i_1$ ou $I(x) = i_2$ \dots ou $I(x) = i_m$} où $i_1, \dots, i_m$ sont les numéros des instructions $R_A := B$ dans le programme de la RAM.
@@ -736,9 +770,8 @@
 			
 			Il ne reste plus qu'à voir que les équations de $S$ définissent les fonctions attendues pour décrire le calcul de $M$ et que $S$ produit la bonne sortie.
 			
-			Soit $s$ la RAM-structure, $1(-), n(-), id(-)$\footnote{Il faudra probablement rajouter $i \mapsto n^K$} comme précédemment, et soient $I, A, B, N, R_A, I', A', B', N', R_A'$ des fonctions \emph{that fulfill the equations of $S$}\footnotemark.
-			
-				\footnotetext{??????}
+			Soit $s$ la RAM-structure, $1(-), n(-), id(-)$ \footnotemark comme précédemment, et soient $I, A, B, N, R_A, I', A', B', N', R_A'$ des fonctions qui vérifient les équations de $S$.
+				\footnotetext{On obtient la fonction $i \mapsto cn^K$ avec une astuce, cf \hyperref[astuce_cnK]{cette note}.}
 				
 			Premièrement, il est clair que pour $a < c(s.n)^K$, on a :
 			

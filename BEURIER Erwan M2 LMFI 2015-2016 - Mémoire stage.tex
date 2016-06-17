@@ -270,7 +270,7 @@
 			Un argument $x$ de $f$ est \emph{safe} dans $\text{BC}$ si et seulement si $\text{tier}(x) \leq \text{tier}(f)$ dans $\TRec{W}$.
 		\end{lemma}
 		
-		\begin{demo}
+		\begin{proof}
 			\textcolor{white}{T} %exte blanc inutile pour passer à la ligne.
 			
 			\textbf{Passage de $\text{BC}$ à $\TRec{W}$}
@@ -345,7 +345,7 @@
 			\end{itemize}
 			
 			Le cas de la récurrence ramifiée se résout de manière analogue. $\blacksquare$
-		\end{demo}
+		\end{proof}
 		
 
 		L'équivalence entre les deux se généralise sans problème aux algèbres de mots voire aux algèbres quelconques (bien que dans le cas d'algèbres quelconques, on ne sache pas s'il y a équivalence entre $P$ et $\text{BC}$ ou $\TRec{A}$).
@@ -542,7 +542,7 @@
 					Une $\bbA$-RAM peut être simulée en temps linéaire par une $\sigma$-RAM.
 				\end{lemma}
 				
-				\begin{demo}
+				\begin{proof}
 					Les registres de la $\bbA$-RAM seront simplement simulés par les registres de la $\sigma$-RAM. 
 					
 					Si la $\bbA$-RAM est déterministe, alors ses états n'ont qu'un seul état suivant. Dans ce cas, le passage d'un état à un autre est simulé dans la $\sigma$-RAM comme simplement le passage d'un ensemble d'instructions à un autre. Si la $\bbA$-RAM est non-déterministe, alors on peut passer à plusieurs états en même temps. Pour simuler cela, on autorise une commande $\text{GOTO}(I(j_1), \dots, I(j_t))$ qui permet d'aller aux instructions correspondantes. 
@@ -664,7 +664,7 @@
 				
 					\paragraph{Bilan.}
 					Chaque instruction de la $\bbA$-RAM peut être simulée en temps constant par une $\sigma$-RAM. $\blacksquare$
-				\end{demo}
+				\end{proof}
 	
 	
 				\subsubsection{$\sigma$-RAM dans $\bbA$-RAM}
@@ -676,7 +676,7 @@
 					Une $\sigma$-RAM fonctionnant en temps polynomial peut être simulée en temps polynomial par une $\bbA$-RAM.
 				\end{lemma}
 	
-				\begin{demo}
+				\begin{proof}
 					Ici, nous allons surtout présenter les algorithmes. La programmation en $\bbA$-RAM est disponible en \hyperref[sec:annexes_programmes]{annexes}.
 					
 					Avant d'en venir à la simulation proprement dite, on va d'abord décrire quelques fonctions.
@@ -774,7 +774,7 @@
 					
 					On définit des fonctions associées qui permettront de mieux comprendre comment on se sert de cette mémoire. 
 					
-					\nepasoublier{CODE à écrire (parce pour l'instant j'ai la flemme.)}
+					\espace
 					
 					\begin{algorithm}[H]
 						\label{algo:A_RAM_fn_INSERT}
@@ -873,6 +873,7 @@
 						\caption{Fonction $\text{ACCESS}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$. Programme \hyperref[prog:A_RAM_fn_ACCESS]{ici}. }
 					\end{algorithm}
 					
+					\espace
 
 					La fonction $\text{ACCESS}$ fonctionne en temps $\leqslant \grozo{\left| \mu \right| \times \max\left( \left| \alpha \right| , \left| \text{longueur des adresses déjà employées} \right| \right) }$.
 					
@@ -886,6 +887,8 @@
 						Dans une $\sigma$-RAM, les entrées sont stockées dans des registres au choix. Il suffit de reproduire cette initialisation en remplissant les registres équivalents dans la $\bbA$-RAM. Si $A_i, N$ sont initialisés, alors initialiser $\alpha_i, \nu$ de la même façon. Si des registres $R_i$ sont initialisés, alors on initialise $\mu$ avec un terme mémoire : 
 						
 						$\text{MEM}\left( f(0), R_0, \text{MEM}\left( f(1), R_1, \dots \right) \dots \right)$.
+						
+						Dans la suite, $(a)$ sera le numéro de l'instruction étudiée. 
 						
 						\subparagraph{Assignation de terme.}
 						$(a) \:\: A := c$ où $c \in \bbA$ est un terme indépendant du calcul, se simule en temps constant en reconstruisant \emph{manuellement} le terme $c$ dans la $\bbA$-RAM. 
@@ -917,10 +920,10 @@
 						
 						
 					\paragraph{Bilan.}
-					La $\bbA$-RAM simule lourdement trois des opérations de base de la $\sigma$-RAM. Les deux machines coïncident sur les \emph{grosses} classes de complexité ($P$, $NP$, $EXP$...) mais pas sur les classes plus fines ($\text{DTIME}(n)$...).
+					La $\bbA$-RAM simule lourdement trois des opérations de base de la $\sigma$-RAM. Les deux machines coïncident sur les \emph{grosses} classes de complexité ($P$, $NP$, $EXP$...) mais pas sur les classes plus fines ($\text{DTIME}(n^k)$ pour un $k$ fixé).
 						
 					$\blacksquare$
-				\end{demo}
+				\end{proof}
 				
 				
 				
