@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{report}
 
 \include{packages}
 \include{macros}
@@ -23,10 +23,20 @@
 \newcommand{\eqpred}[3]{#1\left[ #2^{\leftarrow}(#3) \right]_{#3}}
 \newcommand{\eqpredf}[4]{#1\left[ #2^{\leftarrow}(#3) \right]_{#4}} % four arguments
 \newcommand{\eqpredfi}[5]{#1\left[ #2^{\leftarrow}(#3) #4 \right]_{#5}} % five arguments
+\newcommand{\arite}[1]{\text{arité}\left( #1 \right)}
+\newcommand{\leqa}{\left( \leqslant a \right)}
 
 
 \begin{document}
 	
+	\maketitle
+	
+	\tableofcontents
+	
+	\pagebreak 
+	
+	\chapter{LSRS et temps polynomial}
+	\label{chap:LSRS}
 	
 	\section*{README}
 		\label{sec:README}
@@ -58,7 +68,7 @@
 			
 			Une RAM-structure $s$ de type $t$ est un uplet constitué de :
 			\begin{itemize}[itemsep=-1mm]
-				\item 	$n \in \naturels$ est la taille de la structure ;
+				\item 	$n \in \naturels$ qui est la taille de la structure ;
 				\item 	$C \in \naturels$ pour chaque symbole $C \in t$ ;
 				\item 	$f : n \to \naturels$ pour chaque symbole $f \in t$.
 			\end{itemize}
@@ -75,7 +85,7 @@
 			
 			Une $(t_1, t_2)$-fonction de RAM $\Gamma$ est une fonction telle qu'il existe $c_1, c_2 \in \naturels$, tels que $\Gamma$ envoie les structures $c_1$-bornées de type $t_1$ sur des structures $c_2$-bornées de type $t_2$\footnotemark.
 			
-				\footnotetext{On rappelle que "c-borné" ne concerne que la structure par rapport à sa propre taille ; ici on ne compare pas la taille de l'entrée et de la sortie}
+				\footnotetext{On rappelle que "$c$-borné" ne concerne que la structure par rapport à sa propre taille ; ici on ne compare pas la taille de l'entrée et de la sortie}
 			
 			On dit que $\Gamma$ est polynomiale lorsque $\Gamma(s).n = \grozo{(s.n)^K}$.
 			
@@ -108,6 +118,7 @@
 		\end{definition}
 		
 		\begin{definition}[Transformation affine]
+			\label{def:transfo_affine}
 			Soit $T$ une fonction de RAM qui envoie des RAM-structures de type $t_1$ sur des RAM structures de type $t_2$. 
 			
 			On dit que $T$ est une transformation affine lorsque : 
@@ -128,8 +139,54 @@
 			\label{subsec:LSRS}
 		
 		Le LSRS en tant que tel n'a pas l'air collé à la définition du temps linéaire. On garde la définition pour le moment.
+
+		\begin{definition}[Application bornée et \emph{equal-predecesor}]
+			\label{def:app_bornee_eq_pred}
+			Pour $f : n \to \naturels$, on définit deux opérations :
+			
+			\begin{itemize}
+				\item 	L'application bornée :
+				\[
+				f[x]_y = \casedist{
+					f(x) & \text{si $x<y$} \\
+					x 	& \text{sinon}
+				}
+				\]
+				
+				\item 	L'opération \emph{equal-predecesor} :
+				\[
+				f^{\leftarrow} = \casedist{
+					\max\left(\left\lbrace y < x | f(x) = f(y)\right\rbrace\right) & \text{si un tel $y$ existe} \\
+					x	& \text{sinon}
+				}
+				\]
+			\end{itemize}
+			
+			Pour $g, g' : n \to \naturels$, on combine ces deux opérations pour en créer une troisième, opération de \emph{récursion} :
+			
+			\[
+			f(x) = \eqpred{g'}{g}{x}
+			\]
+			
+			$f(x) = g'(y)$ où $y$ est de plus grand $z$ tel que $g(x) = g(z)$, ou $f(x) = x$ si un tel $y$ n'existe pas.
+		\end{definition}
 		
 		
+		\begin{definition}[LSRS]
+			\label{def:LSRS}
+			Soit $F$ un ensemble de symboles de fonctions (dites \emph{fonctions de base}), soient $f_1, \dots, f_k$ des symboles de fonctions qui n'apparaissent pas dans $F$. Pour $i\leqslant k$, notons $F_i = F\cup \{f_1, \dots, f_i\}$. 
+		
+		Un LSRS (\emph{Linear Simultaneous Recursion Scheme}) $S$ sur $f_1, \dots, f_k$ et $F$ est une suite de $k$ équations $\left(E_i\right)_{i_\in k}$ dont chacune est de l'une des deux formes suivantes :
+		
+		\begin{itemize}
+			\item 	(opération) 		$f_i(x) = g(x) * g'(x)$ où $g,g' \in F_{i-1}$ et $* \in \{+, -, \times \}$\footnotemark
+			
+			\footnotetext{Les opérations peuvent varier, il est dit dans \cite{GrandjeanSchwentick2002} que l'on peut choisir n'importe quelle opération binaire calculable en temps linéaire sur machine de Turing, voire la multiplication. Nous verrons d'ailleurs par la suite que, pour des raisons de facilité, nous aurons besoin de la multiplication.}
+			
+			\item 	(récursion)			$f_i(x) = \eqpred{g'}{g}{x}$ où $g' \in F_k$ et $g \in F_{i-1}$
+		\end{itemize}
+		
+		\end{definition}
 		
 		
 		On doit refaire la définition 3.3 de l'article (la définition de \emph{linéairement représentable}).
@@ -802,10 +859,341 @@
 			
 		\end{proof}
 
+		
+		
+		
+		
+	\pagebreak
+	 
+	\pagebreak
+		
+	\chapter{LSRS à arité multiple}
+	\label{chap:rLSRS}
+	
+	\section{Introduction}
+	\label{sec:rintroduction}
+	
+	Avant toute chose, il peut être bon de rappeler à quoi ressemblent les LSRS. \cite{Schwentick1997} \cite{GrandjeanSchwentick2002}. Cependant, pour les besoins du présent chapitre, nous allons ajouter une troisième forme d'opération.
+	
+	
+	\begin{definition}[LSRS]
+		\label{def:LSRS_2}
+		Soit $F$ un ensemble de symboles de fonctions (dites \emph{fonctions de base}), soient $f_1, \dots, f_k$ des symboles de fonctions qui n'apparaissent pas dans $F$. Pour $i\leqslant k$, notons $F_i = F\cup \{f_1, \dots, f_i\}$. 
+	
+		Un LSRS (\emph{Linear Simultaneous Recursion Scheme}) $S$ sur $f_1, \dots, f_k$ et $F$ est une suite de $k$ équations $\left(E_i\right)_{i_\in k}$ dont chacune est de l'une des trois formes suivantes :
+		
+		\begin{itemize}[itemsep=-1mm]
+			\item 	(opération) 		$f_i(x) = g(x) * g'(x)$ où $g,g' \in F_{i-1}$ et $* \in \{+, -, \times \}$\footnotemark
+			
+			\footnotetext{Les opérations peuvent varier, il est dit dans \cite{GrandjeanSchwentick2002} que l'on peut choisir n'importe quelle opération binaire calculable en temps linéaire sur machine de Turing, voire la multiplication. Nous verrons d'ailleurs par la suite que, pour des raisons de facilité, nous aurons besoin de la multiplication.}
+			
+			\item 	(récursion)			$f_i(x) = \eqpred{g'}{g}{x}$ où $g' \in F_k$ et $g \in F_{i-1}$			
+			
+			\item 	(composition)			$f_i(x) = g'\left[g(x)\right]_x$ où $g' \in F_k$ et $g \in F_{i-1}$
+		\end{itemize}
+	\end{definition}
+	
+	\begin{remark}
+		L'ajout de cette opération facilitera les calculs qui suivront. Elle ne rend pas le LSRS plus puissant \cite{GrandjeanSchwentick2002}.
+	\end{remark}
+	
+	Le but de ce chapitre est d'étendre les LSRS définis dans \cite{GrandjeanSchwentick2002} et utilisés \hyperref[chap:LSRS]{plus haut} aux fonctions d'arité $>1$. Remarquons dans un premier temps que si l'on définit un LSRS avec des fonctions d'arité $a$, où $a$ est le même pour chaque fonction, alors l'ordre lexicographique permet de facilement définir un LSRS équivalent d'arité $1$, ce qui n'apporte pas grand-chose par rapport à ce dont nous avons déjà parlé.
+	
+	Ici, on ne va pas considérer de LSRS dont toutes les fonctions sont de même arité. Soit $a>1$, on suppose que le LSRS est composé de fonctions $f_i$ d'arité $r_i \leqslant a$, où $i \in k$, et telles que $r_i = a$ pour au moins un $i\in k$. On qualifie de $a$-LSRS un tel LSRS. On notera LSRS les systèmes utilisés dans le chapitre précédent, qui sont en fait des $1$-LSRS. 
+	
+	Dans la suite, on notera $\leqa$-uplet pour parler d'un $n$-uplet où $n\leqslant a$. 
+	
+	
+	\section{Les ennuis commencent}
+	\label{sec:ennuis_commencent}
+	
+		\subsection{Bon ordre sur les $\leqa$-uplets}
+		\label{subsec:bon_ordre_uplets}
+		
+		Dans un LSRS, l'ordre est très important ; que ce soit au niveau de l'ordre des fonctions ou des variables. De manière générale, dans un $1$-LSRS, $f(x)$ ne peut être défini avec $g(y)$ que si $g(y)$ a été calculé avant, que ce soit parce que $y<x$ ou, si $x=y$, parce que $g$ est définie avant elle dans le LSRS. 
+		Pour reproduire l'importance de l'ordre sur des fonctions d'arité multiple, et ne pas trahir la définition originelle du LSRS, on peut utiliser un ordre lexicographique sur les $\leqa$-uplets tels que $\bar{x} <_{\text{naïf}} \bar{y} \Leftrightarrow \left|\bar{x}\right| < \left|\bar{y}\right| \text{ ou } \bar{x} <_{\text{lex}} \bar{y}$. 
+			
+		Cela revient à calculer, dans l'ordre, d'abord les fonctions d'arité $1$, puis ensuite toutes les fonctions d'arité $2$, etc. jusqu'à calculer les fonctions d'arité $a$. Le problème de cette définition est que les fonctions d'arité $a'$ ne peuvent faire appel qu'aux fonctions d'arité $<a'$, ce qui ressemble à une contrainte inutile\footnotemark.
+		
+			\footnotetext{Il y avait de plus une autre raison, mais je ne m'en souviens plus au moment où j'écris ces lignes. C'est apparemment un bon ordre (\emph{tout ensemble non vide a un plus petit élément}), mais il y avait un contre-argument qui nous avait fait chercher un autre ordre. Parce qu'on atteint très vite les bornes du domaine ?}
+		
+		Nous avons choisi un ordre moins naturel, mais qui est un bon ordre, permet de faire des projections (récupérer des éléments d'un $a'$-uplet, sauf au moins un, et les utiliser comme argument d'une autre fonction), et permet de calculer tour à tour des fonctions d'arité $1$, puis $2$, etc., puis revenir aux arités $1$, $2$...
+		
+		\begin{definition}
+			\label{def:bon_ordre_sur_uplets}
+			On définit $<$ sur les $\leqa$-uplets par :
+			
+			\[
+				\bar{x} < \bar{y} \Leftrightarrow \left\lbrace
+														\begin{array}{ccc}
+															\max\left(\bar{x}\right) < \max\left(\bar{y}\right) & & \\
+															\text{ou } \max\left(\bar{x}\right) = \max\left(\bar{y}\right) & 
+																\text{ et } \left|\bar{x}\right| < \left|\bar{y}\right| & \\
+															\text{ou } \max\left(\bar{x}\right) = \max\left(\bar{y}\right) & 
+																\text{ et } \left|\bar{x}\right| = \left|\bar{y}\right| & 
+																\text{ et } \bar{x} <_{\text{lex}} \bar{y}\\
+														\end{array}
+													\right. 
+			\]
+			
+			Si toutes les arités $\leqslant a$ ne sont pas permises (par exemple, si notre LSRS ne contient que des fonctions d'arité $1$ et $3$, mais pas $2$), alors on ampute cet ordre des $n$-uplets correspondant.
+		\end{definition}
+	
+	
+		\begin{example}
+			Pour $a = 3$, avec les arités $1,2,3$ : $(0) < (0, 0) < (0,0,0) < (1) < (0,1) < (1,0) < (1,1) < (0,0,1) < (0,1,0) < (0,1,1) < (1,0,0) < (1,0,1) < (1,1,0) < (1,1,1) < (2) < (0,2) < \dots$.
+			
+			Pour $a = 3$, avec les arités $1,3$ : $(0) < (0,0,0) < (1) < (0,0,1) < (0,1,0) < (0,1,1) < (1,0,0) < (1,0,1) < (1,1,0) < (1,1,1) < (2) < (0,0,2) <\dots$.
+		\end{example}
+		
+		\begin{remark}
+			Quelques remarques informelles : 
+			\begin{itemize}
+				\item 	Le premier $\leqa$-uplet d'un max $m$ donné est le $1$-uplet $\left( m \right)$.
+				\item 	Le premier $\leqa$-uplet d'une arité $r$ donnée, à un max $m$ donné, est le $r$-uplet $\left( 0, \dots, 0, m\right)$. 
+			\end{itemize}
+		\end{remark}
+		
+		
+		
+		\subsection{Propriétés combinatoires}
+		\label{subsec:bon_ordre_prop_combinatoires}
+		
+		\begin{prop}
+			\label{prop:bon_ordre_combinatoire}
+			Soit $\bar{x}$ un $\leqa$-uplet. On suppose que toutes les arités sont possibles. Notons $m = \maxs{\bar{x}}$ et $r = \abs{\bar{x}}$.
+			
+			Le bon ordre $<$ sur les $\leqa$-uplets vérifie les égalités suivantes :
+			
+			\begin{enumerate}
+				\item 	\label{itm:bon_ordre_combinatoire1} $\card{\bar{y} < \bar{x} | \maxs{\bar{y}} < \maxs{\bar{x}}} = \sum_{i=1}^{a} m^i$\footnote{J'ai mis $-1$ ici au début, et j'avais l'air convaincu, mais je ne sais plus pourquoi...} ;
+				\item 	\label{itm:bon_ordre_combinatoire2} $\card{\bar{y} < \bar{x} | \maxs{\bar{y}} = \maxs{\bar{x}} \wedge \abs{\bar{y}} < \abs{\bar{x}} } = \sum_{i=1}^{r} \left( \left(m+1\right)^i -1 \right)$ ; 
+				\item 	\label{itm:bon_ordre_combinatoire3} $\card{\bar{y} < \bar{x} | \maxs{\bar{y}} = \maxs{\bar{x}} \wedge \abs{\bar{y}} = \abs{\bar{x}} \wedge \bar{y} <_{\text{lex}} \bar{x} } = \sum_{i=1}^{r-1} x_i m^{r-i}$. \redtext{PROBABLEMENT FAUX parce qu'il faut être sûr de garder un $m$ quelque part dans le $r$-uplet.}
+			\end{enumerate}
+		\end{prop}
+		
+		\begin{proof}
+			\ref{itm:bon_ordre_combinatoire1}. L'entier $a$ étant fixé, pour un max $m$ donné, on peut construire un $\leqa$-uplet en choisissant une arité $i \leqslant a$ et $i$ composantes, toutes des entiers $< m$. Pour $i$ fixé, on peut faire $m^{i}$ $i$-uplets, d'où au total $\sum_{i=1}^{a} m^i$.
+			
+			\ref{itm:bon_ordre_combinatoire2}. Pour construire un tel $\bar{y}$, il faut choisir son arité $i<r$, puis le nombre de composantes que l'on fixe à $m$ ; le reste des composantes est libre et $<m$, d'où le résultat.
+			
+			\ref{itm:bon_ordre_combinatoire3}. \redtext{Je dois y réfléchir.}
+		\end{proof}
+		
+		\begin{coro}
+			\label{coro:rang_bon_ordre}
+			Le rang de $\bar{x}$ est $\left( \sum_{i=1}^{a} m^i \right) + \left( \sum_{i=1}^{r} \left( \left(m+1\right)^i -1 \right) \right) + \text{\redtext{quelque chose}}$.
+		\end{coro}
+		
+	
+	\section{Déroulement d'un calcul de $a$-LSRS}
+	\label{par:deroulement_aLSRS}
+	Au lieu d'incrémenter $x$ de façon naturelle en $x+1$, ici, on compte passer de $\bar{x}$ à son successeur dans cet ordre. Notons-le $s\left(\bar{x}\right)$. Ainsi, le calcul d'un $a$-LSRS se déroule de la façon suivante :
+	
+	\begin{itemize}[itemsep=-1mm]
+		\item 	$\bar{x} = (0)$ : calcul de toutes les fonctions d'arité $1$ en $(0)$, comme dans un LSRS normal. Dans cette première étape, les fonctions ne peuvent bien sûr pas faire référence aux fonctions d'arité supérieure, car elles ne sont même pas encore définies ; leur évaluation doit respecter les règles du LSRS énoncées plus haut. 
+		\item 	$\bar{x} = (0,0) = s\left( \left( 0 \right)\right)$ : calcul de toutes les fonctions d'arité $2$ en $(0,0)$. Ces fonctions peuvent faire appel aux valeurs des fonctions d'arité $1$ en $0$. Une fonction $f_i$ d'arité $2$ peut aussi faire référence à des fonctions d'arité $2$ en $(0,0)$, à condition qu'elles aient déjà été évaluées ; c'est-à-dire, à condition qu'elles soient définies dans des équations $E_j$ telles que $j<i$ ;
+		\item  	$s\left(\bar{x}\right)$ :
+			\begin{itemize}[itemsep=-1mm]
+				\item 	Si $r = \abs{\bar{x}} = \abs{s\left(\bar{x}\right)}$ alors on calcule à nouveau les fonctions d'arité $r$ pour $s\left(\bar{x}\right)$ ; ces fonctions peuvent faire appel aux résultats des fonctions d'arité plus petite. 
+				\item 	Si $r = \abs{\bar{x}} < \abs{s\left(\bar{x}\right)} = r'$ alors on évalue les fonctions d'arité $r'$ en $s\left(\bar{x}\right)$ ; idem, ces fonctions peuvent faire appel aux résultats des fonctions d'arité plus petite.
+				\item 	Si $\abs{s\left(\bar{x}\right)} = 1 < a = \abs{\bar{x}}$ alors on évalue les fonctions d'arité $1$ en $s\left(\bar{x}\right)$ ; ces fonctions d'arité $1$ peuvent faire référence aux résultats des fonctions d'arité plus grande, à condition qu'ils aient été calculés au tour précédent. 
+			\end{itemize}
+	\end{itemize}
+	
+Une fois l'ordre compris, il faut voir comment interpréter les opérations typiques du LSRS : addition, soustraction, multiplication, récursion et composition.
+
+
+		\paragraph{Définissons le $a$-LSRS}
+		
+		Ce qui suit est la piste principale que nous suivons en ce moment. Le LSRS pourrait être élargi de bien des manières, mais c'est celle-ci qui nous semble la plus intéressante et la plus naturelle, une fois que l'on a choisi comment ordonné les $\leqa$-uplets.
+		
+		Soit $a \in \naturels$. Le symbole "$<$" renvoie selon les cas à l'ordre sur les entiers ou à l'ordre \hyperref[def:bon_ordre_sur_uplets]{juste au-dessus}. Pour des raisons de lisibilité, on notera $\bar{x'} \ll \bar{x}$ pour dire :  $\bar{x'} < \bar{x}$, $\abs{\bar{x'}} < \abs{\bar{x}}$ et $\forall j \: \exists j' \:\: x'_j = x_{j'}$\footnotemark.
+		
+			\footnotetext{Autrement dit : $\bar{x'}$ est obtenu à partir de $\bar{x}$ en récupérant ses composantes, en les mélangeant, en les dupliquant, mais en veillant à ce que $\abs{\bar{x'}} < \abs{\bar{x}}$. Par exemple, pour $\bar{x} = (x_1, x_2, x_3)$, les $\bar{x'}$ pourraient être $(x_1, x_2)$, $(x_3, x_1)$ ou $(x_3, x_3)$.}
+		
+		\begin{definition}[$a$-LSRS]
+			\label{def:aLSRS}
+			Soit $F$ un ensemble de symboles de fonctions de base. Soient $f_1, \dots, f_k$ de nouveaux symboles de fonctions n'apparaissant pas dans $F$, d'arités respectives $1 \leqslant r_1 \leqslant r_2 \leqslant \dots \leqslant r_k = a$\footnotemark. 			
+				\footnotetext{L'ordre entre des fonctions de même arité a de l'importance, mais pas entre des fonctions d'arités différentes. On peut donc considérer que les équations sont ordonnées par l'arité de la fonction qu'elles définissent.}
+			On note $F_i = F \cup \{f_j | r_j = r_i \text{ et } j < i\}$, $F'_i = F \cup \{f_j | r_j = r_i\}$, et $G_i = F \cup \{ f_j | r_j < r_i\}$\footnotemark.
+			
+				\footnotetext{$F_i$ est l'ensemble des symboles des fonctions qui ont la même arité que $f_i$ mais qui sont définies avant $f_i$. 
+					
+					$F'_i$ est l'ensemble des symboles des fonctions qui ont la même arité que $f_i$, qu'elles soient définies avant ou après $f_i$.
+					
+					$G_i$ est l'ensemble des symboles des fonctions d'arité strictement inférieure à celle de $f_i$.}
+				
+			Un $a$-LSRS $S$ sur $F$ et $f_1, \dots, f_k$ est une suite d'équations $E_1, \dots, E_k$ où chaque $E_i$ est de l'une des formes suivantes :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item	(opération) 	$f_i\left(\bar{x}\right) = A * B$ où $* \in \{+,-,\times\}$ et $A, B$ sont de la forme suivante : 
+						\begin{itemize}[itemsep=-1mm]
+							\item 	$g\left(\bar{x}\right)$, avec $g \in F_i$ ;
+							\item 	$g\left(\bar{x'}\right)$, avec $g \in G_i$, c et $\bar{x'} \ll \bar{x'}$.
+						\end{itemize}
+									
+				\item 	(récursion)		$f_i\left(\bar{x}\right) = \eqpred{g'}{g}{\bar{x'}}$, où $\text{arité}(g) = \text{arité}(g')$ et l'un des deux cas suivants se réalise :
+						\begin{itemize}[itemsep=-1mm]
+							\item 	Soit $\bar{x'} = \bar{x}$, et dans ce cas $g \in F_i$ et $g' \in F'_i$ ;
+							\item 	Soit $\bar{x'} \ll \bar{x}$ et dans ce cas $g, g' \in G_i$. 
+						\end{itemize}
+						
+				\item 	(composition)	$f_i\left(\bar{x}\right) = g'\left[ g_1\left(\bar{x_1}\right), \dots, g_r\left(\bar{x_r}\right) \right]_{\bar{x}}$, où $\text{arité}(g') = r$, et pour chaque $j \in r$, l'un des cas suivants se réalise : 
+						\begin{itemize}
+							\item 	Soit $\bar{x_j} = \bar{x}$, et dans ce cas $g_j \in F_i$ ;
+							\item 	Soit $\bar{x_j} \ll \bar{x}$ et dans ce cas $g_j \in G_i$. 
+						\end{itemize}
+						De plus :
+						\begin{itemize}
+							\item 	Soit $r = \abs{\bar{x}}$, et dans ce cas $g' \in F_i$\footnotemark ;
+							\item 	Soit $r < \abs{\bar{x}}$ et dans ce cas $g' \in G_i$. 
+						\end{itemize}
+						
+							\footnotetext{Si $\bar{x} < \left(g_1\left(\bar{x_1}\right), \dots, g_r\left(\bar{x_r}\right)\right)$ il faut définir une valeur par défaut à $g'\left[ g_1\left(\bar{x_1}\right), \dots, g_r\left(\bar{x_r}\right) \right]_{\bar{x}}$. Dans le \hyperref[def:app_bornee_eq_pred]{LSRS normal}, on se contente de renvoyer $x$. On peut ici renvoyer une composante par défaut, par exemple $x_1$.}
+			\end{itemize}
+			
+		\end{definition}
+		
+		\begin{remark}
+			\label{rk:fonctions_de_base_LSRS}
+			Par défaut, on suppose, une nouvelle fois, que l'ensemble des fonctions de base contient par défaut les symboles $n(-)$ et $1(-)$ pour toutes les arités possibles, ainsi que les $\pi^i_j(-)$, projections récupérant la $i$-ième composante d'un $j$-uplet. On peut de plus rajouter $a(-)$, permettant de récupérer $a$, quoique cette fonction est facilement calculable par un LSRS.
+		\end{remark}
+		
+		On doit aussi adapter les notions de structures de RAM et de fonctions de RAM. On garde le même $a$ que pour le $a$-LSRS.
+		
+		\begin{definition}[RAM-structure]
+			\label{def:RAM_data_structures_a}
+			Soit $t$ un $a$-type, c'est-à-dire une signature fonctionnelle contenant des fonctions d'arité $\leqslant a$ et dont au moins un symbole est d'arité $a$. 
+			
+			Une RAM-structure $s$ de type $t$ est un uplet constitué de :
+			\begin{itemize}[itemsep=-1mm]
+				\item 	$n \in \naturels$ qui est la taille de la structure ;
+				\item 	$C \in \naturels$ pour chaque symbole $C \in t$ ;
+				\item 	$f : n\times \dots \times n \to \naturels$ pour chaque symbole $f \in t$.
+			\end{itemize}
+			
+			On notera $s.n, s.C, s.f$ les composantes $n, C, f$ de $s$.
+			
+			On dira que $s$ est $c$-bornée pour $c\in\naturels$ lorsque $s.C, s.f\left(\bar{x}\right) < c s.n$ pour tous $C, f \in t$ et $\bar{x} \in n\times \dots \times n$.
+		\end{definition}
+		
+		
+		\begin{definition}[Fonction de RAM]
+			\label{def:fonction_de_RAM_a}
+			Soient $t_1, t_2$ des $a_1,a_2$-types. 
+					
+			Une $(t_1, t_2)$-fonction de RAM $\Gamma$ est une fonction telle qu'il existe $c_1, c_2 \in \naturels$, tels que $\Gamma$ envoie les structures $c_1$-bornées de type $t_1$ sur des structures $c_2$-bornées de type $t_2$\footnotemark.
+			
+				\footnotetext{On rappelle que "$c$-borné" ne concerne que la structure par rapport à sa propre taille ; ici on ne compare pas la taille de l'entrée et de la sortie}
+			
+			On dit que $\Gamma$ est polynomiale lorsque $\Gamma(s).n = \grozo{(s.n)^K}$, et linéaire lorsque $\Gamma(s).n = \grozo{s.n}$.
+			
+			% Là, si.
+		\end{definition}
+		
+		
+		\begin{definition}[RAM représentée par $a$-LSRS]
+			\label{def:representee_par_aLSRS}
+			Soient $t_1, t_2$ respectivement un $a_1$-type et un $a_2$-type. Soit $\Gamma$ une $(t_1, t_2)$-fonction de RAM.
+			
+			Soit $S$ un $a$-LSRS pour $f_1, \dots, f_k$ sur $F_{t_1}$. 
+			
+			On dit que $\Gamma$ est représentée par $S$ lorsqu'il existe un entier $c$ et une projection affine $P$ tels que, pour chaque structure $s$ $c$-bornée, $S$ définit des fonctions $f_1, \dots, f_k : cs.n \times \dots \times cs.n \to (cs.n)^a$ telles que $\Gamma(s) = P((s.n)^a, S(s))$ ($S(s)$ est la structure définie par le $a$-LSRS).
+		\end{definition}
+		
+		A priori, les $a$-LSRS prennent en entrée des structures dont l'arité maximale est au plus $a$, car les définitions que l'on a données ne permettent pas d'utiliser des fonctions dont l'arité est plus grande que $a$. 
+		
+		
+		
+		
+		
 	
 		
-		\bibliographystyle{plain}
-		\bibliography{biblio}
+	\section{Lien entre les deux notions de LSRS}
+	\label{sec:lien_LSRS_aLSRS}
+	
+	L'idée principale de ce chapitre est de chercher un lien entre les LSRS et les $a$-LSRS.
+	
+	\begin{conj}
+		Soit $\Gamma$ une $(t_1,t_2)$-fonction de RAM, où $t_1$ est un $1$-type et $t_2$ est un $a$-type.
+		
+		$\Gamma$ est représentable par un $a$-LSRS ssi $\Gamma$ est $n^a$-représentable par un LSRS.
+	\end{conj}
+		
+	Pour prouver cette conjecture, nous allons avoir besoin de coder l'entrée.
+	
+	\begin{lemma}
+		\label{lem:decomp_rang_par_LSRS}
+		
+		Il existe un $1$-LSRS $S$ qui, à une variable $x$, associe le $\leqa$-uplet $\bar{x}$ de rang $x$. 
+	\end{lemma}
+		
+	\begin{proof}
+		Pour simplifier, on va de nouveau se placer dans le cas où toutes les arités $\leqslant a$ sont représentées\footnotemark. On va se servir du codage du rang donné en proposition \ref{prop:bon_ordre_combinatoire}, montrer qu'on peut le décoder par LSRS.
+		
+			\footnotetext{Si certaines arités ne sont pas représentées, alors il suffit de retirer les quelques équations qui y sont associées.}
+			
+		\paragraph{Calcul du max $m$.} 
+			Considérons le LSRS suivant :
+			
+				\begin{eqnarray}
+					f_1(x) & = & \casedist{	
+									0 & \text{ si $x < a$} \\
+									1 & \text{ si $x = a$} \\
+									f_1(x-1) & \text{ si $x < f_{4a-1}(x-1)$} \\
+									f_1(x-1)+1 & \text{ si $x = f_{4a-1}(x-1)$}
+									} 
+									\label{eqn:f_0}\\
+					f_{i_1 + 1}(x) & = & f_{i_1}(x) \times f_1(x) \label{eqn:m_pow_i}\\
+					f_{a + 1}(x) & = & f_{1}(x) + f_{2}(x) \label{eqn:sum_m_pow_init}\\
+					f_{a + i_2 + 1}(x) & = & f_{a + i_2}(x) + f_{i_2 + 2}(x) \label{eqn:sum_m_pow}\\
+					f_{2a}(x) & = & f_1(x) + 1 \label{eqn:m_plus_1}\\
+					f_{2a + i_3 + 1}(x) & = & f_{2a + i_3}(x) \times f_{2a}(x) \label{eqn:m1_pow_i}\\
+					f_{3a}(x) & = & f_{2a}(x) + f_{2a + 1}(x) \label{eqn:sum_m1_pow_init}\\
+					f_{3a + i_4 + 1}(x) & = & f_{3a + i_4}(x) + f_{2a + i_4+2}(x) \label{eqn:sum_m1_pow}
+				\end{eqnarray}
+		
+			On rappelle que $f_1(x-1) = \eqpred{f_1}{1}{x}$ et que la distinction de cas ne rend pas le LSRS plus puissant \cite{GrandjeanSchwentick2002}. 
+			
+			Expliquons les équations.
+			
+			(\ref{eqn:f_0}) est censée calculer $m$, donc le max courant. Sachant cela, les équations suivantes coulent de source : 
+			
+			\begin{itemize}
+				\item 	(\ref{eqn:m_pow_i}) calcule $m^{i_1}$ pour $i_1 \in \intint{1}{a}$. On a aussi $f_{a}(x) = m^a$. 
+				
+				\item 	(\ref{eqn:sum_m_pow_init}) calcule $\sum_{i = 1}^{2} m^i$ et (\ref{eqn:sum_m_pow}) calcule $\sum_{i = 1}^{i_2+2} m^i$ pour $i_2+2 \leqslant a$. On a ainsi $f_{2a-1}(x) = \sum_{i = 1}^{a} m^i$, soit le rang du $1$-uplet $(m)$.
+				
+				\item 	Les équations suivantes sont sur le même schéma, si ce n'est qu'elles travaillent sur $m+1$ au lieu de $m$. On a $f_{3a-1}(x) = (m+1)^a$ et $f_{4a-1}(x) = \sum_{i = 1}^{a} (m+1)^i$, donc $f_{4a-1}(x)$ contient le rang du $1$-uplet du max suivant, à savoir $(m+1)$. 
+			\end{itemize}
+			
+			Ceci étant explicité, étudions la définition de $f_1(x)$. 
+			
+			$f_1(x)$ s'initialise naturellement en $0$. On parcourt alors toutes $\leqa$-uplets $(0, \dots, 0)$ jusqu'à l'arité $a$, donc on énumère les $a$ premiers $\leqa$-uplets, et donc l'élément de rang $a$ a bien un max égal à $1$ : $f_1(x)$ passe à $1$. Quand le calcul avance, $x$ finit par atteindre le rang du max suivant, que l'on calcule par avance dans $f_{4a-1}(x)$. Une fois que ce rang est atteint, on incrémente $f_1(x)$ ; le reste des équations se met aussi à jour, ce qui assure que $f_{4a-1}(x)$ soit toujours le rang du max suivant. La distinction de cas de $f_1(x)$ est donc bien complète.
+			
+			\paragraph{Calcul de l'arité courante}
+		
+	\end{proof}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	\bibliographystyle{plain}
+	\bibliography{biblio}
 	
 \end{document}
 

@@ -41,9 +41,9 @@
 
 \theoremstyle{smallcapsit}
 \newtheorem{theorem}{Théorème}
-\newtheorem{prop}{Proposition}
-\newtheorem{coro}{Corollaire}
-\newtheorem{lemma}{Lemme}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{coro}[theorem]{Corollaire}
+\newtheorem{lemma}[theorem]{Lemme}
 \newtheorem{ax}{Axiome} % Why do I have that ?
 \newtheorem*{theorem*}{Théorème}
 \newtheorem*{prop*}{Proposition}
@@ -56,15 +56,16 @@
 
 %\theoremstyle{definition}
 \theoremstyle{theorem}
-\newtheorem{definition}{Définition}
-\newtheorem{example}{Exemple}
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{example}[theorem]{Exemple}
 \newtheorem{algo}{ALGORITHME}
 \newtheorem*{definition*}{Définition}
 \newtheorem*{example*}{Exemple}
 \newtheorem*{algo*}{ALGORITHME}
 
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remarque}
+\newtheorem{remark}{Remarque}
 \newtheorem{prob}{Problème}
 \newtheorem*{demo}{Démonstration}
+
 

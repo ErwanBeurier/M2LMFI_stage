@@ -26,12 +26,15 @@
 \newcommand{\aramfn}[3]{\text{(fn)} 		s_{#1} #2 s_{#3}}
 
 \begin{document}
-
+	
 	\maketitle
 	
 	\tableofcontents
 	
 	\pagebreak
+	
+	\chapter{Unification de deux caractérisations de $P$}
+	
 	
 	\section{Des caractérisations de $P$}
 		\label{sec:caracterisations_P}
@@ -941,7 +944,7 @@
 				\subsubsection{Une tentative d'amélioration}
 				\label{subsubsec:sim_amelioration}
 				
-				Enfin, on peut penser à donner un test d'égalité gratuit à la $\bbA$-RAM. Il accélère la simulation des trois opérations de base de la $\sigma$-RAM, mais il reste un coup : 
+				Enfin, on peut penser à donner un test d'égalité gratuit à la $\bbA$-RAM. Il accélère la simulation des trois opérations de base de la $\sigma$-RAM, mais il reste un coût : 
 				
 				\begin{itemize}[itemsep=-1mm]
 					\item 	$A_1 := R_{A_1}$ se simule à présent en temps $\grozo{\left| \mu \right|}$ ;
@@ -959,7 +962,11 @@
 				\nepasoublier{Sauf qu'il faudrait un accès rapide à n'importe quel sous-terme de la mémoire.}
 				
 
+				\subsubsection{Problème majeur}
 
+				La simulation présentée \hyperref[par:sim_sigma_RAM_A_RAM]{ici} de la $\sigma$-RAM par la $\bbA$-RAM n'est pas satisfaisante, car la technique utilisée permet d'avoir la mémoire dans un seul terme, donc de la copier et de la déplacer d'un bloc en une opération, ce qui est beaucoup trop puissant. 
+				
+				De plus, si le test d'égalité est rendu gratuit, on peut faire un test d'égalité entre deux termes de mémoire.
 
 
 	\section{Vers une caractérisation du temps polynomial sur $\sigma$-RAM}
