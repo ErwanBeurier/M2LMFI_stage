@@ -1039,7 +1039,8 @@ Une fois l'ordre compris, il faut voir comment interpréter les opérations typi
 							\item 	Soit $\bar{x'} \ll \bar{x}$ et dans ce cas $g, g' \in G_i$. 
 						\end{itemize}
 						
-				\item 	(composition)	$f_i\left(\bar{x}\right) = g'\left[ g_1\left(\bar{x_1}\right), \dots, g_r\left(\bar{x_r}\right) \right]_{\bar{x}}$, où $\text{arité}(g') = r$, et pour chaque $j \in r$, l'un des cas suivants se réalise : 
+				\item 	(composition)\footnote{Cette opération n'est pas forcément nécessaire ; je l'avais rajoutée vraisemblablement en me trompant quand à son usage. Je reviendrai probablement dessus plus tard.}
+					$f_i\left(\bar{x}\right) = g'\left[ g_1\left(\bar{x_1}\right), \dots, g_r\left(\bar{x_r}\right) \right]_{\bar{x}}$, où $\text{arité}(g') = r$, et pour chaque $j \in r$, l'un des cas suivants se réalise : 
 						\begin{itemize}
 							\item 	Soit $\bar{x_j} = \bar{x}$, et dans ce cas $g_j \in F_i$ ;
 							\item 	Soit $\bar{x_j} \ll \bar{x}$ et dans ce cas $g_j \in G_i$. 
@@ -1132,9 +1133,9 @@ Une fois l'ordre compris, il faut voir comment interpréter les opérations typi
 	\begin{proof}
 		Pour simplifier, on va de nouveau se placer dans le cas où toutes les arités $\leqslant a$ sont représentées\footnotemark. On va se servir du codage du rang donné en proposition \ref{prop:bon_ordre_combinatoire}, montrer qu'on peut le décoder par LSRS.
 		
-			\footnotetext{Si certaines arités ne sont pas représentées, alors il suffit de retirer les quelques équations qui y sont associées.}
+			\footnotetext{Si certaines arités ne sont pas représentées, alors il suffit de retirer les quelques équations qui y sont associées et de modifier, le cas échéant, les initialisations de certaines fonctions.}
 			
-		\paragraph{Calcul du max $m$.} 
+		\paragraph{Calcul du max $m$.}\label{par:calcul_max_bon_ordre}
 			Considérons le LSRS suivant :
 			
 				\begin{eqnarray}
@@ -1144,7 +1145,7 @@ Une fois l'ordre compris, il faut voir comment interpréter les opérations typi
 									f_1(x-1) & \text{ si $x < f_{4a-1}(x-1)$} \\
 									f_1(x-1)+1 & \text{ si $x = f_{4a-1}(x-1)$}
 									} 
-									\label{eqn:f_0}\\
+									\label{eqn:f_0_max_courant}\\
 					f_{i_1 + 1}(x) & = & f_{i_1}(x) \times f_1(x) \label{eqn:m_pow_i}\\
 					f_{a + 1}(x) & = & f_{1}(x) + f_{2}(x) \label{eqn:sum_m_pow_init}\\
 					f_{a + i_2 + 1}(x) & = & f_{a + i_2}(x) + f_{i_2 + 2}(x) \label{eqn:sum_m_pow}\\
@@ -1158,7 +1159,7 @@ Une fois l'ordre compris, il faut voir comment interpréter les opérations typi
 			
 			Expliquons les équations.
 			
-			(\ref{eqn:f_0}) est censée calculer $m$, donc le max courant. Sachant cela, les équations suivantes coulent de source : 
+			(\ref{eqn:f_0_max_courant}) est censée calculer $m$, donc le max courant. Sachant cela, les équations suivantes coulent de source : 
 			
 			\begin{itemize}
 				\item 	(\ref{eqn:m_pow_i}) calcule $m^{i_1}$ pour $i_1 \in \intint{1}{a}$. On a aussi $f_{a}(x) = m^a$. 
@@ -1170,14 +1171,132 @@ Une fois l'ordre compris, il faut voir comment interpréter les opérations typi
 			
 			Ceci étant explicité, étudions la définition de $f_1(x)$. 
 			
-			$f_1(x)$ s'initialise naturellement en $0$. On parcourt alors toutes $\leqa$-uplets $(0, \dots, 0)$ jusqu'à l'arité $a$, donc on énumère les $a$ premiers $\leqa$-uplets, et donc l'élément de rang $a$ a bien un max égal à $1$ : $f_1(x)$ passe à $1$. Quand le calcul avance, $x$ finit par atteindre le rang du max suivant, que l'on calcule par avance dans $f_{4a-1}(x)$. Une fois que ce rang est atteint, on incrémente $f_1(x)$ ; le reste des équations se met aussi à jour, ce qui assure que $f_{4a-1}(x)$ soit toujours le rang du max suivant. La distinction de cas de $f_1(x)$ est donc bien complète.
+			$f_1(x)$ s'initialise naturellement en $0$. On parcourt alors tous les $\leqa$-uplets $(0, \dots, 0)$ jusqu'à l'arité $a$, donc on énumère les $a$ premiers $\leqa$-uplets, et donc l'élément de rang $a$ a bien un max égal à $1$ : $f_1(x)$ passe à $1$. Quand le calcul avance, $x$ finit par atteindre le rang du max suivant, que l'on calcule par avance dans $f_{4a-1}(x)$. Une fois que ce rang est atteint, on incrémente $f_1(x)$ ; le reste des équations se met aussi à jour, ce qui assure que $f_{4a-1}(x)$ est toujours le rang du max suivant. La distinction de cas de $f_1(x)$ est donc bien complète.
 			
-			\paragraph{Calcul de l'arité courante}
+		\paragraph{Calcul de l'arité courante}
+			Le calcul de l'arité du $\leqa$-uplet de rang $x$ s'effectue avec la même idée. Pour des raisons de lisibilité, le système présenté ne sera pas un véritable LSRS mais on laisse le lecteur se convaincre qu'il est facile de réécrire ce système sous une véritable forme de LSRS en s'inspirant de ce qui a été fait \hyperref[par:calcul_max_bon_ordre]{au-dessus}, quitte à remanier la numérotation des fonctions. 
+			
+			\begin{eqnarray}
+				f_{4a}(x) & = & \casedist{
+									1 & \text{si $x = 0$} \\
+									f_{4a}(x-1) & \text{si $x < f_{8a+2}(x-1)$}\\
+									1 & \text{si $x = f_{4a-1}(x-1)$} \\
+									f_{4a}(x-1) + 1 & \text{si $x = f_{8a+2}(x-1)$} 
+									} \label{eqn:f_4a_arite_courante} \\
+				f_{i_1+4a}(x) & = & \casedist{
+										(m+1)^{i_1} - 1 & \text{si $1 \leqslant i_1 \leqslant f_{4a}(x) \leqslant a$} \\
+										0 & \text{sinon}
+										} \label{eqn:max_1_pow_1}\\
+				f_{i_2+5a}(x) & = & \sum_{i=1}^{i_2} f_{i+4a}(x)\label{eqn:cumul_sum_max_1_pow_1} \\
+					& = & \sum_{i=1}^{\min\left(f_{4a}(x), i_2\right)} \left((m+1)^{i} - 1\right) \nonumber\\
+				f_{6a +1}(x) & = & \casedist{
+										f_{4a}(x)+1 & \text{si $f_{4a}(x) < a$} \\
+										1 	& \text{sinon}
+										} \label{eqn:f_4a_arite_suivante}\\
+				f_{i_3+6a+1}(x) & = & \casedist{
+										(m+1)^{i_3} - 1 & \text{si $1 \leqslant i_3 \leqslant f_{6a +1}(x) \leqslant a$} \\
+										0 & \text{si $f_{6a +1}(x)=1 = i_3$} \\
+										0 & \text{sinon} 
+										} \label{eqn:max_2_pow_1}\\
+				f_{i_4+7a+1}(x) & = & \sum_{i=1}^{i_4} f_{i+6a+1}(x)\label{eqn:cumul_sum_max_2_pow_1} \\
+					& = & \casedist{
+								\sum\limits_{i=1}^{\min\left(f_{6a+1}(x), i_4\right)} \left((m+1)^{i} - 1\right) & \text{si $1 < f_{6a +1}(x)$} \\
+								0 & \text{sinon}
+								} \nonumber \\
+				f_{8a+2}(x) & = & f_{8a+1}(x) + f_{4a}(x) \label{eqn:rang_arite_suivante}
+			\end{eqnarray}
+			
+			
+			On va un peu plus vite : les équations (\ref{eqn:max_1_pow_1}), (\ref{eqn:cumul_sum_max_1_pow_1}), (\ref{eqn:max_2_pow_1}) et (\ref{eqn:cumul_sum_max_2_pow_1}) sont des calculs intermédiaires aux résultats suivants : si $f_{4a}(x)$ calcule l'arité courante, alors $f_{6a +1}(x)$ calcule l'arité suivante, et $f_{8a+2}(x)$ calcule le rang du premier $f_{6a +1}(x)$-uplet. Enfin, $f_{4a}(x)$ vérifie le résultat de $f_{8a+2}(x-1)$ pour s'adapter : si $x = f_{8a+2}(x)$ alors on a atteint le seuil qui détermine qu'on est passé à l'arité suivante. Comme $f_{4a}(x)$ se met à jour, $f_{8a+2}(x)$ se met aussi à jour pour donner le rang du premier terme d'arité suivante, donc $x$ ne dépasse jamais $f_{8a+2}(x)$. Les autres cas de la distinction de cas sont triviaux : on retourne à $1$ quand la fonction $f_{4a-1}(x-1)$ (cf. plus haut) indique qu'on a changé de max courant.
+			
+		\paragraph{Calcul des cordonnées.}
+			
+			\redtext{Ici, c'est rigolo. Cette partie de la démonstration est entièrement dépendante de la sous-section \ref{subsec:bon_ordre_prop_combinatoires}, pour laquelle il me manque la troisième partie.}
+			
+			Je peux néanmoins glisser quelques idées qu'il faudra prendre en compte, après avoir rappelé que le max courant est noté $m$ :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item	Puisque l'arité est changeante, certaines fonctions devront renvoyer une valeur par défaut, par exemple si leur indice est plus grand que l'arité courante. 
+				\item 	Le premier terme d'une arité donnée est $(0, \dots, 0, m)$ et le suivant est soit $(0, \dots, 1,m)$ si $m\neq 1$ soit $(0, \dots, 1, 0)$ si $m = 1$.
+				\item 	Quand on parcourt les termes d'une arité fixée, à part le fait de garder le max quelque part, le reste des calculs revient à une énumération de mots de longueur donnée, dans un alphabet de taille $m$.
+			\end{itemize}
+			
+		
+		
 		
 	\end{proof}
 	
+	Une fois qu'on a les coordonnées, le deuxième problème qui se pose est l'utilisation des coordonnées partielles, ce que transcrivait la notation $\bar{x'} \ll \bar{x}$ : $\bar{x'}$ est obtenu en prenant des coordonnées à $\bar{x}$, en les mélangeant, éventuellement en dupliquant certaines, tant que $\abs{\bar{x'}} < \abs{\bar{x}}$. Une fois qu'on a le $\leqa$-uplet $\bar{x}$, il est facile de récupérer $\bar{x'}$. Mais il faut ensuite convertir $\bar{x'}$ en son rang $x'$ afin que le LSRS d'arité $1$ puisse s'en servir. 
+	
+	\redtext{Le calcul du rang $x'$ de $\bar{x'}$ est entièrement dépendant de la troisième partie de la sous-section \ref{subsec:bon_ordre_prop_combinatoires}. \\
+		Admettons qu'on ait cette fonction qui à un $\leqa$-uplet associe son rang.} Alors on a le lemme suivant :
 	
 	
+	\begin{lemma}
+		\label{lem:operation_simulable}
+		Supposons que $g_1, g_2$ sont des symboles de fonctions utilisés ou définies dans un $a$-LSRS, et sont simulées par $\hat{g_1},\hat{g_2}$ dans un LSRS.
+		
+		Alors l'opération $f\left(\bar{x}\right) = g_1\left(\bar{x_1}\right) * g_2\left(\bar{x_2}\right)$, pour $* \in \{+, -, \times \}$ d'un $a$-LSRS est simulable par LSRS.
+	\end{lemma}
+	
+	\begin{proof}
+		Tout d'abord, présentons quelques notations. Notons $\text{sub}_j(x)$ l'application qui à un code $x$ associe $x_j$, code du $\leqa$-uplet $\bar{x_j} \ll \bar{x}$. 
+		
+		\redtext{On a dû admettre l'existence de $\text{sub}_j(x)$ plus haut, mais j'ai bon espoir qu'elles soient effectivement définissables par un LSRS.} 
+		
+		Dans le LSRS d'arité $1$, on va devoir ajouter la composition bornée $g,g' \mapsto \left(x \mapsto g'\left[ g(x)\right]_x\right)$. Cet ajout ne rend pas le LSRS plus puissant \cite{GrandjeanSchwentick2002}. 
+		
+		Le LSRS suivant\footnotemark  simule $f\left(\bar{x}\right) = g_1\left(\bar{x_1}\right) * g_2\left(\bar{x_2}\right)$ :
+			
+			\footnotetext{La numérotation est disjointe de celles précédemment données.}
+		
+		\begin{eqnarray}
+			f_1(x) & = & \hat{g_1}\left[ \text{sub}_1(x) \right]_x \\
+			f_2(x) & = & \hat{g_2}\left[ \text{sub}_2(x) \right]_x \\
+			f^1(x) & = & f_1(x) * f_2(x) 
+		\end{eqnarray}
+	\end{proof}
+	
+	\begin{remark}
+		Avant de traiter l'opération suivante, il faut apporter une précision. Soit le $2$-LSRS suivant :
+		
+		\begin{eqnarray}
+			f_1(x) & = & n(x) + 1(x) \\
+			f_2(x,y) & = & f_1(x) + 1(y) \\
+			f_3(x,y) & = & f_1(x) + id(y)
+		\end{eqnarray}
+	
+		Supposons-le simulé par un LSRS $S$ sur $\hat{f_1}, \hat{f_2}, \hat{f_3}$ (avec éventuellement d'autres fonctions, mais elles ne sont pas importantes pour la remarque).
+		
+		L'ordre est : $(0) < (0,0) < (1) < (0,1) < (1,0) < (1,1) < (2) \dots$. Soit $x$ un $\left(\leqslant 2\right)$-uplet, notons $r(x)$ son rang. La définition donnée ici du déroulement d'un $a$-LSRS suppose, en quelque sorte, qu'une fois que $f_1(0)$ est calculé, on avance d'un pas dans l'ordre et $f_1(0)$ reste \emph{figé} en attendant qu'on ait calculé $f_2(0,0)$ et $f_3(0,0)$. Dans la simulation par un LSRS, chaque fonction renvoie constamment un résultat ; ici, que renvoie $\hat{f_1}(r(0,0))$ ? Une idée pourrait être simplement de renvoyer son dernier résultat. L'idée est que $\hat{f_1}$ effectue son calcul sur $r\left(\bar{x}\right)$ tant que $\abs{\bar{x}} = \text{arité}\left(f_1\right)$, puis renvoie son dernier résultat tant que l'arité n'est pas la bonne. Il faut donc que chaque fonction ait accès à l'arité de la fonction qu'elle simule, ce qui peut se faire en rajoutant des fonctions auxiliaires, incluses dans le LSRS. 
+		
+		En conclusion, si $f\left(\bar{x}\right) = \sigma\left(\bar{x}\right)$ est une équation de $a$-LSRS, avec $f$ d'arité $r$, alors sa simulation est de la forme :
+	
+		\begin{eqnarray}
+			\text{arité}_1(x) & = & 1(x) \\
+			 & \dots & \nonumber \\
+			\text{arité}_a(x) & = & \text{arité}_{a-1}(x) + 1(x) \\
+			 & \dots & \nonumber \\
+			\text{a\_c}(x) & = & \text{arité courante} \\
+			 & \dots & \nonumber \\
+			\hat{f}(x) & = & \casedist{
+								\hat{\sigma}\left(\bar{x}\right) & \text{si $\text{a\_c}(x) = \text{arité}_r(x)$}\\
+								\hat{f}(x-1) & \text{sinon}
+								}
+		\end{eqnarray}
+	
+		Dans la suite, pour des raisons de lisibilité, on évitera ce genre d'écriture, et on notera simplement la simulation sous sa forme $\hat{f}(x) = \hat{\sigma}\left(\bar{x}\right)$.
+	\end{remark}
+	
+	\begin{lemma}
+		Supposons que $g_1, g_2$ sont des symboles de fonctions utilisés ou définies dans un $a$-LSRS, et sont simulées par $\hat{g_1},\hat{g_2}$ dans un LSRS.
+		
+		Alors l'opération $f(x) = \eqpredf{g_1}{g_2}{\bar{x'}}{\bar{x}}$ d'un $a$-LSRS est simulable par un LSRS.
+	\end{lemma}
+	
+	\begin{proof}
+		De nouveau, quelques notations : notons
+	\end{proof}
 	
 	
 	
