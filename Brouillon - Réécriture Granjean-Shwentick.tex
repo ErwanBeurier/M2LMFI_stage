@@ -56,13 +56,13 @@
 	
 	\pagebreak
 	
-	\section{Preliminaries} (p.198)
+	\section{Préliminaires} (p.198)
 		\label{sec:Preliminaries}
 	
-		\subsection{RAM data structures} (p.198)
+		\subsection{Structures de RAM} (p.198)
 			\label{sec:RAM_data_structures}
 
-		\begin{definition}[RAM data structures]
+		\begin{definition}[RAM-structure]
 			\label{def:RAM_data_structures}
 			Soit $t$ un type, c'est-à-dire une signature fonctionnelle ne contenant que des symboles de constantes ou de fonctions unaires.
 			
@@ -155,7 +155,7 @@
 				
 				\item 	L'opération \emph{equal-predecesor} :
 				\[
-				f^{\leftarrow} = \casedist{
+				f^{\leftarrow}(x) = \casedist{
 					\max\left(\left\lbrace y < x | f(x) = f(y)\right\rbrace\right) & \text{si un tel $y$ existe} \\
 					x	& \text{sinon}
 				}
@@ -225,17 +225,18 @@
 			
 			On dit que $\Gamma$ est $n^K$-représentée par $S$ lorsqu'il existe un entier $c$ et une projection affine $P$ tels que, pour chaque structure $s$ $c$-bornée, $S$ définit des fonctions $f_1, \dots, f_k : c (s.n)^K \to c (s.n)^K$ telles que $\Gamma(s) = P((s.n)^K, S(s))$ ($S(s)$ est la structure définie par le LSRS).
 			
-			\emph{La modification réside dans le domaine de définition des fonctions et la taille de la sortie dans la projection.}
+
 		\end{definition}
-			
 		
-		\begin{prob}
-			Est-ce qu'on capture tout $\dtimeram$ ? 
-		\end{prob}
+		La modification réside dans le domaine de définition des fonctions et la taille de la sortie dans la projection.
 		
-		\begin{prob}
-			Est-ce que $P((s.n)^K, S(s))$ capture toutes les structures de taille $\grozo{n^K}$ ?
-		\end{prob}
+%		\begin{prob}
+%			Est-ce qu'on capture tout $\dtimeram$ ? 
+%		\end{prob}
+%		
+%		\begin{prob}
+%			Est-ce que $P((s.n)^K, S(s))$ capture toutes les structures de taille $\grozo{n^K}$ ?
+%		\end{prob}
 			
 	
 		Si $\Gamma$ est $n^K$-représentée par un LSRS alors on dit que $\Gamma$ est définissable par LSRS. 
@@ -243,7 +244,7 @@
 		
 		% Eventuellement d'autres possibilités
 		
-		La définition 3.4 (définition par cas) et les lemmes 3.5 (la définition par cas ne change pas la puissance des LSRS) et 3.6 (composition de fonctions définissables par LSRS reste définissable par LSRS) restent les mêmes.
+		La définition 3.4 (définition par cas) reste la même et les lemmes 3.5 (la définition par cas ne change pas la puissance des LSRS) et 3.6 (composition de fonctions définissables par LSRS reste définissable par LSRS) restent valables.
 		
 		
 		\subsection{LRS} (p.211)
@@ -301,7 +302,7 @@
 					{\footnotesize \begin{minipage}{0.95\textwidth}
 						On a donc besoin d'un moyen de calculer $n^K$ dans la fonction de sortie.
 						
-						Pour l'instant, pour des raisons de simplicité, puisqu'on sait que la fonction est $n^K$-représentable, on va supposer qu'on a accès à une fonction $i \mapsto n^K$. Pour ce faire, on peut soit la définir par multiplication en rajoutant $H$ équations \emph{(ce qui ne me semble pas naturel, parce qu'on modifie le LSRS à chaque fois qu'on veut changer la taille d'arrivée ?)} soit on peut rajouter une fonction constante $i \mapsto n^K$ \emph{(on ajoute ou remplace une fonction dans les fonctions de base du LSRS ? Ça veut dire qu'on rajoute un symbole de fonction au type de départ, qui sait déjà ce qu'on va en faire ?)}.
+						Pour l'instant, pour des raisons de simplicité, puisqu'on sait que la fonction est $n^K$-représentable, on va supposer qu'on a accès à une fonction $i \mapsto n^K$. Pour ce faire, on peut soit la définir par multiplication en rajoutant $K$ équations \emph{(ce qui ne me semble pas naturel, parce qu'on modifie le LSRS à chaque fois qu'on veut changer la taille d'arrivée ?)} soit on peut rajouter une fonction constante $i \mapsto n^K$ \emph{(on ajoute ou remplace une fonction dans les fonctions de base du LSRS ? Ça veut dire qu'on rajoute un symbole de fonction au type de départ, qui sait déjà ce qu'on va en faire ?)}.
 						
 						Problème : apparemment le LSRS sait qu'il représente des fonctions de taille $n^K$, mais est-ce suffisant pour justifier l'insertion de cette fonction en tant que fonction du domaine ? Apparemment, un même LSRS peut être utilisé pour toutes les tailles de domaines, donc peut-être qu'on peut, au cas par cas, rajouter une fonction en plus selon le domaine d'arrivée ?
 						
@@ -333,7 +334,7 @@
 			\begin{enumerate}[itemsep=-1mm,leftmargin=2cm]
 				%\setlength{\itemsep}{-1mm}
 				\item  
-					Renumérotons les symboles de $F_{t_1} = \{f | f \in t_1\} \cup \{f_C | C \in t_1\} \cup \{1(-), n(-), id(-)\}$ ainsi $\{ f^0, \dots, f^{l-1} \}$. On va limiter les occurrences de ces symboles. Premièrement, les symboles $f_0, \dots, f_{k-1}$ sont remplacés par $f^{l}, \dots, f^{l+k-1}$ respectivement. Ensuite, On va introduire $l$ nouvelles fonctions $f_0, \dots, f_{l-1}$ et $l$ équations pour les définir :
+					Renumérotons les symboles de $F_{t_1} = \{f | f \in t_1\} \cup \{f_C | C \in t_1\} \cup \{1(-), n(-), id(-)\}$ ainsi $\{ f^0, \dots, f^{l-1} \}$. On va limiter les occurrences de ces symboles. Premièrement, les symboles $f_0, \dots, f_{k-1}$ sont remplacés par $f^{l}, \dots, f^{l+k-1}$ respectivement. Ensuite, on va introduire $l$ nouvelles fonctions $f_0, \dots, f_{l-1}$ et $l$ équations pour les définir :
 					
 						\begin{itemize}[itemsep=-1mm,leftmargin=1cm]
 							\item	Si $f^i$ vient de $t_1$, alors l'équation associée est $f_i(x) = f^i(x)$ ;
@@ -355,7 +356,7 @@
 							\left\lbrace \begin{array}{ll}
 								0 				& \text{si $y \leqslant k-1$} \\
 								g(y-k) + 1 		& \text{si $k \leqslant y < kcn^K$} \\
-								\sigma_i(y)		& \text{si $y \geqslant kcn^K$ et $y \mod{k} = i$}
+								\sigma_i(y)		& \text{si $kcn^K \leqslant y$ et $y \mod{k} = i$}
 							\end{array}\right.
 					\]
 					
@@ -555,18 +556,23 @@
 		Soit $\Gamma$ une fonction de RAM. Les propositions suivantes sont équivalentes :
 		
 		\begin{enumerate}[itemsep=-1mm]
-			\item 	$\Gamma \in \dtimeramarg{K}$.
-			\item 	$\Gamma$ est $n^K$-représentée par un LSRS.
-			\item 	$\Gamma$ est $n^K$-représentée par un LRS.
+			\item 	\label{num:gamma_in_nk}
+				$\Gamma \in \dtimeramarg{K}$.
+				
+			\item 	\label{num:gamma_nk_rep_LSRS}
+				$\Gamma$ est $n^K$-représentée par un LSRS.
+				
+			\item	\label{num:gamma_nk_rep_LRS}
+				$\Gamma$ est $n^K$-représentée par un LRS.
 		\end{enumerate}
 	\end{conj}
 	
-	On a montré $(2) \Rightarrow (3)$ \hyperref[conj:rep_LSRS_rep_LRS]{juste avant}. 
-	La preuve de $(3) \Rightarrow (1)$ se trouve \hyperref[conj:rep_LRS_calc_n_K]{ci-dessous}.
-	La preuve de $(1) \Rightarrow (2)$ se trouve \hyperref[conj:poly_implique_LSRS]{plus loin}.
+	On a montré $\ref{num:gamma_nk_rep_LSRS} \Rightarrow \ref{num:gamma_nk_rep_LRS}$ \hyperref[conj:rep_LSRS_rep_LRS]{juste avant}. 
+	La preuve de $\ref{num:gamma_nk_rep_LRS} \Rightarrow \ref{num:gamma_in_nk}$ se trouve \hyperref[conj:rep_LRS_calc_n_K]{ci-dessous}.
+	La preuve de $\ref{num:gamma_in_nk} \Rightarrow \ref{num:gamma_nk_rep_LSRS}$ se trouve \hyperref[conj:poly_implique_LSRS]{plus loin}.
 	
 	
-	\subsection{$(3) \Rightarrow (1)$}
+	\subsection{$\ref{num:gamma_nk_rep_LRS} \Rightarrow \ref{num:gamma_in_nk}$}
 		\label{subsec:LRS_implique_poly}
 		
 		\begin{conj}
@@ -897,7 +903,7 @@
 		L'ajout de cette opération facilitera les calculs qui suivront. Elle ne rend pas le LSRS plus puissant \cite{GrandjeanSchwentick2002}.
 	\end{remark}
 	
-	Le but de ce chapitre est d'étendre les LSRS définis dans \cite{GrandjeanSchwentick2002} et utilisés \hyperref[chap:LSRS]{plus haut} aux fonctions d'arité $>1$. Remarquons dans un premier temps que si l'on définit un LSRS avec des fonctions d'arité $a$, où $a$ est le même pour chaque fonction, alors l'ordre lexicographique permet de facilement définir un LSRS équivalent d'arité $1$, ce qui n'apporte pas grand-chose par rapport à ce dont nous avons déjà parlé.
+	Le but de ce chapitre est d'étendre les LSRS définis dans \cite{GrandjeanSchwentick2002} et utilisés \hyperref[def:LSRS]{plus haut} aux fonctions d'arité $>1$. Remarquons dans un premier temps que si l'on définit un LSRS avec des fonctions d'arité $a$, où $a$ est le même pour chaque fonction, alors l'ordre lexicographique permet de facilement définir un LSRS équivalent d'arité $1$, ce qui n'apporte pas grand-chose par rapport à ce dont nous avons déjà parlé.
 	
 	Ici, on ne va pas considérer de LSRS dont toutes les fonctions sont de même arité. Soit $a>1$, on suppose que le LSRS est composé de fonctions $f_i$ d'arité $r_i \leqslant a$, où $i \in k$, et telles que $r_i = a$ pour au moins un $i\in k$. On qualifie de $a$-LSRS un tel LSRS. On notera LSRS les systèmes utilisés dans le chapitre précédent, qui sont en fait des $1$-LSRS. 
 	
@@ -921,7 +927,7 @@
 		
 		\begin{definition}
 			\label{def:bon_ordre_sur_uplets}
-			On définit $<$ sur les $\leqa$-uplets par :
+			On définit l'ordre $<$ sur les $\leqa$-uplets par :
 			
 			\[
 				\bar{x} < \bar{y} \Leftrightarrow \left\lbrace
@@ -935,10 +941,10 @@
 														\end{array}
 													\right. 
 			\]
-			
-			Si toutes les arités $\leqslant a$ ne sont pas permises (par exemple, si notre LSRS ne contient que des fonctions d'arité $1$ et $3$, mais pas $2$), alors on ampute cet ordre des $n$-uplets correspondant.
+
 		\end{definition}
-	
+				
+		Si toutes les arités $\leqslant a$ ne sont pas permises (par exemple, si notre LSRS ne contient que des fonctions d'arité $1$ et $3$, mais pas $2$), alors on ampute cet ordre des $n$-uplets correspondant.
 	
 		\begin{example}
 			Pour $a = 3$, avec les arités $1,2,3$ : $(0) < (0, 0) < (0,0,0) < (1) < (0,1) < (1,0) < (1,1) < (0,0,1) < (0,1,0) < (0,1,1) < (1,0,0) < (1,0,1) < (1,1,0) < (1,1,1) < (2) < (0,2) < \dots$.
@@ -950,7 +956,7 @@
 			Quelques remarques informelles : 
 			\begin{itemize}
 				\item 	Le premier $\leqa$-uplet d'un max $m$ donné est le $1$-uplet $\left( m \right)$.
-				\item 	Le premier $\leqa$-uplet d'une arité $r$ donnée, à un max $m$ donné, est le $r$-uplet $\left( 0, \dots, 0, m\right)$. 
+				\item 	Le premier $\leqa$-uplet d'une arité $r$ donnée, à un max $m$ donné, est le $r$-uplet $\left( 0, \dots, 0, m\right)$.
 			\end{itemize}
 		\end{remark}
 		
@@ -996,7 +1002,7 @@
 		
 		\begin{coro}
 			\label{coro:rang_bon_ordre}
-			Le rang de $\bar{x}$ est $\left( \left( \sum_{i=1}^{a} m^i \right) + \left( \sum_{i=1}^{r} \left( \left(m+1\right)^i -1 \right) \right) + \left(\sum_{i=1}^{r} c_i \right) \right)$ où $c_i = x_i \times \left(m+1\right)^{r-i}$ si $x_{i-1} = m$ ou $x_{i-2} = m$ $\dots$ $x_{1} = m$, et $c_i = \left(m+1\right)^{r-i}-m^{r-i}$ sinon. 
+			Le rang de $\bar{x}$ est $\left( \left( \sum_{i=1}^{a} m^i \right) + \left( \sum_{i=1}^{r} \left( \left(m+1\right)^i -1 \right) \right) + \left(\sum_{i=1}^{r} c_i \right) \right)$ où $c_i = x_i \times \left(m+1\right)^{r-i}$ si $x_{i-1} = m$ ou $x_{i-2} = m$ ou $\dots$ ou $x_{1} = m$, et $c_i = \left(m+1\right)^{r-i}-m^{r-i}$ sinon. 
 		\end{coro}
 		
 		
@@ -1333,7 +1339,7 @@
 	\end{lemma}
 	
 	\begin{proof}
-		Il suffit d'exprimer le calcul du rang décrit dans \hyperref[coro:rang_bon_ordre]{ce corollaire}. Le max de $\bar{x'}$ n'est pas forcément le même que celui de $\bar{x}$ dont il faudra rajouter une fonction qui récupérera son max $m'$, puis une fonction qui renvoie son arité $r'$ (le calcul de $\bar{x'}$ par rapport à $\bar{x}$ est toujours le même, donc il suffit de rajouter manuellement l'arité dans le LSRS). 
+		Il suffit d'exprimer le calcul du rang décrit dans \hyperref[coro:rang_bon_ordre]{ce corollaire}. Le max de $\bar{x'}$ n'est pas forcément le même que celui de $\bar{x}$, donc il faudra rajouter une fonction qui récupérera son max $m'$, ainsi qu'une fonction qui renverra son arité $r'$ (le calcul de $\bar{x'}$ par rapport à $\bar{x}$ est toujours le même, donc il suffit de rajouter manuellement l'arité dans le LSRS). 
 		
 		Une fois ces résultats obtenus, le rang de $\bar{x'}$ s'exprime ainsi :
 		
@@ -1371,6 +1377,7 @@
 	\end{proof}
 	
 	\begin{remark}
+		\label{rk:fonctions_en_attente}
 		Avant de traiter l'opération suivante, il faut apporter une précision. Soit le $2$-LSRS suivant :
 		
 		\begin{eqnarray}
@@ -1407,9 +1414,15 @@
 		Alors l'opération $f\left(\bar{x}\right) = \eqpredf{g_1}{g_2}{\bar{x'}}{\bar{x'}}$ d'un $a$-LSRS est simulable par un LSRS.
 	\end{lemma}
 	
-	\begin{proof}
-		La remarque précédente 
+	\begin{proof}		
+		Pour simplifier, prenons le cas où $\bar{x'} = \bar{x}$. 
 		
+		La \hyperref[rk:fonctions_en_attente]{remarque précédente} impose de revoir le calcul de $\eqpredf{g_1}{g_2}{\bar{x}}{\bar{x}}$.
+		
+		\redtext{Et là on a un problème.}
+		
+		
+		On se ramène au cas précédent en utilisant $f'\left( \bar{y} \right) = \eqpredf{g_1}{g_2}{\bar{y}}{\bar{y}}$ et $f\left( \bar{x} \right) = f'\left( \bar{x'} \right)$, où $\abs{\bar{y}} = \abs{\bar{x'}}$.
 		
 	\end{proof}
 	
