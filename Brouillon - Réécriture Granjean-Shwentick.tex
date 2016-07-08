@@ -1078,6 +1078,19 @@
 		\end{definition}
 		
 		\begin{remark}
+			L'opération $\eqpred{g'}{g}{\bar{x'}}$ nécessite une brève redéfinition, puisqu'on ne peut plus renvoyer l'unique variable contrairement à \hyperref[def:app_bornee_eq_pred]{précédemment}. 
+			
+			\[
+				\eqpred{g'}{g}{\bar{x}} = \casedist{
+												g'\left( \bar{y} \right) & \text{où $\bar{y} = \maxset{\bar{z} < \bar{x} | g\left( \bar{x} \right) = g\left( \bar{z} \right)}$ si un tel $y$ existe} \\
+												x'_i & \text{sinon, où $x'_i$ est l'une des coordonnées de $\bar{x'}$}
+											}
+			\]
+			
+			On impose que la coordonnée renvoyée soit toujours la même au cours du calcul. On pourrait la préciser en ajoutant un label à l'opération, mais dans la suite de ce mémoire, elle ne sera pas cruciale.
+		\end{remark}
+		
+		\begin{remark}
 			\label{rk:fonctions_de_base_LSRS}
 			Par défaut, on suppose, une nouvelle fois, que l'ensemble des fonctions de base contient par défaut les symboles $n(-)$ et $1(-)$ pour toutes les arités possibles, ainsi que les $\pi^i_j(-)$, projections récupérant la $i$-ième composante d'un $j$-uplet. On peut de plus rajouter $a(-)$, permettant de récupérer $a$, quoique cette fonction est facilement calculable par un LSRS.
 		\end{remark}
@@ -1415,11 +1428,85 @@
 	\end{lemma}
 	
 	\begin{proof}		
-		Pour simplifier, prenons le cas où $\bar{x'} = \bar{x}$. 
+		Pour simplifier, commençons par le cas où $\bar{x'} = \bar{x}$. 
 		
-		La \hyperref[rk:fonctions_en_attente]{remarque précédente} impose de revoir le calcul de $\eqpredf{g_1}{g_2}{\bar{x}}{\bar{x}}$.
+		La \hyperref[rk:fonctions_en_attente]{remarque précédente} impose de revoir le calcul de $\eqpredf{g_1}{g_2}{\bar{x}}{\bar{x}}$. Rappelons la définition donnée plus haut : 
 		
-		\redtext{Et là on a un problème.}
+		\[
+			\eqpred{g'}{g}{\bar{x}} = \casedist{
+				g'\left( \bar{y} \right) & \text{où $\bar{y} = \maxset{\bar{z} < \bar{x} | g\left( \bar{x} \right) = g\left( \bar{z} \right)}$ si un tel $\bar{z}$ existe} \\
+				x'_i & \text{sinon, où $x'_i$ est l'une des coordonnées de $\bar{x'}$}
+			}
+		\]
+		
+		Observons cet exemple.
+		
+		\espace 
+		\begin{center}
+			\begin{tabular}{|c|cccccccc|}
+				\hline
+									& (0)	& (0,0)	& (1)	& (0,1)	& (1,0)	& (1,1)	& (2)	& \dots \\
+				\hline
+				$f_1(x)$ 			& $a_0$	& ND	& $a_1$	& ND	& ND	& ND	& $a_2$	& \dots \\
+				$f_2(x)$ 			& $b_0$	& ND	& $b_1$	& ND	& ND	& ND	& $b_2$	& \dots \\
+				$f_3(x)$	 		& $b_0$	& ND	& $b_0$	& ND	& ND	& ND	& $b_0$	& \dots \\
+				$\eqpred{f_1}{f_2}{x}$
+									& 0		& ND	& 1		& ND	& ND	& ND	& 2		& \dots \\
+				$\eqpred{f_1}{f_3}{x}$
+									& 0		& ND	& $a_0$	& ND	& ND	& ND	& $a_1$	& \dots \\
+				\hline 
+				
+			\end{tabular}
+		\end{center}
+
+			
+		\espace 
+		(ND signifie "Non-Défini".)
+			
+		Supposons que ce tableau représente les valeurs de quelques fonctions unaires d'un $2$-LSRS. Une première simulation serait :
+		
+		\espace 
+		
+		\begin{center}
+			\begin{tabular}{|c|cccccccc|}
+				\hline
+				$\bar{x}$			& (0)	& (0,0)	& (1)	& (0,1)	& (1,0)	& (1,1)	& (2)	& \dots \\
+				\hline
+				$x$					& 0 	& 1	 	& 2		& 3 	& 4 	& 5 	& 6 	& \dots \\
+				\hline 
+				$\hat{f_1}(x)$
+									& $a_0$	& $a_0$	& $a_1$	& $a_1$	& $a_1$	& $a_1$	& $a_2$	& \dots \\
+				$\hat{f_2}(x)$ 		
+									& $b_0$	& $b_0$	& $b_1$	& $b_1$	& $b_1$	& $b_1$	& $b_2$	& \dots \\
+				$\hat{f_3}(x)$ 		
+									& $b_0$	& $b_0$	& $b_0$	& $b_0$	& $b_0$	& $b_0$	& $b_0$	& \dots \\
+				$\eqpred{\hat{f_1}}{\hat{f_2}}{x}$
+									& 0		& 0		& 2		& 2		& 2		& 2		& 6		& \dots \\
+				$\eqpred{\hat{f_1}}{\hat{f_3}}{x}$
+									& 0		& 0		& $a_0$ & $a_0$	& $a_0$	& $a_0$	& $a_1$	& \dots \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		Premièrement, la remarque précédente impose que les fonctions renvoient leur dernière valeur quand leur équivalente n'est pas définie. \redtext{Je ne sais pas comment le dire, mais cette condition permet d'assurer que l'equal-predecesor fonctionne correctement. Ici, l'equal-predecesor revient à revenir en arrière sur une même ligne jusqu'à trouver une case dont la valeur est la même que celle de départ, on parcourt ensuite cette colonne pour arriver à la deuxième fonction de l'equal-predecesor et on regarde quelle valeur on trouve dans cette case ; c'est ce que renvoie l'equal-predecesor. Le fait de garder une fonction constante là où elle n'est pas définie remplit simplement des colonnes, et décale le numéro de colonne visitée, mais le résultat renvoyé est le bon.}
+		
+		Deuxièmement, $\eqpred{f_1}{f_2}{x}$ renvoie une coordonnée en cas d'échec de la recherche, alors que $\eqpred{\hat{f_1}}{\hat{f_2}}{x}$ renvoie le rang de l'entrée. C'est pour ça que les valeurs de sortie n'ont rien à voir. On peut corriger ce bug en rajoutant une nouvelle équation qui va tester si la recherche a échoué :
+		
+		\begin{eqnarray}
+			g_1(x) 	& = 	& \eqpred{\text{id}}{\hat{f_2}}{x} = \casedist{
+																		\maxset{y<x | \hat{f_2}(x) = \hat{f_2}(y)} & \text{si de tels $y$ existent}\\
+																		x		& \text{sinon}
+																		} \\
+			g(x) & = & \casedist{
+							\eqpred{\hat{f_1}}{\hat{f_2}}{x} & \text{si $g_1(x) < x$}\\
+							x_i		& \text{sinon}
+							}
+		\end{eqnarray}
+		
+		Rappelons que l'on a par défaut un LSRS qui permet de récupérer les coordonnées du $\leqa$-uplet de rang $x$.
+		
+		
+		\redtext{Et il manque une preuve, mais il faut faire ça pour la simulation.}
 		
 		
 		On se ramène au cas précédent en utilisant $f'\left( \bar{y} \right) = \eqpredf{g_1}{g_2}{\bar{y}}{\bar{y}}$ et $f\left( \bar{x} \right) = f'\left( \bar{x'} \right)$, où $\abs{\bar{y}} = \abs{\bar{x'}}$.
