@@ -1,70 +1,70 @@
 \select@language {french}
-\contentsline {chapter}{\numberline {1}Unification de deux caract\IeC {\'e}risations de $P$}{2}{chapter.1}
-\contentsline {section}{\numberline {1.1}Des caract\IeC {\'e}risations de $P$}{2}{section.1.1}
-\contentsline {subsection}{\numberline {1.1.1}Notions g\IeC {\'e}n\IeC {\'e}rales}{2}{subsection.1.1.1}
-\contentsline {subsection}{\numberline {1.1.2}Approche de Bellantoni et Cook}{2}{subsection.1.1.2}
-\contentsline {subsection}{\numberline {1.1.3}Approche de Cobham}{2}{subsection.1.1.3}
-\contentsline {subsection}{\numberline {1.1.4}Approche de Leivant}{3}{subsection.1.1.4}
-\contentsline {paragraph}{Exemples.}{3}{section*.2}
-\contentsline {subsection}{\numberline {1.1.5}Correspondance entre Bellantoni et Cook et Leivant}{4}{subsection.1.1.5}
-\contentsline {section}{\numberline {1.2}Une histoire de RAMs}{6}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}La $\sigma $-RAM de Grandjean-Schwentick}{6}{subsection.1.2.1}
-\contentsline {paragraph}{Explications.}{6}{section*.3}
-\contentsline {paragraph}{Entr\IeC {\'e}es et sorties.}{6}{section*.4}
-\contentsline {subsection}{\numberline {1.2.2}La $\mathbb {A}$-RAM de Leivant}{6}{subsection.1.2.2}
+\contentsline {chapter}{\numberline {1}Unification de deux caract\IeC {\'e}risations de $P$}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Des caract\IeC {\'e}risations de $P$}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Notions g\IeC {\'e}n\IeC {\'e}rales}{3}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Approche de Bellantoni et Cook}{3}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}Approche de Cobham}{3}{subsection.1.1.3}
+\contentsline {subsection}{\numberline {1.1.4}Approche de Leivant}{4}{subsection.1.1.4}
+\contentsline {paragraph}{Exemples.}{4}{section*.4}
+\contentsline {subsection}{\numberline {1.1.5}Correspondance entre Bellantoni et Cook et Leivant}{5}{subsection.1.1.5}
+\contentsline {section}{\numberline {1.2}Une histoire de RAMs}{7}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}La $\sigma $-RAM de Grandjean-Schwentick}{7}{subsection.1.2.1}
 \contentsline {paragraph}{Explications.}{7}{section*.5}
 \contentsline {paragraph}{Entr\IeC {\'e}es et sorties.}{7}{section*.6}
-\contentsline {subsection}{\numberline {1.2.3}Comparaison entre les deux RAM}{7}{subsection.1.2.3}
-\contentsline {subsubsection}{Mod\IeC {\`e}les Turing-complets}{7}{section*.7}
-\contentsline {subsubsection}{$\mathbb {A}$-RAM dans $\sigma $-RAM}{7}{section*.8}
-\contentsline {paragraph}{Premi\IeC {\`e}res observations.}{7}{section*.9}
-\contentsline {paragraph}{Simulation.}{8}{section*.10}
-\contentsline {subparagraph}{(const)}{8}{section*.11}
-\contentsline {subparagraph}{($p$-dest)}{8}{section*.12}
-\contentsline {subparagraph}{(switch)}{9}{section*.13}
-\contentsline {paragraph}{Bilan.}{9}{section*.14}
-\contentsline {subsubsection}{$\sigma $-RAM dans $\mathbb {A}$-RAM}{9}{section*.15}
-\contentsline {paragraph}{Copie}{9}{section*.16}
-\contentsline {paragraph}{Egalit\IeC {\'e}.}{10}{section*.17}
-\contentsline {paragraph}{M\IeC {\'e}moire.}{10}{section*.18}
-\contentsline {paragraph}{Simulation.}{12}{section*.19}
-\contentsline {subparagraph}{Entr\IeC {\'e}es/sorties}{12}{section*.20}
-\contentsline {subparagraph}{Assignation de terme.}{12}{section*.21}
-\contentsline {subparagraph}{Instructions de copie.}{12}{section*.22}
-\contentsline {subparagraph}{Construction.}{12}{section*.23}
-\contentsline {subparagraph}{Destruction.}{12}{section*.24}
-\contentsline {subparagraph}{HALT.}{12}{section*.25}
-\contentsline {subparagraph}{Acc\IeC {\`e}s m\IeC {\'e}moire.}{12}{section*.26}
-\contentsline {subparagraph}{Insertion m\IeC {\'e}moire.}{13}{section*.27}
-\contentsline {subparagraph}{Test d'\IeC {\'e}galit\IeC {\'e}.}{13}{section*.28}
-\contentsline {paragraph}{Bilan.}{13}{section*.29}
-\contentsline {subsubsection}{Cas particulier : entiers unaires}{13}{section*.30}
-\contentsline {subsubsection}{Une tentative d'am\IeC {\'e}lioration}{13}{section*.31}
-\contentsline {subsubsection}{Probl\IeC {\`e}me majeur}{13}{section*.32}
-\contentsline {chapter}{\numberline {2}Vers une caract\IeC {\'e}risation du temps polynomial sur $\sigma $-RAM}{14}{chapter.2}
+\contentsline {subsection}{\numberline {1.2.2}La $\mathbb {A}$-RAM de Leivant}{7}{subsection.1.2.2}
+\contentsline {paragraph}{Explications.}{8}{section*.7}
+\contentsline {paragraph}{Entr\IeC {\'e}es et sorties.}{8}{section*.8}
+\contentsline {subsection}{\numberline {1.2.3}Comparaison entre les deux RAM}{8}{subsection.1.2.3}
+\contentsline {subsubsection}{Mod\IeC {\`e}les Turing-complets}{8}{section*.9}
+\contentsline {subsubsection}{$\mathbb {A}$-RAM dans $\sigma $-RAM}{8}{section*.10}
+\contentsline {paragraph}{Premi\IeC {\`e}res observations.}{8}{section*.11}
+\contentsline {paragraph}{Simulation.}{9}{section*.12}
+\contentsline {subparagraph}{(const)}{9}{section*.13}
+\contentsline {subparagraph}{($p$-dest)}{9}{section*.14}
+\contentsline {subparagraph}{(switch)}{10}{section*.15}
+\contentsline {paragraph}{Bilan.}{10}{section*.16}
+\contentsline {subsubsection}{$\sigma $-RAM dans $\mathbb {A}$-RAM}{10}{section*.17}
+\contentsline {paragraph}{Copie.}{10}{section*.18}
+\contentsline {paragraph}{Egalit\IeC {\'e}.}{11}{section*.19}
+\contentsline {paragraph}{M\IeC {\'e}moire.}{11}{section*.20}
+\contentsline {paragraph}{Simulation.}{13}{section*.21}
+\contentsline {subparagraph}{Entr\IeC {\'e}es/sorties.}{13}{section*.22}
+\contentsline {subparagraph}{Assignation de terme.}{13}{section*.23}
+\contentsline {subparagraph}{Instructions de copie.}{13}{section*.24}
+\contentsline {subparagraph}{Construction.}{13}{section*.25}
+\contentsline {subparagraph}{Destruction.}{13}{section*.26}
+\contentsline {subparagraph}{HALT.}{13}{section*.27}
+\contentsline {subparagraph}{Acc\IeC {\`e}s m\IeC {\'e}moire.}{13}{section*.28}
+\contentsline {subparagraph}{Insertion m\IeC {\'e}moire.}{14}{section*.29}
+\contentsline {subparagraph}{Test d'\IeC {\'e}galit\IeC {\'e}.}{14}{section*.30}
+\contentsline {paragraph}{Bilan.}{14}{section*.31}
+\contentsline {subsubsection}{Cas particulier : entiers unaires}{14}{section*.32}
+\contentsline {subsubsection}{Une tentative d'am\IeC {\'e}lioration}{14}{section*.33}
+\contentsline {subsubsection}{Probl\IeC {\`e}me majeur}{14}{section*.34}
+\contentsline {chapter}{\numberline {2}Vers une caract\IeC {\'e}risation alg\IeC {\'e}brique du temps polynomial sur $\sigma $-RAM}{15}{chapter.2}
 \contentsline {section}{\numberline {2.1}Pr\IeC {\'e}liminaires}{15}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Structures de RAM}{15}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}Machine RAM}{15}{subsection.2.1.2}
 \contentsline {subsection}{\numberline {2.1.3}R\IeC {\'e}ductions affines}{15}{subsection.2.1.3}
-\contentsline {section}{\numberline {2.2}Le framework alg\IeC {\'e}brique}{15}{section.2.2}
+\contentsline {section}{\numberline {2.2}Le framework alg\IeC {\'e}brique}{16}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}LSRS}{16}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}LRS}{17}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Bilan}{20}{subsection.2.2.3}
-\contentsline {section}{\numberline {2.3}LRS et temps polynomial}{21}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}$n^K$-repr\IeC {\'e}sentable par LRS $\Rightarrow $ calculable en temps $\mathcal {O}\left ( n^K \right )$}{21}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Calculable en temps polynomial $\Rightarrow $ LSRS}{23}{subsection.2.3.2}
-\contentsline {chapter}{\numberline {3}LSRS \IeC {\`a} arit\IeC {\'e} multiple}{26}{chapter.3}
-\contentsline {section}{\numberline {3.1}Introduction}{26}{section.3.1}
-\contentsline {section}{\numberline {3.2}Les ennuis commencent}{26}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Bon ordre sur les $\left ( \leqslant a \right )$-uplets}{26}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Propri\IeC {\'e}t\IeC {\'e}s combinatoires}{27}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}D\IeC {\'e}roulement d'un calcul de $a$-LSRS}{28}{section.3.3}
-\contentsline {paragraph}{D\IeC {\'e}finissons le $a$-LSRS}{28}{section*.35}
-\contentsline {section}{\numberline {3.4}Lien entre les deux notions de LSRS}{29}{section.3.4}
-\contentsline {paragraph}{Calcul du max $m$.}{29}{section*.36}
-\contentsline {paragraph}{Calcul de l'arit\IeC {\'e} courante}{30}{section*.37}
-\contentsline {paragraph}{Calcul des cordonn\IeC {\'e}es.}{31}{section*.38}
-\contentsline {chapter}{Appendices}{35}{section*.39}
-\contentsline {section}{\numberline {.1}Simulation de la $\sigma $-RAM par la $\mathbb {A}$-RAM}{36}{section.1..1}
-\contentsline {subsection}{\numberline {.1.1}Conventions d'\IeC {\'e}criture.}{36}{subsection.1..1.1}
-\contentsline {subsection}{\numberline {.1.2}Ecriture des programmes}{37}{subsection.1..1.2}
+\contentsline {subsection}{\numberline {2.2.3}Bilan}{21}{subsection.2.2.3}
+\contentsline {section}{\numberline {2.3}LRS et temps polynomial}{22}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}$n^K$-repr\IeC {\'e}sentable par LRS $\Rightarrow $ calculable en temps $\mathcal {O}\left ( n^K \right )$}{22}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Calculable en temps polynomial $\Rightarrow $ LSRS}{24}{subsection.2.3.2}
+\contentsline {chapter}{\numberline {3}LSRS \IeC {\`a} arit\IeC {\'e} multiple}{27}{chapter.3}
+\contentsline {section}{\numberline {3.1}Introduction}{27}{section.3.1}
+\contentsline {section}{\numberline {3.2}Les ennuis commencent}{27}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Bon ordre sur les $\left ( \leqslant a \right )$-uplets}{27}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Propri\IeC {\'e}t\IeC {\'e}s combinatoires}{28}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}D\IeC {\'e}roulement d'un calcul de $a$-LSRS}{29}{section.3.3}
+\contentsline {paragraph}{D\IeC {\'e}finissons le $a$-LSRS}{29}{section*.35}
+\contentsline {section}{\numberline {3.4}Lien entre les deux notions de LSRS}{30}{section.3.4}
+\contentsline {paragraph}{Calcul du max $m$.}{30}{section*.36}
+\contentsline {paragraph}{Calcul de l'arit\IeC {\'e} courante}{31}{section*.37}
+\contentsline {paragraph}{Calcul des cordonn\IeC {\'e}es.}{32}{section*.38}
+\contentsline {chapter}{Appendices}{36}{section*.39}
+\contentsline {section}{\numberline {.1}Simulation de la $\sigma $-RAM par la $\mathbb {A}$-RAM}{37}{section.1..1}
+\contentsline {subsection}{\numberline {.1.1}Conventions d'\IeC {\'e}criture}{37}{subsection.1..1.1}
+\contentsline {subsection}{\numberline {.1.2}Ecriture des programmes}{38}{subsection.1..1.2}

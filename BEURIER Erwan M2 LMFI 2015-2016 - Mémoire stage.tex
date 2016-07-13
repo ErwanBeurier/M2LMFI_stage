@@ -31,7 +31,27 @@
 	
 	\maketitle
 	
+	\pagebreak
+	
+	\section*{Disclaimer}
+	
+	Ceci n'est qu'un brouillon de mon mémoire. Il a beau dépasser les 40 pages, il n'en est pas moins incomplet. Il est probablement plein de fautes de français et de textes \redtext{en rouge} voire \nepasoublier{encadrés en rouge}. C'est moi-même qui me signale des points que je ne dois pas oublier de rectifier ou d'ajouter.
+	
+	Je n'aime pas que les liens hypertextes soient trop visibles, mais je n'ai pas encore cherché comment on pouvait les rendre visibles ET discrets, donc pour l'instant, ils sont simplement invisibles. Ne pas hésiter à passer la souris sur des mots comme \emph{ici}, \emph{plus bas}, etc ; ils seront très probablement munis d'un lien hypertexte. Les références à des sections, définitions, théorèmes, etc. sont aussi cliquables.
+	
+	
+	\section*{Notations}
+	\label{sec:Notations}
+	
+	
+	Par abus de notation découlant de la théorie des ensembles, j'écrirai $n$ pour $\intint{0}{n-1}$ voire pour $\intint{1}{n}$ quand il n'y aura pas d'ambiguïté. De manière générale, si un terme ressemble à un entier naturel mais qu'il est mis à la place d'un ensemble (typiquement, dans le domaine de départ ou d'arrivée d'une fonction), il faut le lire comme l'ensemble $\intint{0}{n-1}$.
+	
+	\pagebreak
+	
+	
+	
 	\tableofcontents
+	
 	
 	\pagebreak
 	
@@ -153,9 +173,9 @@
 		\subsection{Approche de Leivant}
 		\label{subsec:Leivant}
 	
-		\nepasoublier{Explication du point de départ de Leivant.}
+		\nepasoublier{Résumé de l'article \cite{Leivant1995} de Leivant}
 		
-		Résumé de l'article \cite{Leivant1995} de Leivant. 
+		. 
 		
 		\begin{definition}[Algèbre \cite{Leivant1995}]
 			\label{def:algebre}
@@ -358,7 +378,7 @@
 				\item 	Soit $\text{tier}(f) = \text{tier}(g) = 0$, dans ce cas par hypothèse d'induction, on a bien : $g( \bar{x}, h_1(\bar{x};) ; \bar{y}, h_0(\bar{x}; \bar{y})) = f(\bar{x} ; \bar{y})$.
 			\end{itemize}
 			
-			Le cas de la récurrence ramifiée se résout de manière analogue. $\blacksquare$
+			Le cas de la récurrence ramifiée se résout de manière analogue.
 		\end{proof}
 		
 
@@ -418,7 +438,7 @@
 		
 		
 			\paragraph{Entrées et sorties.}
-			Dans leur article \cite{GrandjeanSchwentick2002}, Grandjean et Schwentick indiquent que leur $\sigma$-RAM prend en entrée une structure $\left( \intint{1}{n}, \underset{\text{fonctions unaires}}{\underbrace{f_1, \dots, f_k}},  \underset{\text{constantes}}{\underbrace{C_1, \dots, C_l}}\right)$ et s'initialise de la façon suivante : 
+			Dans leur article \cite{GrandjeanSchwentick2002}, Grandjean et Schwentick indiquent que leur $\sigma$-RAM prend en entrée une structure $\left( \intint{1}{n},  f_1, \dots, f_k, C_1, \dots, C_l \right)$ où $f_1, \dots, f_k$ sont des fonctions unaires et $C_1, \dots, C_l$ sont des constantes ; la $\sigma$-RAM s'initialise de la façon suivante : 
 			
 			\begin{itemize}[itemsep=-1mm]
 				\item 	$N := n$
@@ -427,7 +447,7 @@
 			\end{itemize}
 			(La taille est stockée dans $N$ et les fonctions sont stockées dans l'ordre de numérotation).
 			
-			La sortie est une nouvelle structure $\left( \intint{1}{n'}, \underset{\text{fonctions unaires}}{\underbrace{f'_1, \dots, f'_{k'}}},  \underset{\text{constantes}}{\underbrace{C'_1, \dots, C'_{l'}}}\right)$ qui remplace l'entrée.
+			La sortie est une nouvelle structure $\left( \intint{1}{n'}, f'_1, \dots, f'_{k'}, C'_1, \dots, C'_{l'}\right)$ stockée de manière similaire dans la $\sigma$-RAM. 
 		
 		
 		
@@ -507,7 +527,7 @@
 				
 				\espace
 				
-				Soit $\sigma = \left\lbrace C_1, \dots, C_k \right\rbrace$ une signature de constructeurs. On note $r = \maxlist{i \in \intint{1}{k}}{r_i}$. On suppose que $r > 0$.
+				Soit $\sigma = \left\lbrace C_1, \dots, C_k \right\rbrace$ une signature de constructeurs. On note $r = \maxlist{r_i}{i \in \intint{1}{k}}$. On suppose que $r > 0$.
 				
 				Notons $\bbA$ la $\sigma$-algèbre contenant ces termes.
 				
@@ -677,7 +697,7 @@
 					La simulation se fait en $\leq 3r + 9k$ étapes. Encore une fois, les boucles \emph{For} sont des simplifications d'écriture. 
 				
 					\paragraph{Bilan.}
-					Chaque instruction de la $\bbA$-RAM peut être simulée en temps constant par une $\sigma$-RAM. $\blacksquare$
+					Chaque instruction de la $\bbA$-RAM peut être simulée en temps constant par une $\sigma$-RAM.
 				\end{proof}
 	
 	
@@ -696,7 +716,7 @@
 					Avant d'en venir à la simulation proprement dite, on va d'abord décrire quelques fonctions.
 			
 					
-					\paragraph{Copie}
+					\paragraph{Copie.}
 					
 					La $\bbA$-RAM permet une copie indépendante de la longueur du terme. 
 					
@@ -897,7 +917,7 @@
 					
 					Les états de la $\bbA$-RAM seront simplement calqués sur les numéros des instructions du programme de la $\sigma$-RAM. Si une instruction de $\sigma$-RAM se simule en un programme de $\bbA$-RAM, alors l'état initial de cette simulation est l'état correspondant au numéro de l'instruction, et l'état final correspond au numéro de l'instruction suivante. Les états intermédiaires dans les fonctions sont des états qui n'apparaissent nulle part ailleurs que dans la fonction associée, afin d'éviter les conflits. 
 						
-						\subparagraph{Entrées/sorties}
+						\subparagraph{Entrées/sorties.}
 						Dans une $\sigma$-RAM, les entrées sont stockées dans des registres au choix. Il suffit de reproduire cette initialisation en remplissant les registres équivalents dans la $\bbA$-RAM. Si $A_i, N$ sont initialisés, alors initialiser $\alpha_i, \nu$ de la même façon. Si des registres $R_i$ sont initialisés, alors on initialise $\mu$ avec un terme mémoire : 
 						
 						$\text{MEM}\left( f(0), R_0, \text{MEM}\left( f(1), R_1, \dots \right) \dots \right)$.
@@ -935,8 +955,6 @@
 						
 					\paragraph{Bilan.}
 					La $\bbA$-RAM simule lourdement trois des opérations de base de la $\sigma$-RAM. Les deux machines coïncident sur les \emph{grosses} classes de complexité ($P$, $NP$, $EXP$...) mais pas sur les classes plus fines ($\text{DTIME}(n^k)$ pour un $k$ fixé).
-						
-					$\blacksquare$
 				\end{proof}
 				
 				
@@ -948,7 +966,9 @@
 				La $\sigma$-RAM permet l'accès à n'importe quel endroit de sa mémoire avec le registre $A$. Dans le cas général, la $\bbA$-RAM doit utiliser des astuces pour reproduire cet accès du mieux possible. 
 				
 				
-				On peut obtenir une légèrement meilleure simulation de la $\sigma$-RAM par la $\bbA$-RAM dans le cas d'une signature $\sigma = \left\lbrace 0, s(-)\right\rbrace$. On note $\naturels$ l'algèbre engendrée par $\sigma$.
+				On peut obtenir une légèrement meilleure simulation de la $\sigma$-RAM par la $\bbA$-RAM dans le cas d'une signature $\sigma = \left\lbrace 0, s(-)\right\rbrace$. On note $\naturels$ l'algèbre engendrée par cette signature $\sigma$.
+				
+				\nepasoublier{Code + algo de cette optimisation}
 	
 	
 	
@@ -1026,11 +1046,13 @@
 				\section{Simulation de la $\sigma$-RAM par la $\bbA$-RAM}
 					\label{sec:annexes_programmes}
 					
-					\subsection{Conventions d'écriture.}
+					\subsection{Conventions d'écriture}
 					\label{subsec:conventions_ecriture}
 					Pour des raisons de lisibilité, on écrira des fonctions pour $\bbA$-RAM. Pour faire appel à la fonction, on suivra la convention d'écriture suivante : 
 					
-					(fn) 	$s_a \text{NOM\_FONCTION} (\text{arguments})s_b$\\
+					\[
+						\text{(fn)} \ s_a \text{NOM\_FONCTION} (\text{arguments})s_b
+					\]
 					ce qui se lit : à l'état $s_a$, appliquer la fonction puis passer à l'état $s_b$. Si la fonction contient un embranchement, comme ce sera le cas pour l'égalité, alors $s_b$ est inutile mais devrait être précisé comme \emph{bonne pratique} (à l'instar du slash de \text{<br />} en HMTL). De plus, cela permet d'indiquer, à l'écriture d'une fonction, quel est l'état final de la machine qui calcule la fonction.
 					
 					Deuxièmement, on s'autorisera une boucle \emph{For}, non pas pour rendre le calcul plus puissant, mais bien en tant qu'astuce de lisibilité. Il s'agit en fait d'une boucle \emph{méta} sur l'écriture des commandes.
@@ -1077,7 +1099,7 @@
 					
 					\espace
 					
-					doit se comprendre :
+					doivent se comprendre :
 					
 					\espace
 					
@@ -1157,7 +1179,7 @@
 					(3-dest) 	$s_b \mu \mu s_f$\;
 					
 					
-					\caption{Fonction $s_a \text{EXTRACT\_FIRST}(\mu, \pi_1) s_f$. Algorithme \hyperref[algo:A_RAM_fn_extract_first]{ici}. }
+					\caption{Fonction $s_a \text{EXTRACT\_FIRST}(\mu, \pi_1) s_f$. Algorithme \hyperref[algo:A_RAM_fn_extract_first]{plus haut}. }
 				\end{algorithm}
 				
 				\espace 
