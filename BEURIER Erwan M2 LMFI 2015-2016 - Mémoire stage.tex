@@ -13,6 +13,8 @@
 
 % Commandes de ce document
 
+% Commandes personnelles pour le premier chapitre
+
 \newcommand{\sRAMif}[2]{\text{IF} (A=B) \{I( #1 )\} \text{ ELSE } \{I( #2 )\}}
 \newcommand{\sRAMifc}[2]{\text{IF} (A_1=A_2) \{I( #1 )\} \text{ ELSE } \{I( #2 )\}}
 \newcommand{\bbA}{\mathbb{A}}
@@ -78,10 +80,12 @@
 			
 			% Décaler d'une tabulation {{{
 			
-			\emph{$f$ est définie par récurrence \emph{safe} à partir de $\left(g_c\right)_{c \in \sigma} \in \text{BC}$ lorsque :}
+			\nepasoublier{Décaler d'une tabulation}
+			
+			\emph{$f$ est définie par récurrence \emph{safe} à partir de $\left(g_c\right)_{c \in \sigma} \in \text{BC}$ lorsque pour tout constructeur $c$ :}
 			
 			\begin{itemize}
-				\item 	$f\left(c(x), \bar{y} ; \bar{z}\right) = g_c\left( x, \bar{y} ; \bar{z}, f(x, \bar{y}; \bar{z}) \right)$
+				\item 	$f\left(c(;x), \bar{y} ; \bar{z}\right) = g_c\left( x, \bar{y} ; \bar{z}, f(x, \bar{y}; \bar{z}) \right)$
 			\end{itemize}
 
 			%}}}
@@ -89,6 +93,8 @@
 			et composition \emph{safe}.
 			
 			% Décaler d'une tabulation {{{
+			
+			\nepasoublier{Décaler d'une tabulation}
 			
 			\emph{$f$ est définie par composition \emph{safe} à partir de $h, g_0, g_1 \in \text{BC}$ lorsque :}
 			
@@ -105,7 +111,8 @@
 			\label{thm:BC_equals_P}
 			$\text{BC} = P$
 		\end{theorem}
-		
+
+		\nepasoublier{Parler de la preuve.}
 		
 		\subsection{Approche de Cobham}
 		\label{sec:Cobham}
@@ -118,6 +125,8 @@
 			On note $\text{Cob}$ le plus petit ensemble de fonctions contenant les constructeurs, les projections, le smash $x \sharp y = 2^{\left| x \right| \times \left| y\right|}$, et close par composition et récurrence bornée sur les notations.
 			
 			% Décaler d'une tabulation {{{
+			
+			\nepasoublier{Décaler d'une tabulation}
 			
 			\emph{Une fonction $f \in \text{Cob}$ est définie par récurrence bornée sur les notations à partir de $(g_c)_{c \in \sigma}, h \in \text{Cob}$ lorsque :}
 			
@@ -134,7 +143,9 @@
 			\label{thm:Cob_equals_P}
 			$\text{Cob} = P$
 		\end{theorem}
-			
+		
+		\nepasoublier{Parler de la preuve.}
+		
 		Conséquence : il existe une borne explicite pour chaque fonction de $P$. 
 		
 		
@@ -152,7 +163,7 @@
 			
 			La $\sigma$-algèbre $\bbA$ est l'ensemble des termes clos constitués uniquement par les symboles de fonctions de $\sigma$. Dans ce cas, ces fonctions sont nommées \emph{constructeurs}. 
 			
-			On note $r_i$ l'arité du constructeur $C_i$. On suppose que $\minlist{i\in\intint{1}{k}}{r_i} = 0$ (sinon $\bbA$ est vide) et $\maxlist{i\in\intint{1}{k}}{r_i} = r > 0$ (sinon $\bbA$ est finie).
+			On note $r_i$ l'arité du constructeur $C_i$. On suppose que $\minlist{r_i}{i\in\intint{1}{k}} = 0$ (sinon $\bbA$ est vide) et $\maxlist{r_i}{i\in\intint{1}{k}} = r > 0$ (sinon $\bbA$ est finie).
 			
 			Si $r = 1$ alors $\mathbb{A}$ est une \emph{algèbre de mots}, sinon c'est une \emph{algèbre arborescente}.
 			
@@ -174,7 +185,7 @@
 		\espace
 		
 		
-		On note $(\bbA_i)_{i\in \omega}$ l'ensemble des copies de l'algèbre $\bbA$, qui correspondent à des niveaux d'abstraction de $\bbA$. On notera $\mathcal{A}$ n'importe quel produit cartésien fini de copies de $\bbA$. Pour $x\in \bbA$, on note $\text{tier}(x) = i$. De même, pour $f : \mathcal{A} \to \bbA_i$, on note $\text{tier}(f) = i$. Chaque tier a de plus ses propres constructeurs. Le constructeur $C_j$ du niveau $i$ sera noté $C_j^i$. 
+		On note $(\bbA_i)_{i\in \omega}$ l'ensemble des copies de l'algèbre $\bbA$, qui correspondent à des niveaux d'abstraction de $\bbA$. On notera $\mathcal{A}$ n'importe quel produit cartésien fini de copies de $\bbA$. Pour $x\in \bbA_i$, on note $\text{tier}(x) = i$. De même, pour $f : \mathcal{A} \to \bbA_i$, on note $\text{tier}(f) = i$. Chaque tier a de plus ses propres constructeurs. Le constructeur $C_j$ du niveau $i$ sera noté $C_j^i$. 
 		
 		\begin{definition} 
 			\label{def:TRecA}
@@ -227,7 +238,7 @@
 		\end{definition}
 		
 		
-		Il définit aussi une RAM personnalisée pour la construction de termes, voir \ref{def:A_RAM}. Cette RAM, notée $\bbA$-RAM dans ce mémoire, coïncide avec les autres modèles de calcul sur la classe $P$, mais son manque de test d'égalité et sa mémoire limitée la rendent moins puissante qu'une \hyperref[def:sigma_RAM]{RAM au sens de Granjean} \cite{GrandjeanSchwentick2002} sur des classes plus fines (voir \ref{subsubsec:sim_A_RAM_sigma_RAM} pour la comparaison).
+		Il définit aussi une RAM personnalisée pour la construction de termes, voir la définition \ref{def:A_RAM}. Cette RAM, notée $\bbA$-RAM dans ce mémoire, coïncide avec les autres modèles de calcul sur la classe $P$, mais son manque de test d'égalité et sa mémoire limitée la rendent moins puissante qu'une \hyperref[def:sigma_RAM]{RAM au sens de Grandjean} \cite{GrandjeanSchwentick2002} sur des classes plus fines (voir la section \ref{subsubsec:sim_A_RAM_sigma_RAM} pour la comparaison).
 		
 		\espace
 		
@@ -255,7 +266,7 @@
 		
 		La récurrence ramifiée engendre $P$ et deux niveaux de ramification suffisent.
 	
-		Le théorème \ref{thm:TRecA_equals_P_poly_fixe} a été prouvé pour une $\bbA$-RAM ; l'un des objets de ce stage a aussi été d'obtenir un résultat similaire pour la $\sigma$-RAM. 
+		Le théorème \ref{thm:TRecA_equals_P_poly_fixe} a été prouvé pour une $\bbA$-RAM ; l'un des objets de ce stage a aussi été d'obtenir un résultat similaire pour la $\sigma$-RAM, voir les chapitres \ref{chap:LSRS} et \ref{chap:rLSRS}.
 		
 		
 	
@@ -969,19 +980,23 @@
 				De plus, si le test d'égalité est rendu gratuit, on peut faire un test d'égalité entre deux termes de mémoire.
 
 
-	\section{Vers une caractérisation du temps polynomial sur $\sigma$-RAM}
-		\label{sec:carac_poly_sigma_RAM}
-		
-		\subsection{Caractérisation du temps linéaire}
-			\label{subsec:carac_lineaire}
-			\label{subsec:resume_Grandjean_Schwentick}
+
+
+
+
+%	\section{Vers une caractérisation du temps polynomial sur $\sigma$-RAM}
+%		\label{sec:carac_poly_sigma_RAM}
+%		
+%		\subsection{Caractérisation du temps linéaire}
+%			\label{subsec:carac_lineaire}
+%			\label{subsec:resume_Grandjean_Schwentick}
+%			
+%		\begin{definition}[LSRS]
+%			
+%		\end{definition}
 			
-		\begin{definition}[LSRS]
 			
-		\end{definition}
-			
-			
-			
+	\include{BrouillonGrandjeanSchwentick}
 			
 			
 			

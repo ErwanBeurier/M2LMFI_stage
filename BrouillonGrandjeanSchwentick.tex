@@ -14,11 +14,11 @@
 
 % Commandes de ce document
 
-\newcommand{\sRAMif}[2]{\text{IF} (A=B) \{I( #1 )\} \text{ ELSE } \{I( #2 )\}}
-\newcommand{\sRAMifc}[2]{\text{IF} (A_1=A_2) \{I( #1 )\} \text{ ELSE } \{I( #2 )\}}
-\newcommand{\bbA}{\mathbb{A}}
-\newcommand{\TRec}[1]{\text{TRec}\left(\mathbb{#1}\right)}
-\newcommand{\TRecd}[1]{\text{TRec}_{2}\left(\mathbb{#1}\right)}
+%\newcommand{\sRAMif}[2]{\text{IF} (A=B) \{I( #1 )\} \text{ ELSE } \{I( #2 )\}}
+%\newcommand{\sRAMifc}[2]{\text{IF} (A_1=A_2) \{I( #1 )\} \text{ ELSE } \{I( #2 )\}}
+%\newcommand{\bbA}{\mathbb{A}}
+%\newcommand{\TRec}[1]{\text{TRec}\left(\mathbb{#1}\right)}
+%\newcommand{\TRecd}[1]{\text{TRec}_{2}\left(\mathbb{#1}\right)}
 \newcommand{\dtimeram}{\text{DTIME}_{\text{RAM}}\left( n^H \right)}
 \newcommand{\dtimeramarg}[1]{\text{DTIME}_{\text{RAM}}\left( n^{#1} \right)}
 \newcommand{\eqpred}[3]{#1\left[ #2^{\leftarrow}(#3) \right]_{#3}}
@@ -256,7 +256,7 @@
 		
 		On doit adapter la définition de $n^K$-représentée par LRS : 
 		
-		\begin{definition}[RAM $n^K$-représentée par LRS - Proposition 1]
+		\begin{definition}[RAM $n^K$-représentée par LRS]
 			\label{def:representee_par_LRS}
 			Soit $\Gamma$ une fonction de RAM. 
 			
@@ -549,8 +549,8 @@
 	\pagebreak
 		
 		
-	\section{LRS et temps linéaire} (p.216)
-		\label{LRS_et_temps_lineaire}
+	\section{LRS et temps polynomial} (p.216)
+		\label{sec:LRS_et_temps_poly}
 	
 	\begin{conj}
 		\label{conj:big_theorem}
@@ -573,12 +573,12 @@
 	La preuve de $\ref{num:gamma_in_nk} \Rightarrow \ref{num:gamma_nk_rep_LSRS}$ se trouve \hyperref[conj:poly_implique_LSRS]{plus loin}.
 	
 	
-	\subsection{$\ref{num:gamma_nk_rep_LRS} \Rightarrow \ref{num:gamma_in_nk}$}
+	\subsection{$n^K$-représentable par LRS $\Rightarrow$ calculable en temps $\grozo{n^K}$}
 		\label{subsec:LRS_implique_poly}
 		
 		\begin{conj}
 			\label{conj:rep_LRS_calc_n_K}
-			Si une fonction de RAM $\Gamma$ est $n^K$-représentée par un LRS $E$ alors $\Gamma \in \dtimeramarg{K}$.
+			Si une fonction de RAM $\Gamma$ est $n^K$-représentable par LRS alors $\Gamma \in \dtimeramarg{K}$.
 		\end{conj}
 		
 		\begin{proof}
