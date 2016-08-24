@@ -98,7 +98,8 @@
 			On définit $\dtimeram$ comme étant l'ensemble des fonctions calculables sur $\{+\}$-RAM en temps $\grozo{n^K}$, telles que le nombre de registres utilisés, les valeurs entières manipulées (y compris les adresses de registres) soient bornés par $\grozo{n^K}$.
 		\end{definition}
 		
-		Pour les besoins de ce mémoire, la machine RAM a pour signature $\{+ , -, \times \}$. Elle est plus puissante que la $\{+\}$-RAM utilisée dans l'article \cite{Grandjean1994} puisqu'on n'utilise plus les mêmes classes de complexité. Dans le cas du temps linéaire, l'ajout de la multiplication ne rend pas la $\{+\}$-RAM plus puissante \cite{Grandjean1994}, \cite{GrandjeanSchwentick2002}. Par contre, si on considère $\dtimeramarg{t(n)}$ où $t(n) \geqslant n$, la meilleure borne que l'on ait pour la multiplication est $\grozo{t(n)}$. Il faut donc prendre en compte que l'on utilise un modèle de calcul plus puissant que celui d'origine, dont s'inspire ce mémoire.
+		Pour les besoins de ce mémoire, la machine RAM a pour signature $\{+ , -, \times \}$. Elle est intuitivement plus puissante que la $\{+\}$-RAM utilisée dans l'article \cite{Grandjean1994} qui n'utilise que $+$, mais l'ajout de ces deux opérations ne change pas la puissance de calcul. Autrement dit, une $\{+ , -, \times \}$-RAM travaillant en temps $t(n)$ avec des entiers de taille au plus $t(n)$ peut être simulée par une $\{+\}$-RAM calculant en temps $t(n)$ et n'utilisant que des entiers de taille au plus $t(n)$. 
+		L'algorithme présenté dans \cite{GrandjeanSchwentick2002} revient en fait à écrire une table de multiplication pour tous les entiers, se qui se fait avant le calcul de la $\{+\}$-RAM. Les multiplications sont alors remplacées par des accès mémoire, plus rapides.
 		
 		
 		\subsection{Réductions affines} %(p.202)
