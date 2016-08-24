@@ -12,6 +12,7 @@
 \usepackage{graphicx}
 \usepackage[frenchb]{babel}
 
+
 \usepackage[top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm]{geometry} % Pour contrôler la largeur des marges
 %\usepackage[pdftex=true,colorlinks=true,linkcolor=blue]{hyperref} % Ça conflicte avec uasiment toute la suite. 
 \usepackage[pdftex=true, hidelinks]{hyperref} % Package pour les hyperliens (et mettre des ancres partout !)
@@ -20,7 +21,8 @@
 \usepackage[english, onelanguage, boxed]{algorithm2e}
 \usepackage{listings}
 \usepackage{import}
-
+\usepackage[toc,page]{appendix} % Package pour gérer les annexes. 
+%\usepackage{biblatex} % Pour citer l'auteur, ou le titre d'un article listé dans le fichier bib. \citetitle [A voir plus tard]
 
 % Un package sympathique pour donner un contexte aux définitions, théorèmes, etc. 
 
@@ -39,9 +41,9 @@
 
 \theoremstyle{smallcapsit}
 \newtheorem{theorem}{Théorème}
-\newtheorem{prop}{Proposition}
-\newtheorem{coro}{Corollaire}
-\newtheorem{lemma}{Lemme}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{coro}[theorem]{Corollaire}
+\newtheorem{lemma}[theorem]{Lemme}
 \newtheorem{ax}{Axiome} % Why do I have that ?
 \newtheorem*{theorem*}{Théorème}
 \newtheorem*{prop*}{Proposition}
@@ -54,8 +56,8 @@
 
 %\theoremstyle{definition}
 \theoremstyle{theorem}
-\newtheorem{definition}{Définition}
-\newtheorem{example}{Exemple}
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{example}[theorem]{Exemple}
 \newtheorem{algo}{ALGORITHME}
 \newtheorem*{definition*}{Définition}
 \newtheorem*{example*}{Exemple}
@@ -63,6 +65,7 @@
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remarque}
-\newtheorem{prob}{Problème}
+\newtheorem{prob}[theorem]{Problème}
 \newtheorem*{demo}{Démonstration}
+
 
