@@ -182,7 +182,7 @@
 				
 				Dans ces trois cas, le premier argument est appelé \emph{argument de récurrence}, puisque c'est celui-ci qui, en quelques sortes, compte le nombre d'étapes de récurrence. Dans l'addition, l'argument $s(x)$ devient $x$ dans l'appel récursif ; idem pour la multiplication. Dans ces deux cas, l'argument de récurrence décroît à chaque appel récursif. 
 				
-				Dans le cas de l'exponentielle par contre, l'argument $s(x)$ devient $\exp(x)$ en tant qu'argument de récurrence de $+(-,-)$. L'idée de Bellantoni et Cook est d'empêcher cette situation d'apparaitre.
+				Dans le cas de l'exponentielle par contre, l'argument $s(x)$ devient $x$ dans $\exp(x)$ et $\exp(x)$ en tant qu'argument de récurrence de $+(-,-)$. L'idée de Bellantoni et Cook est d'empêcher qu'un argument de récurrence entraine la création d'arguments de récurrence de plus en plus gros, ce qui est le cas ici.
 				
 			\end{example}
 			
@@ -242,7 +242,7 @@
 				$\text{BC} = P$
 			\end{theorem}
 	
-			On démontre en fait $P \subseteq \text{BC} \subseteq \text{Cob}$. La première inclusion se fait en séparant les arguments \emph{safe} et \emph{normaux} dans les définitions des fonctions. La deuxième inclusion se trouve en explicitant par induction une borne sur les fonctions de $\text{BC}$. 
+			On démontre en fait $P \subseteq \text{BC} \subseteq \text{Cob}$. La première inclusion se fait en montrant qu'on peut expliciter les arguments \emph{safe} et \emph{normaux} dans les définitions des fonctions. La deuxième inclusion se trouve en explicitant par induction une borne sur les fonctions de $\text{BC}$. 
 		
 		
 		
@@ -265,7 +265,22 @@
 				
 				\hspace{0.1\linewidth}\parbox{0.9\linewidth}{
 					\small
-					Une fonction est définie par récurrence ramifiée lorsque :
+					Une fonction $f: \mathcal{A} \to \bbA_j$ est définie par composition ramifiée à partir de $h: \mathcal{A}' \to \bbA_j$ et $\left(g_i : \mathcal{A} \to \bbA'_i\right)_{i\in t}$ lorsque :
+					
+					\begin{itemize}
+						\item	$\bbA'_1 \times \dots \times \bbA'_t = \mathcal{A}'$
+						
+						\item 	$\forall i \:\:\:\:
+						f\left( \bar{x} \right) = h\left( g_1\left( \bar{x}\right), \dots,  g_t\left( \bar{x} \right) \right)
+						$
+					\end{itemize}
+				}
+				
+				\espace
+				
+				\hspace{0.1\linewidth}\parbox{0.9\linewidth}{
+					\small
+					Une fonction $f: \bbA_i \times \mathcal{A} \to \bbA_j$ est définie par récurrence ramifiée à partir des fonctions $\left( g_{c_i} \right)_{i\in k}$ lorsque :
 					
 					\begin{itemize}
 						\item 	$\forall i \:\:\:\:
@@ -277,14 +292,12 @@
 				
 				\espace
 				
-				On note $\TRecd{A}$ le sous-ensemble de $\TRec{A}$ dont chaque fonction est constructible en n'utilisant que deux tiers $\bbA_0, \bbA_1$.
+				On note $\TRecd{A}$ le sous-ensemble de $\TRec{A}$ dont chaque fonction est constructible en n'utilisant que les deux tiers $\bbA_0, \bbA_1$.
 			\end{definition}
 			
-			Un résultat intéressant est que si une fonction $f \in \TRec{\bbA}$ a des arguments de tiers inférieur à son tier d'arrivée, alors $f$ \emph{ignore} ces arguments.
+			Un premier résultat sur les tiers est que si une fonction $f \in \TRec{\bbA}$ a des arguments de tiers inférieur à son tier d'arrivée, alors $f$ \emph{ignore} ces arguments (voir lemme \ref{lem:arg_redondant}).
 			
-			\espace 
-			
-			En plus de ça, on va définir une notion de degré d'imbrication, qui sert en somme de compteur de tours de boucles. 
+			Revenons sur la définition de la récurrence ramifiée. Les fonctions $g_{c_i}$ peuvent contenir ou non des appels récursifs à la fonction $f$. Si tel est le cas, un argument $f\left( a_i, \bar{x} \right)$ est appelé argument critique. Cette distinction entre les arguments permet de définir une notion de degré d'imbrication, qui sert en somme de compteur de tours de boucles. 
 			
 			
 			\begin{definition}[Degré d'imbrication de récurrence\footnotemark]
@@ -339,9 +352,9 @@
 				$\TRec{A} = \TRecd{A} = P$
 			\end{theorem}
 			
-			La récurrence ramifiée engendre $P$ et deux niveaux de ramification suffisent.
+			La récurrence ramifiée engendre $P$ et deux niveaux de ramification suffisent (on retrouve un résultat proche de celui de Bellantoni et Cook).
 		
-			Le théorème \ref{thm:TRecA_equals_P_poly_fixe} a été prouvé pour une $\bbA$-RAM ; l'un des objets de ce stage a été d'obtenir un résultat analogue pour la RAM au sens de Grandjean-Schwentick, voir les chapitres \ref{chap:LSRS} et \ref{chap:rLSRS}.
+			Le théorème \ref{thm:TRecA_equals_P_poly_fixe} a été prouvé pour une $\bbA$-RAM ; l'un des objets de ce stage a été d'obtenir un résultat analogue pour la RAM au sens de Grandjean-Schwentick, voir l'annexe \ref{chap:LSRS} et le chapitre \ref{chap:rLSRS}.
 			
 		
 	
@@ -439,12 +452,12 @@
 	
 			L'équivalence entre les deux se généralise sans problème aux algèbres de mots voire aux algèbres quelconques (bien que dans le cas d'algèbres quelconques, on ne sache pas s'il y a équivalence entre $P$ et $\text{BC}$ ou $\TRec{A}$).
 			
+		
+	\espace
+	
+	\espace
 			
-	
-
-
-	\pagebreak
-	
+			
 	\section{Une histoire de RAMs}
 	\label{sec:RAM_story}
 
@@ -570,11 +583,11 @@
 		\subsection{Comparaison entre les deux RAM}
 		\label{subsec:comparaison_RAMs}
 
+			Le but de cette section est de simuler une $\bbA$-RAM dans une $\sigma$-RAM et inversement.
 			
 			\subsubsection{$\bbA$-RAM dans $\sigma$-RAM}
 			\label{subsubsec:sim_A_RAM_sigma_RAM}
 	
-				Le but de cette section est de simuler une $\bbA$-RAM dans une $\sigma$-RAM et inversement.
 				
 				\paragraph{Premières observations.}
 				\label{par:premieres_observations}
@@ -623,10 +636,19 @@
 				
 				Pour donner du sens à $R_{A_1}$, deux choix s'offrent à nous. Soit on suppose que les registres sont numérotés par des entiers naturels et, puisque $\bbA$ est dénombrable, on a une bijection entre $\bbA$ et $\naturels$. On suppose alors que $R_{A_1}$ est le registre dont l'indice est l'image du terme contenu dans $A_1$ par la bijection. Sinon, on peut considérer que les registres sont numérotés directement par des termes.
 				
+				
+				\label{text:bijection_f}
 				Dans la suite, on va se placer dans le cas où l'on a une bijection $f : \naturels \to \bbA$.
 				De plus, par abus de langage, on parlera de $\sigma$-RAM sans préciser si elle est constructrice ou non (elle le sera par défaut). 
 
-	
+				\begin{remark}
+					\label{rk:ajouts_naturels}
+					Cette redéfinition de la $\sigma$-RAM a pour but de l'adapter au vocabulaire de la $\bbA$-RAM dans un souci de lisibilité et de facilité de démonstration. Cela ne change pas sa puissance d'exécution, du moins dans le premier sens de la simulation : on pourrait simuler les termes dans une $\sigma$-RAM avec un système de pointeurs ; par induction, $f(a,b)$ pourrait être représenté par un registre contenant $a$, un registre contenant $b$ et un registre contenant un label $f$ ainsi que deux pointeurs vers $a$ et $b$. 
+					
+					Cependant, l'autre simulation (à savoir, $\sigma$-RAM simulée par une $\bbA$-RAM) aurait été moins lisible. 
+					
+					Enfin, en travaillant avec des termes, les deux machines ont les mêmes opérations de base (à savoir, la construction et destruction de termes), ce qui limite la quantité de codages à faire (notamment pour l'addition).
+				\end{remark}
 				
 				\paragraph{Simulation.}
 				\label{par:sim_A_RAM_sigma_RAM}
@@ -652,6 +674,11 @@
 					
 					\begin{algorithm}[H]
 						\caption{Simulation de la commande (const)}
+						
+						
+						\textbf{Simulation de la commande (const)} 
+						
+						\espace 
 						
 						\KwIn{Registres sources $j_1, \dots, j_{r_i}$, registre d'arrivée $j$, constructeur $C_i$}
 						
@@ -685,6 +712,10 @@
 					\begin{algorithm}[H]
 						\caption{Simulation de la commande ($p$-dest)}
 						
+						\textbf{Simulation de la commande ($p$-dest)} 
+						
+						\espace 
+						
 						\KwIn{Registres $i,j$}
 						
 						\tcp{On récupère le contenu de $R_{f(i)}$ :}
@@ -710,6 +741,12 @@
 					Rappelons-nous que les états $s_{b_i}$, dans une $\bbA$-RAM, correspondent à des numéros d'instruction $j_i$ dans la $\sigma$-RAM. 
 					
 					\begin{algorithm}[H]
+						
+						\caption{Simulation de la commande (switch)}
+						
+						\textbf{Simulation de la commande (switch)} 
+						
+						\espace 
 						
 						\KwIn{Registre $j$, instructions $I\left( j_1 \right), \dots, I\left( j_k \right)$}
 						
@@ -761,7 +798,6 @@
 							}
 						\tcp{On construit un nouveau terme en regardant chaque constructeur et on vérifie s'il est égal au terme de $R_{f(j)}$}
 					
-						\caption{Simulation de la commande (switch)}
 					\end{algorithm}
 					
 					\espace 
@@ -796,8 +832,15 @@
 					
 					\begin{algorithm}[H]
 						\label{algo:A_RAM_fn_COPY}
+						
+						\textbf{Fonction} $s_{a_1}\text{COPY}(\alpha, \beta, \bar{\pi}) s_b$
+						
+						\tcc{Récupère chacun des premiers sous-termes de $\alpha$ puis réassemble ces sous-termes dans $\beta$.}
+						
+						\espace 
+						
 						\KwIn{Registres $\alpha, \beta, \pi_1, \dots, \pi_r$}
-						\tcp{Détruit le terme contenu dans $\alpha$, stocke ses composantes dans chaque $\pi_p$, puis reconstruit le terme dans $\beta$.}
+						\tcp{Détruit le terme contenu dans $\alpha$, stocke ses composantes dans chaque $\pi_p$.}
 						
 						\For{$p$ from $1$ to $r$}{
 							Récupérer le $p$-ième sous-terme de $\alpha$ et le stocker dans $\pi_p$ \;
@@ -821,12 +864,18 @@
 					
 					\begin{algorithm}[H]
 						\label{algo:A_RAM_fn_IF}
+
+						\textbf{Fonction} $\text{IF}(\alpha, \beta, s_1, s_0, \pi_1, \pi_2, \pi'_1, \pi'_2)$
+						
+						\tcc{Vérifie si $\alpha = \beta$ en faisant une analyse inductive sur la construction des termes qu'ils contiennent, c'est-à-dire en vérifiant si le constructeur extérieur est le même, puis en déconstruisant le terme et effectuant ces mêmes comparaisons sur les sous-termes.}
+						
+						\espace 
+						
 						\KwIn{$\alpha, \beta, s_1, s_0, \pi_1, \pi_2, \pi'_1, \pi'_2$}
 						\tcc{$\alpha, \beta$ : les registres contenant les termes à tester.\\
 							$s_1, s_0$ : place la machine dans l'état $s_1$ si $\alpha = \beta$, $s_0$ sinon. \\
 							$\pi_1, \pi_2$ : registres de travail ; contiendront respectivement la liste des sous-termes de $\alpha$ et $\beta$ qui n'ont pas encore été comparés. \\
-							$\pi'_1, \pi'_2$ : registres de travail ; contiendront les sous-termes courants. \\ \\
-							Vérifie si $\alpha = \beta$ en faisant une analyse inductive sur la construction des termes qu'ils contiennent.}
+							$\pi'_1, \pi'_2$ : registres de travail ; contiendront les sous-termes courants. }
 						
 						\espace
 						\espace
@@ -870,7 +919,7 @@
 					
 					$\text{MEM}(f(i_1), R_{f(i_1)}, \text{MEM}( \dots, \text{MEM}(f(i_n), R_{f(i_n)}, \varepsilon) \dots ) )$
 					
-					Le premier argument de $\text{MEM}$ est l'indice du registre, le deuxième est son contenu, et le troisième la suite de la mémoire. Notons qu'on ne suppose pas que les indices sont ordonnés, car ils ne pourront pas l'être. 
+					Le premier argument de $\text{MEM}$ est l'indice du registre (on rappelle que $f$ est la bijection entre les entiers naturels et les termes, cf \hyperref[text:bijection_f]{plus haut}), le deuxième est son contenu, et le troisième la suite de la mémoire. Notons qu'on ne suppose pas que les indices sont ordonnés, car ils ne pourront pas l'être. 
 					
 					Le but est de pouvoir reproduire la mémoire de la $\sigma$-RAM en autorisant un (ou plusieurs) terme(s) de longueur non bornée. 
 					
@@ -878,19 +927,76 @@
 					
 					Le registre $\mu_1$ contiendra l'indice courant de la mémoire, $\mu_2$ contiendra la valeur du registre associé. $\mu_3$ contiendra la mémoire \emph{suivante} et $\mu_4$ la mémoire précédente. Le registre $\mu$ est copiée dans $\mu_3$ à l'initialisation de certaines fonctions, puis $\mu_3$ est déroulée, en stockant le contenu passé dans $\mu_4$. 
 					
-					On définit des fonctions associées qui permettront de mieux comprendre comment on se sert de cette mémoire. 
+					Une configuration typique à un instant $t$ d'un calcul serait :
+
+						
+					\begin{itemize}
+						\item 	
+								$\mu := \text{MEM}(f(i_1), R_{f(i_1)}, \text{MEM}( \dots, \text{MEM}(f(i_n), R_{f(i_n)}, \varepsilon) \dots ) )$ (mémoire complète)
+								
+						\item 	
+								$\mu_1 := f(i_r)$ (pointeur vers une case mémoire)
+								
+						\item 	
+								$\mu_2 := R_{f(i_r)}$ (contenu de la case mémoire pointée)
+								
+						\item 	
+								$\mu_3 := \text{MEM}(f(i_{r+1}), R_{f(i_{r+1})}, \text{MEM}( \dots, \text{MEM}(f(i_n), R_{f(i_n)}, \varepsilon) \dots ) )$ (cases mémoires suivantes)
+								
+						\item 	
+								$\mu_4 := \text{MEM}(f(i_{r-1}), R_{f(i_{r-1})}, \text{MEM}( \dots, \text{MEM}(f(i_1), R_{f(i_1)}, \varepsilon) \dots ) )$ (cases mémoires précédentes)
+					\end{itemize}
+					
+					Si l'on veut accéder à la case suivante en mémoire, il faut récupérer les valeurs de $\mu_1$ et $\mu_2$, les rajouter à $\mu_4$ (ce qui se fait en allongeant le terme de $\mu_4$ : $\mu_4 := \text{MEM}(f(i_{r-1}), R_{f(i_{r-1})}, \mu_4)$), puis raccourcir le terme de $\mu_3$ en récupérant les deux premiers arguments pour remplir $\mu_1$ et $\mu_2$.
+					
+					On obtient la configuration suivante : 
+					
+					
+					\begin{itemize}
+						\item 	
+								$\mu := \text{MEM}(f(i_1), R_{f(i_1)}, \text{MEM}( \dots, \text{MEM}(f(i_n), R_{f(i_n)}, \varepsilon) \dots ) )$ (mémoire complète)
+						
+						\item 	
+								$\mu_1 := f(i_{r+1})$ (pointeur vers une case mémoire)
+						
+						\item 	
+								$\mu_2 := R_{f(i_{r+1})}$ (contenu de la case mémoire pointée)
+						
+						\item 	
+								$\mu_3 := \text{MEM}(f(i_{r+2}), R_{f(i_{r+2})}, \text{MEM}( \dots, \text{MEM}(f(i_n), R_{f(i_n)}, \varepsilon) \dots ) )$ (cases mémoires suivantes)
+						
+						\item 	
+								$\mu_4 := \text{MEM}(f(i_{r}), R_{f(i_{r})}, \text{MEM}( \dots, \text{MEM}(f(i_1), R_{f(i_1)}, \varepsilon) \dots ) )$ (cases mémoires précédentes)
+					\end{itemize}					
+					
+					
+					Pour accéder à la case précédente, on effectue la même opération en inversant les rôles de $\mu_3$ et $\mu_4$.
+					
+					Pour accéder à une case spécifique de la mémoire, il faut avancer dans la mémoire case par case et effectuer un test d'égalité entre l'indice de la mémoire courante et l'indice auquel on souhaite accéder. La raison à cela est que les termes que l'on utilise ne sont pas ordonnés : si l'on sait à chaque instant quelle case mémoire on est en train de visiter, on ne peut pas savoir quelles sont les cases précédentes et suivantes. Cela impose de réinitialiser les registres $\left( \mu_i \right)_{i\in 4}$ à chaque fois qu'on a besoin d'accéder à la mémoire, et de mettre à jour le terme complet de $\mu$ à chaque fois qu'on a fini de modifier une case. 
+					
+					A la fin de chaque modification, il faut revenir à la première case mémoire, donc dérouler $\mu_4$ entièrement et le recoller au début de $\mu_3$, puis copier $\mu_3$ dans $\mu$. 
 					
 					\espace
 					
+					Voici les algorithmes permettant d'effectuer ces opérations en mémoire.
+					
+					\espace 
+					
 					\begin{algorithm}[H]
 						\label{algo:A_RAM_fn_INSERT}
+						
+						\textbf{Fonction} $\text{INSERT}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$
+						
+						\tcc{Insère la valeur de $\beta$ dans la case mémoire d'indice $\alpha$.}
+						
+						\espace 
 						
 						\KwIn{Registres $\mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2$}
 						
 						\tcc{
 							$\mu, (\mu_i)_{i\in 4}$ sont tels que décrits plus haut.\\
-							$\alpha$ est l'indice auquel on veut insérer. \\
-							$\beta$ est la valeur qu'on veut insérer à l'indice $\alpha$. \\
+							$\alpha$ est l'indice auquel on veut accéder. \\
+							$\beta$ est le registre récupérant la valeur de la case mémoire d'indice $\alpha$. \\
 							$\pi_1, \pi_2, \pi'_1, \pi'_2$ sont les registres de travail nécessaires au test d'égalité.
 							}
 						
@@ -944,6 +1050,13 @@
 					
 					\begin{algorithm}[H]
 						\label{algo:A_RAM_fn_ACCESS}
+						
+						\textbf{Fonction} $\text{ACCESS}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$
+						
+						\tcc{Copie la valeur de la case mémoire d'indice $\alpha$ dans $\beta$.}
+						
+						\espace 
+						
 						\KwIn{$\mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2$}
 						
 						\tcc{
@@ -952,6 +1065,8 @@
 							$\beta$ est la valeur qu'on veut insérer à l'indice $\alpha$. \\
 							$\pi_1, \pi_2, \pi'_1, \pi'_2$ sont les registres de travail du test d'égalité.
 						}
+						
+						\espace
 						
 						\tcp{Initialisation de la mémoire}
 						

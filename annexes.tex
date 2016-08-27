@@ -97,6 +97,13 @@
 		
 		\begin{algorithm}[H]
 			\label{prog:A_RAM_fn_COPY}
+
+			\textbf{Fonction} $s_{a_1}\text{COPY}(\alpha, \beta, \bar{\pi}) s_b$
+			
+			\tcc{Récupère chacun des premiers sous-termes de $\alpha$ puis réassemble ces sous-termes dans $\beta$.}
+			
+			\espace 
+			
 			\KwIn{$\alpha, \beta, \pi_1, \dots, \pi_r$}
 			\tcp{Détruit le terme contenu dans $\alpha$, stocke ses composantes dans chaque $\pi_p$, puis reconstruit le terme dans $\beta$.}
 			
@@ -111,7 +118,7 @@
 				(const) 	$s_{b_i} \pi_1 \dots \pi_{r_i} C_i \beta s_b$\;
 				}
 			
-			\caption{Programme de la fonction $s_{a_1}\text{COPY}(\alpha, \beta, \bar{\pi}) s_b$. Algorithme \hyperref[algo:A_RAM_fn_COPY]{en annexe}.}
+			\caption{Programme de la fonction $s_{a_1}\text{COPY}(\alpha, \beta, \bar{\pi}) s_b$. Algorithme \hyperref[algo:A_RAM_fn_COPY]{ci-dessus}.}
 		\end{algorithm}
 		
 		\espace
@@ -122,6 +129,11 @@
 		
 		\begin{algorithm}[H]
 			\label{algo:A_RAM_fn_extract_first}
+			
+			\textbf{Fonction} $s_a \text{EXTRACT\_FIRST}(\mu, \pi_1) s_f$
+
+			\espace 
+			
 			\KwIn{$\mu, \pi_1$}
 			\tcp{Si $\mu$ est un terme de mémoire non vide, on extrait la première valeur de cette mémoire en laissant le reste inchangé.}
 			
@@ -141,6 +153,11 @@
 		
 		\begin{algorithm}[H]
 			\label{prog:A_RAM_fn_extract_first}
+			
+			\textbf{Fonction} $s_a \text{EXTRACT\_FIRST}(\mu, \pi_1) s_f$
+			
+			\espace
+			
 			\KwIn{$\mu, \pi_1$}
 			\tcp{Si $\mu$ est un terme de mémoire non vide, on extrait la première valeur de cette mémoire en laissant le reste inchangé.}
 			
@@ -161,6 +178,11 @@
 		
 		\begin{algorithm}[H]
 			\label{algo:A_RAM_fn_DECOMPOSE}
+			
+			\textbf{Fonction} $s_a \text{DECOMPOSE}(\alpha, \pi, \pi', \bar{\pi}) s_c$
+			
+			\espace 
+			
 			\KwIn{$\alpha, \pi, \pi', \bar{\pi}$}
 			
 			\tcp{Détruit le terme contenu dans $\alpha$, stocke ses sous-termes dans une seule mémoire $\pi$ et copie $\alpha$ dans $\pi'$. Les registres $\bar{\pi}$ sont des registres de travail utiles à la fonction $\text{COPY}$.}
@@ -185,6 +207,11 @@
 		
 		\begin{algorithm}[H]
 			\label{prog:A_RAM_fn_DECOMPOSE}
+			
+			\textbf{Fonction} $s_a \text{DECOMPOSE}(\alpha, \pi, \pi', \bar{\pi}) s_c$
+			
+			\espace
+			
 			\KwIn{$\alpha, \pi, \pi', \bar{\pi}$}
 			
 			\tcp{Détruit le terme contenu dans $\alpha$, stocke ses sous-termes dans une seule mémoire $\pi$ et copie $\alpha$ dans $\pi'$. Les registres $\bar{\pi}$ sont des registres de travail utiles à la fonction $\text{COPY}$.}
@@ -213,6 +240,13 @@
 		
 		\begin{algorithm}[H]
 			\label{prog:A_RAM_fn_IF}
+			
+			\textbf{Fonction} $\text{IF}(\alpha, \beta, s_1, s_0, \pi_1, \pi_2, \pi'_1, \pi'_2)$
+			
+			\tcc{Vérifie si $\alpha = \beta$ en faisant une analyse inductive sur la construction des termes qu'ils contiennent, c'est-à-dire en vérifiant si le constructeur extérieur est le même, puis en déconstruisant le terme et effectuant ces mêmes comparaisons sur les sous-termes.}
+			
+			\espace 
+			
 			\KwIn{$\alpha, \beta, s_1, s_0, \pi_1, \pi_2, \pi'_1, \pi'_2$}
 			\tcc{$\alpha, \beta$ : les registres contenant les termes à tester.\\
 				$s_1, s_0$ : place la machine dans l'état $s_1$ si $\alpha = \beta$, $s_0$ sinon. \\
@@ -279,13 +313,19 @@
 			
 			\tcp{On vérifie les contenus des mémoires temporaires. Si les deux mémoires sont vides ($s_{g_2} \rightarrow s_{g_3} \rightarrow s_{1}$) alors il y a égalité entre les termes de départ (on a fini de tout comparer). Si l'une des mémoires est vide et l'autre non ($s_{g_2} \rightarrow s_{g_3} \rightarrow s_0$ ou $s_{g_2} \rightarrow s_{g_4} \rightarrow s_0$) alors les deux termes n'étaient pas égaux. Enfin, si les deux mémoires ont encore des termes à vérifier, alors on revient à l'état $s_{d_1}$.}
 			
-			\caption{Fonction $\text{IF}(\alpha, \beta, s_1, s_0, \pi_1, \pi_2, \pi'_1, \pi'_2)$. Algorithme \hyperref[algo:A_RAM_fn_IF]{en annexe}.}
+			\caption{Fonction $\text{IF}(\alpha, \beta, s_1, s_0, \pi_1, \pi_2, \pi'_1, \pi'_2)$. Algorithme \hyperref[algo:A_RAM_fn_IF]{ci-dessus}.}
 		\end{algorithm}
 		
 		\espace
 		
 		\begin{algorithm}[H]
 			\label{prog:A_RAM_fn_INSERT}
+			
+			\textbf{Fonction} $\text{INSERT}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$
+			
+			\tcc{Insère la valeur de $\beta$ dans la case mémoire d'indice $\alpha$.}
+			
+			\espace 
 			
 			\KwIn{$\mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2$}
 			
@@ -354,6 +394,12 @@
 		
 		\begin{algorithm}[H]
 			\label{prog:A_RAM_fn_ACCESS}
+			
+			\textbf{Fonction} $\text{ACCESS}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$
+			
+			\tcc{Copie la valeur de la case mémoire d'indice $\alpha$ dans $\beta$.}
+			
+			\espace 
 			
 			\KwIn{$\mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2$}
 			
