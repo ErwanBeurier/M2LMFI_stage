@@ -42,7 +42,7 @@
 	
 	\section*{TODO List}
 	
-	\nepasoublier{NE PAS OULIER}
+	\nepasoublier{NE PAS OUBLIER}
 	
 	\begin{itemize}
 		\item 	Sources pour Cobham et l'équivalence de $P$ (pour Turing) et $P$ (pour RAM).
@@ -280,14 +280,17 @@
 				
 				\hspace{0.1\linewidth}\parbox{0.9\linewidth}{
 					\small
-					Une fonction $f: \bbA_i \times \mathcal{A} \to \bbA_j$ est définie par récurrence ramifiée à partir des fonctions $\left( g_{c_i} \right)_{i\in k}$ lorsque :
+					Une fonction $f: \bbA_m \times \mathcal{A} \to \bbA_n$ est définie par récurrence ramifiée à partir des fonctions $\left( g_{c_i} \right)_{i\in k}$ lorsque :
 					
 					\begin{itemize}
+						\item 	$\forall i \:\:\:\: g_{c_i} : \bbA_n^{r_i} \times \bbA_m^{r_i} \times \mathcal{A} \to \bbA_n$
+						
 						\item 	$\forall i \:\:\:\:
-						f(c_i^j(a_1, \dots, a_{r_i}), \bar{x}) 
+						f(c_i^m(a_1, \dots, a_{r_i}), \bar{x}) 
 						= g_{c_i}\left( f(a_1, \bar{x}), \dots, f(a_{r_i}, \bar{x}), \bar{a}, \bar{x} \right)
 						$
 					\end{itemize}
+					\nepasoublier{Préciser le cas particulier des mots (la récurrence se précise comme ça)}
 				}
 				
 				\espace
