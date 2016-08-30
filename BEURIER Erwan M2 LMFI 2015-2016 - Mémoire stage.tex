@@ -45,7 +45,7 @@
 	\nepasoublier{NE PAS OUBLIER}
 	
 	\begin{itemize}
-		\item 	Sources pour Cobham et l'équivalence de $P$ (pour Turing) et $P$ (pour RAM).
+		\item 	Sources pour Cobham et l'équivalence de $\textbf{P}$ (pour Turing) et $\textbf{P}$ (pour RAM).
 	\end{itemize}
 	
 	\pagebreak
@@ -60,7 +60,7 @@
 	
 	\section*{Introduction}
 	
-	Il existe de nombreuses caractérisations de $FP$ (notée dans la suite $P$ par abus de langage). Parmi les plus fameuses, on peut citer celle de Bellantoni et Cook \cite{BellantoniCook1992} ou celle de Cobham. Ce sont des caractérisations sur la récurrence, qui permettent de traduire le temps de calcul sur un modèle comme la machine de Turing en contraintes sur les définitions des fonctions, notamment en contrôlant leur récurrence. 
+	Il existe de nombreuses caractérisations de $\textbf{FP}$ (notée dans la suite $\textbf{P}$ par abus de langage). Parmi les plus fameuses, on peut citer celle de Bellantoni et Cook \cite{BellantoniCook1992} ou celle de Cobham. Ce sont des caractérisations sur la récurrence, qui permettent de traduire le temps de calcul sur un modèle comme la machine de Turing en contraintes sur les définitions des fonctions, notamment en contrôlant leur récurrence. 
 	
 	Cependant, ces caractérisations ont plusieurs défauts que l'on va essayer de corriger dans ce mémoire :
 	
@@ -69,7 +69,7 @@
 				Ces caractérisations ne \emph{communiquent} pas, dans le sens où elles passent en général par leur modèle de calcul (machine de Turing ou machine RAM) ; parfois, leurs modèles de calculs sont même spécifiques à la caractérisation. Les buts du chapitre \ref{chap:unif_P} sont premièrement, de trouver des passerelles entre diverses caractérisations sans passer par leur machine respective, et deuxièmement, d'expliciter une simulation entre deux de ces machines ;
 				
 		\item 
-				Elles caractérisent $P$ globalement, mais ne permettent pas de caractériser des classes plus précises (à savoir, le temps polynomial à polynôme fixé). Le chapitre \ref{chap:rLSRS} explore une caractérisation de telles classes en s'inspirant d'un travail effectué sur le temps linéaire \cite{GrandjeanSchwentick2002}.
+				Elles caractérisent $\textbf{P}$ globalement, mais ne permettent pas de caractériser des classes plus précises (à savoir, le temps polynomial à polynôme fixé). Le chapitre \ref{chap:rLSRS} explore une caractérisation de telles classes en s'inspirant d'un travail effectué sur le temps linéaire \cite{GrandjeanSchwentick2002}.
 	\end{itemize}
 	
 	
@@ -81,7 +81,7 @@
 	\section{Des caractérisations de $P$}
 		\label{sec:caracterisations_P}
 	
-		Dans cette section, on présente quelques caractérisations connues de $P$. Le but de ce premier chapitre va être de lier ces caractérisations de manière plus directe. 
+		Dans cette section, on présente quelques caractérisations connues de $\textbf{P}$. Le but de ce premier chapitre va être de lier ces caractérisations de manière plus directe. 
 	
 		\subsection{Notions générales}
 			\label{subsec:notions_generales}
@@ -131,32 +131,30 @@
 		
 			On se place dans le cas des mots : $\sigma = \{ C_1, \dots, C_k \}$ où $\minlist{C_i}{i \in k} = 0$ et $\maxlist{C_i}{i \in k} = 1$.
 			
+			\begin{definition}[Récurrence bornée sur les notations]
+				Une fonction $f \in \textbf{Cob}$ est définie par récurrence bornée sur les notations à partir de $(g_c)_{c \in \sigma}, h \in \textbf{Cob}$ lorsque :
+				
+				\begin{itemize}[itemsep=-1mm]
+					\item 	$\forall c \in \sigma, \:\:\: f\left( c(x), \bar{y} \right) = g_c\left( x, \bar{y} \right)$
+					\item 	$\forall x, \bar{y}, \:\:\: \left| f \left( x, \bar{y} \right) \right| \leq \left| h \left( x, \bar{y} \right) \right|$
+				\end{itemize}
+			\end{definition}
+			
 			
 			\begin{definition}
 				\label{def:Cob}
-				On note $\text{Cob}$ le plus petit ensemble de fonctions contenant les constructeurs, les projections, le smash $x \sharp y = 2^{\left| x \right| \times \left| y\right|}$, et close par composition et récurrence bornée sur les notations.
-				
-				\hspace{0.05\linewidth}\parbox{0.9\linewidth}{
-					\small
-					\emph{Une fonction $f \in \text{Cob}$ est définie par récurrence bornée sur les notations à partir de $(g_c)_{c \in \sigma}, h \in \text{Cob}$ lorsque :}
-					
-					\begin{itemize}[itemsep=-1mm]
-						\item 	$\forall c \in \sigma, \:\:\: f\left( c(x), \bar{y} \right) = g_c\left( x, \bar{y} \right)$
-						\item 	$\forall x, \bar{y}, \:\:\: \left| f \left( x, \bar{y} \right) \right| \leq \left| h \left( x, \bar{y} \right) \right|$
-					\end{itemize}
-				}
-				
+				On note $\textbf{Cob}$ le plus petit ensemble de fonctions contenant les constructeurs, les projections, le smash $x \sharp y = 2^{\left| x \right| \times \left| y\right|}$, et close par composition et récurrence bornée sur les notations.
 			\end{definition}
 			
 			
 			\begin{theorem}[Cobham]
 				\label{thm:Cob_equals_P}
-				$\text{Cob} = P$
+				$\textbf{Cob} = \textbf{P}$
 			\end{theorem}
 		
-			L'inclusion $P \subset \text{Cob}$  consiste à réécrire les fonctions de base de $P$ avec les fonctions de $\text{Cob}$ ; l'inclusion inverse vient du fait que la borne est toujours polynomiale.
+			L'inclusion $\textbf{P} \subset \textbf{Cob}$  consiste à décrire le comportement d'une machine de Turing calculant en temps polynomial avec les fonctions de $\textbf{Cob}$ ; l'inclusion inverse vient du fait que la borne est toujours polynomiale.
 			
-			Conséquence : il existe une borne explicite pour chaque fonction de $P$. 
+			%Conséquence : il existe une borne explicite pour chaque fonction de $\textbf{P}$. 
 		
 		
 		
@@ -180,20 +178,48 @@
 							Exponentielle : $\exp(0) = 1$ et $\exp(s(x)) = \exp(x) + \exp(x)$.
 				\end{enumerate}
 				
-				Dans ces trois cas, le premier argument est appelé \emph{argument de récurrence}, puisque c'est celui-ci qui, en quelques sortes, compte le nombre d'étapes de récurrence. Dans l'addition, l'argument $s(x)$ devient $x$ dans l'appel récursif ; idem pour la multiplication. Dans ces deux cas, l'argument de récurrence décroît à chaque appel récursif. 
+				Dans ces trois cas, le premier argument est appelé \emph{argument de récurrence}, puisque c'est celui-ci qui, en quelque sorte, compte le nombre d'étapes de récurrence. Dans l'addition, l'argument $s(x)$ devient $x$ dans l'appel récursif ; idem pour la multiplication. Dans ces deux cas, l'argument de récurrence décroît à chaque appel récursif. 
 				
 				Dans le cas de l'exponentielle par contre, l'argument $s(x)$ devient $x$ dans $\exp(x)$ et $\exp(x)$ en tant qu'argument de récurrence de $+(-,-)$. L'idée de Bellantoni et Cook est d'empêcher qu'un argument de récurrence entraine la création d'arguments de récurrence de plus en plus gros, ce qui est le cas ici.
 				
 			\end{example}
 			
+			Cette idée mène à la séparation des arguments en deux tiers : 
+			
+			\begin{itemize}
+				\item 	Les arguments \emph{normaux}, qui sont ceux qui ne doivent pas croître trop vite (les premiers arguments dans l'addition et la multiplication) ;
+				\item 	Les arguments \emph{safe}, qu'on laisse, en quelque sorte, libres de croître. 
+			\end{itemize}
+			
+			Au niveau des notations, les arguments \emph{normaux} et \emph{safe} sont séparés par un \textquoted{;} :
+			
+			\[
+				f(\underset{\text{normaux}}{\underbrace{\overline{x}}} ; \underset{\text{safe}}{\underbrace{\overline{u}}})
+			\]
+			
+			Ensuite, on se place dans une algèbre de mots (tous les constructeurs de l'algèbre sont d'arité au plus $1$ ; typiquement, l'algèbre des mots binaires). \nepasoublier{Pourquoi les algèbres de mots !!}
+			
+			\begin{definition}[Composition \emph{safe}]
+				La fonction $f$ est définie par composition \emph{safe} à partir de $h, g_0, g_1 \in \textbf{BC}$ lorsque :
+				
+				\[
+					f\left( \bar{x} ; \bar{y}\right) = h\left( \bar{x}, g_0( \bar{x}; ) ; \bar{y}, g_1( \bar{x}; \bar{y} ) \right)
+				\]
+			\end{definition}
 			
 			
+			\begin{definition}[Récurrence \emph{safe}]
+				La fonction $f$ est définie par récurrence \emph{safe} à partir de $\left(g_c\right)_{c \in \sigma} \in \textbf{BC}$ lorsque pour tout constructeur $c$ :
+				
+				\[
+					f\left(c(;x), \bar{y} ; \bar{z}\right) = g_c\left( x, \bar{y} ; \bar{z}, f(x, \bar{y}; \bar{z}) \right)
+				\]
+			\end{definition}
 			
-			On se place dans une algèbre de mots (tous les constructeurs de l'algèbre sont d'arité au plus $1$).
 			
 			\begin{definition}[Fonctions récursives à arguments normaux \cite{BellantoniCook1992}]
 				\label{def:BC}
-				On note $\text{BC}$ le plus petit ensemble de fonctions contenant :
+				On note $\textbf{BC}$ le plus petit ensemble de fonctions contenant :
 				
 				\begin{itemize}[itemsep=-1mm]
 					\item 	les constructeurs \emph{safe} : $C_i\left(; x\right)$
@@ -210,39 +236,17 @@
 						\end{array} \right.$
 				\end{itemize}
 				
-				et étant close par schéma de récursion \emph{safe}
-				
-				
-				\hspace{0.1\linewidth}\parbox{0.9\linewidth}{
-					\small
-					\emph{La fonction $f$ est définie par récurrence \emph{safe} à partir de $\left(g_c\right)_{c \in \sigma} \in \text{BC}$ lorsque pour tout constructeur $c$ :}
-					
-					\[
-						f\left(c(;x), \bar{y} ; \bar{z}\right) = g_c\left( x, \bar{y} ; \bar{z}, f(x, \bar{y}; \bar{z}) \right)
-					\]
-				}
-	
-	
-				et composition \emph{safe}.
-				
-				\hspace{0.1\linewidth}\parbox{0.9\linewidth}{
-					\small
-					\emph{La fonction $f$ est définie par composition \emph{safe} à partir de $h, g_0, g_1 \in \text{BC}$ lorsque :}
-					
-					\[
-						f\left( \bar{x} ; \bar{y}\right) = h\left( \bar{x}, g_0( \bar{x}; ) ; \bar{y}, g_1( \bar{x}; \bar{y} ) \right)
-					\]
-				}
+				et étant close par schéma de récursion \emph{safe} et composition \emph{safe}.
 				
 			\end{definition}
 			
 			
 			\begin{theorem}[Bellantoni et Cook \cite{BellantoniCook1992}]
 				\label{thm:BC_equals_P}
-				$\text{BC} = P$
+				$\textbf{BC} = P$
 			\end{theorem}
 	
-			On démontre en fait $P \subseteq \text{BC} \subseteq \text{Cob}$. La première inclusion se fait en montrant qu'on peut expliciter les arguments \emph{safe} et \emph{normaux} dans les définitions des fonctions. La deuxième inclusion se trouve en explicitant par induction une borne sur les fonctions de $\text{BC}$. 
+			On démontre en fait $\textbf{P} \subseteq \textbf{BC} \subseteq \textbf{Cob}$. La première inclusion se fait en montrant qu'on peut expliciter les arguments \emph{safe} et \emph{normaux} dans les définitions des fonctions. La deuxième inclusion se trouve en explicitant par induction une borne sur les fonctions de $\textbf{BC}$. 
 		
 		
 		
@@ -255,53 +259,62 @@
 			
 			\espace
 				
-			On note $(\bbA_i)_{i\in \omega}$ l'ensemble des copies de l'algèbre $\bbA$, qui correspondent à des niveaux d'abstraction de $\bbA$, c'est-à-dire, une manière de hiérarchiser les arguments d'une fonction. On notera $\mathcal{A}$ n'importe quel produit cartésien fini de copies de $\bbA$. Pour $x\in \bbA_i$, on note $\text{tier}(x) = i$. De même, pour $f : \mathcal{A} \to \bbA_i$, on note $\text{tier}(f) = i$. Chaque tier a de plus ses propres constructeurs. Le constructeur $C_j$ du niveau $i$ sera noté $C_j^i$. 
+			On note $(\bbA_i)_{i\in \omega}$ l'ensemble des copies de l'algèbre $\bbA$, qui correspondent à des niveaux d'abstraction de $\bbA$, c'est-à-dire, une manière de hiérarchiser les arguments d'une fonction. On notera $\mathcal{A}$ n'importe quel produit cartésien fini de copies de $\bbA$. Pour $x\in \bbA_i$, on note $\text{tier}(x) = i$. De même, pour $f : \mathcal{A} \to \bbA_i$, on note $\text{tier}(f) = i$. Chaque tier a de plus ses propres constructeurs. Le constructeur $C_i$ de niveau $j$ sera noté $C^j_i$. 
+			
+			
+			\begin{definition}[Composition ramifiée]
+				Une fonction $f: \mathcal{A} \to \bbA_j$ est définie par composition ramifiée à partir de $h: \mathcal{A}' \to \bbA_j$ et $\left(g_i : \mathcal{A} \to \bbA'_i\right)_{i\in t}$ lorsque :
+				
+				\begin{itemize}
+					\item	$\bbA'_1 \times \dots \times \bbA'_t = \mathcal{A}'$
+					
+					\item 	$\forall i \:\:\:\:
+					f\left( \bar{x} \right) = h\left( g_1\left( \bar{x}\right), \dots,  g_t\left( \bar{x} \right) \right)
+					$
+				\end{itemize}
+			\end{definition}
+			
+
+			Revenons sur la définition de la récurrence ramifiée. Les fonctions $g_{c_i}$ peuvent contenir ou non des appels récursifs à la fonction $f$. Il s'agit de la notion clé de l'article.
+			
+			\begin{definition}[Argument critique]
+				Soit $f$ une fonction définie par récurrence à partir des fonctions $\left( g_{c_i} \right)_{i\in k}$ : 
+				
+				\[
+					\forall i \:\:\:\: f(c_i^m(a_1, \dots, a_{r_i}), \bar{x})  = g_{c_i}\left( f(a_1, \bar{x}), \dots, f(a_{r_i}, \bar{x}), \bar{a}, \bar{x} \right)
+				\]
+				
+				Les arguments $f(a_1, \bar{x}), \dots, f(a_{r_i})$ de la fonction $g_{c_i}$ sont appelés \emph{arguments critiques}.
+			\end{definition}
+			
+			
+			\begin{definition}[Récurrence ramifiée]
+				Une fonction $f: \bbA_m \times \mathcal{A} \to \bbA_n$ est définie par récurrence ramifiée à partir des fonctions $\left( g_{c_i} \right)_{i\in k}$ lorsque :
+				
+				\begin{itemize}
+					\item 	$\forall i \:\:\:\: g_{c_i} : \bbA_n^{r_i} \times \bbA_m^{r_i} \times \mathcal{A} \to \bbA_n$
+					
+					\item 	$\forall i \:\:\:\:
+					f(c_i^m(a_1, \dots, a_{r_i}), \bar{x}) 
+					= g_{c_i}\left( f(a_1, \bar{x}), \dots, f(a_{r_i}, \bar{x}), \bar{a}, \bar{x} \right)
+					$
+					
+					\item 	Si l'une des fonctions de récurrence a un argument critique, alors le tiers de départ $m$ de $f$ doit être strictement supérieur au tiers d'arrivée $n$ : $m > n$ ; sinon, $m \geqslant n$.
+				\end{itemize}
+			\end{definition}
+			
+			
 			
 			\begin{definition} 
 				\label{def:TRecA}
 				On note $\TRec{A}$ le plus petit ensemble de fonctions récursives primitives sur $\bbA$ contenant les constructeurs, les projections et étant clos par composition ramifiée et récurrence ramifiée.
-				
-				\espace
-				
-				\hspace{0.1\linewidth}\parbox{0.9\linewidth}{
-					\small
-					Une fonction $f: \mathcal{A} \to \bbA_j$ est définie par composition ramifiée à partir de $h: \mathcal{A}' \to \bbA_j$ et $\left(g_i : \mathcal{A} \to \bbA'_i\right)_{i\in t}$ lorsque :
-					
-					\begin{itemize}
-						\item	$\bbA'_1 \times \dots \times \bbA'_t = \mathcal{A}'$
-						
-						\item 	$\forall i \:\:\:\:
-						f\left( \bar{x} \right) = h\left( g_1\left( \bar{x}\right), \dots,  g_t\left( \bar{x} \right) \right)
-						$
-					\end{itemize}
-				}
-				
-				\espace
-				
-				\hspace{0.1\linewidth}\parbox{0.9\linewidth}{
-					\small
-					Une fonction $f: \bbA_m \times \mathcal{A} \to \bbA_n$ est définie par récurrence ramifiée à partir des fonctions $\left( g_{c_i} \right)_{i\in k}$ lorsque :
-					
-					\begin{itemize}
-						\item 	$\forall i \:\:\:\: g_{c_i} : \bbA_n^{r_i} \times \bbA_m^{r_i} \times \mathcal{A} \to \bbA_n$
-						
-						\item 	$\forall i \:\:\:\:
-						f(c_i^m(a_1, \dots, a_{r_i}), \bar{x}) 
-						= g_{c_i}\left( f(a_1, \bar{x}), \dots, f(a_{r_i}, \bar{x}), \bar{a}, \bar{x} \right)
-						$
-					\end{itemize}
-					\nepasoublier{Préciser le cas particulier des mots (la récurrence se précise comme ça)}
-				}
-				
-				\espace
-				
+
 				On note $\TRecd{A}$ le sous-ensemble de $\TRec{A}$ dont chaque fonction est constructible en n'utilisant que les deux tiers $\bbA_0, \bbA_1$.
 			\end{definition}
 			
 			Un premier résultat sur les tiers est que si une fonction $f \in \TRec{\bbA}$ a des arguments de tiers inférieur à son tier d'arrivée, alors $f$ \emph{ignore} ces arguments (voir lemme \ref{lem:arg_redondant}).
 			
-			Revenons sur la définition de la récurrence ramifiée. Les fonctions $g_{c_i}$ peuvent contenir ou non des appels récursifs à la fonction $f$. Si tel est le cas, un argument $f\left( a_i, \bar{x} \right)$ est appelé argument critique. Cette distinction entre les arguments permet de définir une notion de degré d'imbrication, qui sert en somme de compteur de tours de boucles. 
-			
+			La distinction entre les arguments critiques et les autres permet de définir une notion de degré d'imbrication, qui sert en somme de compteur de tours de boucles. 
 			
 			\begin{definition}[Degré d'imbrication de récurrence\footnotemark]
 				\label{def:degre_recurrence}
@@ -361,7 +374,7 @@
 			
 		
 	
-		\subsection{Correspondance entre Bellantoni et Cook et Leivant}
+		\subsection{Correspondance entre Bellantoni-Cook et Leivant}
 		\label{subsec:corres_BC_Leivant}
 	
 			Le point de départ de Leivant est différent de celui de Bellantoni et Cook, mais le résultat est similaire. En fait, il y a une correspondance naturelle entre le résultat de Bellantoni et Cook et celui de Leivant.
@@ -370,15 +383,15 @@
 				\label{lem:BC_and_Leivant}
 				Soit $f \in P$, $f$ fonction sur $\mathbb{W}$ (mots binaires).
 				
-				Un argument $x$ de $f$ est \emph{normal} dans $\text{BC}$ si et seulement si $\text{tier}(x) > \text{tier}(f)$ dans $\TRec{W}$.
+				Un argument $x$ de $f$ est \emph{normal} dans $\textbf{BC}$ si et seulement si $\text{tier}(x) > \text{tier}(f)$ dans $\TRec{W}$.
 				
-				Un argument $x$ de $f$ est \emph{safe} dans $\text{BC}$ si et seulement si $\text{tier}(x) \leq \text{tier}(f)$ dans $\TRec{W}$.
+				Un argument $x$ de $f$ est \emph{safe} dans $\textbf{BC}$ si et seulement si $\text{tier}(x) \leq \text{tier}(f)$ dans $\TRec{W}$.
 			\end{lemma}
 			
 			\begin{proof}
 				\textcolor{white}{T} %exte blanc inutile pour passer à la ligne.
 				
-				\textbf{Passage de $\text{BC}$ à $\TRec{W}$}
+				\textbf{Passage de $\textbf{BC}$ à $\TRec{W}$}
 				
 				Un constructeur \emph{safe} $C_i(; x)$ se traduit naturellement en un constructeur \emph{plat} (le tier de départ est égal au tier d'arrivée). Les projections se traduisent naturellement aussi en suivant cette règle.
 				
@@ -426,7 +439,7 @@
 				
 				\espace
 				
-				\textbf{Passage de $\TRec{W}$ à $\text{BC}$}
+				\textbf{Passage de $\TRec{W}$ à $\textbf{BC}$}
 				
 				\begin{lemma}[Leivant \cite{Leivant1995}]
 					\label{lem:arg_redondant}
@@ -444,7 +457,7 @@
 				Si $f(\underset{1}{\bar{x}}, \underset{0}{\bar{y}}) = g( \underset{1}{\bar{x}}, \underset{1}{h_1}(\bar{x}), \underset{0}{\bar{y}}, \underset{0}{h_0}(\bar{x}, \bar{y}))$ alors :
 				
 				\begin{itemize}[itemsep=-1mm]
-					\item 	Soit $\text{tier}(f) = \text{tier}(g) = 1$, dans ce cas $f(\underset{1}{\bar{x}}) = g( \underset{1}{\bar{x}}, \underset{1}{h_1}(\bar{x}))$ (car on n'a pas d'argument redondant). Par hypothèse d'induction $\underset{1}{h_1}(\bar{x}) \equiv h_1(;\bar{x})$ et $g(\underset{1}{\bar{x}}, \underset{1}{h_1}(\bar{x})) \equiv g(; \bar{x}, h_1(;\bar{x})) = f(; \bar{x})$.
+					\item 	Soit $\text{tier}(f) = \text{tier}(g) = 1$, dans ce cas $f(\underset{1}{\bar{x}}) = g( \underset{1}{\bar{x}}, \underset{1}{h_1}(\bar{x}))$ (car on n'a pas d'argument redondant). Par hypothèse d'induction $\underset{1}{h_1}(\bar{x}) \equiv h_1(;\bar{x})$ et $\underset{1}{g}(\bar{x}) \equiv g(;\bar{x})$ d'où $g(\underset{1}{\bar{x}}, \underset{1}{h_1}(\bar{x})) \equiv g(; \bar{x}, h_1(;\bar{x})) = f(; \bar{x})$.
 					
 					\item 	Soit $\text{tier}(f) = \text{tier}(g) = 0$, dans ce cas par hypothèse d'induction, on a bien : $g( \bar{x}, h_1(\bar{x};) ; \bar{y}, h_0(\bar{x}; \bar{y})) = f(\bar{x} ; \bar{y})$.
 				\end{itemize}
@@ -453,7 +466,7 @@
 			\end{proof}
 			
 	
-			L'équivalence entre les deux se généralise sans problème aux algèbres de mots voire aux algèbres quelconques (bien que dans le cas d'algèbres quelconques, on ne sache pas s'il y a équivalence entre $P$ et $\text{BC}$ ou $\TRec{A}$).
+			L'équivalence entre les deux se généralise sans problème aux algèbres de mots voire aux algèbres quelconques (bien que dans le cas d'algèbres quelconques, on ne sache pas s'il y a équivalence entre $P$ et $\textbf{BC}$ ou $\TRec{A}$).
 			
 		
 	\espace
@@ -483,7 +496,7 @@
 				\item 	Une infinité dénombrable de registres $\left( R_i\right)_{i \in \omega}$.
 			\end{itemize}
 			
-			Les registres contiennent \emph{a priori} des valeurs entières.
+			Les registres contiennent des valeurs entières ; elles s'initialisent à 0. 
 			
 			Un programme de $\sigma$-RAM est un ensemble fini d'instructions $\left( I(i) \right)_{i \in N}$ dont chacune est de l'une des formes suivantes :
 			
@@ -504,7 +517,7 @@
 			Ces instructions sont assez claires. $R_A$ est le registre $R_j$ où $j$ est la valeur contenue dans l'accumulateur $A$. La commande $IF$ renvoie à l'instruction $i$ si $A = B$ et à $j$ sinon.
 			Par défaut, tous les registres sont initialisés à $0$.
 			
-			Cette $\sigma$-RAM est déterministe. On pourrait la rendre non-déterministe en autorisant une commande $A := \text{CHOOSE}(A)$ ou une commande $\text{GOTO}\left( I(i_1), \dots, I(i_t)\right)$ qui permet d'effectuer plusieurs instructions en même temps. 
+			Cette $\sigma$-RAM est déterministe. On pourrait la rendre non-déterministe en autorisant une commande $A := \text{CHOOSE}(A)$ ou une commande $\text{GOTO}\left( I(i_1), \dots, I(i_t)\right)$ qui choisissent (respectivement) la valeur suivante ou l'instruction à lire.
 		\end{definition}
 		
 		
@@ -523,7 +536,7 @@
 		
 		\begin{theorem}
 			\label{thm:sRAMs_turing_complete}
-			\emph{Une machine de Turing (binaire ?) simule une $\sigma$-RAM (pour quel $\sigma$ ?) en temps ??? et une $\sigma$-RAM simule une machine de Turing en temps polynomial.}
+			Une machine de Turing (binaire ?) simule une $\{+\}$-RAM en temps polynomial et une $\{+\}$-RAM simule une machine de Turing en temps linéaire.
 		\end{theorem}
 		
 		\nepasoublier{Il me faut une source pour la $\sigma$-RAM.}.
@@ -588,17 +601,27 @@
 
 			Le but de cette section est de simuler une $\bbA$-RAM dans une $\sigma$-RAM et inversement.
 			
-			\subsubsection{$\bbA$-RAM dans $\sigma$-RAM}
+			\subsubsection{Simulation d'une $\bbA$-RAM dans une $\sigma$-RAM}
 			\label{subsubsec:sim_A_RAM_sigma_RAM}
 	
 				
 				\paragraph{Premières observations.}
 				\label{par:premieres_observations}
-				Premièrement, la $\sigma$-RAM calcule des entiers alors que la $\bbA$-RAM construit des termes. Cette remarque plutôt intuitive est pourtant la cause \emph{meta} des différences de puissance de ces machines. La $\sigma$-RAM se veut un modèle de calcul très proche de l'ordinateur réel (la mémoire réelle n'est certes pas infinie, mais suffisamment grande pour que ça ne soit pas un problème), alors que la $\bbA$-RAM se veut un modèle plus logique (construction de termes). De plus, la machine de Leivant est très frustre car il l'a construite pour qu'elle colle parfaitement à sa caractérisation de $DTIME_{\bbA}(n^k)$ (théorème \ref{thm:TRecA_equals_P_poly_fixe}).
+				Quelques remarques préalables.
 				
-				Deuxièmement, la mémoire de la $\sigma$-RAM est infinie et celle de la $\bbA$-RAM est finie et ne doit pas dépendre de l'entrée.
-				Troisièmement, la $\sigma$-RAM dispose d'un test d'égalité gratuit, ce qui n'est pas le cas de la $\bbA$-RAM.
-				Enfin, la $\bbA$-RAM a une commande de destruction de terme qui n'a pas réellement d'équivalent dans la $\sigma$-RAM. 
+				\begin{enumerate}
+					\item 	\label{enum:obs_1} 
+							Premièrement, la $\sigma$-RAM prend en entrée des structures, renvoie une structure en sortie, et manipule des entiers, alors que la $\bbA$-RAM construit des termes. Cette remarque plutôt intuitive est pourtant la cause \emph{meta} des différences de puissance de ces machines. La $\sigma$-RAM se veut un modèle de calcul très proche de l'ordinateur réel (la mémoire réelle n'est certes pas infinie, mais suffisamment grande pour que ça ne soit pas un problème), alors que la $\bbA$-RAM se veut un modèle plus logique (construction de termes). De plus, la machine de Leivant est très frustre car il l'a construite pour qu'elle colle parfaitement à sa caractérisation de $DTIME_{\bbA}(n^k)$ (théorème \ref{thm:TRecA_equals_P_poly_fixe}).
+							
+					\item 	\label{enum:obs_2}
+							Deuxièmement, la mémoire de la $\sigma$-RAM est infinie et celle de la $\bbA$-RAM est finie et ne doit pas dépendre de l'entrée.
+							
+					\item 	\label{enum:obs_3}
+							Troisièmement, la $\sigma$-RAM dispose d'un test d'égalité gratuit, ce qui n'est pas le cas de la $\bbA$-RAM.
+							
+					\item 	\label{enum:obs_4}				
+							Enfin, la $\bbA$-RAM a une commande de destruction de terme qui n'a pas réellement d'équivalent dans la $\sigma$-RAM. 
+				\end{enumerate}
 				
 				Afin de contourner le premier problème, on va étendre la définition de la $\sigma$-RAM pour qu'elle construise elle aussi des termes. Quant aux autres problèmes, il va falloir ruser. Pour la mémoire, on va utiliser une astuce et distinguer quelques registres qui contiendront des termes très grands - mais qui ralentiront l'accès à la mémoire. Le test d'égalité sera simulé lourdement par la $\bbA$-RAM et on rajoutera une commande en plus à la $\sigma$-RAM pour copier la destruction de terme. 
 				
@@ -860,7 +883,7 @@
 					
 	
 					\paragraph{Egalité.}
-					Pour gérer le premier problème, on va écrire un test d'égalité. Puisqu'on ne peut comparer que les constructeurs extérieurs des termes, on va effectuer ces comparaisons, puis déconstruire le terme et recommencer les comparaisons. Puisque le nombre de sous-termes peut dépasser la capacité (finie) d'une $\bbA$-RAM, on va utiliser un fragment de l'astuce ci-dessous concernant la mémoire : à chaque décomposition de terme, on stockera les sous-termes dans une mémoire en forme de liste. Ce moyen est explicité juste \hyperref[par:A_RAM_memoire]{en-dessous}.
+					Pour gérer le premier problème \ref{enum:obs_1}, on va écrire un test d'égalité. Puisqu'on ne peut comparer que les constructeurs extérieurs des termes, on va effectuer ces comparaisons, puis déconstruire le terme et recommencer les comparaisons. Puisque le nombre de sous-termes peut dépasser la capacité (finie) d'une $\bbA$-RAM, on va utiliser un fragment de l'astuce ci-dessous concernant la mémoire : à chaque décomposition de terme, on stockera les sous-termes dans une mémoire en forme de liste. Ce moyen est explicité juste \hyperref[par:A_RAM_memoire]{en-dessous}.
 	
 					
 					\espace 
@@ -918,9 +941,11 @@
 					
 					\paragraph{Mémoire.}
 					\label{par:A_RAM_memoire}
-					Pour le second problème, on va supposer que la $\bbA$-RAM a le droit d'utiliser deux constructeurs supplémentaires $\text{MEM}(-,-,-)$ et $\varepsilon$. La mémoire de la $\sigma$-RAM sera simulée par un terme de la forme : 
+					Pour le second problème \ref{enum:obs_2}, on va supposer que la $\bbA$-RAM a le droit d'utiliser deux constructeurs supplémentaires $\text{MEM}(-,-,-)$ et $\varepsilon$. La mémoire de la $\sigma$-RAM sera simulée par un terme de la forme : 
 					
-					$\text{MEM}(f(i_1), R_{f(i_1)}, \text{MEM}( \dots, \text{MEM}(f(i_n), R_{f(i_n)}, \varepsilon) \dots ) )$
+					\[
+						\text{MEM}(f(i_1), R_{f(i_1)}, \text{MEM}( \dots, \text{MEM}(f(i_n), R_{f(i_n)}, \varepsilon) \dots ) )
+					\]
 					
 					Le premier argument de $\text{MEM}$ est l'indice du registre (on rappelle que $f$ est la bijection entre les entiers naturels et les termes, cf \hyperref[text:bijection_f]{plus haut}), le deuxième est son contenu, et le troisième la suite de la mémoire. Notons qu'on ne suppose pas que les indices sont ordonnés, car ils ne pourront pas l'être. 
 					
@@ -950,7 +975,7 @@
 								$\mu_4 := \text{MEM}(f(i_{r-1}), R_{f(i_{r-1})}, \text{MEM}( \dots, \text{MEM}(f(i_1), R_{f(i_1)}, \varepsilon) \dots ) )$ (cases mémoires précédentes)
 					\end{itemize}
 					
-					Si l'on veut accéder à la case suivante en mémoire, il faut récupérer les valeurs de $\mu_1$ et $\mu_2$, les rajouter à $\mu_4$ (ce qui se fait en allongeant le terme de $\mu_4$ : $\mu_4 := \text{MEM}(f(i_{r-1}), R_{f(i_{r-1})}, \mu_4)$), puis raccourcir le terme de $\mu_3$ en récupérant les deux premiers arguments pour remplir $\mu_1$ et $\mu_2$.
+					Si l'on veut accéder à la case suivante en mémoire, il faut récupérer les valeurs de $\mu_1$ et $\mu_2$, les rajouter à $\mu_4$ (ce qui se fait en allongeant le terme de $\mu_4$ : $\mu_4 := \text{MEM}(f(i_{r-1}), R_{f(i_{r-1})}, \mu_4)$), puis raccourcir le terme de $\mu_3$ en récupérant les deux premiers arguments pour remplir $\mu_1$ et $\mu_2$. Dans la description des algorithmes, on dira qu'on a \emph{dépilé} $\mu_3$. 
 					
 					On obtient la configuration suivante : 
 					
@@ -1042,7 +1067,7 @@
 						
 						Copier $\mu_3$ dans $\mu$ \;
 						
-						\caption{Fonction $\text{INSERT}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$. Programme \hyperref[prog:A_RAM_fn_INSERT]{ici}. }
+						\caption{Fonction $\text{INSERT}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$. Programme \hyperref[prog:A_RAM_fn_INSERT]{en annexe}. }
 					\end{algorithm}
 					
 					\espace 
@@ -1094,7 +1119,7 @@
 						
 						Copier $\mu_2$ dans $\beta$ \;
 						
-						\caption{Fonction $\text{ACCESS}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$. Programme \hyperref[prog:A_RAM_fn_ACCESS]{ici}. }
+						\caption{Fonction $\text{ACCESS}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$. Programme \hyperref[prog:A_RAM_fn_ACCESS]{en annexe}. }
 					\end{algorithm}
 					
 					\espace
@@ -1103,14 +1128,16 @@
 					
 					\paragraph{Simulation.}
 					\label{par:sim_sigma_RAM_A_RAM}
-					Pour $\bbA$ engendrée par $k$ constructeurs $\sigma = \left\lbrace C_1, \dots, C_k\right\rbrace$ d'arité maximale $r$, la $\sigma$-RAM est constituée de $r$ accumulateurs $A_1, \dots, A_r$ (si $r = 1$, on suppose qu'il y en a au moins $2$), un registre spécial $N$ et une infinité de registres $(R_i)_{i \in \omega}$. Pour simuler cette $\sigma$-RAM, on va utiliser une $\bbA$-RAM contenant un registre spécial pour chaque accumulateur $(\alpha_i)_{i \in k}$, un registre $\nu$, cinq registres spéciaux dédiés à la gestion de la mémoire $\mu, (\mu_i)_{i \in 4}$, $r+4$ registres de travail $\overline{\pi''}, \pi_1, \pi_2, \pi'_1, \pi'_2$.
+					Pour $\bbA$ engendrée par $k$ constructeurs $\sigma = \left\lbrace C_1, \dots, C_k\right\rbrace$ d'arité maximale $r$, la $\sigma$-RAM est constituée de $r$ accumulateurs $A_1, \dots, A_r$ (si $r = 1$, on suppose qu'il y en a au moins $2$), un registre spécial $N$ et une infinité de registres $(R_i)_{i \in \omega}$. Pour simuler cette $\sigma$-RAM, on va utiliser une $\bbA$-RAM contenant un registre spécial pour chaque accumulateur $(\alpha_i)_{i \in r}$, un registre $\nu$, cinq registres spéciaux dédiés à la gestion de la mémoire $\mu, (\mu_i)_{i \in 4}$, $r+4$ registres de travail $\overline{\pi''}, \pi_1, \pi_2, \pi'_1, \pi'_2$.
 					
 					Les états de la $\bbA$-RAM seront simplement calqués sur les numéros des instructions du programme de la $\sigma$-RAM. Si une instruction de $\sigma$-RAM se simule en un programme de $\bbA$-RAM, alors l'état initial de cette simulation est l'état correspondant au numéro de l'instruction, et l'état final correspond au numéro de l'instruction suivante. Les états intermédiaires dans les fonctions sont des états qui n'apparaissent nulle part ailleurs que dans la fonction associée, afin d'éviter les conflits. 
 						
 						\subparagraph{Entrées/sorties.}
-						Dans une $\sigma$-RAM, les entrées sont stockées dans des registres au choix. Il suffit de reproduire cette initialisation en remplissant les registres équivalents dans la $\bbA$-RAM. Si $A_i, N$ sont initialisés, alors initialiser $\alpha_i, \nu$ de la même façon. Si des registres $R_i$ sont initialisés, alors on initialise $\mu$ avec un terme mémoire : 
+						Dans une $\sigma$-RAM (non-constructrice), les entrées sont stockées dans des registres au choix. Il suffit de reproduire cette initialisation en remplissant les registres équivalents dans la $\bbA$-RAM. Si $A_i, N$ sont initialisés, alors initialiser $\alpha_i, \nu$ de la même façon. Si des registres $R_i$ sont initialisés, alors on initialise $\mu$ avec un terme mémoire : 
 						
-						$\text{MEM}\left( f(0), R_0, \text{MEM}\left( f(1), R_1, \dots \right) \dots \right)$.
+						\[
+							\text{MEM}\left( f(0), R_0, \text{MEM}\left( f(1), R_1, \dots \right) \dots \right)
+						\]
 						
 						Dans la suite, $(a)$ sera le numéro de l'instruction étudiée. 
 						
@@ -1144,7 +1171,7 @@
 						
 						
 					\paragraph{Bilan.}
-					La $\bbA$-RAM simule lourdement trois des opérations de base de la $\sigma$-RAM. Les deux machines coïncident sur les \emph{grosses} classes de complexité ($P$, $NP$, $EXP$...) mais pas sur les classes plus fines ($\text{DTIME}(n^k)$ pour un $k$ fixé).
+					La $\bbA$-RAM simule lourdement trois des opérations de base de la $\sigma$-RAM. Les deux machines coïncident sur les classes de complexité robustes ($P$, $NP$, $EXP$...) mais pas sur les classes plus fines ($\text{DTIME}(n^k)$ pour un $k$ fixé).
 				\end{proof}
 				
 				
@@ -1155,8 +1182,7 @@
 							
 				La $\sigma$-RAM permet l'accès à n'importe quel endroit de sa mémoire avec le registre $A$. Dans le cas général, la $\bbA$-RAM doit utiliser des astuces pour reproduire cet accès du mieux possible. 
 				
-				
-				On peut obtenir une légèrement meilleure simulation de la $\sigma$-RAM par la $\bbA$-RAM dans le cas d'une signature $\sigma = \left\lbrace 0, s(-)\right\rbrace$. On note $\naturels$ l'algèbre engendrée par cette signature $\sigma$.
+				On peut obtenir une simulation légèrement meilleure de la $\sigma$-RAM par la $\bbA$-RAM dans le cas d'une signature $\sigma = \left\lbrace 0, s(-)\right\rbrace$. On note $\naturels$ l'algèbre engendrée par cette signature $\sigma$.
 				
 				De manière générale, les programmes sont plus simples à écrire car il n'y a qu'un constructeur, et avec une astuce de gestion de mémoire, on arrive à une machine un peu plus rapide. L'astuce consiste à synchroniser la valeur du registre $\alpha$ avec l'indice en mémoire. Si on augmente $\alpha$ de 1, alors on avance d'un pas dans la mémoire. 
 				
@@ -1178,7 +1204,9 @@
 			\subsubsection{Une tentative d'amélioration}
 			\label{subsubsec:sim_amelioration}
 				
-				Enfin, on peut penser à donner un test d'égalité gratuit à la $\bbA$-RAM. Il accélère la simulation des trois opérations de base de la $\sigma$-RAM, mais il reste un coût : 
+				Reprenons les algèbres de mots.
+				
+				On peut penser à donner un test d'égalité gratuit à la $\bbA$-RAM. Il accélère la simulation des trois opérations de base de la $\sigma$-RAM, mais il reste un coût : 
 				
 				\begin{itemize}[itemsep=-1mm]
 					\item 	$A_1 := R_{A_1}$ se simule à présent en temps $\grozo{\abs{\mu}}$ ;
@@ -1193,11 +1221,15 @@
 				
 				Ici, nous avons utilisé une liste, mais dans le cas d'une algèbre de mots, on pourrait utiliser une mémoire avec embranchements (un terme $\text{MEM}\left( -, \dots, -\right)$, où chaque emplacement de la mémoire correspond à un constructeur). L'adresse est alors un mot et se traduit comme un ensemble de destructions successives du terme de mémoire, en prenant garde à récupérer le sous-terme correspondant au constructeur détruit.				
 
-			\subsubsection{Problème majeur}
+			\subsubsection{Conclusion}
 
-				La simulation présentée \hyperref[par:sim_sigma_RAM_A_RAM]{ici} de la $\sigma$-RAM par la $\bbA$-RAM n'est pas satisfaisante, car la technique utilisée permet d'avoir la mémoire dans un seul terme, donc de la copier et de la déplacer d'un bloc en une opération, ce qui est beaucoup trop puissant. 
+				%La simulation présentée \hyperref[par:sim_sigma_RAM_A_RAM]{ici} de la $\sigma$-RAM par la $\bbA$-RAM n'est pas satisfaisante, car la technique utilisée permet d'avoir la mémoire dans un seul terme, donc de la copier et de la déplacer d'un bloc en une opération, ce qui est beaucoup trop puissant. 
 				
-				De plus, si le test d'égalité est rendu gratuit, on peut faire un test d'égalité entre deux termes de mémoire, ce qui n'est pas concevable.
+				%De plus, si le test d'égalité est rendu gratuit, on peut faire un test d'égalité entre deux termes de mémoire, ce qui n'est pas concevable.
+				
+				Les deux modèles de calcul coïncident sur les classes de complexité robustes, mais la simulation de l'un dans l'autre montre un déséquilibre. La $\sigma$-RAM est globalement plus rapide que la $\bbA$-RAM, et on retrouve naturellement une simulation en temps linéaire de la machine de $\bbA$-RAM par la $\sigma$-RAM, mais l'inverse ne peut se faire qu'en temps polynomial. Le déséquilibre apparant ici laisse penser qu'on ne pourra pas faire vraiment mieux.
+				
+				De plus, un tel déséquilibre entraine naturellement que les deux machines définissent des \emph{classes fines} différentes : $\text{DTIME}_{\sigma\text{-RAM}}\left(n^K\right)$ et $\text{DTIME}_{\bbA\text{-RAM}}\left(n^K\right)$ sont deux classes de complexité distinctes.
 
 
 
