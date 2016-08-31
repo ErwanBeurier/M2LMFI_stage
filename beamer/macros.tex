@@ -1,0 +1,69 @@
+% Ce fichier contient les macros/notations que j'ai définies depuis que j'utilise LaTeX.
+
+
+% Commandes personnalisées
+
+	% Notations standards
+
+\newcommand{\naturels}{\mathbb{N}}
+\newcommand{\reels}{\mathbb{R}}
+\newcommand{\complexes}{\mathbb{C}}
+\newcommand{\crod}{\right]\,\!\!\!\right]} % Oui, les espaces sont bizarres, mais parfois ça ne fait pas ce que je veux, donc je suis obligé de modifier ça.
+\newcommand{\crog}{\left[\,\!\!\!\left[}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\re}[1]{\text{Ré}\left( #1 \right)}
+\newcommand{\im}[1]{\text{Im}\left( #1 \right)}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\bigunion}[2]{\underset{#1}{\bigcup} #2}
+\newcommand{\biginter}[2]{\underset{#1}{\bigcap} #2}
+% Respectivement symbole d'union et d'intersection sur des ensembles indexés. S'utilise ainsi :
+% \bigunion{indices}{ensembles}
+\newcommand{\intint}[2]{\crog #1 , #2 \crod }
+\newcommand{\minset}[1]{\min\left( \left\lbrace #1 \right\rbrace \right)}
+\newcommand{\minlist}[2]{\underset{#2}{\min}\left( #1 \right)}
+\newcommand{\maxset}[1]{\max\left( \left\lbrace #1 \right\rbrace \right)}
+\newcommand{\maxlist}[2]{\underset{#2}{\max}\left( #1 \right)}
+\newcommand{\grozo}[1]{\mathcal{O}\left( #1 \right)}
+
+	% Notations moins standards
+	
+\newcommand{\premiers}{\mathbb{P}}
+\newcommand{\zetaS}{\sum\limits_{n = 1}^{\infty} \frac{1}{n^s}}
+\newcommand{\zetaP}{\underset{p \in \mathbb{P}}{\prod} \frac{1}{1- \frac{1}{p^s}}}
+\newcommand{\pprod}{\underset{p \in \mathbb{P}}{\prod}}
+\newcommand{\eqT}{\underset{T \rightarrow + \infty}{=}}
+\newcommand{\Ketten}{\overset{\infty}{\underset{n=1}{\mathrm{\text{\Large{K}}}}}}
+
+\newcommand{\nuplet}[3]{\left(#1_{#2}, \dots, #1_{#3}\right)}
+\newcommand{\nupletf}[4]{\left( #1\left(#2_{#3}\right), \dots, #1\left(#2_{#4}\right) \right)}
+\newcommand{\card}[1]{\text{card}\left( \left\lbrace #1 \right\rbrace \right)}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\maxs}[1]{\max\left( #1 \right)}
+% Définit une commande commode pour définir un n-uplet. La première numérote 
+% le premier symbole, la deuxième macro ajoute un symbole (typiquement, une 
+% fonction) autour des éléments énumérés.
+% Exemple 1 :	\nuplet{a}{1}{n} ==> (a_1, ..., a_n)
+% Exemple 2 : 	\nupletf{f}{a}{1}{n} ==> (f(a_1), ..., f(a_n))
+
+	% Tics mathématiques
+	
+\newcommand{\DCC}{\textit{D.C.C.}} % Dans ces conditions
+\newcommand{\casedist}[1]{\left\lbrace  
+		\begin{array}{ll}
+			#1
+		\end{array}
+	\right.}
+
+
+	% Commandes non mathématiques
+
+\newcommand{\espace}{\vspace{3mm}}
+\newcommand{\bfunder}[1]{\textbf{\underline{#1}}}
+\newcommand{\textquoted}[1]{\textquotedblleft#1\textquotedblright}
+
+	% Couleurs
+	
+\newcommand{\temp}[1]{\textcolor[RGB]{170,170,170}{ #1 }}
+\newcommand{\nepasoublier}[1]{\colorbox{red}{#1}}
+\newcommand{\redtext}[1]{\textcolor{red}{#1}}
+

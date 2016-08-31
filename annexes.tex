@@ -105,7 +105,7 @@
 			\espace 
 			
 			\KwIn{$\alpha, \beta, \pi_1, \dots, \pi_r$}
-			\tcp{Détruit le terme contenu dans $\alpha$, stocke ses composantes dans chaque $\pi_p$, puis reconstruit le terme dans $\beta$.}
+			\tcc{Détruit le terme contenu dans $\alpha$, stocke ses composantes dans chaque $\pi_p$, puis reconstruit le terme dans $\beta$.}
 			
 			\For{\text{$p$ from $1$ to $r$}}{
 				($p$-dest) 	$s_{a_p} \alpha \pi_1 s_{a_{p+1}}$\;
@@ -135,7 +135,7 @@
 			\espace 
 			
 			\KwIn{$\mu, \pi_1$}
-			\tcp{Si $\mu$ est un terme de mémoire non vide, on extrait la première valeur de cette mémoire en laissant le reste inchangé.}
+			\tcc{Si $\mu$ est un terme de mémoire non vide, on extrait la première valeur de cette mémoire en laissant le reste inchangé.}
 			
 			\If{le terme contenu dans $\mu$ est de la forme $\text{MEM}\left( i, A, m\right)$}{
 				Stocker $A$ dans $\pi_1$ \;
@@ -159,7 +159,7 @@
 			\espace
 			
 			\KwIn{$\mu, \pi_1$}
-			\tcp{Si $\mu$ est un terme de mémoire non vide, on extrait la première valeur de cette mémoire en laissant le reste inchangé.}
+			\tcc{Si $\mu$ est un terme de mémoire non vide, on extrait la première valeur de cette mémoire en laissant le reste inchangé.}
 			
 			(switch)	$s_a \mu s_f s_{\text{MEM}}$\;
 			
@@ -185,7 +185,7 @@
 			
 			\KwIn{$\alpha, \pi, \pi', \bar{\pi}$}
 			
-			\tcp{Détruit le terme contenu dans $\alpha$, stocke ses sous-termes dans une seule mémoire $\pi$ et copie $\alpha$ dans $\pi'$. Les registres $\bar{\pi}$ sont des registres de travail utiles à la fonction $\text{COPY}$.}
+			\tcc{Détruit le terme contenu dans $\alpha$, stocke ses sous-termes dans une seule mémoire $\pi$ et copie $\alpha$ dans $\pi'$. Les registres $\bar{\pi}$ sont des registres de travail utiles à la fonction $\text{COPY}$.}
 			
 			Selon le constructeur extérieur de $\alpha$ \;
 			
@@ -214,7 +214,7 @@
 			
 			\KwIn{$\alpha, \pi, \pi', \bar{\pi}$}
 			
-			\tcp{Détruit le terme contenu dans $\alpha$, stocke ses sous-termes dans une seule mémoire $\pi$ et copie $\alpha$ dans $\pi'$. Les registres $\bar{\pi}$ sont des registres de travail utiles à la fonction $\text{COPY}$.}
+			\tcc{Détruit le terme contenu dans $\alpha$, stocke ses sous-termes dans une seule mémoire $\pi$ et copie $\alpha$ dans $\pi'$. Les registres $\bar{\pi}$ sont des registres de travail utiles à la fonction $\text{COPY}$.}
 			
 			(switch) 	$s_a \alpha s_{a_1} \dots s_{a_k,j}$\;
 			
@@ -234,7 +234,7 @@
 				
 		\espace 		
 		
-		On peut enfin coder le test d'égalité. On rappelle que l'algorithme se trouve \hyperref[algo:A_RAM_fn_IF]{ici}.
+		On peut enfin coder le test d'égalité. On rappelle que l'algorithme se trouve \hyperref[algo:A_RAM_fn_IF]{plus haut}.
 		
 		\espace 
 		
@@ -387,7 +387,7 @@
 			
 			$\aramfn{\text{copie}}{\text{COPY}\left( \mu_3, \mu, \mu_1, \mu_2, \mu_4 \right)}{f}$ \;
 			
-			\caption{Fonction $\text{INSERT}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$. Algorithme \hyperref[algo:A_RAM_fn_INSERT]{ici}. }
+			\caption{Fonction $\text{INSERT}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$. Algorithme \hyperref[algo:A_RAM_fn_INSERT]{ci-dessus}.}
 		\end{algorithm}
 		
 		\espace
@@ -441,7 +441,7 @@
 			
 			$\aramfn{c}{\text{COPY}\left( \mu_2, \beta, \mu_1, \mu_2, \mu_4 \right)}{f}$ \;
 			
-			\caption{Fonction $\text{ACCESS}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$. Algorithme \hyperref[algo:A_RAM_fn_ACCESS]{ici}. }
+			\caption{Fonction $\text{ACCESS}\left( \mu, \mu_1, \mu_2, \mu_3, \mu_4, \alpha, \beta, \pi_1, \pi_2, \pi'_1, \pi'_2\right)$. Algorithme \hyperref[algo:A_RAM_fn_ACCESS]{ci-dessus}. }
 		\end{algorithm}
 		
 		\espace
@@ -503,7 +503,7 @@
 			
 			\begin{itemize}[itemsep=-1mm]
 				\item	pour tout $b \in kcn^K$, on a $g(b) = b \div k$ ;
-				\item 	pour tous $a \in cn^K$ et $i \in k$, on a $g\left( kcn^K + ka + i \right) = kcn^K + k f_i(a) + i$ $\textcolor{red}{(\star)}$
+				\item 	pour tous $a \in cn^K$ et $i \in k$, on a $g\left( kcn^K + ka + i \right) = kcn^K + k f_i(a) + i$ $\redtext{(\star)}$
 			\end{itemize}
 			% Commentaire bidon
 			

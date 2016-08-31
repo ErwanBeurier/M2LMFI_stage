@@ -216,7 +216,7 @@
 					f(x) = \eqpred{g'}{g}{x}
 				\]
 				
-				C'est-à-dire : $f(x) = g'(y)$ où $y$ est de plus grand $z$ tel que $g(x) = g(z)$, ou $f(x) = x$ si un tel $y$ n'existe pas.
+				C'est-à-dire : $f(x) = g'(y)$ où $y$ est le plus grand $z$ tel que $g(x) = g(z)$, ou $f(x) = x$ si un tel $y$ n'existe pas.
 			\end{definition}
 			
 			
@@ -720,7 +720,7 @@
 		
 			Notons\footnotemark que $f_1(x-1) = \eqpred{f_1}{1}{x}$ et que la distinction de cas ne rend pas le LSRS plus puissant \cite{GrandjeanSchwentick2002}. 
 			
-				\footnotetext{$1^{\leftarrow}(x) = \max(0, x-1)$ ; en effet, si $x = 0$ alors on ne peut pas trouver la valeur précédente qui donne le même résultat, et si on cherche la précédant $x > 0$ qui donne 1 par la fonction $1(-)$, alors on remonte jusqu'à la valeur précédente, à savoir $x-1$.}
+				\footnotetext{$1^{\leftarrow}(x) = \max(0, x-1)$ ; en effet, si $x = 0$ alors on ne peut pas trouver la valeur précédente qui donne le même résultat, et si $x > 0$, la valeur précédant $x$ qui donne 1 par la fonction $1(-)$ est la valeur précédente, à savoir $x-1$.}
 			
 			Expliquons les équations.
 			
@@ -822,9 +822,9 @@
 				
 			On peut voir l'énumération complète (avec l'ordre lexicographique normal) comme une liste des entiers écrits en base $m+1$, et avec l'ordre lexicographique étendu, comme une liste des entiers écrits en base $m+1$ contenant au moins une fois le chiffre $m$. On remarque aussi que si un $r$-uplet est de la forme $\left(x_1, \dots, x_{r-1}, m\right)$ mais que le $r$-uplet suivant dans l'ordre lexicographique ne contient pas le max, alors la dernière coordonnée restera $m$, et on incrémentera $x_{r-1}$ à la place, jusqu'à ce que $x_{r-1} = m$. 
 			
-			Le calcul crucial porte donc sur la dernière coordonnée et sur la nécessité d'effectuer une simulation du $r$-uplet suivant.\footnotemark
+			Le calcul crucial porte donc sur la dernière coordonnée et sur la nécessité d'effectuer une simulation du $r$-uplet suivant. %\footnotemark
 			
-				\footnotetext{Je sais que pour l'instant ce n'est que du blabla, mais je ne me suis pas encore demandé comment le prouver. De plus, je pense qu'il s'agit plus d'une compréhension du fonctionnement de l'ordre. Mais il faudrait quand même le prouver.}
+				%\footnotetext{Je sais que pour l'instant ce n'est que du blabla, mais je ne me suis pas encore demandé comment le prouver. De plus, je pense qu'il s'agit plus d'une compréhension du fonctionnement de l'ordre. Mais il faudrait quand même le prouver.}
 			
 			Considérons que $m$ et $r$ sont fixés. Pour l'instant, on ne considère pas les cas particuliers où l'on change d'arité. De plus, on va numéroter les fonctions non pas par rapport aux LSRS précédents (bien que ceux que nous allons décrire se mettent à la suite des systèmes précédents), mais par rapport aux coordonnées qu'elles représentent. 
 			
@@ -1079,13 +1079,24 @@
 		
 		Dès lors, les opérations $f(x) = g_1(x) * g_2(x)$ et $f(x) = \eqpred{g_1}{g_2}{x}$ se simulent naturellement par : $f\left(\overline{x}\right) = g_1\left(\overline{x}\right) * g_2\left(\overline{x}\right)$ et $f\left(\overline{x}\right) = \eqpred{g_1}{g_2}{\overline{x}}$.
 		
-		Il y a cependant un problème pour l'opération de composition $f(x) = g_1\left[g_2(x)\right]_x$, qui ne peut pas se simuler telle quelle ; cependant, rappelons qu'elle a été ajoutée à la définition \ref{def:LSRS_2} pour faciliter l'écriture, mais elle est simulable par un LSRS à partir des deux autres opérations de base \cite{GrandjeanSchwentick2002}.
+		Il y a cependant un problème pour l'opération de composition $f(x) = g_1\left[g_2(x)\right]_x$, qui ne peut pas se simuler telle quelle ; cependant, rappelons qu'elle a été ajoutée à la définition \ref{def:LSRS_2} pour faciliter l'écriture, mais elle est simulable par un LSRS à partir des deux autres opérations de base \cite{GrandjeanSchwentick2002} ; il n'y a donc pas besoin de la prendre en compte.
 	\end{proof}
 	
 	
 	
+	\pagebreak
+	
 	
 	\section*{Conclusion}
+	
+	On a donc deux caractérisations fonctionnelles de $\textbf{P}$ et de ses sous-classes sur machine $\sigma$-RAM. La première caractérisation par LSRS \emph{simple}, et encore plus celle par LSRS à arité multiple, sont des outils théoriques, mais leur utilisation pratique n'est pas aisée.
+	
+	La caractérisation par LSRS \emph{simple} a pour principal défaut que sa puissance est limitée au moment de l'écriture du LSRS, puisque son temps de calcul est défini à ce moment-là. 
+	
+	La caractérisation par LSRS à arité multiple reproduit ce même défaut, puisque cette fois, la puissance de calcul est limitée au moment du choix des arités utilisées. De plus, l'ordre utilisé, s'il est intéressant théoriquement, n'est en pratique pas simple d'usage, car il n'est pas intuitif de réfléchir à un algorithme avec ce type de déroulement.
+	
+	Il reste donc à modifier ces caractérisations pour les rendre plus utilisables en pratique. 
+	
 	
 	
 	% Euh......

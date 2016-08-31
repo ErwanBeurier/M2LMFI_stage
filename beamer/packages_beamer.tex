@@ -1,0 +1,71 @@
+% Ce fichier contient les packages que j'utilise le plus souvent.
+
+\usepackage{amsmath, amsfonts, amssymb, stmaryrd, mathtools}
+
+\usepackage{shorttoc}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{pict2e}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[frenchb]{babel}
+
+
+%\usepackage[top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm]{geometry} % Pour contrôler la largeur des marges
+%\usepackage[pdftex=true,colorlinks=true,linkcolor=blue]{hyperref} % Ça conflicte avec uasiment toute la suite. 
+%\usepackage[pdftex=true, hidelinks]{hyperref} % Package pour les hyperliens (et mettre des ancres partout !)
+\frenchbsetup{StandardLists = true} % Pour que le package suivant fonctionne bien
+\usepackage{enumitem} % Pour les listes imbriquées avec personnalisation de l'item (niveau 1 : chiffres ; niveau 2 : lettres par exemple)
+\usepackage[english, onelanguage, boxed]{algorithm2e}
+\usepackage{listings}
+\usepackage{import}
+\usepackage[toc,page]{appendix} % Package pour gérer les annexes. 
+%\usepackage{biblatex} % Pour citer l'auteur, ou le titre d'un article listé dans le fichier bib. \citetitle [A voir plus tard]
+
+% Un package sympathique pour donner un contexte aux définitions, théorèmes, etc. 
+
+\usepackage{amsthm}
+
+\newtheoremstyle{smallcapsit}% small caps and italic
+{2ex}% above space 
+{2ex}% below space 
+{\itshape}% body font 
+{}% indent amount 
+{\scshape}% head font 
+{.}% post head punctuation 
+{ }% post head punctuation 
+{}% head spec
+% Met l'intitulé en petites capitales (donc une vraie majuscule pour le titre et des majusucules plus petites pour les autres)
+
+%\theoremstyle{smallcapsit}
+\newtheorem{thm}{Théorème}
+%\newtheorem{prop}[theorem]{Proposition}
+%\newtheorem{coro}[theorem]{Corollaire}
+%\newtheorem{lemma}[theorem]{Lemme}
+%\newtheorem{ax}{Axiome} % Why do I have that ?
+%\newtheorem*{theorem*}{Théorème}
+%\newtheorem*{prop*}{Proposition}
+%\newtheorem*{coro*}{Corollaire}
+%\newtheorem*{lemma*}{Lemme}
+%\newtheorem*{ax*}{Axiome}
+%\newtheorem{conj}{Conjecture}
+%
+%
+%
+%%\theoremstyle{definition}
+%\theoremstyle{theorem}
+\newtheorem{defn}[theorem]{Définition}
+%\newtheorem{example}[theorem]{Exemple}
+%\newtheorem{algo}{ALGORITHME}
+%\newtheorem*{definition*}{Définition}
+%\newtheorem*{example*}{Exemple}
+%\newtheorem*{algo*}{ALGORITHME}
+%
+%\theoremstyle{remark}
+%\newtheorem{remark}[theorem]{Remarque}
+%\newtheorem{prob}[theorem]{Problème}
+%\newtheorem*{demo}{Démonstration}
+%
+%

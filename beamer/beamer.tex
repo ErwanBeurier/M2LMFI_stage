@@ -1,0 +1,983 @@
+\documentclass[10pt]{beamer}
+
+\include{macros}
+\include{packages_beamer}
+
+\usetheme{default}
+
+\newcommand{\bbW}{\mathbb{W}}
+\setbeamertemplate{footline}[frame number]
+
+\newcommand{\TRec}[1]{\text{TRec}\left(\mathbb{#1}\right)}
+\newcommand{\TRecd}[1]{\text{TRec}_{2}\left(\mathbb{#1}\right)}
+\newcommand{\dtimeram}{\text{DTIME}_{\text{RAM}}\left( n^K \right)}
+\newcommand{\dtimeramarg}[1]{\text{DTIME}_{\text{RAM}}\left( n^{#1} \right)}
+\newcommand{\eqpred}[3]{#1\left[ #2^{\leftarrow}(#3) \right]_{#3}}
+\newcommand{\eqpredf}[4]{#1\left[ #2^{\leftarrow}(#3) \right]_{#4}} % four arguments
+\newcommand{\eqpredfi}[5]{#1\left[ #2^{\leftarrow}(#3) #4 \right]_{#5}} % five arguments
+\newcommand{\arite}[1]{\text{arité}\left( #1 \right)}
+\newcommand{\leqa}{\left( \leqslant a \right)}
+\newcommand{\rang}[1]{\text{rang}\left( #1 \right)}
+
+\author{Erwan BEURIER}
+\title{Unification des caractérisations de $\textbf{P}$}
+\subtitle{Mémoire de stage - M2 LMFI 2015-2016}
+
+\begin{document}
+
+    \begin{frame}
+		\titlepage
+    \end{frame}
+
+
+	\begin{frame}
+		\frametitle{Introduction.}
+		
+		\begin{block}
+			
+			Caractérisation fonctionnelle d'une classe qu'on comprend surtout en termes de machines.
+			% Caractériser P avec des sous-classes des fonctions récursives.
+			% Imposer des restrictions sur la récurrence. 
+			
+			\pause 
+
+			Plusieurs pistes : 
+			\begin{itemize}
+				\item 	Contrainte explicite sur la longueur des valeurs des fonctions (Cobham)
+				\item 	Distinctions entre arguments (Bellantoni-Cook, Leivant)
+			\end{itemize}
+			
+%			\pause 
+%			
+%			Autres pistes : 
+%			
+%			\begin{itemize}
+%				\item 	Complexité implicite (structure des programmes)
+%				\item 	Caractérisations logiques ($\textbf{P} = \textbf{ESO}_{\text{HORN}}$)
+%			\end{itemize}
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Introduction.}
+		
+		\begin{block}{Objets utilisés}
+			\begin{itemize}
+				\item 	Algèbre = ensemble de termes clos basés sur une signature fonctionnelle.
+				\pause
+				\item 	Algèbre binaire = $\bbW$, de signature $\sigma = \{\varepsilon, 1(-), 0(-) \}$.
+				\item 	Algèbre unaire = $\naturels$, de signature $\sigma = \{ 0, s(-) \}$.
+			\end{itemize}
+		\end{block}
+	\end{frame}
+	
+	% On ne va pas démontrer, juste énumérer.
+
+%	\begin{frame}
+%		\frametitle{I. Caractérisations de $\textbf{P}$}
+%		\framesubtitle{Approche de Cobham}
+%		
+%
+%		\begin{defn}[Récurrence bornée sur les notations]
+%			Une fonction $f$ est définie par récurrence bornée sur les notations à partir de $(g_c)_{c \in \sigma}$ et $h$ lorsque :
+%			
+%			\begin{itemize}
+%				\item 	$\forall c \in \sigma, \:\:\: f\left( c(x), \bar{y} \right) = g_c\left( x, \bar{y} \right)$
+%				\item 	$\forall x, \bar{y}, \left| f \left( x, \bar{y} \right) \right| \leq \left| h \left( x, \bar{y} \right) \right|$
+%			\end{itemize}
+%		\end{defn}
+%
+%	\end{frame}
+%
+%	\begin{frame}
+%		\frametitle{I. Caractérisations de $\textbf{P}$}
+%		\framesubtitle{Approche de Cobham}
+%		
+%
+%		\begin{defn}
+%			On note $\textbf{Cob}$ le plus petit ensemble de fonctions contenant les constructeurs, les projections, le smash $x \sharp y = 2^{\left| x \right| \times \left| y\right|}$, et close par composition et récurrence bornée sur les notations.
+%		\end{defn}
+%
+%		
+%		\pause 
+%		
+%
+%		\begin{thm}[Cobham]
+%			$\textbf{Cob} = \textbf{P}$
+%		\end{thm}
+%
+%	\end{frame}
+	
+
+	\begin{frame}
+		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\framesubtitle{Approche de Leivant}
+		
+		% Encore une fois, contrainte la récurrence. 
+		
+		% Petit passage au tableau pour présenter la différence entre les arguments, comme chez Leivant.
+		
+		Distinction sur les arguments, à rapprocher de Bellantoni-Cook, mais résultat plus fin. 
+		
+		%\pause
+		
+		\begin{block}{Les tiers}
+			\begin{itemize}
+				\item 	$\bbW_0, \bbW_1, \dots, \bbW_n, \dots$
+				\item 	$\bbW_m$ a une copie de chaque constructeur, noté $c^m$ ;
+				\item 	$\sim$ niveaux d'abstraction de $\bbW$.
+			\end{itemize}
+		\end{block}
+		
+		%\pause 
+		
+		\begin{defn}[Argument critique]
+			Soit $f$ une fonction définie par récurrence à partir des fonctions $\left( g_{c} \right)_{c \in \{\varepsilon, 0, 1\}}$ : 
+			
+			\[
+				\forall c \:\:\:\: f(c(a), \bar{x})  = g_{c}\left( f(a, \bar{x}), a, \bar{x} \right)
+			\]
+			
+			L'argument $f(a, \bar{x})$ de la fonction $g_{c}$ est appelé \emph{argument critique}.
+		\end{defn}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\framesubtitle{Approche de Leivant}
+		
+		Les arguments critiques contraignent la définition par récurrence :
+		
+		\begin{defn}[Récurrence ramifiée]
+			Une fonction $f: \bbW_m \times \mathcal{W} \to \bbW_n$ est définie par récurrence ramifiée à partir des fonctions $\left( g_{c} \right)_{c \in \{\varepsilon, 0, 1\}}$ lorsque :
+			
+			\begin{itemize}
+				\item 	$\forall i \:\:\:\: g_{c_i} : \bbW_n^{r_i} \times \bbW_m^{r_i} \times \mathcal{W} \to \bbW_n$
+				
+				\item 	$\forall i \:\:\:\:
+				f(c^m(a), \bar{x}) 
+				= g_{c}\left( f(a, \bar{x}), a, \bar{x} \right)
+				$
+				
+				\item 	Si l'une des fonctions de récurrence a un argument critique, alors le tiers de départ $m$ de $f$ doit être strictement supérieur au tiers d'arrivée $n$ : $m > n$ ; sinon, $m \geqslant n$.
+			\end{itemize}
+		\end{defn}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\framesubtitle{Approche de Leivant}
+		
+		\begin{defn}
+			On note $\TRec{W}$ le plus petit ensemble de fonctions récursives primitives sur $\bbW$ contenant les constructeurs, les projections et étant clos par composition ramifiée et récurrence ramifiée.
+			
+			On note $\TRecd{W}$ le sous-ensemble de $\TRec{W}$ dont chaque fonction est constructible en n'utilisant que les deux tiers $\bbW_0, \bbW_1$.
+		\end{defn}
+		
+		%\pause
+		
+		\begin{thm}
+			$\TRec{W} = \TRecd{W} = \textbf{P}$
+		\end{thm}
+	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\framesubtitle{Approche de Leivant}
+		
+		% Ne pas se formaliser ; je vous donne juste la définition pour vous montrer à quoi elle ressemble
+		% Juste un compteur du nombre de boucles imbriquées.
+		
+		\begin{defn}[Degré d'imbrication de récurrence]
+			
+			Soit $f \in \TRec{W}$. 
+			
+			Le degré d'imbrication de récurrence de $f$, noté $\delta(f)$, est un entier défini par induction sur la définition de $f$ :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	Si $f$ est un constructeur ou une projection, alors $\delta(f) = 0$.
+				\item 	Si $f$ est définie par composition, sans perte de généralité, $f(\bar{x}) = g\left( \bar{x}, h\left( \bar{x}\right)\right)$, alors :
+				
+				\begin{itemize}[itemsep=-1mm]
+					\item 	Si $\text{tier}(h) < \text{tier}(g)$ alors $\delta(f) = \delta(g)$ ;
+					\item 	Si $\text{tier}(h) = \text{tier}(g)$ alors $\delta(f) = \max\left(\delta(g), \delta(h)\right)$ ;
+					\item 	Si $\text{tier}(h) > \text{tier}(g)$ alors $\delta(f) = \max\left(1, \delta(h)\right) \times \delta(g)$ ;
+				\end{itemize}
+				
+				\item 	Si $f$ est définie par récurrence ramifiée $f(c^j(a), \bar{x}) = g_{c}\left( f(a, \bar{x}), a, \bar{x} \right)$, telles que $\left( g_{\alpha_j}\right)_{j\in p}$ aient un argument critique et $\left( g_{\beta_j}\right)_{j\in q}$ n'en aient pas, alors $\delta(f) = \max\left( 1 + \delta\left( g_{\alpha_1} \right), \dots,  1 + \delta\left( g_{\alpha_p} \right), \delta\left( g_{\beta_1} \right), \dots,  \delta\left( g_{\beta_q} \right)\right)$. 
+			\end{itemize}
+		\end{defn}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\framesubtitle{Approche de Leivant}
+		
+		\begin{thm}
+			Une fonction $f$ est calculable en temps $\grozo{n^k}$ ssi $\delta(f) \leqslant k$.
+			
+			En particulier, $f$ est calculable en temps $\grozo{n^{\delta(f)}}$
+		\end{thm}
+		
+		% Si la fonction $f$ est calculable en $n ^k$, alors on peut retrouver ce $k$ en étudiant la définition de la fonction. 
+		
+	\end{frame}
+	
+	% Quelque chose que je n'ai pas dit : le modèle de calcul. Quand on parle de classes robustes, comme P, EXPTIME, PSPACE, le modèle de calcul n'est pas si important. 
+	% Pour des classes plus fines, comme le temps polynomial à polynome fixé, le modèle de calcul importe.
+	
+	
+	
+	\begin{frame}
+		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\framesubtitle{Quel modèle de calcul ?}
+		
+		\begin{defn}
+			
+			Une $\bbW$-RAM est un modèle de calcul comprenant :
+			\begin{itemize}[itemsep=-1mm]
+				\item 	Un ensemble fini d'états $S = \left\lbrace s_1, \dots, s_l \right\rbrace$, où $s_1$ est l'état initial et $s_l$ est l'état final ;
+				\item 	Un ensemble fini de registres $\Pi = \left\lbrace \pi_1, \dots, \pi_m \right\rbrace$.
+			\end{itemize}
+			
+			Les registres contiennent des termes de l'algèbre $\bbW$. Par défaut, on leur assigne une valeur $\varepsilon$.
+			
+			Un programme de $\bbW$-RAM est un ensemble fini d'instructions dont chacune est de l'une des formes suivantes :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	(const)			$s_a \pi_{i} C \pi_j s_b$
+				\item	($p$-dest)		$s_a \pi_i \pi_j s_b$
+				\item	(switch)		$s_a \pi_j s_{b_{\varepsilon}} s_{0} s_{1}$
+			\end{itemize}
+		\end{defn}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\begin{block}{La machine de Leivant}
+			\begin{itemize}
+				\item 	Construit des termes
+				\item 	Spécifique à cette caractérisation
+				\item 	Plus puissante qu'une machine de Turing
+				\item 	Moins puissante qu'une $\sigma$-RAM % Naturellement utilisée en algorithmique.
+			\end{itemize}
+		\end{block}
+	\end{frame}
+	
+	% Ne correspond pas à la machine utilisée classiquement en algorithmique, machine qui manipule des entiers, qui a une mémoire infinie, un système de pointeurs
+	
+	
+	\begin{frame}
+		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\framesubtitle{Quel modèle de calcul ?}
+
+		\begin{defn}
+			Soit $\sigma$ une signature fonctionnelle (typiquement $\sigma = \{+, - , \times\}$)
+			Une $\sigma$-RAM est un modèle de calcul composé de :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item	Deux accumulateurs $A$, $B$ ;
+				\item 	Un registre spécial $N$ ;
+				\item 	Une infinité dénombrable de registres $\left( R_i\right)_{i \in \omega}$.
+			\end{itemize}
+			
+%			Les registres contiennent des valeurs entières ; elles s'initialisent à 0. 
+			
+%			Un programme de $\sigma$-RAM est un ensemble fini d'instructions $\left( I(i) \right)_{i \in N}$ dont chacune est de l'une des formes suivantes :
+			
+			Instructions :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	$A := c$ pour n'importe quelle constante $c \in \naturels$
+				\item 	$A := op(A)$ ou $op(A,B)$, où $op \in \sigma$
+				\item 	$A := N$ 
+				\item 	$N := A$
+				\item 	$A := R_A$
+				\item 	$B := A$ 
+				\item 	$R_A := B$
+				\item 	$\text{IF} (A=B) \{I( i)\} \text{ ELSE } \{I( j )\}$
+				\item 	$\text{HALT}$
+			\end{itemize}	
+		\end{defn}
+		
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\framesubtitle{Quel modèle de calcul ?}
+		
+		\begin{block}{Comparaison entre les deux machines}
+			\begin{itemize}
+				\item 	Travaille sur des termes VS travaille sur des entiers
+				\item 	Mémoire finie VS infinie
+				\item 	Test partiel VS test d'égalité
+			\end{itemize}
+			
+			% \pause 
+			
+			Machine $\bbW$-RAM est moins puissante que la $\sigma$-RAM, donc les classes fines définies sur l'une ne sont pas les mêmes sur l'autre machine.
+			
+			% Ce que fait la machine de Leivant, la sigma-RAM le fait plus rapidement.
+			% Parler vite-fait de la simulation.
+		\end{block}
+	\end{frame}
+	
+	% Mais il se trouve que ce qu'utilisent les algorithmiciens est la \sigma-RAM, et il pourrait être intéressant d'avoir une caractérisation de ce type sur cette machine.
+	% C'est ce qui a occupé les deux tiers de mon stage.
+	
+	% On va s'inspirer des travaux de Grandjean et Schwentick sur le temps linéaire.
+	
+	% J'ai dit tout à l'heure que la Sigma-RAM manipulait des entiers ; c'est le cas, mais en fait, ce qu'elles prennent en entrée sont des objets autres ()
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{Introduction}
+		
+		\begin{defn}[RAM-structure]
+			Soit $t$ un type, c'est-à-dire une signature fonctionnelle ne contenant que des symboles de constantes ou de fonctions unaires.
+			
+			Une RAM-structure $s$ de type $t$ est un uplet constitué de :
+			\begin{itemize}[itemsep=-1mm]
+				\item 	$n \in \naturels$ qui est la taille de la structure ;
+				\item 	$C \in \naturels$ pour chaque symbole $C \in t$ ;
+				\item 	$f : n \to \naturels$ pour chaque symbole $f \in t$.
+			\end{itemize}
+			
+			On notera $s.n, s.C, s.f$ les composantes $n, C, f$ de $s$.
+			
+			On dira que $s$ est $c$-bornée pour $c\in\naturels$ lorsque $s.C, s.f(i) < c s.n$ pour tous $C, f \in t$ et $i \in n$.
+		\end{defn}
+		
+	\end{frame}
+		% Exemple :
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{Introduction}
+		\nepasoublier{EXEMPLE}
+		\begin{example}
+			Un graphe $(V,E)$. La taille $n$ serait $\|V\| + \|E\|$, et on coderait les 
+		\end{example}
+	\end{frame}
+		
+	
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{Introduction}
+		
+		\begin{definition}[Fonction de RAM]
+			\label{def:fonction_de_RAM}
+			Soient $t_1, t_2$ des types. 
+			
+			Une $(t_1, t_2)$-fonction de RAM $\Gamma$ est une fonction telle qu'il existe $c_1, c_2 \in \naturels$, tels que $\Gamma$ envoie les structures $c_1$-bornées de type $t_1$ sur des structures $c_2$-bornées de type $t_2$.
+			
+			On dit que $\Gamma$ est polynomiale lorsque $\Gamma(s).n = \grozo{(s.n)^K}$.
+			
+			% Là, si.
+		\end{definition}
+		
+		\pause 
+		
+		\begin{definition}[Temps polynomial]
+			\label{def:temps_poly_RAM}
+			On définit $\dtimeram$ comme étant l'ensemble des fonctions de RAM calculables sur $\{+\}$-RAM en temps $\grozo{n^K}$, telles que le nombre de registres utilisés, les valeurs entières manipulées (y compris les adresses de registres) soient bornés par $\grozo{n^K}$.
+		\end{definition}
+	\end{frame}
+	
+	% Une fonction qui envoie une structure sur une autre.
+	% c_2-bornée : ça veut dire que le codage de la structure n'étend pas trop la taille "intuitive" de la structure. Un graphe de taille n ne devrait pas avoir un codage impliquant des valeurs plus grandes que $c n$, par exemple.
+	
+	% Donc là on a parlé du côté modèle de calcul. Maintenant on va aller du côté fonctionnel qui font intervenir certaines opérations particulières.
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{Introduction}
+		
+		\begin{definition}[Application bornée et \emph{equal-predecessor}]
+			Pour $f : n \to \naturels$, on définit deux opérations :
+			
+			\begin{itemize}
+				\item 	L'application bornée :
+				\[
+				f[x]_y = \casedist{
+					f(x) & \text{si $x<y$} \\
+					x 	& \text{sinon}
+				}
+				\]
+				
+				%\pause 
+				
+				\item 	L'opération \emph{equal-predecessor} :
+				\[
+				f^{\leftarrow}(x) = \casedist{
+					\max\left(\left\lbrace y < x | f(x) = f(y)\right\rbrace\right) & \text{si un tel $y$ existe} \\
+					x	& \text{sinon}
+				}
+				\]
+			\end{itemize}
+			
+			Pour $g, g' : n \to \naturels$, on combine ces deux opérations pour en créer une troisième, l'opération de \emph{récursion} :
+			
+			\[
+			f(x) = \eqpred{g'}{g}{x}
+			\]
+			
+			C'est-à-dire : $f(x) = g'(y)$ où $y$ est le plus grand $z$ tel que $g(x) = g(z)$, ou $f(x) = x$ si un tel $y$ n'existe pas.
+		\end{definition}
+
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{Introduction}
+				
+		\begin{definition}[LSRS]
+			\label{def:LSRS}
+			Soit $F$ un ensemble de symboles de fonctions unaires (dites \emph{fonctions de base}), soient $f_1, \dots, f_k$ des symboles de fonctions qui n'apparaissent pas dans $F$. Pour $i\leqslant k$, notons $F_i = F\cup \{f_1, \dots, f_i\}$. 
+			
+			Un LSRS (\emph{Linear Simultaneous Recursion Scheme}) $S$ sur $f_1, \dots, f_k$ et $F$ est une suite de $k$ équations $\left(E_i\right)_{i_\in k}$ dont chacune est de l'une des deux formes suivantes :
+			
+			\begin{itemize}
+				\item 	(opération) 		$f_i(x) = g(x) * g'(x)$ où $g,g' \in F_{i-1}$ et $* \in \{+, -, \times \}$
+				
+				\item 	(récursion)			$f_i(x) = \eqpred{g'}{g}{x}$ où $g' \in F_k$ et $g \in F_{i-1}$
+			\end{itemize}
+			
+		\end{definition}
+	\end{frame}
+	
+	% L'ordre des équations a une importance cruciale, puisque par exemple, on ne peut pas utiliser la troisième fonction dans la deuxième équation, sauf si c'est sur un résultat déjà calculé. Dans un LSRS, l'ordre d'exécution est important. 
+	
+	% La définition du LSRS est très souple : on pourrait se contenter de l'addition parmi les opérations. On pourrait rajouter séparément les deux opérations que j'ai citées au slide précédent, on pourrait aussi rajouter n'importe quelle opération qui se calcule en temps linéaire sur une machine de Turing.
+	% La soustraction et la multiplication sont elles-mêmes dispensables.
+	
+	% Et les fonctions de base? Ce sont des fonctions gratuites auxquelles on a accès au début du calcul.
+	% Vous vous souvenez que j'ai parlé de structures de RAM précédemment? Le LSRS est aussi un outil qui peut transformer une structure en une autre.
+	% Le LSRS aussi renvoie une structure.
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{Introduction}
+		
+		\begin{block}{Entrée d'un LSRS}	
+			Soient $t$ un type et $S$ un LSRS pour $f_1, \dots, f_k$ sur $t \cup \{1(-), \text{id}(-), n(-) \}$. 
+			L'entrée d'un LSRS peut être vue comme étant une RAM-structure $s$ de type $t$, qu'il \emph{lit} en interprétant les symboles de $F_t$ de la façon suivante : 
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	$\forall f \in t_1$ :   $f(i) = 
+				\left\lbrace \begin{array}{ll}
+				s.f(i) & \text{si } i< s.n \\
+				0 & \text{sinon}
+				\end{array}\right.$
+				
+				\item 	$\forall C \in t_1$ :   $f_C(i) = s.C$
+				\item 	$1(i) = 1$, $n(i) = s.n$, $id(i) = i$
+			\end{itemize}
+			
+			La sortie du LSRS peut aussi être vue comme une nouvelle structure $s' = S(s)$ de type $\{f_1, \dots, f_k\}$.
+		\end{block}
+	\end{frame}
+	
+	% En somme, la structure d'entrée du LSRS est une version élargie, remplie de zéro si on veut, de la structure de base.
+	
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{Introduction}
+		
+		\begin{definition}[RAM $n^K$-représentée par LSRS]
+			\label{def:representee_par_LSRS}
+			Soient $t_1, t_2$ des types. Soit $\Gamma$ une $(t_1, t_2)$-fonction de RAM.
+			
+			Soit $S$ un LSRS pour $f_1, \dots, f_k$ sur $F_{t_1}$. 
+			
+			On dit que $\Gamma$ est $n^K$-représentée par $S$ lorsqu'il existe un entier $c$ tel que le LSRS $S$ définit des fonctions $f_1, \dots, f_k : c (s.n)^K \to c (s.n)^K$ telles que $\Gamma(s) = S(s)$ où $S(s)$ est la structure définie par le LSRS.
+		\end{definition}
+	\end{frame}
+	% Alors oui, il manque quelque chose. En vrai, il y a un codage que je vous épargne ; le LSRS est en fait plein de calculs intermédiaires qu'il faut évacuer
+	% Définition informelle ; elle est détaillée dans le mémoire, mais pour l'exposé, je pense que c'est un ajout qui alourdirait pour rien.
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{Introduction}
+		
+		\begin{thm}[Grandjean-Schwentick]
+			$\Gamma \in \text{DTIME}_{\text{RAM}}\left( n \right)$ $\Leftrightarrow$ $\Gamma$ est $n$-représentée par un LSRS.
+		\end{thm}
+		
+		\espace 
+		
+		%\pause 
+		
+		\begin{thm}
+			Pour tout $K \in \naturels$, $\Gamma \in \text{DTIME}_{\text{RAM}}\left( n^K \right)$ $\Leftrightarrow$ $\Gamma$ est $n^K$-représentée par un LSRS.
+		\end{thm}
+	\end{frame}
+	
+	% Alors, ce n'est pas un résultat exceptionnel ; en fait la démonstration du deuxième résultat est quasiment la même que la première, sauf que le passage au temps polynomial imposait de rajouter la multiplication dans le LSRS. Le résultat aurait pu être trouvé à la volée, mais ce n'était pas le but. GS voulaient juste se concentrer sur le temps linéaire, et je n'ai fait que vérifier que ça fonctionnait bien au temps polynomial.
+	
+	% Je ne vais pas vous faire la démonstration, parce qu'elle est assez longue et technique, mais je peux vous expliquer informellement pourquoi ça marche. En fait, la définition du temps n^K implique de contraindre tout : le nombre de registres, leur taille, en plus du temps. Le LSRS, c'est à peu près pareil ; la taille de ma structure est aussi limitée à l'entrée ; le LSRS sait quelle taille il calcule.
+
+	% C'est une première généralisation. 
+	% Tout à l'heure, je vous ai parlé de types unaires (les fonctions étaient soit des constantes, soit des fonctions unaires.)
+	% On a essayé de faire intervenir de manière naturelle le degré du polynôme, pour que ça ne soit pas forcé. Arité quelconque ; mais pas a priori avec une seule arité
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		
+		\begin{block}{Remarques}
+			\begin{itemize}
+				\item 	C'est une première caractérisation.
+				\pause 
+				\item 	Le degré du polynôme est forcé.
+				\pause 
+				\item 	Comment faire intervenir le degré du polynôme de manière plus naturelle ?
+				% De manière naturelle + Leivant : le degré du polynôme se retrouvait de manière implicite alors que là, c'est presque forcé.
+			\end{itemize}
+		\end{block}
+		
+		\pause 
+		
+		\begin{block}{Solution}
+			Généraliser à des arités supérieures à 1. 
+		\end{block}
+	\end{frame}
+	
+	% Cette idée se confronte à plusieurs problèmes.
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{LSRS à arité multiple}
+		
+		
+		\begin{block}{Cahier des charges}
+			\begin{itemize}
+				\item 	Ne pas se contenter d'une seule arité. % C'est-à-dire ne pas se contenter d'avoir que des fonctions d'arité 5, parce que le lien avec n^5 est trop facile à faire.
+				\pause 
+				\item 	Les fonctions devraient pouvoir s'appeler entre elles, peu importe leur arité. % Une fonction d'arité 5 devrait pouvoir appeleru ne fonction d'arité 3 et une fonction d'arité 3 devrait pouvoir appeler une fonction d'arité 5
+				\item 	Bon ordre sur les tuples afin de reproduire l'exécution pas à pas ?
+			\end{itemize}
+		\end{block}
+		
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{LSRS à arité multiple}
+
+		\begin{block}{Notations}
+			Soit $a \in \naturels$. On notera $a$-LSRS un LSRS utilisant et/ou calculant des fonctions d'arité $a$ et inférieure, et on notera $\leqa$-uplet l'ensemble des $n$-uplets où $n \leqslant a$.
+		\end{block}
+		
+		\pause 
+		
+		\begin{block}{Choix naïf}
+			L'ordre lexicographique naturel sur les $\leqa$-uplets pose problème.
+			
+			$\Rightarrow$ Pas de projections.
+		\end{block}
+	\end{frame}
+	
+	% L'ordre lexicographique naturel pose quelques problèmes, notamment en termes de projections : on ne peut pas faire de projections parce qu'on ne peut pas assurer que le uplet de la projection sera situé avant le uplet courant (ça pose problème dans le sens où dans un LSRS, le truc important c'est de récupérer des résultats passés).
+	% Alors que faire une projection, ou un mélange, ça permet une plus grande souplesse dans la manipulation du LSRS. 
+
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{LSRS à arité multiple}
+		
+		\begin{defn}
+			\label{def:bon_ordre_sur_uplets}
+			On définit l'ordre $<$ sur les $\leqa$-uplets par :
+			
+			\[
+			\overline{x} < \bar{y} \Leftrightarrow \left\lbrace
+			\begin{array}{ccc}
+			\max\left(\overline{x}\right) < \max\left(\bar{y}\right) & & \\
+			\text{ou } \max\left(\overline{x}\right) = \max\left(\bar{y}\right) & 
+			\text{ et } \left|\overline{x}\right| < \left|\bar{y}\right| & \\
+			\text{ou } \max\left(\overline{x}\right) = \max\left(\bar{y}\right) & 
+			\text{ et } \left|\overline{x}\right| = \left|\bar{y}\right| & 
+			\text{ et } \overline{x} <_{\text{lex}} \bar{y}\\
+			\end{array}
+			\right. 
+			\]
+			
+		\end{defn}
+		
+		\pause
+		
+		\begin{example}
+			Pour $a = 3$, avec les arités $1,2,3$ : $(0) < (0, 0) < (0,0,0) < (1) < (0,1) < (1,0) < (1,1) < (0,0,1) < (0,1,0) < (0,1,1) < (1,0,0) < (1,0,1) < (1,1,0) < (1,1,1) < (2) < (0,2) < \dots$.
+		\end{example}
+		
+		\pause 
+		
+		\begin{block}{Avantages}
+			Pas parfait non plus, MAIS...
+		\end{block}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{LSRS à arité multiple}
+		
+		\begin{block}{Propriétés}
+			\begin{itemize}
+				\item 	C'est un bon ordre. % On peut même l'élargir pour obtenir un bon ordre sur les suites finies d'ordinaux.
+				\item 	Permet de faire des mélanges et des projections. % Avec quand même quelques conditions : arité. 
+				\item 	Propriétés intéressantes pour le calcul. % Pour un max donné, le premier uplet est (m), pour une arité donnée, le premier uplet est (0, \dots, 0, m)
+				\item 	Le rang d'un élément $\bar{x}$ est calculable à partir de ses coordonnées, de son maximum et de son arité.
+			\end{itemize}
+		\end{block}
+		
+		\pause 
+		
+		\begin{block}{Rang}
+			$\rang{\overline{x}} = \left( \left( \sum_{i=1}^{a} m^i \right) + \left( \sum_{i=1}^{r} \left( \left(m+1\right)^i -1 \right) \right) + \left(\sum_{i=1}^{r} c_i \right) \right)$
+			
+			où $m = \max\left(\bar{x}\right)$, $r = \text{arité}(\bar{x})$ et $c_i = x_i \times \left(m+1\right)^{r-i}$ si $x_{i-1} = m$ ou $x_{i-2} = m$ ou $\dots$ ou $x_{1} = m$, et $c_i = \left(m+1\right)^{r-i}-m^{r-i}$ sinon. 
+		\end{block}
+		
+	\end{frame}
+	
+	% La formule en elle-même n'est pas importante, mais j'y reviendrai. 
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{LSRS à arité multiple}
+		
+		\begin{block}{Notation}
+			\[
+				\bar{x}' \ll \bar{x} \ \ \ \Leftrightarrow \ \ \ \ \overline{x}' < \overline{x}, \:\: \abs{\overline{x}'} < \abs{\overline{x}} \:\: \forall j \: \exists j' \:\: x'_j = x_{j'}
+			\]
+		\end{block}
+		
+		\begin{block}{Exemple}
+			Si $\bar{x} = \left( x_1, x_2, _3 \right)$, alors les tuples $(x_1, x_2)$, $(x_2,x_2)$, $(x_3, x_1)$ et $(x_1)$ sont $\ll \bar{x}$.
+		\end{block}
+		
+	\end{frame}
+	
+	% C'est ce que j'entendais pas projections ; on récupère certains arguments et on peut les dupliquer, les réordonner, tant qu'on n'en garde qu'un petit nombre. L'ordre lexico normal ne permet pas de faire ça. 
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{LSRS à arité multiple}
+		
+		Soit $a \in \naturels$.
+		
+		\begin{defn}[$a$-LSRS]
+			Soit $F$ un ensemble de symboles de fonctions de base. Soient $f_1, \dots, f_k$ de nouveaux symboles de fonctions n'apparaissant pas dans $F$, d'arités respectives $1 \leqslant r_1 \leqslant r_2 \leqslant \dots \leqslant r_k = a$.
+			
+			On note $F_i = F \cup \{f_j | r_j = r_i \text{ et } j < i\}$, $F'_i = F \cup \{f_j | r_j = r_i\}$, et $G_i = F \cup \{ f_j | r_j < r_i\}$. %\footnotemark.
+			
+			%				\footnotetext{$F_i$ est l'ensemble des symboles des fonctions qui ont la même arité que $f_i$ mais qui sont définies avant $f_i$. 
+			%					
+			%					$F'_i$ est l'ensemble des symboles des fonctions qui ont la même arité que $f_i$, qu'elles soient définies avant ou après $f_i$.
+			%					
+			%					$G_i$ est l'ensemble des symboles des fonctions d'arité strictement inférieure à celle de $f_i$.}
+			
+			Un $a$-LSRS $S$ sur $F$ et $f_1, \dots, f_k$ est une suite d'équations $E_1, \dots, E_k$ où chaque $E_i$ est de l'une des formes suivantes :
+			
+			%\footnotetext{L'ordre entre des fonctions de même arité a de l'importance, mais pas entre des fonctions d'arités différentes. On peut donc considérer que les équations sont ordonnées par l'arité de la fonction qu'elles définissent.}.
+			
+			\only<1>{
+				\begin{itemize}
+					\item	(opération) 	$f_i\left(\overline{x}\right) = A * B$ où $* \in \{+,-,\times\}$ et $A, B$ sont de la forme suivante : 
+					\begin{itemize}
+						\item 	$g\left(\overline{x}\right)$, avec $g \in F_i$ ;
+						\item 	$g\left(\overline{x}'\right)$, avec $g \in G_i$, c et $\overline{x}' \ll \overline{x}'$.
+					\end{itemize}
+				\end{itemize}
+			}
+			\only<2>{
+				\begin{itemize}				
+					\item 	(récursion)		$f_i\left(\overline{x}\right) = \eqpred{g'}{g}{\overline{x}'}$, où $\text{arité}(g) = \text{arité}(g')$ et l'un des deux cas suivants se réalise :
+					\begin{itemize}
+						\item 	Soit $\overline{x}' = \overline{x}$, et dans ce cas $g \in F_i$ et $g' \in F'_i$ ;
+						\item 	Soit $\overline{x}' \ll \overline{x}$ et dans ce cas $g, g' \in G_i$. 
+					\end{itemize}
+				\end{itemize}
+			}
+		\end{defn}
+		
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{LSRS à arité multiple}
+		
+		
+		\begin{itemize}
+			\item 	Les fonctions de base vont de $[0, c n-1] \times \dots \times [0, c n-1]$ vers $[0, c n-1]$. % où $r$ est leur arité respective
+			\item 	Les fonctions calculées et les fonctions de sortie sont définies de $[0, c n-1] \times \dots \times [0, c n-1]$ vers $[0, c n-1]^{?}$.
+			\pause 
+			\item[$\Rightarrow$] On voudrait qu'elles soient définies de $[0, c n-1] \times \dots \times [0, c n-1]$ vers $[0, c n-1]^{a}$.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{LSRS à arité multiple}
+		
+		\begin{block}{Exemple de fonctionnement}
+			On choisit $a = 3$, et on considère le $3$-LSRS suivant :
+			
+			\begin{eqnarray}
+				f_1(x) & = & x + 1(x) \\
+				f_2(x_1, x_2) & = & f_1(x_1) + f_1(x_2) \\
+				f_3(x_1, x_2, x_3) & = & f_2(x_2, x_1) + f_1(x_3)
+			\end{eqnarray}
+		\end{block}
+		
+		%\pause
+		
+		\only<1>{
+			$\redtext{(0)} 
+			< (0,0) 
+			< (0,0,0) 
+			< (1) 
+			< (0,1) 
+			< (1,0) 
+			< (1,1) 
+			< (0,0,1) 
+			< \dots$
+			
+			\begin{block}{Tour 1}
+				$(0)$ :
+				\begin{eqnarray}
+					f_1(0) & = & 1 \\
+					f_2(x_1, x_2) & = & f_1(x_1) + f_1(x_2) \\
+					f_3(x_1, x_2, x_3) & = & f_2(x_2, x_1) + f_1(x_3)
+				\end{eqnarray}
+			\end{block}
+			}
+				
+		\only<2>{
+			$(0) 
+			< \redtext{(0,0)}
+			< (0,0,0) 
+			< (1) 
+			< (0,1) 
+			< (1,0) 
+			< (1,1) 
+			< (0,0,1) 
+			< \dots$
+			\begin{block}{Tour 1}
+				$(0,0)$ :
+				\begin{eqnarray}
+				f_1(0) & = & 1 \\
+				f_2(0,0) & = & f_1(0) + f_1(0) \\
+				f_3(x_1, x_2, x_3) & = & f_2(x_2, x_1) + f_1(x_3)
+				\end{eqnarray}
+			\end{block}
+		}
+		
+		\only<3>{
+			
+			$(0) 
+			< \redtext{(0,0)}
+			< (0,0,0)
+			< (1) 
+			< (0,1) 
+			< (1,0) 
+			< (1,1) 
+			< (0,0,1) 
+			< \dots$
+			\begin{block}{Tour 1}
+				$(0,0)$ :
+				\begin{eqnarray}
+				f_1(0) & = & 1 \\
+				f_2(0,0) & = & 2 \\
+				f_3(x_1, x_2, x_3) & = & f_2(x_2, x_1) + f_1(x_3)
+				\end{eqnarray}
+			\end{block}
+		}
+		
+		\only<4>{
+			
+			$(0) 
+			< (0,0) 
+			< \redtext{(0,0,0)} 
+			< (1) 
+			< (0,1) 
+			< (1,0) 
+			< (1,1) 
+			< (0,0,1) 
+			< \dots$
+			\begin{block}{Tour 1}
+				$(0,0,0)$ :
+				\begin{eqnarray}
+				f_1(0) & = & 1 \\
+				f_2(0,0) & = & 2 \\
+				f_3(0, 0, 0) & = & f_2(0, 0) + f_1(0)
+				\end{eqnarray}
+			\end{block}
+		}
+		
+		\only<5>{
+			
+			$(0) 
+			< (0,0) 
+			< \redtext{(0,0,0)} 
+			< (1) 
+			< (0,1) 
+			< (1,0) 
+			< (1,1) 
+			< (0,0,1) 
+			< \dots$
+			\begin{block}{Tour 1}
+				$(0,0,0)$ :
+				\begin{eqnarray}
+				f_1(0) & = & 1 \\
+				f_2(0,0) & = & 2 \\
+				f_3(0, 0, 0) & = & 3
+				\end{eqnarray}
+			\end{block}
+		}
+		
+		\only<6>{
+			
+			$(0) 
+			< (0,0) 
+			< (0,0,0) 
+			< \redtext{(1)} 
+			< (0,1) 
+			< (1,0) 
+			< (1,1) 
+			< (0,0,1) 
+			< \dots$
+			\begin{block}{Tour 2}
+				$(1)$ :
+				\begin{eqnarray}
+				f_1(1) & = & 1 + 1 \\
+				f_2(x_1, x_2) & = & f_1(x_1) + f_1(x_2) \\
+				f_3(x_1, x_2, x_3) & = & f_2(x_2, x_1) + f_1(x_3)
+				\end{eqnarray}
+			\end{block}
+		}
+		
+		\only<7>{
+			$(0) 
+			< (0,0) 
+			< (0,0,0) 
+			< (1) 
+			< \redtext{(0,1)}
+			< (1,0) 
+			< (1,1) 
+			< (0,0,1) 
+			< \dots$
+			\begin{block}{Tour 2}
+				$(0,1)$ :
+				\begin{eqnarray}
+				f_1(1) & = & 2 \\
+				f_2(0, 1) & = & f_1(0) + f_1(1) \\
+				f_3(x_1, x_2, x_3) & = & f_2(x_2, x_1) + f_1(x_3)
+				\end{eqnarray}
+			\end{block}
+		}
+		
+		\only<8>{
+			
+			$(0) 
+			< (0,0) 
+			< (0,0,0) 
+			< (1) 
+			< \redtext{(0,1)} 
+			< (1,0)
+			< (1,1) 
+			< (0,0,1) 
+			< \dots$
+			\begin{block}{Tour 2}
+				$(0,1)$ :
+				\begin{eqnarray}
+				f_1(1) & = & 2 \\
+				f_2(0, 1) & = & 3 \\
+				f_3(x_1, x_2, x_3) & = & f_2(x_2, x_1) + f_1(x_3)
+				\end{eqnarray}
+			\end{block}
+		}
+		
+		
+		\only<9>{
+			$(0) 
+			< (0,0) 
+			< (0,0,0) 
+			< (1) 
+			< (0,1) 
+			< \redtext{(1,0)} 
+			< (1,1) 
+			< (0,0,1) 
+			< \dots$
+			\begin{block}{Tour 2}
+				$(1,0)$ :
+				\begin{eqnarray}
+				f_1(1) & = & 2 \\
+				f_2(1,0) & = &  f_1(1) + f_1(0) \\
+				f_3(x_1, x_2, x_3) & = & f_2(x_2, x_1) + f_1(x_3)
+				\end{eqnarray}
+			\end{block}
+		}
+		
+	\end{frame}
+	
+	% Maintenant qu'on a trouvé une définition de LSRS pour des arités multiples, il reste à voir deux choses : est-ce que ça caractérise réellement quelque chose et est-ce que c'est utilisable ?
+	
+	\begin{frame}
+		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\framesubtitle{LSRS à arité multiple}
+		
+		\begin{thm}
+			Soit $\Gamma$ une $(t_1,t_2)$-fonction de RAM, où $t_1$ est un $1$-type et $t_2$ est un $a$-type.
+			
+			$\Gamma$ est représentable par un $a$-LSRS $\Leftrightarrow$ $\Gamma$ est $n^a$-représentable par un LSRS.
+		\end{thm}
+		
+		\begin{proof}
+			\only<1>{
+				$\bullet$ $a$-LSRS $\Rightarrow$ LSRS de longueur $n^a$ :
+			
+				\begin{itemize}
+					\item 	Définir un LSRS qui permet de récupérer $\bar{x}$ à partir de $\rang{\bar{x}}$.
+					%\pause 
+					
+					% Tout à l'heure, j'ai dit que l'ordre sur les tuples avait de bonnes propriétés de calcul. 
+					\begin{itemize}
+						\item 	Trouver le max $m$ ($\bar{x}$ se situe entre $(m)$ et $(m+1)$ pour un certain $m$) ;
+						%\pause 
+						\item 	Trouver l'arité $r$ ($\bar{x}$ se situe entre $(0, \dots, 0, m)$ et $(m, \dots, m, m)$) ;
+						%\pause 
+						\item 	Calculer les coordonnées de $\bar{x}$.
+					\end{itemize}
+					%\pause 
+					\item	Simuler les opérations du $a$-LSRS avec un LSRS en utilisant les coordonnées calculées précédemment.
+				\end{itemize}
+			}
+			
+			\only<2>{
+				$\bullet$ LSRS de longueur $n^a$ $\Rightarrow$ $a$-LSRS :
+				\begin{itemize}
+					\item 	Définir un LSRS qui permet de récupérer $\rang{\bar{x}}$ à partir de $\bar{x}$.
+					\item[$\Rightarrow$] Réécrire la formule donnée précédemment.
+					%\pause 
+					\item	Simuler les opérations du LSRS avec un $a$-LSRS.
+				\end{itemize}
+			}
+		\end{proof}
+	\end{frame}
+	
+	
+
+\end{document}
+
+
+
+
+ 

@@ -36,17 +36,17 @@
 	\section*{Précision et notations}
 	\label{sec:Notations}
 	
-	Je n'aime pas que les liens hypertextes soient trop visibles, mais je n'ai pas encore cherché comment on pouvait les rendre visibles ET discrets, donc pour l'instant, ils sont simplement invisibles. Ne pas hésiter à passer la souris sur des mots comme \emph{ici}, \emph{plus bas}, etc ; ils seront très probablement munis d'un lien hypertexte. Les références à des sections, définitions, théorèmes, etc. sont aussi cliquables.
+	Ce document contient de nombreux liens hypertextes. N'ayant pas trouvé de moyen de les rendre discrets mais visibles, ils sont simplement invisibles. Ne pas hésiter à passer la souris sur des mots comme \emph{ici}, \emph{plus bas}, etc ; ils seront très probablement munis d'un lien hypertexte. Les références à des sections, définitions, théorèmes, etc. sont aussi cliquables. Afin de faciliter la navigation entre programmes et algorithmes dans le premier chapitre, les algorithmes contiennent dans leur légende un lien vers leur programme, et un lien inverse existe aussi sous le programme.
 	
 	Par abus de notation découlant de la théorie des ensembles, j'écrirai $n$ pour $\intint{0}{n-1}$ voire pour $\intint{1}{n}$ quand il n'y aura pas d'ambiguïté. De manière générale, si un terme $n$ ressemble à un entier naturel mais qu'il est mis à la place d'un ensemble (typiquement, dans le domaine de départ ou d'arrivée d'une fonction), il faut le lire comme l'ensemble $\intint{0}{n-1}$.
 	
-	\section*{TODO List}
-	
-	\nepasoublier{NE PAS OUBLIER}
-	
-	\begin{itemize}
-		\item 	Sources pour Cobham et l'équivalence de $\textbf{P}$ (pour Turing) et $\textbf{P}$ (pour RAM).
-	\end{itemize}
+%	\section*{TODO List}
+%	
+%	\nepasoublier{NE PAS OUBLIER}
+%	
+%	\begin{itemize}
+%		\item 	Sources pour Cobham et l'équivalence de $\textbf{P}$ (pour Turing) et $\textbf{P}$ (pour RAM).
+%	\end{itemize}
 	
 	\pagebreak
 	
@@ -147,7 +147,7 @@
 			\end{definition}
 			
 			
-			\begin{theorem}[Cobham]
+			\begin{theorem}[Cobham \cite{Cobham1965}]
 				\label{thm:Cob_equals_P}
 				$\textbf{Cob} = \textbf{P}$
 			\end{theorem}
@@ -197,7 +197,12 @@
 				f(\underset{\text{normaux}}{\underbrace{\overline{x}}} ; \underset{\text{safe}}{\underbrace{\overline{u}}})
 			\]
 			
-			Ensuite, on se place dans une algèbre de mots (tous les constructeurs de l'algèbre sont d'arité au plus $1$ ; typiquement, l'algèbre des mots binaires). \nepasoublier{Pourquoi les algèbres de mots !!}
+			Ensuite, on se place dans une algèbre de mots (tous les constructeurs de l'algèbre sont d'arité au plus $1$ ; typiquement, l'algèbre des mots binaires). On utilise uniquement les algèbres de mots car leur récurrence n'engendre qu'un seul calcul à chaque étape, contrairement aux algèbres générales (dites "arborescentes"). Par exemple, une récurrence définie ainsi : 
+			\[
+				f(c(a_1,a_2), \bar{x}) = g_c(f(a_1, \bar{x}),f(a_2, \bar{x}), a_1, a_2, \bar{x})
+			\]
+			
+			entraine deux appels récursifs à chaque constructeur, ce qui engendre un nombre exponentiel d'appels au total. 
 			
 			\begin{definition}[Composition \emph{safe}]
 				La fonction $f$ est définie par composition \emph{safe} à partir de $h, g_0, g_1 \in \textbf{BC}$ lorsque :
@@ -243,7 +248,7 @@
 			
 			\begin{theorem}[Bellantoni et Cook \cite{BellantoniCook1992}]
 				\label{thm:BC_equals_P}
-				$\textbf{BC} = P$
+				$\textbf{BC} = \textbf{P}$
 			\end{theorem}
 	
 			On démontre en fait $\textbf{P} \subseteq \textbf{BC} \subseteq \textbf{Cob}$. La première inclusion se fait en montrant qu'on peut expliciter les arguments \emph{safe} et \emph{normaux} dans les définitions des fonctions. La deuxième inclusion se trouve en explicitant par induction une borne sur les fonctions de $\textbf{BC}$. 
@@ -534,12 +539,10 @@
 			La sortie est une nouvelle structure $\left( \intint{1}{n'}, f'_1, \dots, f'_{k'}, C'_1, \dots, C'_{l'}\right)$ stockée de manière similaire dans la $\sigma$-RAM. 
 		
 		
-		\begin{theorem}
+		\begin{theorem}[\cite{VanEmdeBoas1990}]
 			\label{thm:sRAMs_turing_complete}
-			Une machine de Turing (binaire ?) simule une $\{+\}$-RAM en temps polynomial et une $\{+\}$-RAM simule une machine de Turing en temps linéaire.
+			Une machine de Turing binaire simule une $\{+\}$-RAM en temps polynomial et une $\{+\}$-RAM simule une machine de Turing en temps linéaire.
 		\end{theorem}
-		
-		\nepasoublier{Il me faut une source pour la $\sigma$-RAM.}.
 		
 		
 		

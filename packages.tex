@@ -18,10 +18,14 @@
 \usepackage[pdftex=true, hidelinks]{hyperref} % Package pour les hyperliens (et mettre des ancres partout !)
 \frenchbsetup{StandardLists = true} % Pour que le package suivant fonctionne bien
 \usepackage{enumitem} % Pour les listes imbriquées avec personnalisation de l'item (niveau 1 : chiffres ; niveau 2 : lettres par exemple)
-\usepackage[english, onelanguage, boxed]{algorithm2e}
+\usepackage[french, onelanguage, boxed]{algorithm2e}
 \usepackage{listings}
 \usepackage{import}
 \usepackage[toc,page]{appendix} % Package pour gérer les annexes. 
+\renewcommand{\appendixtocname}{Annexes}
+\renewcommand{\appendixpagename}{Annexes}
+
+
 %\usepackage{biblatex} % Pour citer l'auteur, ou le titre d'un article listé dans le fichier bib. \citetitle [A voir plus tard]
 
 % Un package sympathique pour donner un contexte aux définitions, théorèmes, etc. 
