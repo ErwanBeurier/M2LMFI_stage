@@ -18,7 +18,8 @@
 %\usepackage[pdftex=true, hidelinks]{hyperref} % Package pour les hyperliens (et mettre des ancres partout !)
 \frenchbsetup{StandardLists = true} % Pour que le package suivant fonctionne bien
 \usepackage{enumitem} % Pour les listes imbriquées avec personnalisation de l'item (niveau 1 : chiffres ; niveau 2 : lettres par exemple)
-\usepackage[english, onelanguage, boxed]{algorithm2e}
+\setlist[itemize,1]{label={\fontfamily{cmr}\fontencoding{T1}\selectfont\textbullet}}
+\usepackage[french, onelanguage, boxed]{algorithm2e}
 \usepackage{listings}
 \usepackage{import}
 \usepackage[toc,page]{appendix} % Package pour gérer les annexes. 
@@ -57,6 +58,7 @@
 %%\theoremstyle{definition}
 %\theoremstyle{theorem}
 \newtheorem{defn}[theorem]{Définition}
+\newtheorem{exemple}{Exemple}
 %\newtheorem{example}[theorem]{Exemple}
 %\newtheorem{algo}{ALGORITHME}
 %\newtheorem*{definition*}{Définition}
