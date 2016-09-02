@@ -23,15 +23,15 @@
 \title{Unification des caractérisations de $\textbf{P}$}
 \subtitle{Mémoire de stage - M2 LMFI 2015-2016}
 
-\date{1er septembre 2016}
+%\date{1er septembre 2016}
 
 \begin{document}
 
     \begin{frame}
 		\titlepage
     \end{frame}
-
-	\section{Introduction}
+	
+	\section*{Introduction}
 
 	\begin{frame}
 	\frametitle{Introduction}
@@ -61,7 +61,11 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{Introduction}
+		\tableofcontents
+	\end{frame}
+	\section{Une caractérisation de P}
+	
+	\begin{frame}
 		\begin{block}{Objets utilisés}
 			\begin{itemize}
 				\item 	Algèbre = ensemble de termes clos basés sur une signature fonctionnelle, dont les symboles sont appelés constructeurs.
@@ -110,7 +114,7 @@
 %	\end{frame}
 	
 
-	\section{Une caractérisation de P}
+
 	\subsection{Approche de Leivant}
 	
 	\begin{frame}
@@ -136,10 +140,14 @@
 		
 		\begin{defn}[Récurrence ramifiée]
 			Une fonction $f: \bbW_m \times \mathcal{W} \to \bbW_n$ est définie par récurrence ramifiée à partir des fonctions $\left( g_{c} \right)_{c \in \{\varepsilon, 0, 1\}}$ lorsque :
-			$\forall i \:\:\:\:
+			\begin{itemize}
+				\item $\forall i \:\:\:\:
 				f(c^m(a), \bar{x}) 
 				= g_{c}\left( f(a, \bar{x}), a, \bar{x} \right)
 				$
+				\item 	$m > n$ (tiers de départ > tiers d'arrivée)
+			\end{itemize}
+			
 		\end{defn}
 	\end{frame}
 %		\begin{defn}[Argument critique]
@@ -176,7 +184,7 @@
 %	
 %	
 	\begin{frame}
-		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\frametitle{Caractérisations de $\textbf{P}$}
 		\framesubtitle{Approche de Leivant}
 		
 		\begin{defn}
@@ -194,7 +202,7 @@
 
 
 	\begin{frame}
-		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\frametitle{Caractérisations de $\textbf{P}$}
 		\framesubtitle{Approche de Leivant}
 		
 		% Ne pas se formaliser ; je vous donne juste la définition pour vous montrer à quoi elle ressemble
@@ -222,7 +230,7 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\frametitle{Caractérisations de $\textbf{P}$}
 		\framesubtitle{Approche de Leivant}
 		
 		\begin{thm}
@@ -241,7 +249,7 @@
 	\subsection{Quel modèle de calcul ?}
 	
 	\begin{frame}
-		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\frametitle{Caractérisations de $\textbf{P}$}
 		\framesubtitle{Quel modèle de calcul ?}
 		
 		\begin{defn}
@@ -266,7 +274,7 @@
 	
 	
 	\begin{frame}
-		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\frametitle{Caractérisations de $\textbf{P}$}
 		\framesubtitle{Quel modèle de calcul ?}
 		
 		\begin{block}{La machine de Leivant}
@@ -286,7 +294,7 @@
 	
 	
 	\begin{frame}
-		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\frametitle{Caractérisations de $\textbf{P}$}
 		\framesubtitle{Quel modèle de calcul ?}
 
 		\begin{defn}
@@ -322,7 +330,7 @@
 	
 	
 	\begin{frame}
-		\frametitle{I. Caractérisations de $\textbf{P}$}
+		\frametitle{Caractérisations de $\textbf{P}$}
 		\framesubtitle{Quel modèle de calcul ?}
 		
 		\begin{block}{Comparaison entre les deux machines}
@@ -350,18 +358,21 @@
 	
 	
 	\section{Vers une caractérisation de $\dtimeram$}
-	\subsection{Adaptation d'un résultat existant}
+
 			
 	
 	\begin{frame}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\begin{center}
+			\Large
 			Vers une caractérisation de $\dtimeram$
 		\end{center}
 	\end{frame}
 	
+	\subsection{Adaptation d'un résultat existant}
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{Adaptation d'un résultat existant}
 		
 		\begin{defn}[RAM-structure]
@@ -385,7 +396,7 @@
 		% Exemple :
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{Adaptation d'un résultat existant}
 
 		\begin{exemple}
@@ -414,7 +425,7 @@
 	
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{Adaptation d'un résultat existant}
 		
 
@@ -472,7 +483,7 @@
 %	\end{frame}
 
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{Adaptation d'un résultat existant}
 		
 		\begin{defn}[Opération de récursion]
@@ -487,7 +498,7 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{Adaptation d'un résultat existant}
 				
 		\begin{defn}[LSRS]
@@ -507,7 +518,7 @@
 	
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{Adaptation d'un résultat existant}
 		
 		\begin{exemple}
@@ -609,25 +620,29 @@
 	% Le LSRS aussi renvoie une structure.
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{Adaptation d'un résultat existant}
 		
+		Soient $t$ un type et $S$ un LSRS qui définit $f_1, \dots, f_k$ à partir de $t \cup \{1(-), \text{id}(-), n(-) \}$. 
+		
 		\begin{block}{Entrée d'un LSRS}	
-			Soient $t$ un type et $S$ un LSRS pour $f_1, \dots, f_k$ sur $t \cup \{1(-), \text{id}(-), n(-) \}$. 
 			
 			Entrée d'un LSRS = RAM-structure $s$ de type $t$
+			
+			$\Rightarrow$ Les fonctions de base sont définies sur $[0, cn-1]$.
 			
 			Fonctions de base = fonctions précalculées de la structure.
 			
 			La sortie du LSRS = nouvelle structure $s' = S(s)$ de type $\{f_1, \dots, f_k\}$.
 		\end{block}
+		
 	\end{frame}
 	
 	% En somme, la structure d'entrée du LSRS est une version élargie, remplie de zéro si on veut, de la structure de base.
 	
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{Adaptation d'un résultat existant}
 		
 		\begin{defn}[RAM $n^K$-représentée par LSRS]
@@ -638,12 +653,14 @@
 			
 			On dit que $\Gamma$ est $n^K$-représentée par $S$ lorsqu'il existe un entier $c$ tel que le LSRS $S$ définit des fonctions $f_1, \dots, f_k : c (s.n)^K \to c (s.n)^K$ telles que $\Gamma(s) = S(s)$ où $S(s)$ est la structure définie par le LSRS.
 		\end{defn}
+		
+		$\Rightarrow$ Longueur du domaine de définition ? \pause Implicite au LSRS.
 	\end{frame}
 	% Alors oui, il manque quelque chose. En vrai, il y a un codage que je vous épargne ; le LSRS est en fait plein de calculs intermédiaires qu'il faut évacuer
 	% Définition informelle ; elle est détaillée dans le mémoire, mais pour l'exposé, je pense que c'est un ajout qui alourdirait pour rien.
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{Adaptation d'un résultat existant}
 		
 		\begin{thm}[Grandjean-Schwentick]
@@ -668,7 +685,7 @@
 	% On a essayé de faire intervenir de manière naturelle le degré du polynôme, pour que ça ne soit pas forcé. Arité quelconque ; mais pas a priori avec une seule arité
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{Adaptation d'un résultat existant}
 		
 		\begin{block}{Remarques}
@@ -699,7 +716,7 @@
 	
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{LSRS à arité multiple}
 		
 		
@@ -716,7 +733,7 @@
 	
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{LSRS à arité multiple}
 
 		\begin{block}{Notations}
@@ -736,7 +753,7 @@
 	% Alors que faire une projection, ou un mélange, ça permet une plus grande souplesse dans la manipulation du LSRS. 
 
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{LSRS à arité multiple}
 		
 		\begin{defn}
@@ -773,7 +790,7 @@
 	
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{LSRS à arité multiple}
 		
 		\begin{block}{Propriétés}
@@ -798,7 +815,7 @@
 	% La formule en elle-même n'est pas importante, mais j'y reviendrai. 
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{LSRS à arité multiple}
 		
 		\begin{block}{Notation}
@@ -816,7 +833,7 @@
 	% C'est ce que j'entendais pas projections ; on récupère certains arguments et on peut les dupliquer, les réordonner, tant qu'on n'en garde qu'un petit nombre. L'ordre lexico normal ne permet pas de faire ça. 
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{LSRS à arité multiple}
 		
 		Soit $a \in \naturels$.
@@ -860,7 +877,7 @@
 	
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{LSRS à arité multiple}
 		
 		\begin{block}{Exemple de fonctionnement}
@@ -1058,7 +1075,7 @@
 	
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{LSRS à arité multiple}
 		
 		
@@ -1073,7 +1090,7 @@
 	% Maintenant qu'on a trouvé une définition de LSRS pour des arités multiples, il reste à voir deux choses : est-ce que ça caractérise réellement quelque chose et est-ce que c'est utilisable ?
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{LSRS à arité multiple}
 		
 		\begin{thm}
@@ -1105,7 +1122,7 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{II. Vers une caractérisation de $\dtimeram$}
+		\frametitle{Vers une caractérisation de $\dtimeram$}
 		\framesubtitle{LSRS à arité multiple}
 		
 		\begin{thm}
@@ -1128,7 +1145,7 @@
 
 	
 	
-	\section{Conclusion}
+	\section*{Conclusion}
 	
 	
 	\begin{frame}

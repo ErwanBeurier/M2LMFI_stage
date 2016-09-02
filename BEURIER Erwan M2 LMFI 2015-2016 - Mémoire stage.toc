@@ -48,17 +48,17 @@
 \contentsline {subsection}{\numberline {2.2.1}LSRS}{21}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}LRS}{22}{subsection.2.2.2}
 \contentsline {subsection}{\numberline {2.2.3}Th\IeC {\'e}or\IeC {\`e}me principal}{22}{subsection.2.2.3}
-\contentsline {section}{\numberline {2.3}Introduction aux LSRS d'arit\IeC {\'e} multiple}{22}{section.2.3}
+\contentsline {section}{\numberline {2.3}Introduction aux LSRS d'arit\IeC {\'e} multiple}{23}{section.2.3}
 \contentsline {section}{\numberline {2.4}Un bon ordre}{23}{section.2.4}
 \contentsline {subsection}{\numberline {2.4.1}Bon ordre sur les $\left ( \leqslant a \right )$-uplets}{23}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Propri\IeC {\'e}t\IeC {\'e}s combinatoires}{23}{subsection.2.4.2}
-\contentsline {section}{\numberline {2.5}Introduction aux $a$-LSRS}{24}{section.2.5}
-\contentsline {paragraph}{D\IeC {\'e}roulement du calcul}{24}{section*.33}
+\contentsline {subsection}{\numberline {2.4.2}Propri\IeC {\'e}t\IeC {\'e}s combinatoires}{24}{subsection.2.4.2}
+\contentsline {section}{\numberline {2.5}Introduction aux $a$-LSRS}{25}{section.2.5}
+\contentsline {paragraph}{D\IeC {\'e}roulement du calcul}{25}{section*.33}
 \contentsline {paragraph}{D\IeC {\'e}finissons le $a$-LSRS}{25}{section*.34}
 \contentsline {section}{\numberline {2.6}Lien entre les deux notions de LSRS}{26}{section.2.6}
 \contentsline {paragraph}{Calcul du max $m$.}{26}{section*.35}
 \contentsline {paragraph}{Calcul de l'arit\IeC {\'e} courante}{27}{section*.36}
-\contentsline {paragraph}{Calcul des cordonn\IeC {\'e}es.}{27}{section*.37}
+\contentsline {paragraph}{Calcul des cordonn\IeC {\'e}es.}{28}{section*.37}
 \contentsline {chapter}{Annexes}{33}{section*.39}
 \contentsline {chapter}{\numberline {A}Simulation de la $\sigma $-RAM par la $\mathbb {A}$-RAM}{34}{Annexe.1.A}
 \contentsline {section}{\numberline {A.1}Conventions d'\IeC {\'e}criture}{34}{section.1.A.1}

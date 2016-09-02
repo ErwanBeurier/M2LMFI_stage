@@ -329,8 +329,24 @@
 		\subsection{LRS} % (p.211)
 		\label{subsec:LRS}
 		
-		Il existe une variante des LSRS qui n'utilise qu'une seule équation.
+		Il existe une variante des LSRS qui n'utilise qu'une seule équation mais autorise la composition.
 		
+		\begin{definition}[Terme récursif]
+			Un terme $\sigma(x)$ est un terme récursif vis-à-vis d'une fonction $g$ et sur le type $t$ lorsque $\sigma(x)$ est de l'une des formes suivantes :
+			
+			\begin{itemize}[itemsep=-1mm]
+				\item 	$\sigma(x) = C$ où $C$ est une constante de $t$ ;
+				\item 	$\sigma(x) = f(x)$ où $f$ est une fonction de $t\cup \{1(-), \text{id}(-), n(-) \}$ ;
+				\item 	$\sigma(x) = g^{\leftarrow}(x-\delta)$ où $\delta$ est un entier naturel ;
+				\item 	$\sigma(x) = g\left[ \sigma'(x)\right]$ où $\sigma'(x)$ est un terme récursif ;
+				\item 	$\sigma(x) = f(\sigma'(x))$ où $f \in t$ et $\sigma'(x)$ est un terme récursif ;
+				\item 	$\sigma(x) = \sigma_1(x) * \sigma_2(x)$ où $\sigma_1(x)$ et $\sigma_2(x)$ sont des termes récursifs, et $* \in \{+, -, \times\}$
+			\end{itemize}
+		\end{definition}
+		
+		\begin{definition}[LRS]
+			Un LRS (\emph{Linear Recursion Scheme}) pour $g$ et sur $t$ est une équation de la forme $g(x) = \sigma(x)$ où $\sigma(x)$ est un terme récursif vis-à-vis de $g$ et sur le type $t$.
+		\end{definition}
 		
 		\begin{definition}[RAM $n^K$-représentée par LRS]
 			\label{def:representee_par_LRS}
