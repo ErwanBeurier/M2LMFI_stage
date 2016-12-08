@@ -1,4 +1,17 @@
 # M2LMFI_stage
+
+Contient le rapport final de mon stage de M2 au Master LMFI + le beamer qui a servi à le soutenir le 1er septembre 2016.
+
+
+
+
+
+
+
+
+
+ANCIENNEMENT:
+
 Fichiers LaTeX en rapport avec mon stage de M2.
 
 Contient :

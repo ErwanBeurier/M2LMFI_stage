@@ -8,3 +8,5 @@
 # Les fichiers générés par BibTeX :
 *.bbl
 *.blg
+*.tex
+*.cfg
