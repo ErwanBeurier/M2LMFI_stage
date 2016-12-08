@@ -10,3 +10,6 @@
 *.blg
 *.tex
 *.cfg
+*.nav
+*.snm
+*.bib
